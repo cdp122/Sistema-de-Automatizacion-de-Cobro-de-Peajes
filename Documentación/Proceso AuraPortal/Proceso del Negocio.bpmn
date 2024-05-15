@@ -1,0 +1,599 @@
+<GraphEditor objectsShadow="shadow" pageHeight="841.88" pageOrientation="1" pageWidth="595.27" simDaysPerMonth="22" simExpectedCost="0" simHousPerDay="8" simMaxDuration=" 00-00 00:00:00" simSimultaneous="10" simTotal="1000">
+ <mxGraphModel value="&lt; Proceso del Negocio &gt;">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0" value="Proceso del Negocio"/>
+    <mxCell id="2" idAp="16" parent="1" style="horizontalBand" typeAp="undefined" value="PROCESO DEL NEGOCIO" vertex="1">
+      <mxGeometry as="geometry" height="1170.0" labelHeight="1170.0" labelWidth="14.630859375" width="830.0024457158815" y="1.0">
+        <mxPoint as="offset" x="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="3" idAp="2" parent="2" style="horizontalBand" typeAp="undefined" value="Cliente" vertex="1">
+      <mxGeometry as="geometry" height="390.0" labelHeight="390.0" labelWidth="14.630859375" width="805.3715863408815" x="25.0">
+        <mxPoint as="offset" x="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="9" idAp="1" parent="3" style="tp" typeAp="TP" value="Cliente llega al peaje" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="53.39669421487609" y="78.9338842975207">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="10" parent="3" source="8" sourceEdgeFix="bottomCenter" style="" target="9" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="69.72222222222217" y="42.22727272727275"/>
+        <mxPoint as="targetPoint" x="96.2644628099174" y="78.28925619834718"/>
+        <Array as="pointsViewer">
+          <mxPoint x="125.8966942148761" y="43.727272727272734"/>
+          <mxPoint x="125.8966942148761" y="79.9338842975207"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="23.103305785123986"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="12" parent="3" source="9" sourceEdgeFix="bottomCenter" style="" target="11" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="100.8966942148761" y="111.43388429752088"/>
+        <mxPoint as="targetPoint" x="102.04958677685954" y="159.69421487603313"/>
+        <Array as="pointsViewer">
+          <mxPoint x="125.8966942148761" y="144.9338842975207"/>
+          <mxPoint x="125.8966942148761" y="175.63636363636368"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="20.35123966942149"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="11" idAp="1" parent="3" style="dx" typeAp="DX" value="¿Qué tipo de pago?" vertex="1">
+      <mxGeometry as="geometry" height="35.0" labelHeight="40.91373790394176" labelWidth="50.0" width="55.0" x="73.39669421487609" y="174.63636363636368">
+        <mxPoint as="offset" x="-41.0" y="-24.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="14" parent="3" source="11" sourceEdgeFix="bottomCenter" style="" target="13" targetEdgeFix="topCenter" value="Fisico">
+      <mxGeometry as="geometry" labelHeight="14.630859375" labelWidth="49.0" relative="1">
+        <mxPoint as="sourcePoint" x="100.8966942148761" y="192.13636363636374"/>
+        <mxPoint as="targetPoint" x="101.63636363636363" y="222.09090909090924"/>
+        <Array as="pointsViewer">
+          <mxPoint x="125.8966942148761" y="210.63636363636368"/>
+          <mxPoint x="125.8966942148761" y="236.08264462809922"/>
+        </Array>
+        <mxPoint as="offset" x="6.0" y="-1.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="13" idAp="2" parent="3" style="tp" typeAp="TP" value="Cliente se dirige al cajero" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="53.39669421487609" y="235.08264462809922">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="8" idAp="1" parent="3" style="im" typeAp="IM" value="" vertex="1">
+      <mxGeometry as="geometry" height="25.0" width="25.0" x="88.39669421487609" y="17.727272727272734">
+        <mxPoint as="offset" x="23.0" y="23.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="36" idAp="12" parent="3" style="tp" typeAp="TP" value="Cliente toma el ticket" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="237.47252747252747" y="307.57142857142856">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="53" idAp="19" parent="3" style="tp" typeAp="TP" value="Cliente se dirige a carril telepass" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="176.05154639175254" y="159.8659793814433">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="43" idAp="16" parent="3" style="tp" typeAp="TP" value="Cliente avanza en la carretera" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="540.0485436893205" y="307.57142857142856">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="55" parent="3" source="11" sourceEdgeFix="rightMiddle" style="" target="53" targetEdgeFix="leftMiddle" value="Telepass">
+      <mxGeometry as="geometry" labelHeight="14.630859375" labelWidth="50.0" relative="1">
+        <mxPoint as="sourcePoint" x="100.8966942148761" y="192.13636363636374"/>
+        <mxPoint as="targetPoint" x="174.59793814432987" y="189.80412371134025"/>
+        <Array as="pointsViewer">
+          <mxPoint x="153.3966942148761" y="193.13636363636368"/>
+          <mxPoint x="186.05154639175254" y="193.13636363636368"/>
+          <mxPoint x="186.05154639175254" y="193.3659793814433"/>
+          <mxPoint x="201.05154639175254" y="193.3659793814433"/>
+        </Array>
+        <mxPoint as="offset" x="-3.0" y="-17.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="69" idAp="15" parent="3" style="text" typeAp="undefined" value="" vertex="1">
+      <mxGeometry as="geometry" height="39.2861328125" labelHeight="39.2861328125" labelWidth="20.0" width="20.0" x="107.0" y="145.0">
+        <mxPoint as="offset"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="5" idAp="3" parent="2" style="horizontalBand" typeAp="undefined" value="Cajero" vertex="1">
+      <mxGeometry as="geometry" height="390.0" labelHeight="390.0" labelWidth="14.630859375" width="805.3715863408815" x="24.610706676136363" y="390.0">
+        <mxPoint as="offset" x="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="15" idAp="3" parent="5" style="tp" typeAp="TP" value="Analiza el valora recibir depende al vehículo" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="54.19921067923559" y="24.884297520661164">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="16" idAp="4" parent="5" style="tp" typeAp="TP" value="Pedir el valor que debe paga el cliente" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="54.612433819731464" y="144.30578512396693">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="17" idAp="5" parent="5" style="tp" typeAp="TP" value="recibir el pago" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="55.02565696022732" y="251.3305785123967">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="18" idAp="2" parent="5" style="dx" typeAp="DX" value="¿Se pago el total?" vertex="1">
+      <mxGeometry as="geometry" height="35.0" labelAngle="329" labelHeight="40.91373790394176" labelWidth="50.0" width="55.0" x="196.10003712551656" y="266.7438016528926">
+        <mxPoint as="offset" x="-16.0" y="-38.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="19" idAp="6" parent="5" style="tp" typeAp="TP" value="Cajero ingreso a software" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="280.6454916709711" y="252.15702479338842">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="26" parent="5" source="15" sourceEdgeFix="bottomCenter" style="" target="16" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="101.69921067923558" y="57.384297520661164"/>
+        <mxPoint as="targetPoint" x="102.70179332386364" y="144.85416666666669"/>
+        <Array as="pointsViewer">
+          <mxPoint x="126.30991735537197" y="480.88429752066116"/>
+          <mxPoint x="126.30991735537197" y="520.3057851239669"/>
+          <mxPoint x="126.72314049586782" y="520.3057851239669"/>
+          <mxPoint x="126.72314049586782" y="535.3057851239669"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="24.710743801652853"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="27" parent="5" source="16" sourceEdgeFix="bottomCenter" style="" target="17" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="102.11243381973146" y="176.80578512396693"/>
+        <mxPoint as="targetPoint" x="102.18095999053033" y="249.54166666666669"/>
+        <Array as="pointsViewer">
+          <mxPoint x="126.72314049586782" y="600.3057851239669"/>
+          <mxPoint x="126.72314049586782" y="627.3305785123966"/>
+          <mxPoint x="127.13636363636368" y="627.3305785123966"/>
+          <mxPoint x="127.13636363636368" y="642.3305785123966"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="18.512396694214885"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="28" parent="5" source="17" sourceEdgeFix="rightMiddle" style="" target="18" targetEdgeFix="leftMiddle" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="102.52565696022732" y="283.8305785123968"/>
+        <mxPoint as="targetPoint" x="199.0559599905303" y="283.9166666666667"/>
+        <Array as="pointsViewer">
+          <mxPoint x="174.63636363636368" y="674.8305785123966"/>
+          <mxPoint x="205.71074380165294" y="674.8305785123966"/>
+          <mxPoint x="205.71074380165294" y="675.2438016528927"/>
+          <mxPoint x="220.71074380165294" y="675.2438016528927"/>
+        </Array>
+        <mxPoint as="offset" x="20.537190082644628" y="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="29" parent="5" source="18" sourceEdgeFix="rightMiddle" style="" target="19" targetEdgeFix="leftMiddle" value="Si">
+      <mxGeometry as="geometry" labelHeight="14.630859375" labelWidth="29.0" relative="1">
+        <mxPoint as="sourcePoint" x="223.60003712551656" y="284.2438016528926"/>
+        <mxPoint as="targetPoint" x="281.8684599905303" y="282.3541666666667"/>
+        <Array as="pointsViewer">
+          <mxPoint x="275.71074380165294" y="675.2438016528927"/>
+          <mxPoint x="290.2561983471075" y="675.2438016528927"/>
+          <mxPoint x="290.2561983471075" y="675.6570247933885"/>
+          <mxPoint x="305.2561983471075" y="675.6570247933885"/>
+        </Array>
+        <mxPoint as="offset" x="-4.0" y="-19.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="31" idAp="10" parent="5" style="tp" typeAp="TP" value="cajero presiona boton para imprimir ticket" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="237.8618207963911" y="144.10989010988993">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="33" idAp="11" parent="5" style="tp" typeAp="TP" value="Cajero toma ticket y entrega al conductor" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="237.8618207963911" y="24.32967032967025">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="34" parent="5" source="31" sourceEdgeFix="topCenter" style="" target="33" targetEdgeFix="bottomCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="285.36182079639116" y="176.60989010988993"/>
+        <mxPoint as="targetPoint" x="290.35632629089656" y="85.99999999999994"/>
+        <Array as="pointsViewer">
+          <mxPoint x="309.9725274725275" y="535.1098901098899"/>
+          <mxPoint x="309.9725274725275" y="480.32967032967025"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="32.39010989010981"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="37" idAp="13" parent="5" style="tp" typeAp="TP" value="Cajero permite el paso" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="404.8947878293581" y="24.32967032967025">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="38" idAp="14" parent="5" style="tp" typeAp="TP" value="Presiona botón para levantar obstáculo" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="404.8947878293581" y="127.62637362637355">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="41" parent="5" source="37" sourceEdgeFix="bottomCenter" style="" target="38" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="452.39478782935817" y="56.82967032967025"/>
+        <mxPoint as="targetPoint" x="451.8947878293581" y="131.054945054945"/>
+        <Array as="pointsViewer">
+          <mxPoint x="477.0054945054945" y="480.32967032967025"/>
+          <mxPoint x="477.0054945054945" y="518.6263736263736"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="24.148351648351678"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="7" idAp="4" parent="2" style="horizontalBand" typeAp="undefined" value="Sistema" vertex="1">
+      <mxGeometry as="geometry" height="390.0" labelHeight="390.0" labelWidth="14.630859375" width="805.3715863408815" x="24.610706676136363" y="780.0">
+        <mxPoint as="offset" x="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="20" idAp="7" parent="7" style="tp" typeAp="TP" value="Software toma placa del auto con su cámara" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="281.058714811467" y="17.942148760330497">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="22" idAp="9" parent="7" style="tp" typeAp="TP" value="Permite imprimir el ticket" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="282.2642933238636" y="218.1874999999999">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="23" parent="7" source="20" sourceEdgeFix="bottomCenter" style="" target="21" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="328.558714811467" y="50.4421487603305"/>
+        <mxPoint as="targetPoint" x="327.1809599905303" y="118.91666666666663"/>
+        <Array as="pointsViewer">
+          <mxPoint x="353.16942148760336" y="863.9421487603305"/>
+          <mxPoint x="353.16942148760336" y="885.2291666666665"/>
+          <mxPoint x="354.375" y="885.2291666666665"/>
+          <mxPoint x="354.375" y="900.2291666666665"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="15.64350895316801"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="24" parent="7" source="21" sourceEdgeFix="bottomCenter" style="" target="22" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="329.7642933238637" y="150.72916666666652"/>
+        <mxPoint as="targetPoint" x="329.785126657197" y="216.3124999999999"/>
+        <Array as="pointsViewer">
+          <mxPoint x="354.375" y="965.2291666666665"/>
+          <mxPoint x="354.375" y="999.1874999999999"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="21.979166666666686"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="21" idAp="8" parent="7" style="tp" typeAp="TP" value="Colocar datos del auto en el ticket" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="282.2642933238636" y="119.22916666666652">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="39" idAp="15" parent="7" style="tp" typeAp="TP" value="Sistema levanta obstáculo" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="445.5541284886988" y="17.846153846153697">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="48" parent="7" source="45" sourceEdgeFix="bottomCenter" style="" target="47" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="633.5494874986208" y="50.490291262136"/>
+        <mxPoint as="targetPoint" x="636.9329826442519" y="141.2524271844659"/>
+        <Array as="pointsViewer">
+          <mxPoint x="675.1601941747573" y="863.8461538461537"/>
+          <mxPoint x="675.1601941747573" y="905.2291666666665"/>
+          <mxPoint x="658.1601941747573" y="905.2291666666665"/>
+          <mxPoint x="658.1601941747573" y="920.2291666666665"/>
+        </Array>
+        <mxPoint as="offset" x="22.0" y="25.69150641025641"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="47" idAp="1" parent="7" style="fn" typeAp="FN" value="" vertex="1">
+      <mxGeometry as="geometry" height="40.0" width="25.0" x="621.0494874986209" y="139.22916666666652">
+        <mxPoint as="offset" x="23.0" y="38.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="50" idAp="18" parent="7" style="tp" typeAp="TP" value="No se permite el ingreso" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="176.44083971561616" y="18.01030927835052">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell connectionMode="manual" edge="1" id="52" parent="7" source="50" sourceEdgeFix="bottomCenter" style="" target="47" targetEdgeFix="bottomCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="223.9408397156161" y="50.51030927835063"/>
+        <mxPoint as="targetPoint" x="633.7501180661317" y="175.78350515463922"/>
+        <Array as="points">
+          <mxPoint x="223.9408397156161" y="83.01030927835063"/>
+          <mxPoint x="223.9408397156161" y="142.286082474227"/>
+          <mxPoint x="240.24114517571547" y="142.286082474227"/>
+          <mxPoint x="240.24114517571547" y="320.1134020618558"/>
+          <mxPoint x="633.5494874986208" y="320.1134020618558"/>
+          <mxPoint x="633.5494874986208" y="179.2291666666663"/>
+        </Array>
+        <Array as="pointsControl">
+          <mxPoint x="221.71861749339394" y="110.42597365406641"/>
+          <mxPoint x="229.86877022344345" y="140.06386025200482"/>
+          <mxPoint x="238.0189229534932" y="228.9775200458189"/>
+          <mxPoint x="434.6730941149459" y="317.8911798396334"/>
+          <mxPoint x="631.3272652763986" y="247.44906214203866"/>
+        </Array>
+        <Array as="pointsViewer">
+          <mxPoint x="248.55154639175254" y="864.0103092783505"/>
+          <mxPoint x="248.55154639175254" y="923.286082474227"/>
+          <mxPoint x="264.85185185185185" y="923.286082474227"/>
+          <mxPoint x="264.85185185185185" y="1101.1134020618558"/>
+          <mxPoint x="658.1601941747573" y="1101.1134020618558"/>
+          <mxPoint x="658.1601941747573" y="960.2291666666665"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="34.637886597938234"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="54" idAp="20" parent="7" style="tp" typeAp="TP" value="Debitar depende al vehiculo" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="45.523313942420316" y="119.22916666666652">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="58" parent="7" source="54" sourceEdgeFix="bottomCenter" style="" target="57" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="93.02331394242039" y="151.72916666666674"/>
+        <mxPoint as="targetPoint" x="94.57486033417298" y="210.8350515463917"/>
+        <Array as="pointsViewer">
+          <mxPoint x="117.63402061855669" y="965.2291666666665"/>
+          <mxPoint x="117.63402061855669" y="988.2371134020619"/>
+          <mxPoint x="92.11070667613636" y="988.2371134020619"/>
+          <mxPoint x="92.11070667613636" y="1003.2371134020619"/>
+        </Array>
+        <mxPoint as="offset" x="30.52331394242033" y="16.50397336769771"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="57" idAp="3" parent="7" style="dx" typeAp="DX" value="¿Pagó el total?" vertex="1">
+      <mxGeometry as="geometry" height="35.0" labelHeight="27.762222290039062" labelWidth="50.0" width="55.0" x="40.0" y="222.23711340206194">
+        <mxPoint as="offset" x="-23.0" y="-25.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="60" idAp="22" parent="7" style="tp" typeAp="TP" value="Permite paso a cliente" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="46.54393249912134" y="297.3917525773197">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="61" parent="7" source="57" sourceEdgeFix="rightMiddle" style="" target="59" targetEdgeFix="leftMiddle" value="No">
+      <mxGeometry as="geometry" labelHeight="14.630859375" labelWidth="36.0" relative="1">
+        <mxPoint as="sourcePoint" x="67.4999999999999" y="239.73711340206182"/>
+        <mxPoint as="targetPoint" x="111.06970569499767" y="242.79381443298985"/>
+        <Array as="pointsViewer">
+          <mxPoint x="119.61070667613637" y="1020.7371134020618"/>
+          <mxPoint x="150.50515463917523" y="1020.7371134020618"/>
+        </Array>
+        <mxPoint as="offset" x="7.0" y="-23.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="62" parent="7" source="57" sourceEdgeFix="bottomCenter" style="" target="60" targetEdgeFix="topCenter" value="Si">
+      <mxGeometry as="geometry" labelHeight="14.630859375" labelWidth="29.0" relative="1">
+        <mxPoint as="sourcePoint" x="67.4999999999999" y="239.73711340206182"/>
+        <mxPoint as="targetPoint" x="94.57486033417298" y="302.58762886597947"/>
+        <Array as="pointsViewer">
+          <mxPoint x="92.11070667613636" y="1038.2371134020618"/>
+          <mxPoint x="92.11070667613636" y="1063.3917525773197"/>
+          <mxPoint x="118.6546391752577" y="1063.3917525773197"/>
+          <mxPoint x="118.6546391752577" y="1078.3917525773197"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="7.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell connectionMode="manual" edge="1" id="63" parent="7" source="60" sourceEdgeFix="rightMiddle" style="" target="47" targetEdgeFix="bottomCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="94.04393249912142" y="329.8917525773197"/>
+        <mxPoint as="targetPoint" x="635.8119737362348" y="175.78350515463922"/>
+        <Array as="points">
+          <mxPoint x="141.5439324991213" y="329.8917525773197"/>
+          <mxPoint x="172.29427968659002" y="329.8917525773197"/>
+          <mxPoint x="172.29427968659002" y="344.85567010309273"/>
+          <mxPoint x="633.5494874986208" y="344.85567010309273"/>
+          <mxPoint x="633.5494874986208" y="179.22916666666652"/>
+        </Array>
+        <Array as="pointsControl">
+          <mxPoint x="153.82632258770104" y="326.79896907216516"/>
+          <mxPoint x="169.20149618143546" y="334.28092783505167"/>
+          <mxPoint x="399.8291000874508" y="341.7628865979382"/>
+          <mxPoint x="630.4567039934662" y="258.94963487972495"/>
+        </Array>
+        <Array as="pointsViewer">
+          <mxPoint x="166.1546391752577" y="1110.8917525773197"/>
+          <mxPoint x="196.9049863627264" y="1110.8917525773197"/>
+          <mxPoint x="196.9049863627264" y="1125.8556701030927"/>
+          <mxPoint x="658.1601941747573" y="1125.8556701030927"/>
+          <mxPoint x="658.1601941747573" y="960.2291666666665"/>
+        </Array>
+        <mxPoint as="offset" x="20.375173593734345" y="155.6625859106532"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell connectionMode="manual" edge="1" id="64" parent="7" source="59" sourceEdgeFix="rightMiddle" style="" target="47" targetEdgeFix="bottomCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="159.39444796303894" y="239.73711340206205"/>
+        <mxPoint as="targetPoint" x="634.7810459011833" y="175.78350515463922"/>
+        <Array as="points">
+          <mxPoint x="206.89444796303883" y="239.73711340206205"/>
+          <mxPoint x="267.2037263135544" y="239.73711340206205"/>
+          <mxPoint x="267.2037263135544" y="299.4948453608247"/>
+          <mxPoint x="633.5494874986208" y="299.4948453608247"/>
+          <mxPoint x="633.5494874986208" y="179.22916666666652"/>
+        </Array>
+        <Array as="pointsControl">
+          <mxPoint x="233.95630363314206" y="236.64432989690727"/>
+          <mxPoint x="264.1109428083997" y="266.5231958762886"/>
+          <mxPoint x="447.2838234009331" y="296.4020618556701"/>
+          <mxPoint x="630.4567039934662" y="236.26922250859093"/>
+        </Array>
+        <Array as="pointsViewer">
+          <mxPoint x="245.5051546391752" y="1020.7371134020618"/>
+          <mxPoint x="291.8144329896908" y="1020.7371134020618"/>
+          <mxPoint x="291.8144329896908" y="1080.4948453608247"/>
+          <mxPoint x="658.1601941747573" y="1080.4948453608247"/>
+          <mxPoint x="658.1601941747573" y="960.2291666666665"/>
+        </Array>
+        <mxPoint as="offset" x="28.154639175257785" y="65.50794673539531"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="45" idAp="17" parent="7" style="tp" typeAp="TP" value="Sistema baja el obstáculo" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="603.0494874986209" y="17.846153846153697">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="59" idAp="21" parent="7" style="tp" typeAp="TP" value="No Permite ingreso del vehiculo" vertex="1">
+      <mxGeometry as="geometry" height="65.0" labelHeight="50.0" labelWidth="95.0" width="95.0" x="125.89444796303887" y="207.23711340206194">
+        <mxPoint as="offset" y="15.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="25" parent="2" source="19" sourceEdgeFix="bottomCenter" style="" target="20" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1" y="780.0">
+        <mxPoint as="sourcePoint" x="352.75619834710756" y="674.6570247933885"/>
+        <mxPoint as="targetPoint" x="351.7916666666667" y="800.4791666666667"/>
+        <Array as="pointsViewer">
+          <mxPoint x="352.7561983471075" y="708.1570247933885"/>
+          <mxPoint x="352.7561983471075" y="783.9421487603305"/>
+          <mxPoint x="353.16942148760336" y="783.9421487603305"/>
+          <mxPoint x="353.16942148760336" y="798.9421487603305"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="42.89256198347101"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="30" parent="2" source="13" sourceEdgeFix="bottomCenter" style="" target="15" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1" y="780.0">
+        <mxPoint as="sourcePoint" x="125.89669421487608" y="267.5826446280992"/>
+        <mxPoint as="targetPoint" x="130.4375" y="416.625"/>
+        <Array as="pointsViewer">
+          <mxPoint x="125.8966942148761" y="301.0826446280992"/>
+          <mxPoint x="125.8966942148761" y="400.88429752066116"/>
+          <mxPoint x="126.30991735537197" y="400.88429752066116"/>
+          <mxPoint x="126.30991735537197" y="415.88429752066116"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="54.90082644628097"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell connectionMode="manual" edge="1" id="32" parent="2" source="22" sourceEdgeFix="rightMiddle" style="" target="31" targetEdgeFix="rightMiddle" value="">
+      <mxGeometry as="geometry" relative="1" y="780.0">
+        <mxPoint as="sourcePoint" x="354.37500000000006" y="1030.6875"/>
+        <mxPoint as="targetPoint" x="354.5274725274725" y="561.7142857142857"/>
+        <Array as="points">
+          <mxPoint x="401.875" y="1030.6875"/>
+          <mxPoint x="421.56043956043953" y="1030.6875"/>
+          <mxPoint x="421.56043956043953" y="566.60989010989"/>
+          <mxPoint x="357.4725274725275" y="566.60989010989"/>
+        </Array>
+        <Array as="pointsControl">
+          <mxPoint x="408.4210164835165" y="1027.3907967032967"/>
+          <mxPoint x="418.26373626373623" y="795.3519917582416"/>
+          <mxPoint x="386.21978021978026" y="563.3131868131867"/>
+        </Array>
+        <Array as="pointsViewer">
+          <mxPoint x="401.875" y="1031.6875"/>
+          <mxPoint x="421.56043956043953" y="1031.6875"/>
+          <mxPoint x="421.56043956043953" y="567.6098901098899"/>
+          <mxPoint x="357.4725274725275" y="567.6098901098899"/>
+        </Array>
+        <mxPoint as="offset" x="59.24519230769229" y="469.0776098901101"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell connectionMode="auto" edge="1" id="35" parent="2" source="33" sourceEdgeFix="topCenter" style="" target="36" targetEdgeFix="bottomCenter" value="">
+      <mxGeometry as="geometry" relative="1" y="780.0">
+        <mxPoint as="sourcePoint" x="307.97252747252753" y="450.8296703296703"/>
+        <mxPoint as="targetPoint" x="302.0" y="324.0"/>
+        <Array as="pointsViewer">
+          <mxPoint x="309.9725274725275" y="415.32967032967025"/>
+          <mxPoint x="309.9725274725275" y="373.57142857142856"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="25.879120879120848"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="40" parent="2" source="36" sourceEdgeFix="rightMiddle" style="" target="37" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1" y="780.0">
+        <mxPoint as="sourcePoint" x="309.97252747252753" y="305.07142857142856"/>
+        <mxPoint as="targetPoint" x="479.8021978021978" y="421.05494505494505"/>
+        <Array as="pointsViewer">
+          <mxPoint x="357.4725274725275" y="341.07142857142856"/>
+          <mxPoint x="477.0054945054945" y="341.07142857142856"/>
+          <mxPoint x="477.0054945054945" y="415.32967032967025"/>
+        </Array>
+        <mxPoint as="offset" x="64.7664835164835" y="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="42" parent="2" source="38" sourceEdgeFix="bottomCenter" style="" target="39" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1" y="780.0">
+        <mxPoint as="sourcePoint" x="477.00549450549454" y="550.1263736263736"/>
+        <mxPoint as="targetPoint" x="518.2637362637363" y="800.1758241758241"/>
+        <Array as="pointsViewer">
+          <mxPoint x="477.0054945054945" y="583.6263736263736"/>
+          <mxPoint x="477.0054945054945" y="783.8461538461537"/>
+          <mxPoint x="517.6648351648352" y="783.8461538461537"/>
+          <mxPoint x="517.6648351648352" y="798.8461538461537"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="105.10989010989005"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="44" parent="2" source="39" sourceEdgeFix="rightMiddle" style="" target="43" targetEdgeFix="bottomCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="517.664835164835" y="830.3461538461536"/>
+        <mxPoint as="targetPoint" x="578.0485436893205" y="385.3300970873786"/>
+        <Array as="pointsViewer">
+          <mxPoint x="565.1648351648352" y="831.3461538461537"/>
+          <mxPoint x="612.5485436893205" y="831.3461538461537"/>
+          <mxPoint x="612.5485436893205" y="373.57142857142856"/>
+        </Array>
+        <mxPoint as="offset" x="28.691854262242657" y="462.77472527472514"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="46" parent="2" source="43" sourceEdgeFix="rightMiddle" style="" target="45" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="558.5485436893202" y="320.87864077669906"/>
+        <mxPoint as="targetPoint" x="659.6019417475727" y="796.9805825242718"/>
+        <Array as="pointsViewer">
+          <mxPoint x="660.0485436893205" y="341.07142857142856"/>
+          <mxPoint x="675.1601941747573" y="341.07142857142856"/>
+          <mxPoint x="675.1601941747573" y="798.8461538461537"/>
+        </Array>
+        <mxPoint as="offset" x="12.555825242718413" y="5.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell edge="1" id="51" parent="2" source="18" sourceEdgeFix="bottomCenter" style="" target="50" targetEdgeFix="topCenter" value="No">
+      <mxGeometry as="geometry" labelHeight="14.630859375" labelWidth="36.0" relative="1">
+        <mxPoint as="sourcePoint" x="248.21074380165282" y="674.2438016528927"/>
+        <mxPoint as="targetPoint" x="249.08247422680415" y="803.2061855670104"/>
+        <Array as="pointsViewer">
+          <mxPoint x="248.21074380165294" y="692.7438016528927"/>
+          <mxPoint x="248.21074380165294" y="784.0103092783505"/>
+          <mxPoint x="248.55154639175254" y="784.0103092783505"/>
+          <mxPoint x="248.55154639175254" y="799.0103092783505"/>
+        </Array>
+        <mxPoint as="offset" x="5.0" y="22.0"/>
+      </mxGeometry>
+    </mxCell>
+    <mxCell connectionMode="manual" edge="1" id="56" parent="2" source="53" sourceEdgeFix="bottomCenter" style="verticalAlign=top;lineSpacing=4" target="54" targetEdgeFix="topCenter" value="">
+      <mxGeometry as="geometry" relative="1">
+        <mxPoint as="sourcePoint" x="246.55154639175248" y="196.36597938144337"/>
+        <mxPoint as="targetPoint" x="680.0" y="1689.0"/>
+        <Array as="points">
+          <mxPoint x="248.55154639175248" y="224.86597938144337"/>
+          <mxPoint x="248.55154639175248" y="329.10309278350496"/>
+          <mxPoint x="59.39175257731961" y="329.10309278350496"/>
+          <mxPoint x="59.39175257731961" y="884.2291666666667"/>
+          <mxPoint x="117.63402061855675" y="884.2291666666667"/>
+          <mxPoint x="117.63402061855675" y="899.2291666666665"/>
+        </Array>
+        <Array as="pointsControl">
+          <mxPoint x="245.55154639175254" y="273.98453608247416"/>
+          <mxPoint x="150.97164948453607" y="326.10309278350496"/>
+          <mxPoint x="56.39175257731961" y="603.6661297250859"/>
+          <mxPoint x="85.51288659793815" y="881.2291666666667"/>
+          <mxPoint x="114.63402061855669" y="888.7291666666666"/>
+        </Array>
+        <Array as="pointsViewer">
+          <mxPoint x="248.55154639175254" y="225.8659793814433"/>
+          <mxPoint x="248.55154639175254" y="330.10309278350496"/>
+          <mxPoint x="59.39175257731961" y="330.10309278350496"/>
+          <mxPoint x="59.39175257731961" y="885.2291666666667"/>
+          <mxPoint x="117.63402061855669" y="885.2291666666667"/>
+          <mxPoint x="117.63402061855669" y="900.2291666666665"/>
+        </Array>
+        <mxPoint as="offset" x="194.15979381443293" y="57.118556701030826"/>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>
+</GraphEditor>
