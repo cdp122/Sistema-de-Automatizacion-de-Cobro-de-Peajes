@@ -1,11 +1,30 @@
 {
-  "name": "proyecto1",
-  "private": true,
-  "dependencies": {
-    "@rails/ujs": "^6.0.0",
-    "turbolinks": "^5.2.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/actioncable": "^6.0.0"
+  "name": "proyecto",
+  "version": "1.0.0",
+  "description": "Pagina Web para Automatizacion de Peaje",
+  "main": "index.js",
+  "scripts": {
+    "test": "var",
+    "start": "node ./src/index.js",
+    "start:dev": "nodemon ./src/index.js"
   },
-  "version": "0.1.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdp122/Sistema-de-Automatizacion-de-Cobro-de-Peajes.git"
+  },
+  "keywords": [
+    "Peaje"
+  ],
+  "author": "Carlos Puentestar",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/cdp122/Sistema-de-Automatizacion-de-Cobro-de-Peajes/issues"
+  },
+  "homepage": "https://github.com/cdp122/Sistema-de-Automatizacion-de-Cobro-de-Peajes#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
