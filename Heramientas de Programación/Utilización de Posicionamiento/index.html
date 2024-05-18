@@ -1,84 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IFRAME</title>
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        display: flex;
-        justify-content: space-between;
-        width: 80%;
-      }
-      .frame {
-        border: none;
-        width: 31%;
-        height: 600px;
-      }
-      .left,
-      .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .left p,
-      .right p {
-        font-size: 24px;
-        margin-bottom: 10px;
-      }
-      .left iframe,
-      .right iframe {
-        border: none;
-      }
-      .center {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .center h1 {
-        font-size: 36px;
-        margin-bottom: 20px;
-      }
-      .center p {
-        font-size: 20px;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .center iframe {
-        border: none;
-        width: 80%;
-        height: 400px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container">
-      <div class="left">
-        <p>ESTE ESTÁ A LA IZQUIERDA</p>
-        <iframe src="https://www.wikipedia.org"></iframe>
-      </div>
-      <div class="center">
-        <h1>ESTE ES UN MARCO CENTRADO</h1>
-        <p>
-          Av. 17 de Julio 5-21 y Gral. José María Cordova<br />inbuned<br />(06)
-          2957-800
-        </p>
-        <iframe src="https://www.utn.edu.ec"></iframe>
-      </div>
-      <div class="right">
-        <p>ESTE A LA DERECHA</p>
-        <iframe src="https://www.ibm.com"></iframe>
-      </div>
+    <header>Utilizacion de Posicionamiento</header>
+    <div class="centrado">
+      <br>ESTE ES UN MARCO CENTRADO</br>
+      <br>
+      <iframe src="https://www.utn.edu.ec" frameborder="0" >
+        Si ves este mensaje, significa que tu navegador no soporta esta característica o está; 
+        deshabilitada. Pero puedes acceder a esta información aquí.
+        <a href="https://www.utn.edu.ec/">tag HTML a la pagina UTN</a>
+      </iframe>
     </div>
+    
+    <div class="izquierda">
+      <br>ESTE ESTA A LA IZQUIERDA</br>
+      <iframe src="https://www.wikipedia.org" frameborder="0">
+        Si ves este mensaje, significa que tu navegador no soporta esta característica o está; 
+        deshabilitada. Pero puedes acceder a esta información aquí.
+        <a href="https://es.wikipedia.org/wiki/Wikipedia:Portada">tag HTML a la pagina Wikipedia</a>
+      </iframe> 
+    </div>
+    
+    <div class="derecha" >
+      <br>ESTE ESTA A LA DERECHA</br>
+      <iframe src="https://www.openoffice.org/" frameborder="0">
+        Si ves este mensaje, significa que tu navegador no soporta esta característica o está; 
+        deshabilitada. Pero puedes acceder a esta información aquí.
+        <a href="https://www.openoffice.org/">tag HTML a la pagina w3schools</a>
+      </iframe>
+    </div>
+    <footer>
+      &copy; Grupo N°3 Derechos Reservados 2024 <br>
+    </footer>
   </body>
 </html>
