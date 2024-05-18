@@ -1,0 +1,30 @@
+body {
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    padding: 30vh 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.menu {
+    height: 20vh;
+    width: 50vw;
+    padding: 10vh 10vw;
+    background-color: darkcyan;
+    border-radius: 20px;
+}
+
+input[type="submit"] {
+    border-radius: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+    border-radius: 20px;
+    height: fit-content;
+    font-size: large;
+    padding: 0 10px;
+    border: none;
+}

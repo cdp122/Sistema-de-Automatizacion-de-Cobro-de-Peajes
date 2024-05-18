@@ -4,9 +4,8 @@
   "description": "Pagina Web para Automatizacion de Peaje",
   "main": "index.js",
   "scripts": {
-    "test": "var",
-    "start": "node ./src/index.js",
-    "start:dev": "nodemon ./src/index.js"
+    "test": "nodemon ./index.js",
+    "start": "node ./index.js"
   },
   "repository": {
     "type": "git",
