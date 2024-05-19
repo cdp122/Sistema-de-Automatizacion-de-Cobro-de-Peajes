@@ -1,0 +1,51 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+nav {
+    background-color: #050550;
+    padding: 1vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+
+
+    h1 {
+        color: white;
+        height: fit-content;
+    }
+
+    a,
+    a:visited {
+        color: white;
+        text-decoration: none;
+        margin: 0 1vw;
+        transition: all ease 0.3s;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: black;
+        background-color: aliceblue;
+    }
+}
+
+.tablas {
+    display: flex;
+    margin: 5vh 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+
+    table {
+        border: solid black 1px;
+        border-collapse: collapse;
+
+        td {
+            border: solid black 1px;
+
+        }
+    }
+}
