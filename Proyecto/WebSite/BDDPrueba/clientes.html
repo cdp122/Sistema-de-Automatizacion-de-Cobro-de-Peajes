@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="clientes.css">
+    <script src="clientes.js"></script>
+    <title>Clientes</title>
+</head>
+
+<body>
+    <div class="menu">
+        <span id="action">Registro</span>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" type="text" maxlength="50">
+        <label for="cedula">Cédula:</label>
+        <input id="cedula" type="text" maxlength="10">
+        <label for="contraseña">Contraseña:</label>
+        <input id="contraseña" type="text" maxlength="10">
+        <label for="correo">Correo:</label>
+        <input id="correo" type="email" maxlength="30">
+        <label for="placa">Placa:</label>
+        <input id="placa" type="text" maxlength="7">
+        <label for="tarjeta">Tarjeta:</label>
+        <input id="tarjeta" type="text" maxlength="5">
+        <div class="btns">
+            <a href="./bdd.html">Cancelar</a>
+            <a onclick="Guardar()">Guardar</a>
+        </div>
+    </div>
+</body>
+
+</html>
