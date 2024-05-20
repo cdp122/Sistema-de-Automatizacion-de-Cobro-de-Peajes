@@ -4,72 +4,105 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Justificación</title>
+    <link rel="stylesheet" href="detalles.css" type="text/css" />
   </head>
 
   <body>
     <a href="Cuestionario.html">Regresar a Cuestionario</a>
     <h1>Justificación del Formulario</h1>
-    <section id="nombre">
-      <h2>Nombre Usuario</h2>
+
+    <fieldset id="nombre">
+      <legend>Nombre Usuario</legend>
       <p>
         Se requiere para identificar al usuario. Debe tener entre 3 y 16
         caracteres y solo puede contener letras, números y guiones bajos.
+        Decidimos usar un campo de texto con una expresión regular para asegurar
+        que el nombre de usuario cumpla con los requisitos.
       </p>
-    </section>
-    <section id="contrasena">
-      <h2>Contraseña</h2>
+    </fieldset>
+
+    <fieldset id="contrasena">
+      <legend>Contraseña</legend>
       <p>
         Se requiere para la seguridad del usuario. Debe tener al menos 6
-        caracteres.
+        caracteres. Usamos un campo de contraseña con una expresión regular para
+        asegurar la longitud mínima y mejorar la seguridad.
       </p>
-    </section>
-    <section id="repContrasena">
-      <h2>Repetir Contraseña</h2>
+    </fieldset>
+
+    <fieldset id="repContrasena">
+      <legend>Repetir Contraseña</legend>
       <p>
         Se requiere para verificar que el usuario haya ingresado correctamente
-        su contraseña.
+        su contraseña. Este campo ayuda a prevenir errores en la entrada de la
+        contraseña.
       </p>
-    </section>
-    <section id="direccion">
-      <h2>Dirección</h2>
-      <p>Se utiliza para la entrega de servicios o productos.</p>
-    </section>
-    <section id="ciudad">
-      <h2>Ciudad</h2>
+    </fieldset>
+
+    <fieldset id="direccion">
+      <legend>Dirección</legend>
+      <p>
+        Se utiliza para la entrega de servicios o productos. Un campo de texto
+        simple permite la entrada libre para la dirección del usuario.
+      </p>
+    </fieldset>
+
+    <fieldset id="ciudad">
+      <legend>Ciudad</legend>
       <p>
         Se utiliza para identificar la ubicación del usuario. Debe contener al
-        menos 2 caracteres y solo letras.
+        menos 2 caracteres y solo letras. Usamos una expresión regular para
+        asegurar que solo se ingresen letras.
       </p>
-    </section>
-    <section id="provincia">
-      <h2>Provincia</h2>
+    </fieldset>
+
+    <fieldset id="provincia">
+      <legend>Provincia</legend>
       <p>
         Se utiliza para identificar la región del usuario. Debe contener al
-        menos 2 caracteres y solo letras.
+        menos 2 caracteres y solo letras. Similar al campo de ciudad, usamos una
+        expresión regular para asegurar la entrada correcta.
       </p>
-    </section>
-    <section id="huespedes">
-      <h2>Número de Huéspedes</h2>
-      <p>Se requiere para saber la cantidad de personas que se hospedarán.</p>
-    </section>
-    <section id="servicios">
-      <h2>Servicios brindados</h2>
+    </fieldset>
+
+    <fieldset id="huespedes">
+      <legend>Número de Huéspedes</legend>
+      <p>
+        Se requiere para saber la cantidad de personas que se hospedarán. Usamos
+        un campo numérico para limitar la entrada a valores válidos.
+      </p>
+    </fieldset>
+
+    <fieldset id="servicios">
+      <legend>Servicios brindados</legend>
       <p>
         Opción para seleccionar los diferentes servicios que nosotros le
-        brindamos.
+        brindamos. Usamos checkboxes para permitir múltiples selecciones.
       </p>
-    </section>
-    <section id="habitacion">
-      <h2>Tipo de habitación</h2>
-      <p>Opción para seleccionar las diferentes habitaciones disponibles</p>
-    </section>
-    <section id="pension">
-      <h2>Tipo de pensión</h2>
-      <p>Opción para seleccionar el tipo de pensión</p>
-    </section>
-    <section id="comentario">
-      <h2>Comentarios</h2>
-      <p>Opción para enviar su correo y dejar algún comentario o sugerencia</p>
-    </section>
+    </fieldset>
+
+    <fieldset id="habitacion">
+      <legend>Tipo de habitación</legend>
+      <p>
+        Opción para seleccionar las diferentes habitaciones disponibles.
+        Utilizamos botones de radio para limitar la selección a una opción.
+      </p>
+    </fieldset>
+
+    <fieldset id="pension">
+      <legend>Tipo de pensión</legend>
+      <p>
+        Opción para seleccionar el tipo de pensión. Similar a las habitaciones,
+        usamos botones de radio para una selección exclusiva.
+      </p>
+    </fieldset>
+
+    <fieldset id="comentario">
+      <legend>Comentarios</legend>
+      <p>
+        Opción para enviar su correo y dejar algún comentario o sugerencia.
+        Usamos un textarea para permitir una entrada de texto más larga.
+      </p>
+    </fieldset>
   </body>
 </html>
