@@ -97,4 +97,19 @@ async function Editar(index) {
         console.error('Error:', error);
     }
 }
+
+async function Salir() {
+    try {
+        const response = await fetch('/', {
+            method: 'DELETE',
+        });
+        if (response.ok) {
+            window.location.href = "../index.html"
+        } else {
+            alert('No se pudo cerrar sesión.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 //#endregion
