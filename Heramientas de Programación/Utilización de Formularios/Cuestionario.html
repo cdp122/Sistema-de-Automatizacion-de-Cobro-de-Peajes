@@ -25,8 +25,8 @@
           pattern="^[A-Za-z0-9_]{3,16}$"
           title="Nombre de usuario debe tener entre 3 y 16 caracteres y solo puede contener letras, números y guiones bajos."
           placeholder="Ej: usuario123"
-        /><br />
-
+        />
+        <a href="detalles.html#nombre">Justificación</a><br />
         <label for="contrasena" class="label">Contraseña:</label>
         <input
           type="password"
@@ -37,8 +37,8 @@
           pattern=".{6,}"
           title="La contraseña debe tener al menos 6 caracteres."
           placeholder="Mínimo 6 caracteres"
-        /><br />
-
+        />
+        <a href="detalles.html#contrasena">Justificación</a><br />
         <label for="repContrasena" class="label">Repetir Contraseña:</label>
         <input
           type="password"
@@ -49,8 +49,8 @@
           pattern=".{6,}"
           title="La contraseña debe tener al menos 6 caracteres."
           placeholder="Mínimo 6 caracteres"
-        /><br />
-
+        />
+        <a href="detalles.html#repContrasena">Justificación</a><br />
         <label for="direccion" class="label">Dirección:</label>
         <input
           type="text"
@@ -59,8 +59,8 @@
           class="input"
           title="Introduce tu dirección completa."
           placeholder="Ej: Calle Falsa 123"
-        /><br />
-
+        />
+        <a href="detalles.html#direccion">Justificación</a><br />
         <label for="ciudad" class="label">Ciudad:</label>
         <input
           type="text"
@@ -70,8 +70,8 @@
           pattern="^[A-Za-zÀ-ÿ\u00f1\u00d1\s]{2,}$"
           title="La ciudad debe contener al menos 2 caracteres y solo letras."
           placeholder="Ej: Madrid"
-        /><br />
-
+        />
+        <a href="detalles.html#ciudad">Justificación</a><br />
         <label for="provincia" class="label">Provincia:</label>
         <input
           type="text"
@@ -81,8 +81,8 @@
           pattern="^[A-Za-zÀ-ÿ\u00f1\u00d1\s]{2,}$"
           title="La provincia debe contener al menos 2 caracteres y solo letras."
           placeholder="Ej: Madrid"
-        /><br />
-
+        />
+        <a href="detalles.html#provincia">Justificación</a><br />
         <label for="huespedes" class="label">Número de Huéspedes:</label>
         <input
           type="number"
@@ -93,9 +93,9 @@
           max="100"
           title="El número de huéspedes debe ser entre 1 y 100."
           placeholder="Ej: 2"
-        /><br />
+        />
+        <a href="detalles.html#huespedes">Justificación</a><br />
       </fieldset>
-
       <fieldset class="servicios">
         <legend>Servicios</legend>
         <input
@@ -109,7 +109,6 @@
         <label for="aireAcondicionado" class="label-checkbox"
           >Aire Acondicionado</label
         ><br />
-
         <input
           type="checkbox"
           id="almohadas"
@@ -121,7 +120,6 @@
         <label for="almohadas" class="label-checkbox"
           >Almohadas a la carta</label
         ><br />
-
         <input
           type="checkbox"
           id="cajaFuerte"
@@ -131,7 +129,6 @@
           title="Seleccione si desea caja fuerte."
         />
         <label for="cajaFuerte" class="label-checkbox">Caja fuerte</label><br />
-
         <input
           type="checkbox"
           id="detectorhumo"
@@ -143,7 +140,6 @@
         <label for="detectorhumo" class="label-checkbox"
           >Detector de humos</label
         ><br />
-
         <input
           type="checkbox"
           id="minibar"
@@ -153,7 +149,6 @@
           title="Seleccione si desea minibar."
         />
         <label for="minibar" class="label-checkbox">Minibar</label><br />
-
         <input
           type="checkbox"
           id="mesatrabajo"
@@ -164,7 +159,6 @@
         />
         <label for="mesatrabajo" class="label-checkbox">Mesa de Trabajo</label
         ><br />
-
         <input
           type="checkbox"
           id="internet"
@@ -175,7 +169,6 @@
         />
         <label for="internet" class="label-checkbox">Conexión a Internet</label
         ><br />
-
         <input
           type="checkbox"
           id="wifi"
@@ -185,8 +178,10 @@
           title="Seleccione si desea WIFI."
         />
         <label for="wifi" class="label-checkbox">WIFI</label><br />
+        <a href="detalles.html#servicios" class="justificacion-link"
+          >Justificación</a
+        ><br />
       </fieldset>
-
       <fieldset class="tipo-habitacion">
         <legend>Tipo de Habitación</legend>
         <input
@@ -198,7 +193,6 @@
           title="Seleccione si desea una habitación individual."
         />
         <label for="individual" class="label-radio">Individual</label><br />
-
         <input
           type="radio"
           id="doble"
@@ -208,7 +202,6 @@
           title="Seleccione si desea una habitación doble."
         />
         <label for="doble" class="label-radio">Doble</label><br />
-
         <input
           type="radio"
           id="suite"
@@ -218,8 +211,10 @@
           title="Seleccione si desea una suite."
         />
         <label for="suite" class="label-radio">Suite</label><br />
+        <a href="detalles.html#tipo-habitacion" class="justificacion-link"
+          >Justificación</a
+        ><br />
       </fieldset>
-
       <fieldset class="pension">
         <legend>Pensión</legend>
         <input
@@ -231,7 +226,6 @@
           title="Seleccione si desea solo alojamiento."
         />
         <label for="alojamiento" class="label-radio">Alojamiento</label><br />
-
         <input
           type="radio"
           id="desayuno"
@@ -241,7 +235,6 @@
           title="Seleccione si desea alojamiento con desayuno."
         />
         <label for="desayuno" class="label-radio">Desayuno</label><br />
-
         <input
           type="radio"
           id="media"
@@ -251,7 +244,6 @@
           title="Seleccione si desea media pensión."
         />
         <label for="media" class="label-radio">Media Pensión</label><br />
-
         <input
           type="radio"
           id="completa"
@@ -261,8 +253,10 @@
           title="Seleccione si desea pensión completa."
         />
         <label for="completa" class="label-radio">Pensión Completa</label><br />
+        <a href="detalles.html#pension" class="justificacion-link"
+          >Justificación</a
+        ><br />
       </fieldset>
-
       <fieldset class="comentarios">
         <legend>Comentarios y Sugerencias</legend>
         <label for="comentarios" class="label"
@@ -274,9 +268,7 @@
           class="textarea"
           title="Escriba sus comentarios o sugerencias aquí."
           placeholder="Escriba aquí sus comentarios..."
-        ></textarea
-        ><br />
-
+        ></textarea>
         <label for="email" class="label">E-mail contacto:</label>
         <input
           type="email"
@@ -287,8 +279,8 @@
           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           title="Introduce una dirección de correo válida."
           placeholder="Ej: correo@ejemplo.com"
-        /><br />
-
+        />
+        <a href="detalles.html#comentario">Justificación</a><br />
         <input
           type="checkbox"
           id="privacidad"
@@ -300,9 +292,7 @@
         <label for="privacidad" class="label-checkbox"
           >Acepto la política de privacidad</label
         >
-        <a href="detalles.html">Justificación</a><br />
       </fieldset>
-
       <input
         type="submit"
         value="Enviar"
@@ -315,6 +305,13 @@
         class="reset"
         title="Limpiar todos los campos del formulario."
       />
+      <br /><br /><br /><br /><br />
     </form>
+    <footer>
+      &copy; 2024 Sistema de automatización de peajes. Todos los derechos
+      reservados.
+
+      <img src="../Images/Logo dev Cuaspa.png" alt="Logo" class="footer-logo" />
+    </footer>
   </body>
 </html>
