@@ -14,94 +14,111 @@
     <fieldset id="nombre">
       <legend>Nombre Usuario</legend>
       <p>
-        Se requiere para identificar al usuario. Debe tener entre 3 y 16
-        caracteres y solo puede contener letras, números y guiones bajos.
-        Decidimos usar un campo de texto con una expresión regular para asegurar
-        que el nombre de usuario cumpla con los requisitos.
+        este campo de entrada está configurado para aceptar un nombre de usuario
+        que debe tener entre 3 y 16 caracteres y solo puede incluir letras,
+        números y guiones bajos. El campo es obligatorio, y se proporciona un
+        mensaje de ayuda para guiar al usuario.
       </p>
     </fieldset>
 
     <fieldset id="contrasena">
       <legend>Contraseña</legend>
       <p>
-        Se requiere para la seguridad del usuario. Debe tener al menos 6
-        caracteres. Usamos un campo de contraseña con una expresión regular para
-        asegurar la longitud mínima y mejorar la seguridad.
+        este campo de entrada está configurado para aceptar una contraseña que
+        debe tener al menos 6 caracteres. Los caracteres ingresados se ocultan
+        para mayor seguridad, el campo es obligatorio, y se proporciona un
+        mensaje de ayuda para guiar al usuario.
       </p>
     </fieldset>
 
     <fieldset id="repContrasena">
       <legend>Repetir Contraseña</legend>
       <p>
-        Se requiere para verificar que el usuario haya ingresado correctamente
-        su contraseña. Este campo ayuda a prevenir errores en la entrada de la
-        contraseña.
+        este campo de entrada está configurado para aceptar una contraseña
+        repetida (para confirmar la contraseña inicial) que debe tener al menos
+        6 caracteres. Los caracteres ingresados se ocultan para mayor seguridad,
+        el campo es obligatorio, y se proporciona un mensaje de ayuda para guiar
+        al usuario.
       </p>
     </fieldset>
 
     <fieldset id="direccion">
       <legend>Dirección</legend>
       <p>
-        Se utiliza para la entrega de servicios o productos. Un campo de texto
-        simple permite la entrada libre para la dirección del usuario.
+        Este campo de entrada permite al usuario ingresar su dirección completa.
+        Muestra un texto de ejemplo cuando está vacío y proporciona un mensaje
+        de ayuda cuando el usuario pasa el cursor sobre el campo.
       </p>
     </fieldset>
 
     <fieldset id="ciudad">
       <legend>Ciudad</legend>
       <p>
-        Se utiliza para identificar la ubicación del usuario. Debe contener al
-        menos 2 caracteres y solo letras. Usamos una expresión regular para
-        asegurar que solo se ingresen letras.
+        Este campo de entrada permite al usuario ingresar el nombre de su
+        ciudad, que debe contener al menos 2 caracteres y solo letras. Muestra
+        un texto de ejemplo y proporciona un mensaje de ayuda si los datos no
+        cumplen con el patrón.
       </p>
     </fieldset>
 
     <fieldset id="provincia">
       <legend>Provincia</legend>
       <p>
-        Se utiliza para identificar la región del usuario. Debe contener al
-        menos 2 caracteres y solo letras. Similar al campo de ciudad, usamos una
-        expresión regular para asegurar la entrada correcta.
+        Este campo de entrada permite al usuario ingresar el nombre de su
+        provincia, que debe contener al menos 2 caracteres y solo letras.
+        Muestra un texto de ejemplo y proporciona un mensaje de ayuda si los
+        datos no cumplen con el patrón.
       </p>
     </fieldset>
 
     <fieldset id="huespedes">
       <legend>Número de Huéspedes</legend>
       <p>
-        Se requiere para saber la cantidad de personas que se hospedarán. Usamos
-        un campo numérico para limitar la entrada a valores válidos.
+        Este campo de entrada permite al usuario ingresar el número de
+        huéspedes, que debe estar entre 1 y 100. Muestra un texto de ejemplo y
+        proporciona un mensaje de ayuda si los datos no están dentro del rango
+        especificado.
       </p>
     </fieldset>
 
     <fieldset id="servicios">
       <legend>Servicios brindados</legend>
       <p>
-        Opción para seleccionar los diferentes servicios que nosotros le
-        brindamos. Usamos checkboxes para permitir múltiples selecciones.
+        Este campo de entrada permite al usuario seleccionar si desea aire
+        acondicionado. En caso de estar seleccionado, se enviará el valor "Aire
+        Acondicionado" con el formulario.
       </p>
     </fieldset>
 
     <fieldset id="habitacion">
       <legend>Tipo de habitación</legend>
       <p>
-        Opción para seleccionar las diferentes habitaciones disponibles.
-        Utilizamos botones de radio para limitar la selección a una opción.
+        Este campo de entrada permite al usuario seleccionar si desea una
+        habitación individual. Solo se puede seleccionar una opción de este
+        grupo y es obligatorio elegir una antes de enviar el formulario.
       </p>
     </fieldset>
 
     <fieldset id="pension">
       <legend>Tipo de pensión</legend>
       <p>
-        Opción para seleccionar el tipo de pensión. Similar a las habitaciones,
-        usamos botones de radio para una selección exclusiva.
+        Este campo de entrada permite al usuario seleccionar si desea solo
+        alojamiento. Solo se puede seleccionar una opción de este grupo y es
+        obligatorio elegir una antes de enviar el formulario.
       </p>
     </fieldset>
 
     <fieldset id="comentario">
       <legend>Comentarios</legend>
       <p>
-        Opción para enviar su correo y dejar algún comentario o sugerencia.
-        Usamos un textarea para permitir una entrada de texto más larga.
+        -Este campo de entrada permite al usuario ingresar su dirección de
+        correo electrónico, que debe ser válida según el patrón definido. Es un
+        campo obligatorio y muestra un texto de ejemplo y proporciona un mensaje
+        de ayuda si los datos no cumplen con el patrón.<br />
+        -Opción para enviar su correo y dejar algún comentario o sugerencia.
+        Usamos un textarea para permitir una entrada de texto más larga.<br />-Este
+        campo de entrada permite al usuario aceptar la política de privacidad.
+        Es un campo obligatorio para poder enviar el formulario.
       </p>
     </fieldset>
   </body>
