@@ -13,17 +13,17 @@
     <div class="menu">
         <span id="action">Registro</span>
         <label for="nombre">Nombre:</label>
-        <input id="nombre" type="text" maxlength="50">
+        <input id="nombre" type="text" maxlength="50" minlength="5" required>
         <label for="cedula">Cédula:</label>
-        <input id="cedula" type="text" maxlength="10">
+        <input id="cedula" type="text" maxlength="10" minlength="10" required>
         <label for="contraseña">Contraseña:</label>
-        <input id="contraseña" type="text" maxlength="10">
+        <input id="contraseña" type="text" maxlength="10" minlength="5" required>
         <label for="correo">Correo:</label>
-        <input id="correo" type="email" maxlength="30">
+        <input id="correo" type="email" maxlength="30" minlength="5" required>
         <label for="placa">Placa:</label>
-        <input id="placa" type="text" maxlength="7">
+        <input id="placa" type="text" maxlength="7" minlength="7" required>
         <label for="tarjeta">Tarjeta:</label>
-        <input id="tarjeta" type="text" maxlength="5">
+        <input id="tarjeta" type="text" maxlength="5" minlength="5" required>
         <div class="btns">
             <a href="./bdd.html">Cancelar</a>
             <a onclick="Guardar()">Guardar</a>

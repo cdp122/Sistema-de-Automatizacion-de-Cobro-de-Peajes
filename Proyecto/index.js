@@ -113,7 +113,7 @@ bd.delete('/', async (req, res) => {
 
     try {
         await bdd.consultar(conexion,
-            'DELETE FROM tb_clientes_prueba WHERE cedula=' + req.query.cedula);
+            "DELETE FROM tb_clientes_prueba WHERE cedula='" + req.query.cedula + "'");
         console.log("Registro Eliminado");
         res.json({ success: true });
     } catch (error) {
