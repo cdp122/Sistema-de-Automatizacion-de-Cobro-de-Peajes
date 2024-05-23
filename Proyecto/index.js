@@ -26,14 +26,19 @@ const express = require('express');
 const app = express();
 console.log(`Comenzando ejecución en http://localhost:${PORT}`)
 
-app.use(express.static(path.join(__dirname, 'WebSite')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'BDDPrueba')));
 app.use('/bd', bd);
 app.use('/clientes', clientes);
 
 app.listen(PORT, () => {
     console.log("El servidor ahora está escuchando...");
 });
+//#endregion
+
+//#region Cargar archivos
+app.use(express.static(path.join(__dirname, 'WebSite')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'BDDPrueba')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'modules')));
 //#endregion
 
 //#region Puertos
