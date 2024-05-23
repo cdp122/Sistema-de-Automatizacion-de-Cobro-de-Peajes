@@ -1,0 +1,10 @@
+Morado claro #8F1299
+Morado oscuro #72148E
+Rosa Claro #F970AE
+Palo de Rosa #EF2A78
+Rojo intenso #EF1126
+Naranja #EB8F46
+Amarillo #FBDA70 
+
+// Indicaciónes: estos colores deben interactuar para que se vea como en olas o en cambio de colores muy chevere, pero solo entre estos colores, adaptarlo tanto al color de fondo de paleta oscura como: Plomo oscuro o un tanto más negros, o en blanco completamente blanco para saber como funciona
+
