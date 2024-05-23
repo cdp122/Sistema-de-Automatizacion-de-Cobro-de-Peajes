@@ -58,6 +58,12 @@ app.post('/', (req, res) => {
         }
     });
 });
+
+app.delete('/', (req, res) => {
+    console.log("token eliminado: " + tokensDisponibles.pop())
+
+    res.sendFile(path.resolve(__dirname, 'WebSite/index.html'));
+});
 //#endregion
 
 //#region Generación de Tokens
@@ -107,7 +113,7 @@ bd.delete('/', async (req, res) => {
 
     try {
         await bdd.consultar(conexion,
-            'DELETE FROM tb_clientes_prueba WHERE cedula=' + req.query.cedula);
+            "DELETE FROM tb_clientes_prueba WHERE cedula='" + req.query.cedula + "'");
         console.log("Registro Eliminado");
         res.json({ success: true });
     } catch (error) {
@@ -207,7 +213,6 @@ clientes.get('/', async (req, res) => {
 });
 
 clientes.post('/', async (req, res) => {
-    console.log("Registro recibido", req.query);
 
     const registro = {
         nombre: decodeURIComponent(req.query.nombre),
@@ -219,42 +224,76 @@ clientes.post('/', async (req, res) => {
         current: decodeURIComponent(req.query.current)
     }
 
-    console.log(registro, uName, uPass);
     const conexion = bdd.crearConexion(uName, uPass);
     if (!conexion) {
         return res.status(500).json({ error: 'No hay conexión a la base de datos' });
     }
 
-    try {
-        await bdd.consultar(conexion,
-            "UPDATE tb_clientes_prueba SET" +
-            " nombres = '" + registro.nombre + "'," +
-            " contraseña = '" + registro.contraseña + "'," +
-            " cedula = '" + registro.cedula + "'," +
-            " correo = '" + registro.correo + "'," +
-            " placa = '" + registro.placa + "'," +
-            " tarjeta = '" + registro.tarjeta + "'" +
-            " WHERE cedula = '" + registro.current + "'"
-        );
-        console.log("UPDATE tb_clientes_prueba SET " +
-            " nombres = '" + registro.nombre + "', " +
-            " contraseña = '" + registro.contraseña + "'," +
-            " cedula = '" + registro.cedula + "'," +
-            " correo = '" + registro.correo + "'," +
-            " placa = '" + registro.placa + "'," +
-            " tarjeta = '" + registro.tarjeta + "'," +
-            " WHERE cedula = '" + registro.current + "'"
-        );
-        console.log("Registro dado");
-        res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/bdd.html'));
-    } catch (error) {
-        console.error(error);
-        res.send('<script>alert("ERROR: No se pudo modificar el registro\n' +
-            error + '); window.location.href = "/";</script>');
-        res.status(400).send({ error: 'Error en la consulta' });
-    } finally {
-        console.log("conexión cerrada en post/clientes")
-        conexion.end();
+    if (registro.current != 'undefined') {
+        try {
+            await bdd.consultar(conexion,
+                "UPDATE tb_clientes_prueba SET" +
+                " nombres = '" + registro.nombre + "'," +
+                " contraseña = '" + registro.contraseña + "'," +
+                " cedula = '" + registro.cedula + "'," +
+                " correo = '" + registro.correo + "'," +
+                " placa = '" + registro.placa + "'," +
+                " tarjeta = '" + registro.tarjeta + "'" +
+                " WHERE cedula = '" + registro.current + "'"
+            );
+            console.log("UPDATE tb_clientes_prueba SET " +
+                " nombres = '" + registro.nombre + "', " +
+                " contraseña = '" + registro.contraseña + "'," +
+                " cedula = '" + registro.cedula + "'," +
+                " correo = '" + registro.correo + "'," +
+                " placa = '" + registro.placa + "'," +
+                " tarjeta = '" + registro.tarjeta + "'," +
+                " WHERE cedula = '" + registro.current + "'"
+            );
+            console.log("Registro dado");
+            res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/bdd.html'));
+        } catch (error) {
+            console.error(error);
+            res.send('<script>alert("ERROR: No se pudo modificar el registro\n' +
+                error + '); window.location.href = "/";</script>');
+            res.status(400).send({ error: 'Error en la consulta' });
+        } finally {
+            console.log("conexión cerrada en post/clientes")
+            conexion.end();
+        }
+    }
+    else {
+        try {
+            await bdd.consultar(conexion,
+                "INSERT INTO tb_clientes_prueba " +
+                "(nombres, contraseña, cedula, correo, placa, tarjeta) VALUES (" +
+                " '" + registro.nombre + "'," +
+                " '" + registro.contraseña + "'," +
+                " '" + registro.cedula + "'," +
+                " '" + registro.correo + "'," +
+                " '" + registro.placa + "'," +
+                " '" + registro.tarjeta + "')"
+            );
+            console.log("INSERT INTO tb_clientes_prueba " +
+                "(nombres, contraseña, cedula, correo, placa, tarjeta) VALUES (" +
+                " '" + registro.nombre + "'," +
+                " '" + registro.contraseña + "'," +
+                " '" + registro.cedula + "'," +
+                " '" + registro.correo + "'," +
+                " '" + registro.placa + "'," +
+                " '" + registro.tarjeta + "')"
+            );
+            console.log("Registro guardado");
+            res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/bdd.html'));
+        } catch (error) {
+            console.error(error);
+            res.send('<script>alert("ERROR: No se pudo modificar el registro\n' +
+                error + '); window.location.href = "/";</script>');
+            res.status(400).send({ error: 'Error en la consulta' });
+        } finally {
+            console.log("conexión cerrada en post/clientes")
+            conexion.end();
+        }
     }
 })
 //#endregion

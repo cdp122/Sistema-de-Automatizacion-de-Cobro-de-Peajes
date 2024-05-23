@@ -1,1 +1,1 @@
-GET http://localhost:3000/bd
+DELETE http://localhost:3000/

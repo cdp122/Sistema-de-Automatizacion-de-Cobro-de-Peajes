@@ -7,7 +7,6 @@ async function cargarClientes() {
         const response = await fetch('http://localhost:3000/clientes');
         if (response.ok) {
             data = await response.json();
-            console.log(data);
         } else {
             console.error('Error:', response.statusText);
         }
@@ -19,9 +18,19 @@ async function cargarClientes() {
 
 //#region Main
 document.addEventListener("DOMContentLoaded", async () => {
+    data = null;
     await cargarClientes();
-    console.log(data);
-    CargarDatos();
+    if (data.length != 0) CargarDatos();
+    else {
+        data[0] = {};
+        data[0].cedula = "undefined";
+        document.getElementById("nombre").value = "";
+        document.getElementById("cedula").value = "";
+        document.getElementById("contraseña").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("placa").value = "";
+        document.getElementById("tarjeta").value = "";
+    }
 });
 //#endregion
 
