@@ -1,9 +1,11 @@
 //#region Dependencias y variables globales
 const express = require("express");
 const conexion = require("./bdd.js")
+const path = require("path");
 
 const bd = express.Router();
 const clientes = express.Router();
+const login = express.Router();
 //#endregion
 
 //#region Ruta '/bd'
@@ -143,5 +145,12 @@ clientes.post('/', async (req, res) => {
 })
 //#endregion
 
+//#region Ruta 'log-in'
+login.get('/', (req, res) => {
+    console.log("Yendo a", path.resolve(__dirname, '../WebSite/Login.html'))
+    res.sendFile(path.resolve(__dirname, '../WebSite/Login.html'));
+})
+//#endregion
+
 module.exports =
-    { bd, clientes };
+    { bd, clientes, login };

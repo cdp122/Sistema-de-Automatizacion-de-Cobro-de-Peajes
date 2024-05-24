@@ -1,15 +1,12 @@
 //#region Dependencias
 const bodyParser = require('body-parser');
 const path = require("path");
-const fs = require('fs');
-const { bd, clientes } = require("./modules/routes");
-const conexion = require("./modules/bdd");
+const { bd, clientes, login } = require("./modules/routes");
 //#endregion
 
 //#region Inicio del Server !Importante
 const PORT = process.env.PORT || 3000;
 const express = require('express');
-const { secureHeapUsed } = require('crypto');
 const app = express();
 console.log(`Comenzando ejecución en http://localhost:${PORT}`)
 app.listen(PORT, () => {
@@ -20,6 +17,7 @@ app.listen(PORT, () => {
 //#region Puertos
 app.use('/bd', bd);
 app.use('/clientes', clientes);
+app.use('/login', login);
 //#endregion
 
 //#region Cargar archivos
@@ -35,7 +33,8 @@ let uName;
 let uPass;
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/index.html'));
+    console.log("Redirigiendo a", path.resolve(__dirname, 'WebSite/Login.html'))
+    res.sendFile(path.resolve(__dirname, 'WebSite/Login.html'));
 });
 //#endregion
 
