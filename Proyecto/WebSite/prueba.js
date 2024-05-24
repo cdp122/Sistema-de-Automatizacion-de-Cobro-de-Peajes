@@ -1,4 +1,4 @@
-import { GetJson, GetPage } from "./modules/backend.js";
+import { GetJson, GetPage } from "./Modules/backend.js";
 
 const params = ["asd", "asd"];
 const queries = [["prueba", "Prueba"], ["asd", "asd"]];
