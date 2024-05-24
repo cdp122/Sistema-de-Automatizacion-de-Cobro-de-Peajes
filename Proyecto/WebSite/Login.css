@@ -1,3 +1,166 @@
-body{
-    background-color: #262626;
+*{
+    font-family: 'Roboto', sans-serif;   
 }
+body{
+    background-color: #212121;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.full {
+    width: 100%;
+    height: 100%;
+    background: url('../WebSite/Assets/Panorámica.webp') no-repeat 50% 50%;
+    background-size: cover;
+    display: table;
+    margin: 0;
+    top: 0;
+}
+.full-inner {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width: 500px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    background: linear-gradient(#ffffff72, #ffffff37) padding-box,
+              linear-gradient(145deg, transparent 35%,  #ef112789, #eb9046d0) border-box;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 16px;
+    transition: width 0.5s, height 0.5s, font-size 0.5s;
+}
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: 'Roboto', sans-serif;
+}
+  
+.btn {
+    width: 150px;   
+    height: 60px;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 24px;
+    color: white;
+    margin-top: 10px;
+    transition: background-color 0.5s, font-size 0.5s;
+}
+  
+  .btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+  
+  .btn:active {
+    opacity: 0.5;
+  }
+
+#username, #contraseña {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    transition: font-size 0.5s;
+}
+/* Dispositivos móviles pequeños (teléfonos) */
+@media (min-width: 320px) {
+    .content {
+        width: 200px;
+        height: 300px;
+    }
+}
+
+/* Dispositivos móviles medianos (teléfonos más grandes) */
+@media (min-width: 375px) {
+    .content {
+        width: 270px;
+        height: 370px;
+    }
+}
+
+/* Dispositivos móviles grandes (teléfonos grandes y pequeños tabletas) */
+@media (min-width: 425px) {
+    .content {
+        width: 300px;
+        height: 390px;
+    }
+    .form-group {
+        font-size: 25px;
+    }
+}
+
+/* Dispositivos de tabletas */
+@media (min-width: 768px) {
+    .content {
+        width: 400px;
+        height: 520px;
+    }
+    .form-group {
+        font-size: 30px;
+    }
+}
+
+/* Portátiles */
+@media (min-width: 1024px) {
+    .content {
+        width: 420px;
+        height: 550px;
+    }
+    .form-group {
+        font-size: 40px;
+    }
+}
+
+/* Portátiles grandes y pantallas de escritorio */
+@media (min-width: 1440px) {
+    .content {
+        width: 800px;
+        height: 700px;
+    }
+    .form-group {
+        font-size: 50px;
+    }
+}
+  /*
+Morado claro #8F1299
+Morado oscuro #72148E
+Rosa Claro #F970AE
+Palo de Rosa #EF2A78
+Rojo intenso #EF1126
+Naranja #EB8F46
+Amarillo #FBDA70 
+  */
