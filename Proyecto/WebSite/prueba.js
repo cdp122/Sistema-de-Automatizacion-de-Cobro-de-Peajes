@@ -1,5 +1,6 @@
-import { Get } from "./modules/backend.js";
+import { GetJson, GetPage } from "./modules/backend.js";
 
-var obj = ["prueba", "Prueba"];
+const params = ["asd", "asd"];
+const queries = [["prueba", "Prueba"], ["asd", "asd"]];
 
-Get('Prueba', "prueba", "prueba");
+GetJson('prueba', params, queries, "Asd");
