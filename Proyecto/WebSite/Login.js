@@ -1,7 +1,5 @@
-const express = require("express");
 
-const app = express();
-
-app.get("/", (req, res) => {
-    res.send("Hola Mundo");
-});
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+        }
+    
