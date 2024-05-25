@@ -2,10 +2,16 @@
 const express = require("express");
 const conexion = require("./bdd.js")
 const path = require("path");
+const bodyParser = require('body-parser');
+const { generar, validar } = require("./auth.js");
 
 const bd = express.Router();
 const clientes = express.Router();
+const error = express.Router();
+
 const login = express.Router();
+login.use(bodyParser.urlencoded({ extended: true }));
+login.use(bodyParser.json());
 //#endregion
 
 //#region Ruta '/bd'
@@ -44,13 +50,12 @@ bd.post('/', async (req, res) => {
 });
 
 bd.get('/access', async (res, req) => {
-    const conexion = bdd.crearConexion(uName, uPass);
     if (!conexion) {
         return res.status(500).json({ error: 'No hay conexión a la base de datos' });
     }
 
     try {
-        const results = await bdd.consultar(conexion, 'SELECT * FROM tb_clientes_prueba');
+        const results = await conexion.Consultar('SELECT * FROM tb_clientes_prueba');
         const Clientes = results.map(result => ({
             nombre: result.nombres,
             contraseña: result.contraseña,
@@ -147,10 +152,38 @@ clientes.post('/', async (req, res) => {
 
 //#region Ruta 'log-in'
 login.get('/', (req, res) => {
-    console.log("Yendo a", path.resolve(__dirname, '../WebSite/Login.html'))
     res.sendFile(path.resolve(__dirname, '../WebSite/Login.html'));
+})
+
+login.post('/auth', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    if (username == "1002003001" && password == "1002003001") {
+        const user = { username: username };
+
+        const token = generar(user);
+
+        res.header("authorization", token).json({
+            message: "Usuario autenticado",
+            token: token
+        })
+    }
+    else {
+        res.send("<script>alert('Error, usuario no detectado');window.location.href = '/';</script>");
+    }
+})
+
+login.get('/access', validar, (req, res) => {
+    res.send(req.user);
+})
+//#endregion
+
+//#region Ruta error404
+error.get('/404', (req, res) => {
+    res.send("Bueno, seguramente aquí no querías llegar o sí ;)");
 })
 //#endregion
 
 module.exports =
-    { bd, clientes, login };
+    { bd, clientes, login, error};

@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="login.css" type="text/css" />
-    <link rel="icon" href="Assets/Logo.png" type="imagen/png" />
-    <script></script>
-  </head>
-  <body>
-    <section class="full">
-      <div class="full-inner">
-        <div class="content">
-          <form>
-            <div class="form-group">  
-              <label for="username"><b>Cédula de Usuario</b></label>
-              <input type="text" id="username" name="username" required maxlength="10" pattern="\d{10}" title="Ingrese los 10 digitos de su cédula" oninput="validateInput(this)"/>
-            </div>
-            <div class="form-group">
-              <label for="password"><b>Contraseña</b></label>
-              <input type="password" id="contraseña" name="password" required maxlength="30" pattern=".{8,}" title="Ingrese su contraseña"/>
-            </div>
-            <div class ="form-group">
-              <button type ="submit" class="btn" name="EnviarLogin">Iniciar Sesión</button>
-            </div>
-          </form>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="login.css" type="text/css" />
+  <link rel="icon" href="Assets/Logo.png" type="imagen/png" />
+</head>
+
+<body>
+  <section class="full">
+    <div class="full-inner">
+      <div class="content">
+        <form method="post" action="/login/auth">
+          <div class="form-group">
+            <label for="username"><b>Cédula de Usuario</b></label>
+            <input type="text" id="username" name="username" required
+              pattern=".{10}"="Ingrese los 10 digitos de su cédula" />
+          </div>
+          <div class="form-group">
+            <label for="password"><b>Contraseña</b></label>
+            <input type="password" id="contraseña" name="password" required pattern=".{8,}"
+              title="Ingrese su contraseña" />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn" name="EnviarLogin">Iniciar Sesión</button>
+          </div>
+        </form>
       </div>
-    </section>
     </div>
-    <script src="Login.js"></script>
-  </body> 
+  </section>
+  </div>
+</body>
+
 </html>
