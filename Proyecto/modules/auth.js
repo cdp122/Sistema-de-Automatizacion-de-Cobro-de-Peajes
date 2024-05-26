@@ -1,4 +1,3 @@
-const app = require("../index");
 const jwt = require("jsonwebtoken");
 
 function generateAccessToken(user) {

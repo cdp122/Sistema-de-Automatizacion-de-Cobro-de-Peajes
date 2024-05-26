@@ -155,22 +155,28 @@ login.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../WebSite/Login.html'));
 })
 
-login.post('/auth', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+login.get('/auth', (req, res) => {
+    const username = req.query.username;
+    const password = req.query.password;
 
-    if (username == "1002003001" && password == "1002003001") {
+    console.log(username, password);
+
+    if (username === "1002003001" && password === "1002003001") {
         const user = { username: username };
+        const token = generar(user); // Assuming 'generar' function creates a token
 
-        const token = generar(user);
+        // Set appropriate headers for the token (consider security best practices)
+        res.setHeader("authorization", token); // Adjust header name if needed
+        res.setHeader("Content-Type", "application/json"); // For JSON response
 
-        res.header("authorization", token).json({
+        // Inform the user of successful authentication and redirect to the desired page
+        res.json({
             message: "Usuario autenticado",
-            token: token
-        })
-    }
-    else {
-        res.send("<script>alert('Error, usuario no detectado');window.location.href = '/';</script>");
+            token: token,// Replace with your desired redirect URL
+        });
+    } else {
+        // Send an error response with appropriate status code (e.g., 401 Unauthorized)
+        return res.status(401).json({ message: "Error, usuario no detectado" });
     }
 })
 
@@ -186,4 +192,4 @@ error.get('/404', (req, res) => {
 //#endregion
 
 module.exports =
-    { bd, clientes, login, error};
+    { bd, clientes, login, error };
