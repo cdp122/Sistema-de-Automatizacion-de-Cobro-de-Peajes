@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(8, 28, 34);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+
+}
+
+img {
+    width: 40%;
+
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+h1 {
+    color: white;
+    font-size: 50px;
+    padding: 10px;
+}
+
+button {
+
+    border-radius: 15px;
+    border: none;
+    background: #F0581E;
+    color: white;
+    font-size: 30px;
+}
