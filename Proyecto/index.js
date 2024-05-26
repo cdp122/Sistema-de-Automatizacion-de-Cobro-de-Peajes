@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'WebSite', 'BDDPrueba')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Modules')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
 //#endregion
 
 //#region exportaciones

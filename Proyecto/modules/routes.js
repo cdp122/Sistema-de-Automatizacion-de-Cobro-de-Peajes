@@ -194,7 +194,7 @@ login.delete('/client', validar, (req, res) => {
 
 //#region Ruta error404
 error.get('/404', (req, res) => {
-    res.send("Bueno, seguramente aquí no querías llegar o sí ;)");
+    res.sendFile(path.resolve(__dirname, "../WebSite/Error/PagError404.html"));
 })
 //#endregion
 
