@@ -130,7 +130,7 @@ body{
     opacity: 0.5;
   }
 
-#username, #contraseña {
+  .username, .contraseña {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -139,6 +139,49 @@ body{
     outline: none;
     font-size: 20px;
     transition: font-size 0.5s;
+    
+    
+}
+.username:focus{
+    animation: borderAnimationDay 2s infinite;
+    border: solid 5px #d48d07;
+}
+.contraseña:focus{
+    animation: borderAnimationDay 2s infinite;
+    border: solid 5px #d48d07;
+}
+
+.usernameNight:focus {
+    animation: borderAnimation 2s infinite;
+    border: solid 5px #691183;
+}
+
+.contraseñaNight:focus {
+    animation: borderAnimation 2s infinite;
+    border: solid 5px #691183;
+}
+
+@keyframes borderAnimation {
+    0% {
+        border-color: #691183;
+    }
+    50% {
+        border-color: #a379ff;
+    }
+    100% {
+        border-color: #4f0d63;
+    }
+}
+@keyframes borderAnimationDay {
+    0% {
+        border-color: #ef9608;
+    }
+    50% {
+        border-color: #e0d35e;
+    }
+    100% {
+        border-color: #ff9d00;
+    }
 }
 /* Dispositivos móviles pequeños (teléfonos) */
 @media (min-width: 320px) {

@@ -16,13 +16,13 @@
         <form method="post" action="/login/auth">
           <div class="form-group">
             <label for="username"><b>Cédula de Usuario</b></label>
-            <input type="text" id="username" name="username" required
+            <input type="text" class="username" name="user" required
               pattern=".{10}" title="Ingrese los 10 digitos de su cédula"
-              oninput="validateInput(this)" />
+              oninput="validateInput(this)" autofocus  />
           </div>
           <div class="form-group">
-            <label for="password"><b>Contraseña</b></label>
-            <input type="password" id="contraseña" name="password" required pattern=".{8,}"
+            <label for="contra"><b>Contraseña</b></label>
+            <input type="password" class="contraseña" name="password" required pattern=".{8,}"
               title="Ingrese su contraseña" />
           </div>
           <div class="form-group">
@@ -35,5 +35,4 @@
   <script src="Login.js"></script>
   </div>
 </body>
-
 </html>

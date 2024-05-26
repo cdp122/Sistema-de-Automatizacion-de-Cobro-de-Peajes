@@ -5,17 +5,20 @@ function validateInput(input) {
 
 function setBackgroundBasedOnTime() {
     var hour = new Date().getHours();
-    var body = document.body;
     var fullSection = document.querySelector('.full');
     var contentSection = document.querySelector('.content');
-    var butonSection = document.querySelector('.btn');
+    var buttonSection = document.querySelector('.btn');
+    var usernameInput = document.querySelector('.username');
+    var passwordInput = document.querySelector('.contraseña');
 
     if (hour >= 6 && hour < 18) {
         fullSection.className = 'full day';
     } else {
         fullSection.className = 'full night';
         contentSection.className = 'content contentNight';
-        butonSection.className = 'btn btnNight';
+        buttonSection.className = 'btn btnNight';
+        usernameInput.className = 'username usernameNight';
+        passwordInput.className = 'contraseña contraseñaNight';
     }
 }
 
