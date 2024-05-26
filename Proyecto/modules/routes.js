@@ -4,6 +4,7 @@ const conexion = require("./bdd.js")
 const path = require("path");
 const bodyParser = require('body-parser');
 const { generar, validar } = require("./auth.js");
+const { stringify } = require("querystring");
 
 const bd = express.Router();
 const clientes = express.Router();
@@ -179,8 +180,15 @@ login.get('/auth', (req, res) => {
 })
 
 login.get('/client', validar, (req, res) => {
-    conexion.ConseguirRegistros("1002003001");
-    
+    //!Importante aqui agregar lo necesario para la bdd
+    const datos = { saldo: "100.00$" };
+
+    res.json(stringify(datos));
+})
+
+login.delete('/client', validar, (req, res) => {
+    console.log("Cerrando sesión...");
+    res.json({ message: 'Sesión cerrada exitosamente' });
 })
 //#endregion
 
