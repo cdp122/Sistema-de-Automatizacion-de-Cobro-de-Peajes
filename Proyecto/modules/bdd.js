@@ -44,15 +44,15 @@ async function BorrarRegistro(cedula) {
 
 async function ConseguirRegistros(cedula) {
     try {
-        await Consultar("SELECT * FROM tb_clientes_prueba " +
+        const registro = await Consultar("SELECT * FROM tb_clientes_prueba " +
             "WHERE cedula='" + cedula + "'");
         console.log("Registro Encontrado");
         conexion.end();
-        return true;
+        return registro;
     } catch (error) {
         console.error(error);
         conexion.end();
-        return false;
+        return null;
     }
 }
 

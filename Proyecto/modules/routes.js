@@ -178,8 +178,9 @@ login.get('/auth', (req, res) => {
     }
 })
 
-login.get('/access', validar, (req, res) => {
-    res.send(req.user);
+login.get('/client', validar, (req, res) => {
+    conexion.ConseguirRegistros("1002003001");
+    
 })
 //#endregion
 

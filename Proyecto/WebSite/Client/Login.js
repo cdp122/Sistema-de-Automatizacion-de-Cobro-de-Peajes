@@ -35,7 +35,6 @@ async function Validar() {
         const result = await response.json();
         if (response.ok) {
             localStorage.setItem('token', result.token);
-            alert(localStorage.token);
             window.location.href = "./Profile.html"; //aqui va la dirección
         } else {
             alert(result.message);
