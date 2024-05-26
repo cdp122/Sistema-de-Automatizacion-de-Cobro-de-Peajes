@@ -30,13 +30,13 @@ async function Validar() {
 
     try {
         const response = await fetch("/login/auth?username="
-        +encodeURIComponent(user) + "&password="+
-        encodeURIComponent(contraseña), {method: 'GET'});
+            + encodeURIComponent(user) + "&password=" +
+            encodeURIComponent(contraseña), { method: 'GET' });
         const result = await response.json();
         if (response.ok) {
             localStorage.setItem('token', result.token);
             alert(localStorage.token);
-            //window.location.href = "."; //aqui va la dirección
+            window.location.href = "./Profile.html"; //aqui va la dirección
         } else {
             alert(result.message);
         }

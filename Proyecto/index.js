@@ -25,14 +25,14 @@ app.use('/error', error);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    console.log("Redirigiendo a", path.resolve(__dirname, 'WebSite/Login.html'))
-    res.sendFile(path.resolve(__dirname, 'WebSite/Login.html'));
+    res.sendFile(path.resolve(__dirname, 'WebSite/Client/Login.html'));
 });
 //#endregion
 
 //#region Cargar archivos
 app.use(express.static(path.join(__dirname, 'WebSite')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'BDDPrueba')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Modules')));
 //#endregion

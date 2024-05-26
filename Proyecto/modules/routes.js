@@ -152,14 +152,12 @@ clientes.post('/', async (req, res) => {
 
 //#region Ruta 'log-in'
 login.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../WebSite/Login.html'));
+    res.sendFile(path.resolve(__dirname, '../WebSite/Client/Login.html'));
 })
 
 login.get('/auth', (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
-
-    console.log(username, password);
 
     if (username === "1002003001" && password === "1002003001") {
         const user = { username: username };
