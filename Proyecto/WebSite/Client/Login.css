@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-
 *{
     font-family: 'Bebas Neue', sans-serif;   
 }
@@ -14,6 +13,41 @@ body{
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+
+.container {
+    max-width: 90%;
+    margin: 0 auto; 
+}
+
+.menu {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+}
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+}
+
+.menu .navbar ul li a {
+    font-size: 20px;
+    padding: 20px;
+    color: #000000;
+    display: block;
+   
+}   
+
+.menu .navbar ul li a:hover {
+    color: #b7975b;
 }
 .full {
     width: 100%;
@@ -218,7 +252,7 @@ body{
 @media (min-width: 768px) {
     .content {
         width: 400px;
-        height: 520px;
+        height: 480px;
     }
     .form-group {
         font-size: 30px;
@@ -229,7 +263,7 @@ body{
 @media (min-width: 1024px) {
     .content {
         width: 420px;
-        height: 550px;
+        height: 500px;
     }
     .form-group {
         font-size: 40px;
@@ -239,8 +273,8 @@ body{
 /* Portátiles grandes y pantallas de escritorio */
 @media (min-width: 1440px) {
     .content {
-        width: 800px;
-        height: 700px;
+        width: 700px;
+        height: 560px;
     }
     .form-group {
         font-size: 50px;
