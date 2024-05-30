@@ -25,7 +25,7 @@ app.use('/error', error);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'WebSite/Client/Login.html'));
+    res.sendFile(path.resolve(__dirname, 'WebSite/Client/Paginfo.html'));
 });
 //#endregion
 
