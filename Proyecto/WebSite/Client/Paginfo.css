@@ -13,10 +13,11 @@ body {
     width: 100%;
     height: 100vh;
     color: #fff;
-    background: linear-gradient(45deg, #8F1299, #72148E, #F970AE, #EF2A78, #EF1126, #EB8F46, #FBDA70);
+    background: linear-gradient(60deg, #f8928d, #f8c48d);
     background-size: 400% 400%;
     position: relative;
-    animation: cambiar 10s ease-in-out infinite;
+    animation: cambiar 12.5s ease-in-out infinite;
+    text-shadow: #616060 2px 4px ;  
 }
 
 .container {
@@ -26,9 +27,9 @@ body {
 
 .header {
     background-image: linear-gradient(
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.5)),
-        url('../Assets/pana.jpg');
+        rgba(0, 0, 0, 0.17),
+        rgba(0, 0, 0, 0.19)),
+        url('../Assets/PanaSolar.webp');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -50,6 +51,7 @@ body {
 .logo {
     color: #fffdfc;
     font-size: 25px;
+   
 }
 
 .menu .navbar ul li {
@@ -62,6 +64,7 @@ body {
     padding: 20px;
     color: #fffdfc;
     display: block;
+   
 }
 
 .menu .navbar ul li a:hover {
@@ -83,6 +86,7 @@ menu label {
 
 .header-txt {
     width: 50%;
+    
 }
 
 .header-txt h1 {
@@ -90,12 +94,14 @@ menu label {
     line-height: 110px;
     color: #fefcfb;
     margin-bottom: 15px;
+
 }
 
 .header-txt p {
     font-size: 16px;
     color: #e0e0e0;
     margin-bottom: 15px;
+    font-size: 25px;
 }
 
 .btn-1 {

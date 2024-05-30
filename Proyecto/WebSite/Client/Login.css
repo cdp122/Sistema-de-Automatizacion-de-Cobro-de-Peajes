@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
 *{
-    font-family: 'Roboto', sans-serif;   
+    font-family: 'Bebas Neue', sans-serif;   
 }
 body{
     background-color: #212121;
@@ -89,7 +92,7 @@ body{
 }
 .btn {
     transition: all 0.3s ease-in-out;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
 }
   
 .btn {
@@ -160,6 +163,7 @@ body{
     animation: borderAnimation 2s infinite;
     border: solid 5px #691183;
 }
+
 
 @keyframes borderAnimation {
     0% {
