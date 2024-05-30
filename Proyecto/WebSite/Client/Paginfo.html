@@ -10,9 +10,12 @@
     <header class="header">
       <div class="menu container">
         <a href="#" class="logo">Logo</a>
-        <input type="checkbox" id="menu" />
-        <label for="menu">
-          <img src="../Assets/menu.png" class="menu-icono" alt="Menú" />
+        <input type="checkbox" id="menu-toggle" />
+        <label class="hamburger" for="menu-toggle">
+          <svg viewBox="0 0 32 32">
+            <path class="line line-top-bottom" d="M27 10L13 10C10.8 10 9 8.2 9 6C9 3.5 10.8 2 13 2C15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30C23.2 30 25 28.2 25 26C25 23.8 23.2 22 21 22L7 22"></path>
+            <path class="line" d="M7 16L27 16"></path>
+          </svg>
         </label>
         <nav class="navbar">
           <ul>
@@ -20,7 +23,7 @@
             <li><a href="#">Servicio</a></li>
             <li><a href="#">Producto</a></li>
             <li><a href="#">Contacto</a></li>
-            <li><a href="../Client/Login.html">Inciar Sesión</a></li>
+            <li><a href="../Client/Login.html">Iniciar Sesión</a></li>
           </ul>
         </nav>
       </div>
@@ -88,7 +91,7 @@
       </div>
       <div class="house-4 txt">
         <span>04</span>
-        <h3>Paramedicos</h3>
+        <h3>Paramédicos</h3>
         <p>Disponible</p>
       </div>
       <div class="house-5 txt">
@@ -103,12 +106,7 @@
         <form>
           <input class="campo" type="text" placeholder="Nombre" />
           <input class="campo" type="email" placeholder="Correo" />
-          <textarea
-            class="campo"
-            cols="30"
-            rows="10"
-            placeholder="Mensaje"
-          ></textarea>
+          <textarea class="campo" cols="30" rows="10" placeholder="Mensaje"></textarea>
           <input class="btn-2" type="submit" value="Enviar" />
         </form>
       </div>
