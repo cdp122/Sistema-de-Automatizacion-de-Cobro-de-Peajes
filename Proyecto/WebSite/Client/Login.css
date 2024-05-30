@@ -14,40 +14,51 @@ body{
     align-items: center;
     overflow: hidden;
 }
-
-
-.container {
-    max-width: 90%;
-    margin: 0 auto; 
+.izq{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
 }
 
-.menu {
+
+.menuContainer {
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    
-    
+        
 }
-.menu .navbar ul li {
+.menuContainer .navbar ul li {
     position: relative;
     float: left;
+    text-decoration: none;
+    list-style: none;
+    
 }
 
-.menu .navbar ul li a {
+.menuContainer .navbar ul li a {
     font-size: 20px;
     padding: 20px;
     color: #000000;
     display: block;
-   
+    text-decoration: none;
 }   
+.menuContainer .izq .logo{
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    background: url('../Assets/Logo.png') no-repeat 50% 50%;
+    background-size: cover;
+    margin-left: 20px;
+}
 
-.menu .navbar ul li a:hover {
-    color: #b7975b;
+.menuContainer .navbar ul li a:hover {
+    color: rgb(255, 230, 0);
 }
 .full {
     width: 100%;
@@ -199,6 +210,59 @@ body{
 }
 
 
+.checkbox {
+    width: 223px;
+    height: 60px;
+    background-color: #d0d0d0;
+    border-radius: 30px;
+    position: relative;
+    color: black;
+    overflow: hidden;
+  }
+  
+  #checkbox_toggle {
+    display: none;
+  }
+  
+  .checkbox .toggle {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    border-radius: 30px;
+    left: 5px;
+    cursor: pointer;
+    background: linear-gradient(40deg, #FF0080,#FF8C00 70%);
+    transition: 0.4s;
+    box-shadow: 0px 0px 3px rgb(255, 255, 20), 0px 0px 5px rgb(255, 255, 20);
+  }
+  
+  .checkbox .slide {
+    width: 230px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+  }
+  
+  .checkbox .slide .text {
+    font-size: 16px;
+    font-weight: 700;
+    z-index: 100;
+    cursor: pointer;
+  }
+  
+  .check:checked + .checkbox .slide .toggle {
+    transform: translateX(113px);
+    background: linear-gradient(40deg, #8983F7, #A3DAFB 70%);
+    box-shadow: -0px -0px 10px #8983F7, -0px -0px 3px #8983F7;
+  }
+  
+  .check:checked + .checkbox .slide {
+    background-color: #0a1929;
+    color: #8116e4;
+  }
+
 @keyframes borderAnimation {
     0% {
         border-color: #691183;
@@ -227,6 +291,9 @@ body{
         width: 200px;
         height: 300px;
     }
+    .menuContainer nav{
+        visibility: hidden;
+    }
 }
 
 /* Dispositivos móviles medianos (teléfonos más grandes) */
@@ -234,6 +301,9 @@ body{
     .content {
         width: 270px;
         height: 370px;
+    }
+    .menuContainer nav{
+        visibility: hidden;
     }
 }
 
@@ -246,27 +316,36 @@ body{
     .form-group {
         font-size: 25px;
     }
+    .menuContainer nav{
+        visibility: hidden;
+    }
 }
 
 /* Dispositivos de tabletas */
 @media (min-width: 768px) {
     .content {
         width: 400px;
-        height: 480px;
+        height: 460px;
     }
     .form-group {
         font-size: 30px;
     }
+    .menuContainer nav{
+        visibility: hidden;
+    }
 }
 
 /* Portátiles */
-@media (min-width: 1024px) {
+@media (min-width: 1040px) {
     .content {
         width: 420px;
         height: 500px;
     }
     .form-group {
         font-size: 40px;
+    }
+    .menuContainer nav{
+        visibility:visible;
     }
 }
 
@@ -278,6 +357,9 @@ body{
     }
     .form-group {
         font-size: 50px;
+    }
+    .menuContainer nav{
+        visibility:visible;
     }
 }
   /*
