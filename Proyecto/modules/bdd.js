@@ -31,7 +31,7 @@ function Consultar(query) {
 
 async function BorrarRegistro(cedula) {
     try {
-        await Consultar("DELETE FROM tb_clientes_prueba WHERE cedula='" + cedula + "'");
+        await Consultar("DELETE FROM tb_clientes WHERE cedula='" + cedula + "'");
         console.log("Registro Eliminado");
         conexion.end();
         return true;
@@ -44,7 +44,7 @@ async function BorrarRegistro(cedula) {
 
 async function ConseguirRegistros(cedula) {
     try {
-        const registro = await Consultar("SELECT * FROM tb_clientes_prueba " +
+        const registro = await Consultar("SELECT * FROM tb_clientes " +
             "WHERE cedula='" + cedula + "'");
         console.log("Registro Encontrado");
         conexion.end();
@@ -58,24 +58,17 @@ async function ConseguirRegistros(cedula) {
 
 async function ModificarRegistro(registro) {
     try {
-        await Consultar("UPDATE tb_clientes_prueba SET" +
+        await Consultar("UPDATE tb_clientes SET" +
             " nombres = '" + registro.nombre + "'," +
             " contraseña = '" + registro.contraseña + "'," +
             " cedula = '" + registro.cedula + "'," +
             " correo = '" + registro.correo + "'," +
             " placa = '" + registro.placa + "'," +
             " tarjeta = '" + registro.tarjeta + "'" +
+            " saldo = '" + parseFloat(registro.tarjeta) + "'" +
             " WHERE cedula = '" + registro.current + "'"
         );
-        console.log("UPDATE tb_clientes_prueba SET " +
-            " nombres = '" + registro.nombre + "', " +
-            " contraseña = '" + registro.contraseña + "'," +
-            " cedula = '" + registro.cedula + "'," +
-            " correo = '" + registro.correo + "'," +
-            " placa = '" + registro.placa + "'," +
-            " tarjeta = '" + registro.tarjeta + "'," +
-            " WHERE cedula = '" + registro.current + "'"
-        );
+        console.log("Registro actualizado");
         return true;
     } catch (error) {
         console.error(error);
@@ -86,25 +79,17 @@ async function ModificarRegistro(registro) {
 
 async function InsertarRegistro(registro) {
     try {
-        await Consultar("INSERT INTO tb_clientes_prueba " +
+        await Consultar("INSERT INTO tb_clientes " +
             "(nombres, contraseña, cedula, correo, placa, tarjeta) VALUES (" +
             " '" + registro.nombre + "'," +
             " '" + registro.contraseña + "'," +
             " '" + registro.cedula + "'," +
             " '" + registro.correo + "'," +
             " '" + registro.placa + "'," +
-            " '" + registro.tarjeta + "')"
-        );
-        console.log("INSERT INTO tb_clientes_prueba " +
-            "(nombres, contraseña, cedula, correo, placa, tarjeta) VALUES (" +
-            " '" + registro.nombre + "'," +
-            " '" + registro.contraseña + "'," +
-            " '" + registro.cedula + "'," +
-            " '" + registro.correo + "'," +
             " '" + registro.placa + "'," +
-            " '" + registro.tarjeta + "')"
+            " '" + parseFloat(registro.saldo) + "')"
         );
-        console.log("Registro guardado");
+        console.log("IRegistro ingresado");
         conexion.end();
         return true;
     } catch (error) {
