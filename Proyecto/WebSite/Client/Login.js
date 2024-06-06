@@ -1,5 +1,5 @@
 function validateInput(input) {
-    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 11);
 }
 
 function setBackgroundBasedOnTime() {
