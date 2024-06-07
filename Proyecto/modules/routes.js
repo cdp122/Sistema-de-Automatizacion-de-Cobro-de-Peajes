@@ -160,21 +160,17 @@ login.get('/auth', (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
 
-    if (username === "1002003001" && password === "1002003001") {
+    const credenciales = conexion.ConseguirRegistros(username)
+    if (credenciales != null &&
+        credenciales.cedula == username &&
+        credenciales.contraseña == password) {
         const user = { username: username };
-        const token = generar(user); // Assuming 'generar' function creates a token
-
-        // Set appropriate headers for the token (consider security best practices)
-        res.setHeader("authorization", token); // Adjust header name if needed
-        res.setHeader("Content-Type", "application/json"); // For JSON response
-
-        // Inform the user of successful authentication and redirect to the desired page
+        const token = generar(user);
         res.json({
             message: "Usuario autenticado",
-            token: token,// Replace with your desired redirect URL
+            token: token,
         });
     } else {
-        // Send an error response with appropriate status code (e.g., 401 Unauthorized)
         return res.status(401).json({ message: "Error, usuario no detectado" });
     }
 })
@@ -192,7 +188,8 @@ login.delete('/client', validar, (req, res) => {
 })
 //#endregion
 
-//#region Ruta error404
+//#region Ruta error404 
+//IMPORTANTE: SIEMPRE MANTENER AL PENULTIMO ESTA SECCIÓN
 error.get('/404', (req, res) => {
     res.sendFile(path.resolve(__dirname, "../WebSite/Error/PagError404.html"));
 })
