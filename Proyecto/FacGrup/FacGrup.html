@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura</title>
+  <link rel="stylesheet" href="FacGrup.css">
+  <script src="FacGrup.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Pana del Sol</h1>
+      <div class="invoice-info">
+        <p>NÚMERO DE FACTURA: <input type="text" id="invoice-number" placeholder="Ingrese el número de factura"></p>
+        <p>FECHA DE FACTURA: <input type="text" id="invoice-date" placeholder="MM/DD/AAAA"></p>
+      </div>
+    </header>
+
+    <div class="client-company-info">
+      <section class="client-info">
+        <h2>FACTURAR A:</h2>
+        <p>Nombre del cliente: <input type="text" id="client-name" placeholder="Ingrese el nombre del cliente"></p>
+        <p>Calle: <input type="text" id="client-street" placeholder="Ingrese la calle"></p>
+        <p>Ciudad, Estado, País: <input type="text" id="client-city" placeholder="Ingrese la ciudad y país"></p>
+        <p>NIF/CIF: <input type="text" id="client-nif" placeholder="Ingrese el NIF/CIF"></p>
+        <p>Código Postal: <input type="text" id="client-zip" placeholder="Ingrese el código postal"></p>
+        <p>Teléfono: <input type="text" id="client-phone" placeholder="Ingrese el teléfono"></p>
+      </section>
+
+      <section class="company-info">
+        <h2>TU EMPRESA:</h2>
+        <p>Dirección: <input type="text" id="company-address" placeholder="Ingrese la dirección de la empresa"></p>
+        <p>Ciudad, Provincia, Pais: <input type="text" id="company-city" placeholder="Ingrese la ciudad, provincia y país"></p>
+        <p>Teléfono: <input type="text" id="company-phone" placeholder="Ingrese el teléfono de la empresa"></p>
+        <p>Correo electrónico: <input type="email" id="company-email" placeholder="Ingrese el correo electrónico"></p>
+        <p>Sitio web: <input type="text" id="company-website" placeholder="Ingrese el sitio web"></p>
+      </section>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>DESCRIPCIÓN</th>
+          <th>UNIDADES</th>
+          <th>PRECIO UNITARIO</th>
+          <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody id="item-rows">
+        <tr>
+          <td><input type="text" placeholder="Ingrese la descripción del artículo/servicio"></td>
+          <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1"></td>
+          <td><input type="number" placeholder="Ingrese el precio unitario" min="0" step="0.01" value="1.00"></td>
+          <td><input type="number" placeholder="Total" min="0" step="0.01" value="1.00" readonly></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button id="add-row">Agregar fila</button>
+    <button id="show-total">Mostrar total</button>
+    <button id="delete-row-btn">Eliminar fila</button>
+
+    <footer>
+      <div class="totals">
+        <p id="subtotal">SUBTOTAL: $<span id="subtotal-value">0.00</span></p>
+        <p id="discount">DESCUENTO: $<span id="discount-value">0.00</span></p>
+        <p id="tax-rate">TIPO DE IVA: <span id="tax-rate-value">15</span>%</p>
+        <p id="tax">IVA: $<span id="tax-value">0.00</span></p>
+        <p id="total" class="total">FACTURA TOTAL: $<span id="total-value">0.00</span></p>
+      </div>
+      <p class="thanks">Gracias por confiarnos su seguridad.</p>
+      <p class="company-address">Pana del Sol, Dirección (Ibarra, Pichincha, Ecuador)</p>
+      <p class="bank-info">Tel: 00-000-000-00 | Método de pago:  | E-mail: correolectronico@direccion.com</p>
+    </footer>
+  </main>
+</body>
+</html>

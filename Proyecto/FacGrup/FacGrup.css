@@ -1,0 +1,145 @@
+/* Reseteo de estilos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos generales */
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f4f4f4;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+  }
+  
+  /* Estilos para los inputs */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"] {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  }
+  
+  .invoice-info p {
+    margin-bottom: 10px;
+  }
+  
+  .client-company-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .client-info,
+  .company-info {
+    width: 48%;
+  }
+  
+  section h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #4a90e2;
+    color: #ffffff;
+  }
+  
+  /* Estilos para los botones */
+  button {
+    background-color: #4a90e2;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #357abf;
+  }
+  
+  footer {
+    text-align: right;
+  }
+  
+  .totals p {
+    margin-bottom: 10px;
+  }
+  
+  .total {
+    font-weight: bold;
+    font-size: 18px;
+    color: #1a1a1a;
+  }
+  
+  .thanks {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-style: italic;
+  }
+  
+  .company-address {
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .bank-info {
+    color: #666;
+  }
