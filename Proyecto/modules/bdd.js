@@ -1,7 +1,7 @@
+const { json } = require('body-parser');
 const mysql = require('mysql');
 
-const conexion = mysql.createPool({
-    connectionLimit: 10,
+const conexion = mysql.createConnection({
     host: 'localhost',
     database: 'db_proyecto_final',
     user: "root",
@@ -10,7 +10,7 @@ const conexion = mysql.createPool({
 
 function Conectar() {
     return new Promise((resolve, reject) => {
-        conexion.getConnection((error) => {
+        conexion.connect((error) => {
             if (error) {
                 return reject(error);
             }
@@ -20,9 +20,8 @@ function Conectar() {
 }
 
 function Consultar(query) {
-    Conectar();
     return new Promise((resolve, reject) => {
-        conexion.query(query, (error, results, fields) => {
+        conexion.query(query, (error, results) => {
             if (error) {
                 return reject(error);
             }
@@ -44,12 +43,12 @@ async function BorrarRegistro(cedula) {
     }
 }
 
-async function ConseguirRegistros(cedula) {
+async function ConseguirRegistros(idCliente) {
     try {
-        const query = "SELECT * FROM tb_clientes " +
-            "WHERE cedula=?";
-        const registro = await Consultar(query, [cedula]);
-        console.log("Registro Encontrado");
+        const query = "SELECT * FROM tb_clientes WHERE idCliente = ?";
+        const registro = await Consultar(mysql.format(query, [idCliente]));
+        console.log("Enviando resultado");
+        if (registro.length === 0) return null;
         return registro;
     } catch (error) {
         console.error(error);

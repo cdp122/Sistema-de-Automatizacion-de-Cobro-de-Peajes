@@ -1,5 +1,5 @@
 function validateInput(input) {
-    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 11);
+    //input.value = input.value.replace(/[^0-9]/g, '').slice(0, 11);
 }
 
 function setBackgroundBasedOnTime() {
@@ -23,23 +23,22 @@ function setBackgroundBasedOnTime() {
 
 setBackgroundBasedOnTime();
 
-
 async function Validar() {
     const user = document.getElementById("username").value;
     const contraseña = document.getElementById("password").value;
-
     try {
         const response = await fetch("/login/auth?username="
             + encodeURIComponent(user) + "&password=" +
             encodeURIComponent(contraseña), { method: 'GET' });
         const result = await response.json();
         if (response.ok) {
+            alert("Ingreso correcto")
             localStorage.setItem('token', result.token);
             window.location.href = "./Profile.html"; //aqui va la dirección
         } else {
             alert(result.message);
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.log('Error:', error.message);
     }
 }

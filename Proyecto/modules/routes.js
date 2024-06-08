@@ -156,14 +156,14 @@ login.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../WebSite/Client/Login.html'));
 })
 
-login.get('/auth', (req, res) => {
-    const username = req.query.username;
-    const password = req.query.password;
+login.get('/auth', async (req, res) => {
+    const username = decodeURIComponent(req.query.username);
+    const password = decodeURIComponent(req.query.password);
 
-    const credenciales = conexion.ConseguirRegistros(username)
-    if (credenciales != null &&
-        credenciales.cedula == username &&
-        credenciales.contraseña == password) {
+    const credenciales = await conexion.ConseguirRegistros(username)
+    if (credenciales != null && credenciales[0] != null &&
+        credenciales[0].idCliente == username &&
+        credenciales[0].contraseña == password) {
         const user = { username: username };
         const token = generar(user);
         res.json({
