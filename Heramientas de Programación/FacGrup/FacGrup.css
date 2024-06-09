@@ -1,145 +1,202 @@
 /* Reseteo de estilos */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Estilos generales */
-  body {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #f4f4f4;
-  }
-  
-  main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 30px;
-    border: 1px solid #ccc;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-  }
-  
-  header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
-    color: #1a1a1a;
-  }
-  
-  /* Estilos para los inputs */
-  input[type="text"],
-  input[type="number"],
-  input[type="email"] {
-    width: 100%;
-    padding: 8px 12px;
-    margin: 5px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-  }
-  
-  input[type="text"]:focus,
-  input[type="number"]:focus,
-  input[type="email"]:focus {
-    outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
-  }
-  
-  .invoice-info p {
-    margin-bottom: 10px;
-  }
-  
-  .client-company-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-  
-  .client-info,
-  .company-info {
-    width: 48%;
-  }
-  
-  section h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #333;
-    border-bottom: 2px solid #4a90e2;
-    padding-bottom: 5px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #4a90e2;
-    color: #ffffff;
-  }
-  
-  /* Estilos para los botones */
-  button {
-    background-color: #4a90e2;
-    color: #ffffff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-right: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #357abf;
-  }
-  
-  footer {
-    text-align: right;
-  }
-  
-  .totals p {
-    margin-bottom: 10px;
-  }
-  
-  .total {
-    font-weight: bold;
-    font-size: 18px;
-    color: #1a1a1a;
-  }
-  
-  .thanks {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-style: italic;
-  }
-  
-  .company-address {
-    margin-bottom: 5px;
-    color: #666;
-  }
-  
-  .bank-info {
-    color: #666;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+}
+
+/* Estilos para los inputs */
+input[type="text"],
+input[type="number"],
+input[type="email"] {
+  width: 100%;
+  padding: 8px 12px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.invoice-info p {
+  margin-bottom: 10px;
+}
+
+.client-company-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.client-info,
+.company-info {
+  width: 48%;
+}
+
+section h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 5px;
+}
+
+/* Estilos para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; 
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2; 
+  font-weight: bold;
+  color: #333; 
+}
+
+/* Estilos para los campos de entrada en la tabla */
+table input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Estilos para el menú desplegable de productos */
+.product-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.product-select:hover {
+  border-color: #999;
+}
+
+.product-select:focus {
+  outline: none;
+  border-color: #4a90e2; 
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+}
+
+.product-select option {
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+}
+
+/* Estilos para los botones */
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #4a90e2; 
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-right: 10px;
+  margin-bottom: 20px; 
+}
+
+button:hover {
+  background-color: #357abf; 
+}
+
+button:active {
+  background-color: #2c6295; 
+}
+
+footer {
+  text-align: right;
+}
+
+/* Estilos para la sección de totales */
+.totals {
+  margin-top: 20px; 
+  font-size: 16px;
+}
+
+.totals p {
+  margin-bottom: 10px;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 18px;
+  color: #1a1a1a;
+}
+
+.thanks {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.company-address {
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.bank-info {
+  color: #666;
+}
