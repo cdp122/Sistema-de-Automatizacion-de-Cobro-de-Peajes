@@ -5,6 +5,7 @@ const path = require("path");
 const bodyParser = require('body-parser');
 const { generar, validar } = require("./auth.js");
 const { stringify } = require("querystring");
+const { env } = require("process");
 
 const bd = express.Router();
 const clientes = express.Router();
@@ -40,7 +41,7 @@ bd.post('/', async (req, res) => {
         return res.status(500).json({ error: 'No hay conexión a la base de datos' });
     }
 
-    const success = await conexion.ConseguirRegistros(cedula);
+    const success = await conexion.LogIn(cedula);
 
     if (success) res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/clientes.html'));
     else {
@@ -156,18 +157,48 @@ login.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../WebSite/Client/Login.html'));
 })
 
-login.get('/auth', async (req, res) => {
+login.get('/authclient', async (req, res) => {
+    try {
+        const username = decodeURIComponent(req.query.username).toUpperCase();
+        const password = decodeURIComponent(req.query.password);
+
+        console.log(`Autorización solicitada por: ${username}`);
+
+        const credenciales = await conexion.LogInClient(username)
+        if (credenciales && credenciales[0] &&
+            credenciales[0].idCliente === username &&
+            credenciales[0].contraseña === password) {
+            const user = { username: username };
+            const token = generar(user);
+            console.log("Usuario enviado " + username);
+            res.json({
+                message: "Usuario autenticado",
+                tipo: "Cliente",
+                token: token,
+            });
+        } else {
+            console.log(`Autorización denegeada a: ${username}`);
+            res.status(401).json({ message: "Error, usuario no detectado" });
+        }
+    } catch (error) {
+        console.error("Error en /authclient:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+login.get('/authemployee', async (req, res) => {
     const username = decodeURIComponent(req.query.username);
     const password = decodeURIComponent(req.query.password);
 
-    const credenciales = await conexion.ConseguirRegistros(username)
+    const credenciales = await conexion.LogInEmpleado(username)
     if (credenciales != null && credenciales[0] != null &&
-        credenciales[0].idCliente == username &&
+        credenciales[0].idEmpleado == username &&
         credenciales[0].contraseña == password) {
         const user = { username: username };
         const token = generar(user);
         res.json({
             message: "Usuario autenticado",
+            tipo: "Empleado",
             token: token,
         });
     } else {
@@ -175,11 +206,22 @@ login.get('/auth', async (req, res) => {
     }
 })
 
-login.get('/client', validar, (req, res) => {
-    //!Importante aqui agregar lo necesario para la bdd
-    const datos = { saldo: "100.00$" };
+login.get('/client', validar, async (req, res) => {
+    console.log("Intentando iniciar sesión...");
 
-    res.json(stringify(datos));
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "id", req.user.username
+    )
+    const cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "idCliente", req.user.username
+    )
+    const enviar = {
+        nombre: usuario[0].nombres,
+        nroTarjeta: cuenta[0].tarjeta,
+        saldo: cuenta[0].saldo
+    }
+
+    res.json(enviar);
 })
 
 login.delete('/client', validar, (req, res) => {

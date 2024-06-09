@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="Profile.js"></script>
+    <link rel="stylesheet" href="Profile.css">
     <title>Perfil</title>
 </head>
 
@@ -14,12 +15,16 @@
         <a onclick="CloseSesion()">Cerrar Sesión</a>
     </nav>
 
-    <div class="Nombre">
-        <span id="nombre"></span>
-    </div>
-    <div class="Credito">
-        <span id="saldo"></span>
-    </div>
+    <section>
+        <div class="Nombre">
+            <h1>Bienvenido: <span id="nombre">Carlos</span></h1>
+        </div>
+        <div class="Credito"> <br>
+            <h1>Saldo Total:</h1>
+            <span id="tarjeta">Tarjeta: </span>
+            <span id="saldo">10$</span>
+        </div>
+    </section>
 </body>
 
 </html>

@@ -1,0 +1,38 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #1E5792;
+}
+
+nav {
+    background-color: #01041C;
+    color: white;
+    margin: -0.9vh -0.9vw;
+    padding: 2.5vh 5vw;
+    display: flex;
+    justify-content: space-between;
+
+    a:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+section {
+    background-color: white;
+    border-radius: 20px;
+    margin: 25vh 25vw;
+    width: 50vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    .Nombre {
+        margin: 4vh;
+    }
+
+    .Credito {
+        margin: -4vh 0;
+    }
+}

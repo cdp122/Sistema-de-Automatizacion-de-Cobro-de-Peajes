@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function Validar() {
     token = localStorage.getItem('token');
+    console.log(token);
 
     try {
         const response = await fetch("/login/client", {
@@ -16,7 +17,12 @@ async function Validar() {
         });
         if (response.ok) {
             const data = await response.json();
-            document.getElementById("saldo").innerHTML = decodeURIComponent(data);
+
+            if(data.message) window.location.href = "../Error/PagError404.html";
+
+            document.getElementById("nombre").innerHTML = data.nombre;
+            document.getElementById("tarjeta").innerHTML = "Tarjeta " + data.nroTarjeta + " :";
+            document.getElementById("saldo").innerHTML = data.saldo;
         } else {
             alert(result.message);
         }

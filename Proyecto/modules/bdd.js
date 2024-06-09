@@ -1,4 +1,3 @@
-const { json } = require('body-parser');
 const mysql = require('mysql');
 
 const conexion = mysql.createConnection({
@@ -43,18 +42,32 @@ async function BorrarRegistro(cedula) {
     }
 }
 
-async function ConseguirRegistros(idCliente) {
+//#region Conseguir Registros
+async function ConseguirRegistros(tabla, nombreParametro, parametroBusqueda) {
     try {
-        const query = "SELECT * FROM tb_clientes WHERE idCliente = ?";
-        const registro = await Consultar(mysql.format(query, [idCliente]));
-        console.log("Enviando resultado");
+        const query = "SELECT * FROM " + tabla + " WHERE " + nombreParametro + " = ?";
+        const registro = await Consultar(mysql.format(query, [parametroBusqueda]));
         if (registro.length === 0) return null;
+        console.log("Enviando resultado");
         return registro;
     } catch (error) {
         console.error(error);
         return null;
     }
 }
+
+async function LogInClient(idCliente) {
+    return await ConseguirRegistros("tb_clientes", "idCliente", idCliente);
+}
+
+async function LogInEmpleado(idEmpleado) {
+    return await ConseguirRegistros("tb_empleados", "idEmpleado", idEmpleado);
+}
+
+async function RecibirDatos(idCliente) {
+    return await ConseguirRegistros("tb_clientes", "idCliente", idCliente);
+}
+//#endregion
 
 async function ModificarRegistro(registro) {
     try {
@@ -98,5 +111,5 @@ async function InsertarRegistro(registro) {
         return false;
     }
 }
-module.exports = { conexion, BorrarRegistro, ConseguirRegistros, ModificarRegistro, InsertarRegistro };
+module.exports = { conexion, BorrarRegistro, ConseguirRegistros, LogInClient, LogInEmpleado, RecibirDatos, ModificarRegistro, InsertarRegistro };
 
