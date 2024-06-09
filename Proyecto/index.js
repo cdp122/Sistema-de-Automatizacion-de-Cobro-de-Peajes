@@ -25,17 +25,16 @@ app.use('/error', error);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'WebSite/Client/Paginfo.html'));
+    res.sendFile(path.resolve(__dirname, 'WebSite/index.html'));
 });
 //#endregion
 
 //#region Cargar archivos
 app.use(express.static(path.join(__dirname, 'WebSite')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'BDDPrueba')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'Modules')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn')));
 //#endregion
 
 //#region exportaciones
