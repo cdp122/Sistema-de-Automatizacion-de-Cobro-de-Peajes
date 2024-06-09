@@ -30,7 +30,7 @@ body {
         rgba(0, 0, 0, 0.17),
         rgba(0, 0, 0, 0.19)
     ),
-    url('../Assets/PanaSolar.webp');
+    url('Assets/PanaSolar.webp');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -104,7 +104,7 @@ body {
     width: 80px;
     height: 80px;
     align-items: center;
-    background: url('../Assets/Logo.png') no-repeat 50% 50%;
+    background: url('Assets/Logo.png') no-repeat 50% 50%;
     background-size: cover;
     margin-left: 20px;
 }
@@ -251,7 +251,7 @@ h2 {
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)
     ),
-    url('../Assets/gerente.jpg');
+    url('Assets/gerente.jpg');
 }
 
 .house-2 {
@@ -259,7 +259,7 @@ h2 {
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)
     ),
-    url('../Assets/empleado.jpg');
+    url('Assets/empleado.jpg');
 }
 
 .house-3 {
@@ -267,7 +267,7 @@ h2 {
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)
     ),
-    url('../Assets/cajero.jpg');
+    url('Assets/cajero.jpg');
 }
 
 .house-4 {
@@ -275,7 +275,7 @@ h2 {
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)
     ),
-    url('../Assets/paramedico.jpg');
+    url('Assets/paramedico.jpg');
 }
 
 .house-5 {
