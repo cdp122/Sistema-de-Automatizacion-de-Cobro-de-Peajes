@@ -6,6 +6,7 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    
 }
 
 body {
@@ -18,14 +19,22 @@ body {
     position: relative;
     animation: cambiar 12.5s ease-in-out infinite;
     text-shadow: #616060 2px 4px;  
+    
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+
 
 .header {
+    background: #e4a451d8;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*border: solid 3px #09080d;*/
+    height: 90px;
+    
+}
+.containerIMG{
     background-image: linear-gradient(
         rgba(0, 0, 0, 0.17),
         rgba(0, 0, 0, 0.19)
@@ -34,12 +43,11 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 70vh;
+    min-height: 500px;
     display: flex;
     align-items: center;
-    
+    /*border: solid 3px #09080d;*/
 }
-
 .hamburger {
     cursor: pointer;
   }
@@ -79,7 +87,7 @@ body {
     stroke-dashoffset: -32.42;
   }
 
-.menu {
+.menuContainer {
     position: absolute;
     top: 0;
     left: 0;
@@ -87,12 +95,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
-.menu .navbar.active {
+.menuContainer .navbar.active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #09080d;
+    /*background-color: #09080d;*/
     width: 100%;
     position: absolute;
     top: 60px;
@@ -109,19 +118,19 @@ body {
     margin-left: 20px;
 }
 
-.menu .navbar ul li {
+.menuContainer .navbar ul li {
     position: relative;
     float: left;
 }
 
-.menu .navbar ul li a {
+.menuContainer .navbar ul li a {
     font-size: 20px;
     padding: 20px;
     color: #fffdfc;
     display: block;
 }
 
-.menu .navbar ul li a:hover {
+.menuContainer .navbar ul li a:hover {
     color: #f7a000;
 }
 
@@ -129,7 +138,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #09080d;
+    /*background-color: #09080d;*/
     width: 100%;
     position: absolute;
     top: 60px;
@@ -140,21 +149,25 @@ body {
 
 
 
-.header-txt {
+.headertxt {
     width: 50%;
+    padding-left: 30px;
+    /*border: solid 3px #09080d;*/
 }
 
-.header-txt h1 {
+.headertxt h1 {
     font-size: 105px;
     line-height: 110px;
     color: #fefcfb;
     margin-bottom: 15px;
+    
 }
 
-.header-txt p {
+.headertxt p {
     font-size: 25px;
     color: #e0e0e0;
     margin-bottom: 15px;
+    
 }
 
 .btn-1 {
@@ -164,6 +177,7 @@ body {
     color: #fefcfb;
     border-radius: 25px;
     font-size: 22px;
+    
 }
 
 .btn-1:hover {
@@ -174,6 +188,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 40px 0;
+    
 }
 
 .direction-container p {
@@ -183,7 +198,9 @@ body {
 
 .about {
     padding: 100px 0;
+    padding-left: 30px;
     display: flex;
+    /*border: solid 3px #09080d;*/
 }
 
 .about-txt {
@@ -192,45 +209,57 @@ body {
 
 .about-img {
     width: 450px;
+    
+    /*border: solid 3px #09080d;*/
+}
+.nosotros{
+    border-radius: 50%;
 }
 
 h2 {
     font-size: 70px;
     color: #fefcfb;
     margin-bottom: 15px;
+    
 }
 
 .about-txt p {
     font-size: 16px;
     color: #e0e0e0;
     margin-bottom: 35px;
+    
 }
 
 .informacion {
     display: flex;
     justify-content: space-between;
-    padding: 50px 0;
+    padding: 50px 30px 30px 30px;
+    /*border: solid 3px #09080d;*/
 }
 
 .information-1 {
     display: flex;
     align-items: center;
+    
 }
 
 .information-1 h3 {
     font-size: 70px;
     color: #fefcfb;
+    
 }
 
 .information-1 p {
     font-size: 16px;
     color: #e0e0e0;
     margin-left: 15px;
+    
 }
 
 .house {
     display: flex;
     justify-content: space-between;
+    /*border: solid 3px #09080d;*/
 }
 
 .house-1,
@@ -311,18 +340,27 @@ h2 {
 
 .footer {
     padding: 100px 0 0 0;
+    /*border: solid 3px #09080d;*/
+    
+    
 }
 
 .footer-content {
     display: flex;
+    /*border: solid 3px #09080d;*/
+    padding-left: 30px;
 }
 
 .footer-form {
     width: 50%;
+    /*border: solid 3px #09080d;*/
+    
 }
 
 .footer-txt {
     width: 50%;
+    padding-left: 30px;
+    /*border: solid 3px #09080d;*/
 }
 
 form {
@@ -330,6 +368,9 @@ form {
     width: 350px;
     flex-direction: column;
     margin-left: 200px;
+    
+    
+
 }
 
 .campo {
@@ -358,12 +399,14 @@ form {
     color: #fefcfb;
     font-size: 35px;
     margin: 0 100px 20px 0;
+    
 }
 
 .footer-txt p {
     margin-bottom: 25px;
     font-size: 18px;
     color: #e0e0e0;
+    
 }
 
 .footer-2 p {
