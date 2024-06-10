@@ -55,13 +55,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function recargarSaldo() {
+    let balanceElement = document.getElementById("balance-amount");
+    let saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
     let nuevoSaldo = prompt("Ingrese el monto a recargar:");
-    if (nuevoSaldo !== null && !isNaN(nuevoSaldo) && nuevoSaldo > 0) {
-        let balanceElement = document.getElementById("balance-amount");
-        let saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
+    let actualizacionSaldo = parseFloat(saldoActual) + parseFloat(nuevoSaldo);
+    console.log(actualizacionSaldo);
+
+    if (nuevoSaldo !== null && !isNaN(nuevoSaldo) && nuevoSaldo > 0 && actualizacionSaldo <= 99.99) {
+        saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
         let saldoNuevo = saldoActual + parseFloat(nuevoSaldo);
         balanceElement.textContent = `$${saldoNuevo.toFixed(2)}`;
-    } else {
+    }
+    else if (actualizacionSaldo > 99.99) {
+        alert("No se permite exceder la cantidad de Saldo de 99.99$");
+    }
+    else {
         alert("Ingrese un monto válido.");
     }
 }
