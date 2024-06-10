@@ -10,11 +10,13 @@ const totalValue = document.getElementById('total-value');
 
 // Definir productos y precios
 const products = {
-  "Producto1": 15.00,
-  "Producto2": 45.50,
-  "Producto3": 0.65,
-  "Producto4": 7.00,
-  "Producto5": 10.00
+  "Producto1": { name: "Manzanas", price: 2.00 },
+  "Producto2": { name: "Platanos", price: 1.50 },
+  "Producto3": { name: "Peras", price: 3.50 },
+  "Producto4": { name: "Limas", price: 2.50 },
+  "Producto5": { name: "Uvas", price: 4.10 },
+  "Producto6": { name: "Kiwis", price: 4.50 },
+  "Producto7": { name: "Sandias", price: 1.10 }
 };
 
 // Función para agregar una nueva fila a la tabla
@@ -23,8 +25,8 @@ function addRow() {
   newRow.innerHTML = `
     <td>
       <select class="product-select">
-        <option value="">Seleccione un producto</option>
-        ${Object.keys(products).map(product => `<option value="${product}">${product}</option>`).join('')}
+        <option value="">Productos</option>
+        ${Object.entries(products).map(([key, product]) => `<option value="${key}">${product.name}</option>`).join('')}
       </select>
     </td>
     <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
@@ -46,7 +48,7 @@ function attachInputListeners(row) {
   quantityInput.addEventListener('change', updateTotals);
   productSelect.addEventListener('change', function() {
     const selectedProduct = this.value;
-    const price = products[selectedProduct] || 0;
+    const price = products[selectedProduct] ? products[selectedProduct].price : 0;
     priceInput.value = price.toFixed(2);
     updateTotals();
   });
