@@ -16,29 +16,27 @@ const products = {
   "Producto4": { name: "Limas", price: 2.50 },
   "Producto5": { name: "Uvas", price: 4.10 },
   "Producto6": { name: "Kiwis", price: 4.50 },
-  "Producto7": { name: "Sandias", price: 1.10 },
-  "Producto8": { name: "Pepinos", price: 1.20 },
-  "Producto9": { name: "Piñas", price: 2.50 },
-  "Producto10": { name: "Aguacates", price: 1.00 }
+  "Producto7": { name: "Sandias", price: 1.10 }
 };
 
 // Función para agregar una nueva fila a la tabla
 function addRow() {
-  const newRow = document.createElement('tr');
-  newRow.innerHTML = `
-    <td>
-      <select class="product-select">
-        <option value="">Productos</option>
-        ${Object.entries(products).map(([key, product]) => `<option value="${key}">${product.name}</option>`).join('')}
-      </select>
-    </td>
-    <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
-    <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price" readonly></td>
-    <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
-  `;
-  itemRows.appendChild(newRow);
-  attachInputListeners(newRow);
-  updateTotals();
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+      <td>
+        <select class="product-select">
+          <option value="">Productos</option>
+          ${Object.entries(products).map(([key, product]) => `<option value="${key}">${product.name}</option>`).join('')}
+        </select>
+      </td>
+      <td><input type="text" placeholder="Nuevo Producto" class="new-product-input"></td>
+      <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
+      <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
+      <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
+    `;
+    itemRows.appendChild(newRow);
+    attachInputListeners(newRow);
+    updateTotals();
 }
 
 // Función para adjuntar los event listeners a los campos de entrada
@@ -46,6 +44,7 @@ function attachInputListeners(row) {
   const quantityInput = row.querySelector('.quantity');
   const priceInput = row.querySelector('.price');
   const productSelect = row.querySelector('.product-select');
+  const newProductInput = row.querySelector('.new-product-input');
 
   quantityInput.addEventListener('input', updateTotals);
   quantityInput.addEventListener('change', updateTotals);
@@ -53,7 +52,15 @@ function attachInputListeners(row) {
     const selectedProduct = this.value;
     const price = products[selectedProduct] ? products[selectedProduct].price : 0;
     priceInput.value = price.toFixed(2);
+    priceInput.readOnly = newProductInput.value.trim() === '';
     updateTotals();
+  });
+
+  newProductInput.addEventListener('input', function() {
+    priceInput.readOnly = this.value.trim() === '';
+    if (this.value.trim() === '') {
+      priceInput.value = products[productSelect.value].price.toFixed(2);
+    }
   });
 }
 
@@ -79,10 +86,11 @@ function updateTotals() {
   rowInputs.forEach(row => {
     const quantityInput = row.querySelector('.quantity');
     const priceInput = row.querySelector('.price');
+    const newProductInput = row.querySelector('.new-product-input');
     const totalInput = row.querySelector('.row-total');
 
     const quantity = parseFloat(quantityInput.value) || 0;
-    const price = parseFloat(priceInput.value) || 0;
+    const price = newProductInput.value.trim() !== '' ? parseFloat(priceInput.value) || 0 : parseFloat(priceInput.value) || 0;
     const rowTotal = quantity * price;
 
     totalInput.value = rowTotal.toFixed(2);
