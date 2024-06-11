@@ -10,8 +10,11 @@ function validateToken(req, res, next) {
         if (!token) res.redirect('error/404');
 
         jwt.verify(token, "telepass", (err, user) => {
-            if (err) res.json({ message: "AUTENTICACIÓN FALLIDA" });
-            else {
+            if (err) {
+                console.log("Autenticación por usuario fallida.");
+                res.json({ message: "AUTENTICACIÓN FALLIDA" });
+            } else {
+                console.log("Autenticación exitosa.");
                 req.user = user;
                 next();
             }

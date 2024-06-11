@@ -1,3 +1,5 @@
+var token;
+
 document.addEventListener("DOMContentLoaded", function () {
     const camposEditables = ["telefono", "direccion", "email"];
     const editarPerfilBtn = document.getElementById("editar-perfil");
@@ -52,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     editarPerfilBtn.addEventListener("click", editarPerfil);
     guardarCambiosBtn.addEventListener("click", guardarCambios);
+    Validar();
 });
 
 function recargarSaldo() {
@@ -74,6 +77,51 @@ function recargarSaldo() {
     }
 }
 
-function regresarMenu() {
-    window.location.href = "menu.html"; // Cambia "menu.html" por la URL correcta de tu menú principal
+async function Validar() {
+    token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch("/login/client", {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.message) window.location.href = "../Error/PagError404.html";
+
+            document.getElementById("full-name").innerHTML = data.nombre;
+            document.getElementById("balance-amount").innerHTML = data.saldo;
+            document.getElementById("cedula").innerHTML = data.cedula;
+            document.getElementById("telefono").innerHTML = data.telefono;
+            document.getElementById("modelo-carro").innerHTML = data.modelo;
+            document.getElementById("placa").innerHTML = data.placa;
+            document.getElementById("codigo-telepass").innerHTML = data.tarjeta;
+            document.getElementById("email").innerHTML = data.correo;
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function CerrarSesion() {
+    try {
+        const response = await fetch('/login/client', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            localstorage.removeItem('token'); // Eliminar el token del almacenamiento local
+            window.location.href = '../LogIn/Login.html'; // Redirigir al usuario a la página de inicio de sesión
+        } else {
+            alert('Error al cerrar sesión');
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }

@@ -215,10 +215,21 @@ login.get('/client', validar, async (req, res) => {
     const cuenta = await conexion.ConseguirRegistros(
         "tb_clientes", "idCliente", req.user.username
     )
+    const vehiculo = await conexion.ConseguirRegistros(
+        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
+    )
+
+    console.log(usuario, cuenta);
+
     const enviar = {
         nombre: usuario[0].nombres,
-        nroTarjeta: cuenta[0].tarjeta,
-        saldo: cuenta[0].saldo
+        saldo: cuenta[0].saldo,
+        cedula: usuario[0].cedula,
+        telefono: usuario[0].telefono,
+        modelo: vehiculo[0].modelo,
+        placa: vehiculo[0].placa,
+        tarjeta: cuenta[0].tarjeta,
+        correo: cuenta[0].correo
     }
 
     res.json(enviar);

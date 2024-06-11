@@ -32,7 +32,7 @@ async function Validar() {
     try {
         let response;
         if (user[0] === "C") {
-            response = await fetch("http://localhost:3000/login/authclient?username=" + encodeURIComponent(user) + "&password=" + encodeURIComponent(contraseña), {
+            response = await fetch("/login/authclient?username=" + encodeURIComponent(user) + "&password=" + encodeURIComponent(contraseña), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ async function Validar() {
 
             if (result.tipo === "Cliente") {
                 localStorage.setItem('token', result.token);
-                window.location.href = "./Profile.html";
+                window.location.href = "../Pag-perfil/perfil.html";
             } else if (result.tipo === "Empleado") {
                 alert("Estamos trabajando en la página de Empleados. Así que aún no es accesible...");
             } else {
