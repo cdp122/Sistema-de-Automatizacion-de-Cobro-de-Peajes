@@ -85,7 +85,7 @@ section h2 {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 th, td {
@@ -95,9 +95,9 @@ th, td {
 }
 
 th {
-  background-color: #f2f2f2; 
+  background-color: #f2f2f2;
   font-weight: bold;
-  color: #333; 
+  color: #333;
 }
 
 /* Estilos para los campos de entrada en la tabla */
@@ -109,9 +109,14 @@ table input[type="number"] {
   font-size: 14px;
 }
 
-/* Estilos para el menú desplegable de productos */
+/* Estilos para el menú desplegable de productos y el input de producto personalizado */
+.product-input-container {
+  display: flex;
+  align-items: center;
+}
+
 .product-select {
-  width: 100%;
+  width: 60%;
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -126,6 +131,7 @@ table input[type="number"] {
   background-position: right 10px center;
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
+  margin-right: 10px;
 }
 
 .product-select:hover {
@@ -134,7 +140,7 @@ table input[type="number"] {
 
 .product-select:focus {
   outline: none;
-  border-color: #4a90e2; 
+  border-color: #4a90e2;
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
 }
 
@@ -144,26 +150,34 @@ table input[type="number"] {
   padding: 10px;
 }
 
+.custom-product {
+  width: 40%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 /* Estilos para los botones */
 button {
   padding: 10px 20px;
   font-size: 14px;
-  background-color: #4a90e2; 
+  background-color: #4a90e2;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
   margin-right: 10px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 button:hover {
-  background-color: #357abf; 
+  background-color: #357abf;
 }
 
 button:active {
-  background-color: #2c6295; 
+  background-color: #2c6295;
 }
 
 footer {
@@ -172,7 +186,7 @@ footer {
 
 /* Estilos para la sección de totales */
 .totals {
-  margin-top: 20px; 
+  margin-top: 20px;
   font-size: 16px;
 }
 
