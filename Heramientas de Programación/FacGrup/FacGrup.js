@@ -16,7 +16,10 @@ const products = {
   "Producto4": { name: "Limas", price: 2.50 },
   "Producto5": { name: "Uvas", price: 4.10 },
   "Producto6": { name: "Kiwis", price: 4.50 },
-  "Producto7": { name: "Sandias", price: 1.10 }
+  "Producto7": { name: "Sandias", price: 1.10 },
+  "Producto8": { name: "Pepinos", price: 1.20 },
+  "Producto9": { name: "Piñas", price: 2.50 },
+  "Producto10": { name: "Aguacates", price: 1.00 }
 };
 
 // Función para agregar una nueva fila a la tabla
