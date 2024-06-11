@@ -219,7 +219,33 @@ login.get('/client', validar, async (req, res) => {
         "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
     )
 
-    console.log(usuario, cuenta);
+    const enviar = {
+        nombre: usuario[0].nombres,
+        saldo: cuenta[0].saldo,
+        cedula: usuario[0].cedula,
+        telefono: usuario[0].telefono,
+        modelo: vehiculo[0].modelo,
+        placa: vehiculo[0].placa,
+        tarjeta: cuenta[0].tarjeta,
+        correo: cuenta[0].correo
+    }
+
+    console.log("Sesión autorizada a " + req.user.username);
+    res.json(enviar);
+})
+
+login.post('/client', validar, async (req, res) => {
+    console.log("Intentando guardar datos...");
+
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "id", req.user.username
+    )
+    const cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "idCliente", req.user.username
+    )
+    const vehiculo = await conexion.ConseguirRegistros(
+        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
+    )
 
     const enviar = {
         nombre: usuario[0].nombres,

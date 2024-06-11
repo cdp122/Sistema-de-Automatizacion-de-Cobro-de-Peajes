@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 function generateAccessToken(user) {
-    return jwt.sign(user, "telepass", { expiresIn: "10m" });
+    return jwt.sign(user, "telepass", { expiresIn: "20m" });
 }
 
 function validateToken(req, res, next) {
