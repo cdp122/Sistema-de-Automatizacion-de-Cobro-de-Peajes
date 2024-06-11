@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Pag-perfil')));
 //#endregion
 
 //#region exportaciones
