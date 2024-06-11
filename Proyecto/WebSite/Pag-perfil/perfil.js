@@ -24,7 +24,8 @@ function guardarCambios() {
     let telefono = document.getElementById("telefono").textContent;
     let placa = document.getElementById("placa").textContent;
     let tarjeta = document.getElementById("codigo-telepass").textContent;
-    let correo = document.getElementById("email").textContent;
+    let correo = document.getElementById("email").textContent.toLowerCase();
+    document.getElementById("email").textContent = correo;
 
     let guardar = true;
 
@@ -92,7 +93,7 @@ function recargarSaldo() {
         let saldoNuevo = saldoActual + parseFloat(nuevoSaldo);
         balanceElement.textContent = `$${saldoNuevo.toFixed(2)}`;
     }
-    else if (actualizacionSaldo > 99.99) {
+    else if (actualizacionSaldo >= 100) {
         alert("No se permite exceder la cantidad de Saldo de 99.99$");
     }
     else {
@@ -104,7 +105,7 @@ async function Validar() {
     token = localStorage.getItem('token');
 
     try {
-        const response = await fetch("/login/client", {
+        const response = await fetch("/clientes", {
             method: 'GET',
             headers: {
                 'Authorization': token
@@ -132,14 +133,14 @@ async function Validar() {
 
 async function CerrarSesion() {
     try {
-        const response = await fetch('/login/client', {
+        const response = await fetch('/login/close', {
             method: 'DELETE',
             headers: {
                 'Authorization': token
             }
         });
         if (response.ok) {
-            localstorage.removeItem('token'); // Eliminar el token del almacenamiento local
+            localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
             window.location.href = '../LogIn/Login.html'; // Redirigir al usuario a la página de inicio de sesión
         } else {
             alert('Error al cerrar sesión');
