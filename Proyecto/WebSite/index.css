@@ -30,6 +30,7 @@ body {
     align-items: center;
     justify-content: space-between;
     height: 90px;
+    padding: 0 20px; /* Ajustar el padding del encabezado */
 }
 
 /* Contenedor de imagen */
@@ -86,6 +87,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 20px; /* Ajustar el padding del menú */
 }
 
 .menuContainer .navbar.active {
@@ -111,19 +113,17 @@ body {
 .menuContainer .navbar ul li {
     margin: 0 5px; /* Ajusta el margen según tus necesidades */
 }
+
 .menuContainer .navbar ul {
     display: flex;
     justify-content: center;
 }
+
 .menuContainer .navbar ul li a {
     font-size: 20px;
     padding: 20px;
-    color: #fffdfc;
+    color: #000000;
     display: block;
-}
-
-.menuContainer .navbar ul li a:hover {
-    color: #f7a000;
 }
 
 #menu-toggle:checked ~ .navbar {
@@ -304,10 +304,33 @@ h2 {
 .footer {
     padding: 100px 0 0 0;
 }
+.footer-content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px; /* Espacio entre footer-flex y footer-content */
+}
+.footer-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px; /* Espacio entre el h2 y .footer-txt */
+}
+.footer h2 {
+    margin: 0;
+}
 
 .footer-content {
     display: flex;
-    padding-left: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+.footer.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .footer-form {
@@ -315,15 +338,14 @@ h2 {
 }
 
 .footer-txt {
-    width: 50%;
-    padding-left: 30px;
+    text-align: left;
+
 }
 
 form {
     display: flex;
     width: 350px;
     flex-direction: column;
-    margin-left: 200px;
 }
 
 .campo {
@@ -346,7 +368,7 @@ form {
 .footer-txt h3 {
     color: #fefcfb;
     font-size: 35px;
-    margin: 0 100px 20px 0;
+    margin: 0 0 20px 0;
 }
 
 .footer-txt p {
@@ -362,122 +384,161 @@ form {
 
 /* Estilos responsivos */
 @media (max-width: 991px) {
-    .menu {
-        padding: 30px;
-    }
-
-    .menu label {
-        display: initial;
-    }
-
-    .menu .navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: #09080d;
-        display: none;
-    }
-
-    .menu .navbar ul li {
-        width: 100%;
-    }
-
-    #menu-toggle:checked ~ .navbar {
-        display: initial;
-    }
-
+    /* Encabezado */
     .header {
-        min-height: 0vh;
+        height: auto;
+        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        align-items: center;
     }
 
-    .header-content {
-        padding: 100px 30px;
+    .headertxt {
+        padding-left: 0;
+        text-align: center; /* Centra el texto */
     }
 
-    .header-txt {
-        width: 100%;
-        text-align: center;
+    /* Contenedor de imagen */
+    .containerIMG {
+        min-height: 300px; /* Reduce la altura mínima */
     }
 
-    .header-txt h1 {
-        font-size: 70px;
-        list-style: 80px;
+    /* Menú hamburguesa */
+    .menuContainer {
+        padding: 20px 0; /* Ajusta el padding */
     }
 
-    .direction {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
+    /* Menú de Navegación */
+    .menuContainer .navbar.active {
+        top: 90px; /* Ajusta la posición en dispositivos móviles */
     }
 
-    .direction p {
-        margin-bottom: 10px;
+    /* Botón */
+    .btn-1 {
+        margin-top: 20px; /* Ajusta el margen superior */
     }
 
+    /* Dirección */
+    .direction-container {
+        padding: 20px 0; /* Ajusta el padding */
+    }
+
+    /* Sección "Nosotros" */
     .about {
-        padding: 0 30px 30px 30px;
-        flex-direction: column;
+        padding: 50px 0; /* Ajusta el padding */
     }
 
-    .about-txt {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    .about-img {
-        width: 100%;
-        order: 2;
-        text-align: center;
-    }
-
-    .about-img img {
-        width: 300px;
-    }
-
+    /* Información */
     .informacion {
-        padding: 30px;
-        flex-direction: column;
-        margin-left: 80px;
+        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        padding: 30px; /* Ajusta el padding */
     }
 
+    /* Sección de casas */
     .house {
-        flex-direction: column;
+        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        margin-top: 0; /* Elimina el margen superior */
     }
 
-    .footer {
-        padding: 30px 30px 0 30px;
+    .house-1,
+    .house-2,
+    .house-3,
+    .house-4 {
+        height: auto; /* Cambia la altura a automática */
+        margin-bottom: 20px; /* Añade un margen inferior */
+    }
+
+    .txt p {
+        position: static; /* Restaura la posición */
+        transform: rotate(0); /* Restaura la rotación */
+        margin-top: 10px; /* Ajusta el margen superior */
+    }
+
+    /* Pie de página */
+    .footer-content-wrapper {
+        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        gap: 30px; /* Ajusta el espacio entre los elementos */
+    }
+
+    .footer-flex {
+        align-items: center; /* Centra los elementos */
     }
 
     .footer-content {
-        flex-direction: column;
+        width: 100%; /* Ajusta el ancho */
     }
 
     .footer-form {
-        width: 100%;
-        text-align: center;
+        width: 100%; /* Ajusta el ancho */
     }
 
     .footer-txt {
-        text-align: center;
-    }
-
-    .footer-txt h3 {
-        margin: 0 0 20px 0;
+        text-align: center; /* Centra el texto */
     }
 
     form {
+        width: 100%; /* Ajusta el ancho */
+    }
+}
+
+@media (min-width: 991px){
+    .hamburger {
+        visibility: hidden;
+    }
+}
+
+/*Mobiles*/
+@media (max-width: 620px) {
+    .containerIMG .headertxt {
         width: 100%;
-        margin: 0 0 25px 0;
+        padding: 0 20px;
+        text-align: center;
+    }
+    .navbar {
+        position: absolute;
+        right: 20px;
+        visibility: hidden;
+    }
+}
+@media (max-width: 768px) {
+    /* Ocultar el nav bar por defecto */
+    .menuContainer .navbar {
+        display: none;
+    }
+    .containerIMG .headertxt {
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
     }
 
-    .footer-2 p {
+    /* Ajustar el menú de hamburguesa */
+    .hamburger svg {
+        height: 2.5em; /* Ajustar el tamaño del icono de hamburguesa */
+    }
+
+    /* Mostrar el nav bar cuando se active el menú de hamburguesa */
+    #menu-toggle:checked ~ .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        background-color: #fff; /* Agrega un fondo al menú desplegable */
+    }
+}
+
+@media (max-width: 769px) {
+    /* Mostrar el nav bar */
+    .menuContainer .navbar {
+        display: flex;
+    }
+    .containerIMG .headertxt {
+        width: 100%;
+        padding: 0 20px;
         text-align: center;
     }
 }
 
-@media (min-width: 991px) {
+@media (min-width: 768px) {
     .hamburger {
         visibility: hidden;
     }
