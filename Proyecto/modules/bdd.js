@@ -70,24 +70,7 @@ async function RecibirDatos(idCliente) {
 //#endregion
 
 async function ModificarRegistro(registro) {
-    try {
-        await Consultar("UPDATE tb_clientes SET" +
-            " nombres = '" + registro.nombre + "'," +
-            " contraseña = '" + registro.contraseña + "'," +
-            " cedula = '" + registro.cedula + "'," +
-            " correo = '" + registro.correo + "'," +
-            " placa = '" + registro.placa + "'," +
-            " tarjeta = '" + registro.tarjeta + "'" +
-            " saldo = '" + parseFloat(registro.tarjeta) + "'" +
-            " WHERE cedula = '" + registro.current + "'"
-        );
-        console.log("Registro actualizado");
-        return true;
-    } catch (error) {
-        console.error(error);
-        conexion.end();
-        return false;
-    }
+    //por el momento no hará nada. 
 }
 
 async function InsertarRegistro(registro) {
@@ -111,5 +94,8 @@ async function InsertarRegistro(registro) {
         return false;
     }
 }
-module.exports = { conexion, BorrarRegistro, ConseguirRegistros, LogInClient, LogInEmpleado, RecibirDatos, ModificarRegistro, InsertarRegistro };
+module.exports = {
+    conexion, BorrarRegistro, ConseguirRegistros, LogInClient, LogInEmpleado,
+    RecibirDatos, ModificarRegistro, InsertarRegistro
+};
 

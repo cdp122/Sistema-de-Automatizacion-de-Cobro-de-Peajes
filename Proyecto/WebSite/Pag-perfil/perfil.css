@@ -103,6 +103,10 @@ body {
     color: white;
 }
 
+.perfil-container h1{
+    color: white;
+}
+
 /* Balance del usuario */
 .balance {
     background: white;
