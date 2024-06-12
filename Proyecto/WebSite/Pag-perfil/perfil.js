@@ -120,7 +120,7 @@ async function ActualizarDatos(validarDatos) {
 
 function AgregarTarjeta() {
     var caja = document.createElement('div');
-    caja.className = 'perfil-details';
+    caja.className = 'cajaTarjeta';
 
     var boton = document.createElement('button');
     boton.className = 'editar';
@@ -131,6 +131,11 @@ function AgregarTarjeta() {
     var boton2 = document.createElement('button');
     boton2.className = 'agregar';
     boton2.textContent = 'Recargar Saldo';
+
+    var boton3 = document.createElement('button');
+    boton3.className = 'movi';
+    boton3.textContent = 'Movimientos';
+    boton3.addEventListener("click", ListarMovimientos);
 
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
@@ -186,6 +191,7 @@ function AgregarTarjeta() {
     caja.appendChild(lista);
     caja.appendChild(boton);
     caja.appendChild(boton2);
+    caja.appendChild(boton3);
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
 }
@@ -193,15 +199,15 @@ function AgregarTarjeta() {
 function CargarTarjetas(tarjeta, vehiculo) {
     console.log("Funca mi funcion");
     var caja = document.createElement('div');
-    caja.className = 'perfil-details';
+    caja.className = 'cajaTarjeta';
 
     var boton = document.createElement('button');
-    boton.className = 'agregar';
+    boton.className = 'editar';
     boton.textContent = 'Editar Tarjeta';
     boton.addEventListener("click", EditarTarjeta);
 
     var boton2 = document.createElement('button');
-    boton2.className = 'agregar';
+    boton2.className = 'movi';
     boton2.textContent = 'Movimientos';
     boton2.addEventListener("click", ListarMovimientos);
 
@@ -268,6 +274,42 @@ function CargarTarjetas(tarjeta, vehiculo) {
     });
 }
 
+function validarTarjeta(input) {
+    var valor = input.value.trim();
+    var id = input.id;
+
+    if (valor === '') {
+        input.dataset.error = "Este campo no debe estar vacío.";
+        return false;
+    }
+
+    switch (id) {
+        case 'modelo-carro':
+            if (!/^[a-zA-Z\s]+$/.test(valor)) {
+                input.dataset.error = "El modelo del auto solo debe contener letras.";
+                return false;
+            }
+            break;
+        case 'placa':
+            if (!/^[a-zA-Z0-9]{6}$/.test(valor)) {
+                input.dataset.error = "La placa debe tener exactamente 6 digitos.";
+                return false;
+            }
+            break;
+        case 'codigo-telepass':
+            if (!/^\d{10}$/.test(valor)) {
+                input.dataset.error = "El código Telepass debe tener exactamente 10 dígitos.";
+                return false;
+            }
+            break;
+        default:
+            break;
+    }
+
+    delete input.dataset.error;
+    return true;
+}
+
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
 
@@ -295,16 +337,40 @@ function GuardarCambios(event) {
 
     var inputs = caja.querySelectorAll('input');
 
-    inputs.forEach(function (input) {
-        var span = document.createElement('span');
-        span.id = input.id;
-        span.textContent = input.value;
+    var datosValidos = true;
 
-        input.parentNode.replaceChild(span, input);
+    inputs.forEach(function (input) {
+        if (!validarTarjeta(input)) {
+
+            datosValidos = false;
+            input.style.borderColor = 'red';
+            if (input.dataset.error) {
+                window.alert(input.dataset.error);
+            }
+        }
+        else {
+            input.style.borderColor = '';
+        }
     });
-    event.target.textContent = 'Editar Tarjeta';
-    event.target.removeEventListener("click", GuardarCambios);
-    event.target.addEventListener("click", EditarTarjeta);
+
+    if (datosValidos) {
+
+        inputs.forEach(function (input) {
+            var span = document.createElement('span');
+            span.id = input.id;
+            span.textContent = input.value;
+            input.parentNode.replaceChild(span, input);
+        });
+
+        event.target.textContent = 'Editar Tarjeta';
+        event.target.removeEventListener("click", GuardarCambios);
+        event.target.addEventListener("click", EditarTarjeta);
+    }
+    else {
+        window.alert("Corrije los campos en rojo");
+    }
+
+
 }
 
 

@@ -178,6 +178,46 @@ body {
     color: #555;
 }
 
+
+/* Detalles del perfil */
+.cajaTarjeta {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin-top: 20px;
+    height: 300px;
+
+}
+
+.cajaTarjeta h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.cajaTarjeta ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cajaTarjeta li {
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Etiquetas fuertes para los detalles del perfil */
+.cajaTarjeta li strong {
+    display: inline-block;
+    width: 150px;
+}
+
+/* Span para los valores de detalles del perfil */
+.cajaTarjeta li span {
+    color: #555;
+}
 /* Campos editables en modo de edición */
 .editable[contenteditable="true"] {
     background: #4a493f57;
@@ -193,12 +233,14 @@ body {
     width: 20%;
     height: 40px;
     border: none;
+    font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
     background-color:  #1e88e5;
     color: white;
     position: relative;
     left: 80%;
+    top: -60px;
     margin-top: 20px;
 }
 
@@ -208,14 +250,30 @@ body {
     width: 20%;
     height: 40px;
     border: none;
+    font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
-    background-color:  #1e88e5;
+    background-color:  #1ee55a;
     color: white;
     position: relative;
-    left: 80%;
+    left: 0%;
     margin-top: 20px;
-    
+}
+
+/* Boton para listar Movimietnos*/
+.movi {
+    display: block;
+    width: 20%;
+    height: 40px;
+    font-size: 18px;
+    top: -100px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f970ae;
+    color: white;
+    position: relative;
+    left: 25%;
 }
 
 /* Botón para guardar cambios */
