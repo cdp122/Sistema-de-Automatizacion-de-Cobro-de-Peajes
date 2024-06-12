@@ -1,8 +1,12 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const hamburger = document.querySelector('.hamburger');
-    const menu = document.querySelector('.navbar');
+document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbar = document.querySelector('.navbar');
 
-    hamburger.addEventListener('click', function () {
-        menu.classList.toggle('active');
+    menuToggle.addEventListener('change', function() {
+      if (menuToggle.checked) {
+        navbar.classList.add('mostrar-menu');
+      } else {
+        navbar.classList.remove('mostrar-menu');
+      }
     });
-});
+  });
