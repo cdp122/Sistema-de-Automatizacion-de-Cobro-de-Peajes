@@ -103,6 +103,10 @@ body {
     color: white;
 }
 
+.perfil-container h1{
+    color: white;
+}
+
 /* Balance del usuario */
 .balance {
     background: white;
@@ -180,10 +184,32 @@ body {
     transition: background 0.3s ease, border 0.3s ease;
 }
 
+/* Boton para Agregar Tarjetas*/
+.agregar {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color:  #1e88e5;
+    color: white;
+    position: relative;
+    left: 700px;
+}
+
+/* Boton para Agregar Tarjetas*/
+.editar {
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color:  #1e88e5;
+    color: white;
+    position: relative;
+    left: 700px;
+}
+
 /* Botón para guardar cambios */
 #guardar-cambios {
     display: block;
-    width: 100%;
+    width: 20%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -193,6 +219,8 @@ body {
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 20px;
+    position: relative;
+    left: 80%;
 }
 
 #guardar-cambios:hover {
@@ -202,7 +230,7 @@ body {
 /* Botón para editar perfil */
 #editar-perfil {
     display: block;
-    width: 100%;
+    width: 20%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -212,6 +240,12 @@ body {
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 20px;
+    position: relative;
+    left: 80%;
+}
+
+.botonEditar {
+    width: 200px;
 }
 
 .footer {

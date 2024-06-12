@@ -53,7 +53,6 @@ class Cliente extends Usuario {
     }
 
     AgregarVehiculo(vehiculo) {
-        console.log("clases 56:", vehiculo);
         this.vehiculos.push(new Vehiculo(vehiculo.tarjetaVeh, vehiculo.placa, vehiculo.modelo, vehiculo.color, vehiculo.tipo));
     }
 }
