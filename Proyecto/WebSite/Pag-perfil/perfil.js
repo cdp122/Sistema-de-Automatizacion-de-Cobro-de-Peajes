@@ -1,5 +1,6 @@
 var token;
-const camposEditables = ["cedula", "telefono", "modelo-carro", "placa", "codigo-telepass", "email"];
+const camposEditables = ["cedula", "telefono", "email"];
+const camposTarjeta = ["modelo-carro", "placa", "codigo-telepass"];
 const editarPerfilBtn = document.getElementById("editar-perfil");
 const guardarCambiosBtn = document.getElementById("guardar-cambios");
 
@@ -22,8 +23,6 @@ function editarPerfil() {
 function guardarCambios() {
     let cedula = document.getElementById("cedula").textContent;
     let telefono = document.getElementById("telefono").textContent;
-    let placa = document.getElementById("placa").textContent;
-    let tarjeta = document.getElementById("codigo-telepass").textContent;
     let correo = document.getElementById("email").textContent;
 
     let guardar = true;
@@ -35,16 +34,6 @@ function guardarCambios() {
 
     if (!/^\d{10}$/.test(telefono)) {
         alert("El nro de Telefono debe contener 10 dígitos y solo números.");
-        guardar = false;
-    }
-
-    if (!/^[A-Z]{3}[0-9]{4}$/.test(placa)) {
-        alert("La placa no corresponde al formato XXX####.");
-        guardar = false;
-    }
-
-    if (!/^\d{5}$/.test(tarjeta)) {
-        alert("La tarjeta debe contener 5 dígitos y solo números.");
         guardar = false;
     }
 
@@ -118,9 +107,7 @@ async function Validar() {
             document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo);
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
-            document.getElementById("modelo-carro").innerHTML = data.modelo;
-            document.getElementById("placa").innerHTML = data.placa;
-            document.getElementById("codigo-telepass").innerHTML = data.tarjeta;
+            
             document.getElementById("email").innerHTML = data.correo;
         } else {
             alert(result.message);
@@ -169,9 +156,6 @@ async function ActualizarDatos(validarDatos) {
             document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo);
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
-            document.getElementById("modelo-carro").innerHTML = data.modelo;
-            document.getElementById("placa").innerHTML = data.placa;
-            document.getElementById("codigo-telepass").innerHTML = data.tarjeta;
             document.getElementById("email").innerHTML = data.correo;
         } else {
             alert(result.message);
@@ -182,4 +166,108 @@ async function ActualizarDatos(validarDatos) {
 
 
     return false;
+}
+
+function AgregarTargeta(){
+    var caja = document.createElement('div');
+    caja.className ='perfil-details';
+
+    var boton = document.createElement('button');
+    boton.className ='agregar';
+    boton.textContent = 'Editar Tarjeta';
+    boton.addEventListener("click", EditarTarjeta);   
+
+     
+    
+    var titulo = document.createElement('h2');
+    titulo.textContent = 'Tarjeta';
+
+    caja.appendChild(titulo);
+
+    var lista = document.createElement('ul');
+
+    var elemento = document.createElement('li');
+    var letra = document.createElement('strong');
+    letra.textContent = 'Modelo de auto';
+    var spanModelo = document.createElement('span');
+    spanModelo.id = 'modelo-carro';
+    spanModelo.textContent = 'Modelo de auto';
+    elemento.appendChild(letra);
+    elemento.appendChild(spanModelo);
+    lista.appendChild(elemento);
+
+    var elemento2 = document.createElement('li');
+    var letra2 = document.createElement('strong');
+    letra2.textContent = 'Placa:';
+    var spanModelo2 = document.createElement('span');
+    spanModelo2.id = 'placa';
+    spanModelo2.textContent = 'ABC-123';
+    elemento2.appendChild(letra2);
+    elemento2.appendChild(spanModelo2);
+    lista.appendChild(elemento2);
+
+    var elemento3 = document.createElement('li');
+    var letra3 = document.createElement('strong');
+    letra3.textContent = 'Tarjeta Telepass';
+    var spanModelo3 = document.createElement('span');
+    spanModelo3.id = 'codigo-telepass';
+    spanModelo3.textContent = '1234567890';
+    elemento3.appendChild(letra3);
+    elemento3.appendChild(spanModelo3);
+    lista.appendChild(elemento3);
+
+    var elemento4 = document.createElement('li');
+    var letra4 = document.createElement('strong');
+    letra4.textContent = 'Saldo';
+    var spanModelo4 = document.createElement('span');
+    spanModelo4.id = 'saldo';
+    spanModelo4.textContent = '10';
+    elemento4.appendChild(letra4);
+    elemento4.appendChild(spanModelo4);
+    lista.appendChild(elemento4);
+
+    caja.appendChild(lista);
+    caja.appendChild(boton);
+    var ubicacion = document.getElementById('tarjetas');
+    ubicacion.appendChild(caja);
+}
+
+
+function EditarTarjeta(event) {
+
+    var caja = event.target.parentNode;
+
+    var spans = caja.querySelectorAll('span');
+
+    spans.forEach(function(span) {
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.value = span.textContent;
+        input.id = span.id;
+
+        span.parentNode.replaceChild(input, span);
+    });
+
+    event.target.textContent = 'Guardar Cambios';
+    event.target.removeEventListener("click", EditarTarjeta);
+    event.target.addEventListener("click", GuardarCambios);
+}
+
+function GuardarCambios(event) {
+    
+    var caja = event.target.parentNode;
+
+    var inputs = caja.querySelectorAll('input');
+
+   
+    inputs.forEach(function(input) {
+        var span = document.createElement('span');
+        span.id = input.id;
+        span.textContent = input.value;
+
+        input.parentNode.replaceChild(span, input);
+    });
+    event.target.textContent = 'Editar Tarjeta';
+    event.target.removeEventListener("click", GuardarCambios);
+    event.target.addEventListener("click", EditarTarjeta);
 }
