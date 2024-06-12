@@ -37,8 +37,11 @@ function validarFormulario() {
     const fechaActual = new Date();
     const fechaMinima = new Date();
     fechaMinima.setFullYear(fechaMinima.getFullYear() - 100);
-    if (fechaNacimientoDate > fechaActual || fechaNacimientoDate < fechaMinima) {
-        alert('Por favor, ingrese una fecha de nacimiento válida.');
+    const edadMinima = new Date();
+    edadMinima.setFullYear(fechaActual.getFullYear() - 18);
+
+    if (fechaNacimientoDate > fechaActual || fechaNacimientoDate < fechaMinima || fechaNacimientoDate > edadMinima) {
+        alert('Por favor, ingrese una fecha de nacimiento válida. Debe ser mayor de 18 años.');
         return false;
     }
 
