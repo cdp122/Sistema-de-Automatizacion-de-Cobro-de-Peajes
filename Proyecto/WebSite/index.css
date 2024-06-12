@@ -401,6 +401,52 @@ form {
     font-size: 20px;
 }
 
+.Desp {
+    text-align: center;
+    align-items: center;
+    width: 200px;
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    z-index: 1000;
+    /* Asegura que se sobreponga a otros elementos */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Fondo semi-transparente */
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra para mayor visibilidad */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    display: none;
+    /* Ocultar por defecto */
+}
+
+#menu-toggle:checked~.Desp {
+    display: block;
+    /* Mostrar cuando el checkbox esté seleccionado */
+}
+
+.navDes ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navDes ul li {
+    margin: 5px 0;
+}
+
+.navDes ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.navDes ul li a:hover {
+    color: #007BFF;
+    /* Color de enlace al pasar el mouse */
+}
+
 /* Estilos responsivos */
 @media (max-width: 991px) {
 
@@ -572,7 +618,7 @@ form {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 769px) {
     .navbar {
         display: none;
     }
@@ -582,7 +628,7 @@ form {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .navbar {
         display: flex;
     }
