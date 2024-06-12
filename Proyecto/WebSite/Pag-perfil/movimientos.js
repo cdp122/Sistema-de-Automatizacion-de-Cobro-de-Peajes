@@ -36,34 +36,22 @@ function AgregarPMovimiento(movimiento) {
 
     var elemento = document.createElement('li');
 
-    var tituloID = document.createElement('strong');
-    tituloID.textContent = "ID Transacción:";
     var spanID = document.createElement('span');
     spanID.textContent = movimiento.idTransaccion;
     spanID.id = "idMov";
-    var tituloMov = document.createElement('strong');
-    tituloMov.textContent = "Tipo de Movimiento:";
     var spanMov = document.createElement('span');
     if (movimiento.tipoMovimiento == 0) spanMov.textContent = "Cobro";
     else spanMov.textContent = "Recarga";
-    var tituloValor = document.createElement('strong');
-    tituloValor.textContent = "Valor:";
     var spanValor = document.createElement('span');
     spanValor.textContent = movimiento.valor;
-    var tituloFecha = document.createElement('strong');
-    tituloFecha.textContent = "Fecha:";
     var spanFecha = document.createElement('span');
     spanFecha.textContent = JSON.stringify(movimiento.fecha).slice(1, 20).replace("T", " ");
     var button = document.createElement('button');
     button.textContent = "Solicitar Devolución";
     button.addEventListener('click', Devolucion);
-    elemento.appendChild(tituloID);
     elemento.appendChild(spanID);
-    elemento.appendChild(tituloMov);
     elemento.appendChild(spanMov);
-    elemento.appendChild(tituloValor);
     elemento.appendChild(spanValor);
-    elemento.appendChild(tituloFecha);
     elemento.appendChild(spanFecha);
     elemento.appendChild(button);
     lista.appendChild(elemento);
@@ -77,31 +65,24 @@ function AgregarMovimiento(movimiento) {
 
     var elemento = document.createElement('li');
 
-    var tituloID = document.createElement('strong');
-    tituloID.textContent = "ID Transacción:";
     var spanID = document.createElement('span');
     spanID.textContent = movimiento.idTransaccion;
-    var tituloMov = document.createElement('strong');
-    tituloMov.textContent = "Tipo de Movimiento:";
     var spanMov = document.createElement('span');
     if (movimiento.tipoMovimiento == 0) spanMov.textContent = "Cobro";
     else spanMov.textContent = "Recarga";
-    var tituloValor = document.createElement('strong');
-    tituloValor.textContent = "Valor:";
     var spanValor = document.createElement('span');
     spanValor.textContent = movimiento.valor;
-    var tituloFecha = document.createElement('strong');
-    tituloFecha.textContent = "Fecha:";
     var spanFecha = document.createElement('span');
     spanFecha.textContent = JSON.stringify(movimiento.fecha).slice(1, 20).replace("T", " ");
-    elemento.appendChild(tituloID);
+    var btn = document.createElement("button");
+    btn.textContent = "No es posible solicit"
+    btn.style.visibility = "hidden";
+
     elemento.appendChild(spanID);
-    elemento.appendChild(tituloMov);
     elemento.appendChild(spanMov);
-    elemento.appendChild(tituloValor);
     elemento.appendChild(spanValor);
-    elemento.appendChild(tituloFecha);
     elemento.appendChild(spanFecha);
+    elemento.appendChild(btn);
     lista.appendChild(elemento);
     cuadro.appendChild(lista);
 }
@@ -109,16 +90,19 @@ function AgregarMovimiento(movimiento) {
 async function Devolucion(event) {
     var caja = event.target.parentNode;
     const id = caja.querySelector('#idMov').textContent;
-    
+    const token = localStorage.getItem("token");
+    const tarjeta = localStorage.getItem("tarjeta");
+
     try {
-        const response = await fetch("/clientes/movs?tarjeta=" + codigoTelepas, {
+        const response = await fetch("/clientes/movs?id=" + id
+            + "&tarjeta=" + tarjeta, {
             method: 'DELETE',
             headers: {
                 'Authorization': token
             }
         });
         if (response.ok) {
-            movimientos = await response.json();
+            window.location.href = "./perfil.html"
         } else {
             alert(result.message);
         }

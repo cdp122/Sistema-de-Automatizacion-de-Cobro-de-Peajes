@@ -29,15 +29,15 @@ function Consultar(query) {
     });
 }
 
-async function BorrarRegistro(cedula) {
+async function BorrarRegistro(tabla, parametro, valor) {
     try {
-        await Consultar("DELETE FROM tb_clientes WHERE cedula='" + cedula + "'");
+        const query = "DELETE FROM " + tabla + " WHERE " +
+            parametro + " = '" + valor + "'";
+        await Consultar(query);
         console.log("Registro Eliminado");
-        conexion.end();
         return true;
     } catch (error) {
         console.error(error);
-        conexion.end();
         return false;
     }
 }
@@ -69,8 +69,19 @@ async function RecibirDatos(idCliente) {
 }
 //#endregion
 
-async function ModificarRegistro(registro) {
-    //por el momento no hará nada. 
+async function ModificarRegistro(tabla, nuevoParam, actual, paramTarg, target) {
+    try {
+        const query = "UPDATE " + tabla + " SET " + nuevoParam + " = " + actual +
+            " WHERE " + paramTarg + " = '" + target + "'";
+        console.log(query);
+        const registro = await Consultar(query);
+        if (registro.length === 0) return null;
+        console.log("Enviando resultado");
+        return registro;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 async function InsertarRegistro(registro) {

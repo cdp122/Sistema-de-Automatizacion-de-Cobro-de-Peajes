@@ -130,12 +130,30 @@ clientes.get('/movs', validar, async (req, res) => {
 })
 
 clientes.delete('/movs', validar, async (req, res) => {
-    console.log("Solicitando movimientos de", req.query.tarjeta)
-    const movimientos = await conexion.BorrarRegistro(
-        "tb_movimientos", "tarjetaMov", req.query.tarjeta
+    console.log("Solicitando eliminar movimientos de", req.query.id)
+
+    const tarjeta = await conexion.ConseguirRegistros(
+        "tb_tarjetas", "tarjeta", req.query.tarjeta
     )
-    console.log("Enviando Movimientos");
-    res.json(movimientos);
+
+    const movimiento = await conexion.ConseguirRegistros(
+        "tb_movimientos", "idTransaccion", req.query.id
+    )
+
+    const eliminar = await conexion.BorrarRegistro(
+        "tb_movimientos", "idTransaccion", req.query.id
+    )
+
+    const nuevoSaldo = parseFloat(tarjeta[0].saldo)
+        - parseFloat(movimiento[0].valor).toFixed(2);
+
+    await conexion.ModificarRegistro(
+        "tb_tarjetas", "saldo", nuevoSaldo,
+        "tarjeta", req.query.tarjeta
+    )
+
+    console.log("Eliminando Movimiento");
+    res.json(eliminar);
 })
 
 clientes.post('/', validar, async (req, res) => {
