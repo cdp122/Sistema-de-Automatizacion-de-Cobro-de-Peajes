@@ -10,19 +10,17 @@
 </head>
 
 <body>
-  
-    <header class="menuContainer">
-      <div class="izq">
-        
+    <header class="header">
+      <div class="menuContainer">
       <a href="../index.html" class="logo"></a>
-    </div>
-    <label class="hamburger">
-      <input type="checkbox">
-      <svg viewBox="0 0 32 32">
-        <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
-        <path class="line" d="M7 16 27 16"></path>
-      </svg>
-    </label>
+    
+    <label for="menu-toggle" class="hamburger">
+      <input type="checkbox" id="menu-toggle" />
+        <svg viewBox="0 0 32 32">
+          <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+          <path class="line" d="M7 16 27 16"></path>
+        </svg>
+      </label>
       <nav class="navbar">
         <ul>
           <li><a href="../index.html">Inicio</a></li>
@@ -32,7 +30,9 @@
           
         </ul>
       </nav>
+    </div>
     </header>
+    
     
  
   <section class="full">
@@ -42,7 +42,7 @@
           <div class="form-group">
             <label for="username"><b>Cédula de Usuario</b></label>
             <input type="text" class="username" id="username" required pattern=".{10}"
-              title="Ingrese los 10 digitos de su cédula" oninput="validateInput(this)" autofocus />
+              title="Ingrese los 10 digitos de su cédula" oninput="validateInput(this)"  />
           </div>
           <div class="form-group">
             <label for="contra"><b>Contraseña</b></label>
@@ -51,14 +51,14 @@
           </div>
           <div class="form-group">
             <button onclick="Validar()" class="btn" name="EnviarLogin">Iniciar Sesión</button>
-            <button class="btn" name="EnviarRegistro">Registrarse</button>
+            <button class="btn" name="EnviarRegistro"><a href="../Registro/Registro.html">Registrarse</a></button>
           </div>
         </form>
       </div>
     </div>
   </section>
   <script src="../LogIn/Login.js"></script>
-  <script src="decorator.js"></script>
+ <script src="decorator.js"></script>
   </div>
 </body>
 

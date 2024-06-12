@@ -2,84 +2,29 @@
 
 * {
     font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
 }
 
 body {
     background-color: #212121;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 101vh;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Asegura que los elementos se alineen al inicio */
     align-items: center;
     overflow: hidden;
 }
 
-.menuContainer {
-    background: #e4a451f1;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /*border: solid 3px #09080d;*/
-    height: 80px;
-
-}
-
 .menuContainerNight {
-    background: #061148f1;
+    background: #050e3af1;
 }
-
-.izq {
-    width: 400px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-
-}
-
-
-.menuContainer {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-.menuContainer .navbar ul li {
-    position: relative;
-    float: left;
-    text-decoration: none;
-    list-style: none;
-
-}
-
-.menuContainer .navbar ul li a {
-    font-size: 20px;
-    padding: 20px;
-    color: #000000;
-    display: block;
-    text-decoration: none;
-}
-
-.menuContainer .izq .logo {
-    width: 80px;
-    height: 80px;
-    align-items: center;
-    background: url('../Assets/Logo.png') no-repeat 50% 50%;
-    background-size: cover;
-    margin-left: 20px;
-}
-
-.menuContainer .navbar ul li a:hover {
-    color: rgb(0, 0, 0);
-}
-
 
 .navbarNight {
     color: #ffffff !important;
@@ -199,6 +144,11 @@ body {
     opacity: 0.5;
 }
 
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
 .username,
 .contraseña {
     width: 100%;
@@ -233,11 +183,21 @@ body {
     border: solid 5px #691183;
 }
 
-/* Hamburger Menu */
+/* =================================================================Rocha*/
+.header {
+    background-color: #e4a451d8;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+
+    /* Ajustar el padding del encabezado */
+}
+
+/* Menú hamburguesa */
 .hamburger {
     cursor: pointer;
-    display: none;
-
 }
 
 .hamburger input {
@@ -269,6 +229,109 @@ body {
 .hamburger input:checked+svg .line-top-bottom {
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
+}
+
+/* Menu de Navegacion */
+.menuContainer {
+    width: 100%;
+    /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    /* Ajustar el padding del menú */
+}
+
+.menuContainer .navbar.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+}
+
+.logo {
+    color: #fffdfc;
+    font-size: 25px;
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    background: url('../Assets/Logo.png') no-repeat 50% 50%;
+    background-size: cover;
+    margin-left: 20px;
+
+}
+
+.menuContainer .navbar ul li {
+    margin: 0 5px;
+    /* Ajusta el margen según tus necesidades */
+}
+
+.menuContainer .navbar ul {
+    display: flex;
+    justify-content: center;
+}
+
+.menuContainer .navbar ul li a {
+    font-size: 20px;
+    padding: 20px;
+    color: #000000;
+    display: block;
+}
+
+#menu-toggle:checked~.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 90px;
+    /* Ajusta esta posición según sea necesario */
+    background: #000000d8;
+    /* Ajusta el fondo según sea necesario */
+}
+
+#menu-toggle {
+    display: none;
+}
+
+/* Mostrar el menú de hamburguesa en dispositivos móviles y tabletas */
+@media (min-width: 320px) and (max-width: 1024px) {
+    .hamburger {
+        display: block;
+    }
+
+    .navbar {
+        display: none;
+        /* Oculta la barra de navegación por defecto */
+    }
+
+    #menu-toggle:checked~.navbar {
+        display: flex;
+        /* Muestra la barra de navegación cuando el menú de hamburguesa está activado */
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 90px;
+        /* Ajusta esta posición según sea necesario */
+        background: #e4a451d8;
+        /* Ajusta el fondo según sea necesario */
+    }
+}
+
+
+/* Ocultar el menú de hamburguesa en pantallas más grandes */
+@media (min-width: 1025px) {
+    .hamburger {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+    }
 }
 
 
@@ -328,8 +391,6 @@ body {
         width: 270px;
         height: 370px;
     }
-
-
 }
 
 /* Dispositivos móviles grandes (teléfonos grandes y pequeños tabletas) */
@@ -342,9 +403,6 @@ body {
     .form-group {
         font-size: 25px;
     }
-
-
-
 }
 
 /* Dispositivos de tabletas */
@@ -358,13 +416,10 @@ body {
         font-size: 30px;
     }
 
-
-
     .btn {
         font-size: 24px;
         height: 60px;
     }
-
 
     #password,
     #username {
@@ -382,8 +437,6 @@ body {
     .form-group {
         font-size: 40px;
     }
-
-
 }
 
 /* Portátiles grandes y pantallas de escritorio */
@@ -396,8 +449,6 @@ body {
     .form-group {
         font-size: 50px;
     }
-
-
 }
 
 @media (max-height: 700px) {
@@ -419,8 +470,6 @@ body {
     #username {
         height: 20px;
     }
-
-
 }
 
 @media (max-height: 630px) {
@@ -442,14 +491,13 @@ body {
     #username {
         height: 20px;
     }
-
-
 }
 
 @media (max-height: 550px) {
     .content {
         width: 370px;
         height: 300px;
+        margin-top: 100px;
     }
 
     .form-group {
@@ -467,11 +515,7 @@ body {
     }
 }
 
-@media (max-height: 550px) {
-    .content {
-        margin-top: 100px;
-    }
-}
+@media (max-height: 400px) {}
 
 /*
 Morado claro #8F1299
