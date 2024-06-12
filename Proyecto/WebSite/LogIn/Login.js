@@ -2,10 +2,6 @@ function validateInput(input) {
     //input.value = input.value.replace(/[^0-9]/g, '').slice(0, 11);
 }
 
-
-
-
-
 async function Validar() {
     event.preventDefault();
 
@@ -53,4 +49,3 @@ async function Validar() {
         alert("Error: " + error.message);
     }
 }
-

@@ -7,6 +7,7 @@ const { generar, validar } = require("./auth.js");
 const { stringify } = require("querystring");
 const { env } = require("process");
 var { Usuario, Cliente } = require("./clases.js");
+const { compareSync } = require("bcryptjs");
 Usuario = new Usuario();
 Cliente = new Cliente();
 
@@ -117,6 +118,24 @@ clientes.get('/', validar, async (req, res) => {
 
     console.log("Sesión autorizada a " + req.user.username);
     res.json(enviar);
+})
+
+clientes.get('/movs', validar, async (req, res) => {
+    console.log("Solicitando movimientos de", req.query.tarjeta)
+    const movimientos = await conexion.ConseguirRegistros(
+        "tb_movimientos", "tarjetaMov", req.query.tarjeta
+    )
+    console.log("Enviando Movimientos");
+    res.json(movimientos);
+})
+
+clientes.delete('/movs', validar, async (req, res) => {
+    console.log("Solicitando movimientos de", req.query.tarjeta)
+    const movimientos = await conexion.BorrarRegistro(
+        "tb_movimientos", "tarjetaMov", req.query.tarjeta
+    )
+    console.log("Enviando Movimientos");
+    res.json(movimientos);
 })
 
 clientes.post('/', validar, async (req, res) => {
