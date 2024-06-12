@@ -14,73 +14,6 @@ Cliente = new Cliente();
 const bd = express.Router();
 const clientes = express.Router();
 const error = express.Router();
-
-const login = express.Router();
-login.use(bodyParser.urlencoded({ extended: true }));
-login.use(bodyParser.json());
-//#endregion
-
-//#region Ruta '/bd'
-bd.delete('/', async (req, res) => {
-    console.log("Borrando registro", req.query.cedula);
-
-    if (!conexion) {
-        return res.status(500).json({ error: 'No hay conexión a la base de datos' });
-    }
-
-    const success = await conexion.BorrarRegistro(req.query.cedula);
-
-    if (success) res.json({ success: true });
-    else {
-        res.send('<script>alert("ERROR: No se pudo borra el registro\n' + //Probar solo alert.
-            error + '); window.location.href = "/";</script>');
-        res.status(400).send({ error: 'Error en la consulta' });
-    }
-});
-
-bd.post('/', async (req, res) => {
-    console.log("Consiguiendo registro", req.query.cedula);
-
-    if (!conexion) {
-        return res.status(500).json({ error: 'No hay conexión a la base de datos' });
-    }
-
-    const success = await conexion.LogIn(cedula);
-
-    if (success) res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/clientes.html'));
-    else {
-        alert('<script>alert("ERROR: No se pudo borra el registro\n' +
-            error + '); window.location.href = "/";</script>');
-        res.status(400).send({ error: 'Error en la consulta' });
-    }
-});
-
-bd.get('/access', async (res, req) => {
-    if (!conexion) {
-        return res.status(500).json({ error: 'No hay conexión a la base de datos' });
-    }
-
-    try {
-        const results = await conexion.Consultar('SELECT * FROM tb_clientes_prueba');
-        const Clientes = results.map(result => ({
-            nombre: result.nombres,
-            contraseña: result.contraseña,
-            cedula: result.cedula,
-            correo: result.correo,
-            placa: result.placa,
-            tarjeta: result.tarjeta
-        }));
-        req.json(Clientes);
-    } catch (error) {
-        console.error(error);
-        res.statusCode = 400;
-        res.send({ error: 'Error en la consulta' });
-    }
-    finally {
-        conexion.end();
-        console.log("Se cerró la conexión en get/bd/access")
-    }
-})
 //#endregion
 
 //#region Ruta 'clientes'
@@ -208,6 +141,10 @@ clientes.post('/movs', validar, async (req, res) => {
 //#endregion
 
 //#region Ruta 'log-in'
+const login = express.Router();
+login.use(bodyParser.urlencoded({ extended: true }));
+login.use(bodyParser.json());
+
 login.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../WebSite/Client/Login.html'));
 })
@@ -267,6 +204,35 @@ login.delete('/close', validar, (req, res) => {
 })
 //#endregion
 
+//#region Ruta register
+const register = express.Router();
+register.use(bodyParser.urlencoded({ extended: true }));
+register.use(bodyParser.json());
+
+var tarjetaID = 10000;
+register.post("/", async (req, res) => {
+    const registro = req.body;
+
+    await conexion.InsertarRegistro("tb_usuarios", ["id", "nombres",
+        "cedula", "fecha_nacimiento"], ["C" + registro.cedula, registro.nombres, registro.cedula,
+        registro.fecha])
+
+    await conexion.InsertarRegistro("tb_clientes", ["idCliente", "correo", "contraseña"],
+        ["C" + registro.cedula, registro.correo, registro.contraseña])
+
+    await conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
+        ["C" + registro.cedula, tarjetaID.toString(), 0]
+    )
+
+    await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa",
+        "modelo", "color", "tipo"], [tarjetaID.toString(), registro.placa,
+        registro.modelo, "BLANCA", registro.tipoVehiculo.toUpperCase()]);
+    tarjetaID++;
+
+    res.json("ok");
+})
+//#endregion
+
 //#region Ruta error404 
 //IMPORTANTE: SIEMPRE MANTENER AL PENULTIMO ESTA SECCIÓN
 error.get('/404', (req, res) => {
@@ -275,4 +241,4 @@ error.get('/404', (req, res) => {
 //#endregion
 
 module.exports =
-    { bd, clientes, login, error };
+    { bd, clientes, login, error, register };

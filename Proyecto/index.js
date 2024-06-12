@@ -1,7 +1,7 @@
 //#region Dependencias
 const bodyParser = require('body-parser');
 const path = require("path");
-const { bd, clientes, login, error } = require("./modules/routes");
+const { bd, clientes, login, error, register } = require("./modules/routes");
 //#endregion
 
 //#region Setup del Server !Importante
@@ -19,10 +19,12 @@ app.use('/bd', bd);
 app.use('/clientes', clientes);
 app.use('/login', login);
 app.use('/error', error);
+app.use('/register', register);
 //#endregion
 
 //#region Inicio
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'WebSite/index.html'));
@@ -36,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Pag-perfil')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Registro')));
 //#endregion
 
 //#region exportaciones

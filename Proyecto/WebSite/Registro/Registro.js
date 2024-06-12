@@ -59,5 +59,45 @@ function validarFormulario() {
 
     // Si todo es válido
     alert('Registro exitoso');
+    CrearCuenta();
     return true;
+}
+
+async function CrearCuenta() {
+    event.preventDefault();
+
+    const data = {
+        nombres: document.getElementById("nombre").value,
+        cedula: document.getElementById("cedula").value,
+        fecha: document.getElementById("fechaNacimiento").value,
+        correo: document.getElementById("email").value,
+        contraseña: document.getElementById("password").value,
+        telefono: document.getElementById("telefono").value,
+        modelo: document.getElementById("modeloVehiculo").value,
+        tipoVehiculo: document.getElementById("tipoVehiculo").value,
+        placa: document.getElementById("placa").value
+    }
+
+    console.log(data);
+
+    try {
+        response = await fetch("/register", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert("Usuario creado correctamente con el ID C" + data.cedula) //Cambiar aqui lo que quiere que haga
+            window.location.href = "../LogIn/Login.html";
+        } else {
+            const errorResult = await response.json();
+            alert(errorResult.message || "Error desconocido");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error: " + error.message);
+    }
 }
