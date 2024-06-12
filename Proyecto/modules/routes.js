@@ -120,6 +120,33 @@ clientes.get('/', validar, async (req, res) => {
     res.json(enviar);
 })
 
+clientes.post('/', validar, async (req, res) => {
+    console.log("Intentando guardar datos...");
+
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "id", req.user.username
+    )
+    const cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "idCliente", req.user.username
+    )
+    const vehiculo = await conexion.ConseguirRegistros(
+        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
+    )
+
+    const enviar = {
+        nombre: usuario[0].nombres,
+        saldo: cuenta[0].saldo,
+        cedula: usuario[0].cedula,
+        telefono: usuario[0].telefono,
+        modelo: vehiculo[0].modelo,
+        placa: vehiculo[0].placa,
+        tarjeta: cuenta[0].tarjeta,
+        correo: cuenta[0].correo
+    }
+
+    res.json(enviar);
+})
+
 clientes.get('/movs', validar, async (req, res) => {
     console.log("Solicitando movimientos de", req.query.tarjeta)
     const movimientos = await conexion.ConseguirRegistros(
@@ -156,31 +183,17 @@ clientes.delete('/movs', validar, async (req, res) => {
     res.json(eliminar);
 })
 
-clientes.post('/', validar, async (req, res) => {
-    console.log("Intentando guardar datos...");
+clientes.post('/movs', validar, async (req, res) => {
+    console.log(req.query.tarjeta, req.query.saldo, req.query.valor);
 
-    const usuario = await conexion.ConseguirRegistros(
-        "tb_usuarios", "id", req.user.username
-    )
-    const cuenta = await conexion.ConseguirRegistros(
-        "tb_clientes", "idCliente", req.user.username
-    )
-    const vehiculo = await conexion.ConseguirRegistros(
-        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
-    )
+    const id = "1234567895";
 
-    const enviar = {
-        nombre: usuario[0].nombres,
-        saldo: cuenta[0].saldo,
-        cedula: usuario[0].cedula,
-        telefono: usuario[0].telefono,
-        modelo: vehiculo[0].modelo,
-        placa: vehiculo[0].placa,
-        tarjeta: cuenta[0].tarjeta,
-        correo: cuenta[0].correo
-    }
-
-    res.json(enviar);
+    await conexion.InsertarRegistro(
+        "tb_movimientos", ["idTransaccion", "tarjetaMov",
+        "tipoMovimiento", "valor", "fecha"], [id,
+        req.query.tarjeta, 1, req.query.valor,
+        "current_timestamp()"]
+    )
 })
 //#endregion
 

@@ -77,26 +77,28 @@ async function ModificarRegistro(tabla, nuevoParam, actual, paramTarg, target) {
         const registro = await Consultar(query);
         if (registro.length === 0) return null;
         console.log("Enviando resultado");
-        return registro;
+        return true;
     } catch (error) {
         console.error(error);
-        return null;
+        return false;
     }
 }
 
-async function InsertarRegistro(registro) {
+async function InsertarRegistro(tabla, params, values) {
+    var query = "INSERT INTO " + tabla + " (";
+    if (params.length != values.length) return false;
+    params.forEach(parametro => {
+        query += "" + parametro + ", ";
+    });
+    query = query.slice(0, query.length - 2) + ") VALUES (";
+    values.forEach(valor => {
+        if (valor != "current_timestamp()") query += "'" + valor + "', ";
+    });
+    query = query.slice(0, query.length - 2) + ")";
+    console.log(query);
     try {
-        await Consultar("INSERT INTO tb_clientes " +
-            "(nombres, contraseña, cedula, correo, placa, tarjeta) VALUES (" +
-            " '" + registro.nombre + "'," +
-            " '" + registro.contraseña + "'," +
-            " '" + registro.cedula + "'," +
-            " '" + registro.correo + "'," +
-            " '" + registro.placa + "'," +
-            " '" + registro.placa + "'," +
-            " '" + parseFloat(registro.saldo) + "')"
-        );
-        console.log("IRegistro ingresado");
+        await Consultar(query);
+        console.log("Registro ingresado");
         conexion.end();
         return true;
     } catch (error) {
@@ -105,6 +107,7 @@ async function InsertarRegistro(registro) {
         return false;
     }
 }
+
 module.exports = {
     conexion, BorrarRegistro, ConseguirRegistros, LogInClient, LogInEmpleado,
     RecibirDatos, ModificarRegistro, InsertarRegistro

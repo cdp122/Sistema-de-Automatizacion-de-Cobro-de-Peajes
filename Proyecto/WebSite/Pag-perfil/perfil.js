@@ -68,16 +68,14 @@ function restaurarCampo(event) {
     }
 }
 
-function recargarSaldo(saldo) {
+async function recargarSaldo(saldo, tarjeta) {
+    console.log(tarjeta);
     let saldoActual = parseFloat(saldo.textContent.replace('$', ''));
     let nuevoSaldo = prompt("Ingrese el monto a recargar:");
     let actualizacionSaldo = parseFloat(saldoActual) + parseFloat(nuevoSaldo);
-    console.log(actualizacionSaldo);
 
     if (nuevoSaldo !== null && !isNaN(nuevoSaldo) && nuevoSaldo > 0 && actualizacionSaldo <= 99.99) {
-        //saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
-        //let saldoNuevo = saldoActual + parseFloat(nuevoSaldo);
-        //balanceElement.textContent = `$${saldoNuevo.toFixed(2)}`;
+        RecargarTarjeta(tarjeta.textContent, actualizacionSaldo.toFixed(2), parseFloat(nuevoSaldo).toFixed(2));
         saldo.textContent = `${actualizacionSaldo.toFixed(2)}`;
     }
     else if (actualizacionSaldo > 99.99) {
@@ -85,57 +83,6 @@ function recargarSaldo(saldo) {
     }
     else {
         alert("Ingrese un monto válido.");
-    }
-}
-
-async function Validar() {
-    token = localStorage.getItem('token');
-
-    try {
-        const response = await fetch("/clientes", {
-            method: 'GET',
-            headers: {
-                'Authorization': token
-            }
-        });
-        if (response.ok) {
-            const data = await response.json();
-            if (data.message) window.location.href = "../Error/PagError404.html";
-
-            document.getElementById("full-name").innerHTML = data.nombre;
-            document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo).toFixed(2);
-            document.getElementById("cedula").innerHTML = data.cedula;
-            document.getElementById("telefono").innerHTML = data.telefono;
-
-            document.getElementById("email").innerHTML = data.correo;
-
-            for (let i = 0; i < data.tarjetas.length; i++) {
-                AgregarTarjeta(data.tarjetas[i], data.vehiculos[i]);
-            }
-        } else {
-            alert(result.message);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-async function CerrarSesion() {
-    try {
-        const response = await fetch('/login/client', {
-            method: 'DELETE',
-            headers: {
-                'Authorization': token
-            }
-        });
-        if (response.ok) {
-            localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
-            window.location.href = '../LogIn/Login.html'; // Redirigir al usuario a la página de inicio de sesión
-        } else {
-            alert('Error al cerrar sesión');
-        }
-    } catch (error) {
-        console.error("Error:", error);
     }
 }
 
@@ -233,7 +180,7 @@ function AgregarTarjeta() {
     lista.appendChild(elemento4);
 
     boton2.addEventListener('click', function () {
-        recargarSaldo(spanModelo4);
+        recargarSaldo(spanModelo4, spanModelo3);
     });
 
     caja.appendChild(lista);
@@ -243,7 +190,8 @@ function AgregarTarjeta() {
     ubicacion.appendChild(caja);
 }
 
-function AgregarTarjeta(tarjeta, vehiculo) {
+function CargarTarjetas(tarjeta, vehiculo) {
+    console.log("Funca mi funcion");
     var caja = document.createElement('div');
     caja.className = 'perfil-details';
 
@@ -260,10 +208,6 @@ function AgregarTarjeta(tarjeta, vehiculo) {
     var boton3 = document.createElement('button');
     boton3.className = 'agregar';
     boton3.textContent = 'Recargar Saldo';
-
-    boton3.addEventListener('click', function () {
-        recargarSaldo(spanModelo4);
-    });
 
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
@@ -318,10 +262,13 @@ function AgregarTarjeta(tarjeta, vehiculo) {
     caja.appendChild(boton3);
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
+
+    boton3.addEventListener('click', function () {
+        recargarSaldo(spanModelo4, spanModelo3);
+    });
 }
 
 function EditarTarjeta(event) {
-
     var caja = event.target.parentNode;
 
     var spans = caja.querySelectorAll('span');
@@ -360,8 +307,6 @@ function GuardarCambios(event) {
     event.target.addEventListener("click", EditarTarjeta);
 }
 
-function Recargar() {
-}
 
 async function ListarMovimientos(event) {
     var caja = event.target.parentNode;
@@ -370,3 +315,82 @@ async function ListarMovimientos(event) {
     localStorage.setItem("tarjeta", codigoTelepas);
     window.location.href = "./movimientos.html";
 }
+
+//#region Backend
+async function Validar() {
+    token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch("/clientes", {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.message) window.location.href = "../Error/PagError404.html";
+
+            document.getElementById("full-name").innerHTML = data.nombre;
+            document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo).toFixed(2);
+            document.getElementById("cedula").innerHTML = data.cedula;
+            document.getElementById("telefono").innerHTML = data.telefono;
+
+            document.getElementById("email").innerHTML = data.correo;
+
+            for (let i = 0; i < data.tarjetas.length; i++) {
+                CargarTarjetas(data.tarjetas[i], data.vehiculos[i]);
+            }
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {
+    const token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch("/clientes/movs?tarjeta=" + tarjeta +
+            "&saldo=" + nuevoSaldo + "&valor=" + valor, {
+            method: 'POST',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+
+            for (let i = 0; i < data.tarjetas.length; i++) {
+                CargarTarjetas(data.tarjetas[i], data.vehiculos[i]);
+            }
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+}
+
+async function CerrarSesion() {
+    try {
+        const response = await fetch('/login/client', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
+            window.location.href = '../LogIn/Login.html'; // Redirigir al usuario a la página de inicio de sesión
+        } else {
+            alert('Error al cerrar sesión');
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+//#endregion
