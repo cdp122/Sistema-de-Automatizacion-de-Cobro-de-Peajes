@@ -163,6 +163,9 @@ body {
     display: flex;
     justify-content: space-between;
 }
+#tarjetas {
+    padding: 20px;
+}
 
 /* Etiquetas fuertes para los detalles del perfil */
 .perfil-details li strong {
@@ -186,24 +189,33 @@ body {
 
 /* Boton para Agregar Tarjetas*/
 .agregar {
-    width: 100px;
+    display: block;
+    width: 20%;
     height: 40px;
+    border: none;
     border-radius: 10px;
+    cursor: pointer;
     background-color:  #1e88e5;
     color: white;
     position: relative;
-    left: 700px;
+    left: 80%;
+    margin-top: 20px;
 }
 
-/* Boton para Agregar Tarjetas*/
+/* Boton para Editar Tarjetas*/
 .editar {
-    width: 100px;
+    display: block;
+    width: 20%;
     height: 40px;
+    border: none;
     border-radius: 10px;
+    cursor: pointer;
     background-color:  #1e88e5;
     color: white;
     position: relative;
-    left: 700px;
+    left: 80%;
+    margin-top: 20px;
+    
 }
 
 /* Botón para guardar cambios */
