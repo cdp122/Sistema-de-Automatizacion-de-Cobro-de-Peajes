@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
 }
 
 header {
@@ -56,4 +56,24 @@ button {
 
 button:hover {
     background-color: #d0b010;
+}
+
+.horizontal-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.izq {
+    flex: 1;
+}
+
+.check {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.check input[type="checkbox"] {
+    margin-left: auto;
 }

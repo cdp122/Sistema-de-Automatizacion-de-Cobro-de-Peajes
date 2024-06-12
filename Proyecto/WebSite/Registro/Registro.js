@@ -5,13 +5,15 @@ function validarFormulario() {
     const fechaNacimiento = form.fechaNacimiento.value;
     const email = form.email.value;
     const password = form.password.value;
+    const confirmacionPasswd = form.confirmacionPasswd.value;
     const telefono = form.telefono.value;
     const modeloVehiculo = form.modeloVehiculo.value;
+    const color = form.color.value;
     const tipoVehiculo = form.tipoVehiculo.value;
     const placa = form.placa.value;
 
     // Validar que los campos no estén vacíos
-    if (!nombre || !cedula || !fechaNacimiento || !email || !password || !telefono || !modeloVehiculo || !tipoVehiculo || !placa) {
+    if (!nombre || !cedula || !fechaNacimiento || !email || !password || !confirmacionPasswd || !telefono || !modeloVehiculo || !color || !tipoVehiculo || !placa) {
         alert('Todos los campos son obligatorios.');
         return false;
     }
@@ -30,6 +32,16 @@ function validarFormulario() {
         return false;
     }
 
+    // Validar fecha de nacimiento
+    const fechaNacimientoDate = new Date(fechaNacimiento);
+    const fechaActual = new Date();
+    const fechaMinima = new Date();
+    fechaMinima.setFullYear(fechaMinima.getFullYear() - 100);
+    if (fechaNacimientoDate > fechaActual || fechaNacimientoDate < fechaMinima) {
+        alert('Por favor, ingrese una fecha de nacimiento válida.');
+        return false;
+    }
+
     // Validar correo electrónico
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     if (!emailRegex.test(email)) {
@@ -40,6 +52,12 @@ function validarFormulario() {
     // Validar contraseña
     if (password.length < 8) {
         alert('La contraseña debe tener al menos 8 caracteres.');
+        return false;
+    }
+
+    // Confirmar contraseña
+    if (password !== confirmacionPasswd) {
+        alert('Las contraseñas no coinciden.');
         return false;
     }
 
@@ -59,8 +77,19 @@ function validarFormulario() {
 
     // Si todo es válido
     alert('Registro exitoso');
-    CrearCuenta();
     return true;
+}
+
+function mostrarOcultarContraseña() {
+    const password = document.getElementById("password");
+    const confirmacionPasswd = document.getElementById("confirmacionPasswd");
+    if (password.type === "password" || confirmacionPasswd.type === "password") {
+        password.type = "text";
+        confirmacionPasswd.type = "text";
+    } else {
+        password.type = "password";
+        confirmacionPasswd.type = "password";
+    }
 }
 
 async function CrearCuenta() {
