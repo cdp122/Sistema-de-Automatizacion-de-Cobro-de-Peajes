@@ -28,7 +28,7 @@ body {
 }
 
 .menuContainerNight {
-    background: #0b1d77f1;
+    background: #061148f1;
 }
 
 .izq {
@@ -80,8 +80,9 @@ body {
     color: rgb(0, 0, 0);
 }
 
-.navbarNight a {
-    color: #ffffff;
+
+.navbarNight {
+    color: #ffffff !important;
 }
 
 .full {

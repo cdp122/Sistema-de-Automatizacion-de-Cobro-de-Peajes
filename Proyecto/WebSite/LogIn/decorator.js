@@ -2,7 +2,6 @@ class ElementDecorator {
     constructor(element) {
         this.element = element;
     }
-
     applyStyle() {
         throw new Error("Method 'applyStyle()' must be implemented.");
     }
@@ -51,12 +50,11 @@ class NavDecorator extends ElementDecorator {
         const hour = new Date().getHours();
         if (hour < 6 || hour >= 18) {
             this.element.classList.add('menuContainerNight');
-            const links = this.element.querySelectorAll('nav a');
+            const links = this.element.querySelectorAll('.navbar ul li a');
             links.forEach(link => link.classList.add('navbarNight'));
         }
     }
 }
-
 
 function applyDecorators() {
     const fullSection = document.querySelector('.full');
@@ -92,4 +90,6 @@ function applyDecorators() {
 }
 
 document.addEventListener('DOMContentLoaded', applyDecorators);
+
+
 
