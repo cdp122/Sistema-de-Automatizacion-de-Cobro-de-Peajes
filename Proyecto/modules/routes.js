@@ -183,10 +183,13 @@ clientes.delete('/movs', validar, async (req, res) => {
     res.json(eliminar);
 })
 
+var nums = 1000000000;
+
 clientes.post('/movs', validar, async (req, res) => {
     console.log(req.query.tarjeta, req.query.saldo, req.query.valor);
 
-    const id = "1234567895";
+    nums = nums + 1;
+    const id = nums;
 
     await conexion.InsertarRegistro(
         "tb_movimientos", ["idTransaccion", "tarjetaMov",
@@ -194,6 +197,13 @@ clientes.post('/movs', validar, async (req, res) => {
         req.query.tarjeta, 1, req.query.valor,
         "current_timestamp()"]
     )
+
+    await conexion.ModificarRegistro(
+        "tb_tarjetas", "saldo", req.query.saldo, "tarjeta", req.query.tarjeta
+    )
+
+    console.log("Recarga realizada exitosamente");
+    res.json("ok");
 })
 //#endregion
 

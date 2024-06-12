@@ -361,11 +361,7 @@ async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {
             }
         });
         if (response.ok) {
-            const data = await response.json();
-
-            for (let i = 0; i < data.tarjetas.length; i++) {
-                CargarTarjetas(data.tarjetas[i], data.vehiculos[i]);
-            }
+            alert("Recarga exitosa");
         } else {
             alert(result.message);
         }
@@ -377,7 +373,7 @@ async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {
 
 async function CerrarSesion() {
     try {
-        const response = await fetch('/login/client', {
+        const response = await fetch('/login/close', {
             method: 'DELETE',
             headers: {
                 'Authorization': token

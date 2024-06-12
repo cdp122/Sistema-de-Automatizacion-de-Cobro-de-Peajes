@@ -90,20 +90,21 @@ async function InsertarRegistro(tabla, params, values) {
     params.forEach(parametro => {
         query += "" + parametro + ", ";
     });
-    query = query.slice(0, query.length - 2) + ") VALUES (";
+    query = query.slice(0, - 2) + ") VALUES (";
     values.forEach(valor => {
-        if (valor != "current_timestamp()") query += "'" + valor + "', ";
+        if (valor !== "current_timestamp()") {
+            query += "'" + valor + "', ";
+        } else {
+            query += "current_timestamp(), ";
+        }
     });
-    query = query.slice(0, query.length - 2) + ")";
-    console.log(query);
+    query = query.slice(0, - 2) + ")";
     try {
         await Consultar(query);
         console.log("Registro ingresado");
-        conexion.end();
         return true;
     } catch (error) {
         console.error(error);
-        conexion.end();
         return false;
     }
 }
