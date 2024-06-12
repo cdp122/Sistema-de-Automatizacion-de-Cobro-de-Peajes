@@ -118,6 +118,7 @@ async function ActualizarDatos(validarDatos) {
     return false;
 }
 
+/*
 function AgregarTarjeta() {
     var caja = document.createElement('div');
     caja.className = 'cajaTarjeta';
@@ -146,7 +147,7 @@ function AgregarTarjeta() {
 
     var elemento = document.createElement('li');
     var letra = document.createElement('strong');
-    letra.textContent = 'Modelo de auto';
+    letra.textContent = 'Modelo de Vehiculo';
     var spanModelo = document.createElement('span');
     spanModelo.id = 'modelo-carro';
     spanModelo.textContent = 'Modelo de auto';
@@ -262,17 +263,96 @@ function CargarTarjetas(tarjeta, vehiculo) {
     elemento4.appendChild(spanModelo4);
     lista.appendChild(elemento4);
 
+    boton3.addEventListener('click', function () {
+        recargarSaldo(spanModelo4, spanModelo3);
+    });
+
     caja.appendChild(lista);
     caja.appendChild(boton);
     caja.appendChild(boton2);
     caja.appendChild(boton3);
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
+}
+*/
 
-    boton3.addEventListener('click', function () {
+function manejarTarjetas(tarjeta, vehiculo) {
+    var caja = document.createElement('div');
+    caja.className = 'cajaTarjeta';
+
+    var boton = document.createElement('button');
+    boton.className = 'editar';
+    boton.textContent = 'Editar Tarjeta';
+    boton.addEventListener("click", EditarTarjeta);
+
+    var boton2 = document.createElement('button');
+    boton2.className = 'agregar';
+    boton2.textContent = 'Recargar Saldo';
+
+    var boton3 = document.createElement('button');
+    boton3.className = 'movi';
+    boton3.textContent = 'Movimientos';
+    boton3.addEventListener("click", ListarMovimientos);
+
+    var titulo = document.createElement('h2');
+    titulo.textContent = 'Tarjeta';
+
+    caja.appendChild(titulo);
+
+    var lista = document.createElement('ul');
+
+    var elemento = document.createElement('li');
+    var letra = document.createElement('strong');
+    letra.textContent = 'Modelo de Vehículo';
+    var spanModelo = document.createElement('span');
+    spanModelo.id = 'modelo-carro';
+    spanModelo.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Modelo de auto';
+    elemento.appendChild(letra);
+    elemento.appendChild(spanModelo);
+    lista.appendChild(elemento);
+
+    var elemento2 = document.createElement('li');
+    var letra2 = document.createElement('strong');
+    letra2.textContent = 'Placa:';
+    var spanModelo2 = document.createElement('span');
+    spanModelo2.id = 'placa';
+    spanModelo2.textContent = vehiculo && vehiculo.placa ? vehiculo.placa : 'ABC-123';
+    elemento2.appendChild(letra2);
+    elemento2.appendChild(spanModelo2);
+    lista.appendChild(elemento2);
+
+    var elemento3 = document.createElement('li');
+    var letra3 = document.createElement('strong');
+    letra3.textContent = 'Tarjeta Telepass';
+    var spanModelo3 = document.createElement('span');
+    spanModelo3.id = 'codigo-telepass';
+    spanModelo3.textContent = tarjeta && tarjeta.id ? tarjeta.id : '1234567890';
+    elemento3.appendChild(letra3);
+    elemento3.appendChild(spanModelo3);
+    lista.appendChild(elemento3);
+
+    var elemento4 = document.createElement('li');
+    var letra4 = document.createElement('strong');
+    letra4.textContent = 'Saldo';
+    var spanModelo4 = document.createElement('span');
+    spanModelo4.id = 'saldo';
+    spanModelo4.textContent = tarjeta && tarjeta.saldo ? `$${parseFloat(tarjeta.saldo)}` : '10';
+    elemento4.appendChild(letra4);
+    elemento4.appendChild(spanModelo4);
+    lista.appendChild(elemento4);
+
+    boton2.addEventListener('click', function () {
         recargarSaldo(spanModelo4, spanModelo3);
     });
+
+    caja.appendChild(lista);
+    caja.appendChild(boton);
+    caja.appendChild(boton2);
+    caja.appendChild(boton3);
+    var ubicacion = document.getElementById('tarjetas');
+    ubicacion.appendChild(caja);
 }
+
 
 function validarTarjeta(input) {
     var valor = input.value.trim();
@@ -291,14 +371,14 @@ function validarTarjeta(input) {
             }
             break;
         case 'placa':
-            if (!/^[a-zA-Z0-9]{6}$/.test(valor)) {
-                input.dataset.error = "La placa debe tener exactamente 6 digitos.";
+            if (!/^[a-zA-Z0-9]{6,7}$/.test(valor)) {
+                input.dataset.error = "La placa debe tener exactamente 6 0 7 digitos.";
                 return false;
             }
             break;
         case 'codigo-telepass':
-            if (!/^\d{10}$/.test(valor)) {
-                input.dataset.error = "El código Telepass debe tener exactamente 10 dígitos.";
+            if (!/^\d{5}$/.test(valor)) {
+                input.dataset.error = "El código Telepass debe tener exactamente 5 dígitos.";
                 return false;
             }
             break;
