@@ -118,164 +118,6 @@ async function ActualizarDatos(validarDatos) {
     return false;
 }
 
-/*
-function AgregarTarjeta() {
-    var caja = document.createElement('div');
-    caja.className = 'cajaTarjeta';
-
-    var boton = document.createElement('button');
-    boton.className = 'editar';
-    boton.textContent = 'Editar Tarjeta';
-    boton.addEventListener("click", EditarTarjeta);
-
-
-    var boton2 = document.createElement('button');
-    boton2.className = 'agregar';
-    boton2.textContent = 'Recargar Saldo';
-
-    var boton3 = document.createElement('button');
-    boton3.className = 'movi';
-    boton3.textContent = 'Movimientos';
-    boton3.addEventListener("click", ListarMovimientos);
-
-    var titulo = document.createElement('h2');
-    titulo.textContent = 'Tarjeta';
-
-    caja.appendChild(titulo);
-
-    var lista = document.createElement('ul');
-
-    var elemento = document.createElement('li');
-    var letra = document.createElement('strong');
-    letra.textContent = 'Modelo de Vehiculo';
-    var spanModelo = document.createElement('span');
-    spanModelo.id = 'modelo-carro';
-    spanModelo.textContent = 'Modelo de auto';
-    elemento.appendChild(letra);
-    elemento.appendChild(spanModelo);
-    lista.appendChild(elemento);
-
-    var elemento2 = document.createElement('li');
-    var letra2 = document.createElement('strong');
-    letra2.textContent = 'Placa:';
-    var spanModelo2 = document.createElement('span');
-    spanModelo2.id = 'placa';
-    spanModelo2.textContent = 'ABC-123';
-    elemento2.appendChild(letra2);
-    elemento2.appendChild(spanModelo2);
-    lista.appendChild(elemento2);
-
-    var elemento3 = document.createElement('li');
-    var letra3 = document.createElement('strong');
-    letra3.textContent = 'Tarjeta Telepass';
-    var spanModelo3 = document.createElement('span');
-    spanModelo3.id = 'codigo-telepass';
-    spanModelo3.textContent = '1234567890';
-    elemento3.appendChild(letra3);
-    elemento3.appendChild(spanModelo3);
-    lista.appendChild(elemento3);
-
-    var elemento4 = document.createElement('li');
-    var letra4 = document.createElement('strong');
-    letra4.textContent = 'Saldo';
-    var spanModelo4 = document.createElement('span');
-    spanModelo4.id = 'saldo';
-    spanModelo4.textContent = '10';
-    elemento4.appendChild(letra4);
-    elemento4.appendChild(spanModelo4);
-    lista.appendChild(elemento4);
-
-    boton2.addEventListener('click', function () {
-        recargarSaldo(spanModelo4, spanModelo3);
-    });
-
-    caja.appendChild(lista);
-    caja.appendChild(boton);
-    caja.appendChild(boton2);
-    caja.appendChild(boton3);
-    var ubicacion = document.getElementById('tarjetas');
-    ubicacion.appendChild(caja);
-}
-
-function CargarTarjetas(tarjeta, vehiculo) {
-    console.log("Funca mi funcion");
-    var caja = document.createElement('div');
-    caja.className = 'cajaTarjeta';
-
-    var boton = document.createElement('button');
-    boton.className = 'editar';
-    boton.textContent = 'Editar Tarjeta';
-    boton.addEventListener("click", EditarTarjeta);
-
-    var boton2 = document.createElement('button');
-    boton2.className = 'movi';
-    boton2.textContent = 'Movimientos';
-    boton2.addEventListener("click", ListarMovimientos);
-
-    var boton3 = document.createElement('button');
-    boton3.className = 'agregar';
-    boton3.textContent = 'Recargar Saldo';
-
-    var titulo = document.createElement('h2');
-    titulo.textContent = 'Tarjeta';
-
-    caja.appendChild(titulo);
-
-    var lista = document.createElement('ul');
-
-    var elemento = document.createElement('li');
-    var letra = document.createElement('strong');
-    letra.textContent = "Modelo de Vehículo";
-    var spanModelo = document.createElement('span');
-    spanModelo.id = 'modelo-carro';
-    spanModelo.textContent = vehiculo.modelo;
-    elemento.appendChild(letra);
-    elemento.appendChild(spanModelo);
-    lista.appendChild(elemento);
-
-    var elemento2 = document.createElement('li');
-    var letra2 = document.createElement('strong');
-    letra2.textContent = 'Placa:';
-    var spanModelo2 = document.createElement('span');
-    spanModelo2.id = 'placa';
-    spanModelo2.textContent = vehiculo.placa;
-    elemento2.appendChild(letra2);
-    elemento2.appendChild(spanModelo2);
-    lista.appendChild(elemento2);
-
-    var elemento3 = document.createElement('li');
-    var letra3 = document.createElement('strong');
-    letra3.textContent = 'Tarjeta Telepass';
-    var spanModelo3 = document.createElement('span');
-    spanModelo3.id = 'codigo-telepass';
-    spanModelo3.textContent = tarjeta.id;
-    elemento3.appendChild(letra3);
-    elemento3.appendChild(spanModelo3);
-    lista.appendChild(elemento3);
-
-    var elemento4 = document.createElement('li');
-    var letra4 = document.createElement('strong');
-    letra4.textContent = 'Saldo';
-    var spanModelo4 = document.createElement('span');
-    spanModelo4.id = 'saldo';
-    spanModelo4.textContent = "$" + parseFloat(tarjeta.saldo);
-    elemento4.appendChild(letra4);
-    elemento4.appendChild(spanModelo4);
-    lista.appendChild(elemento4);
-
-    boton3.addEventListener('click', function () {
-        recargarSaldo(spanModelo4, spanModelo3);
-    });
-
-    caja.appendChild(lista);
-    caja.appendChild(boton);
-    caja.appendChild(boton2);
-    caja.appendChild(boton3);
-    var ubicacion = document.getElementById('tarjetas');
-    ubicacion.appendChild(caja);
-}
-*/
-
 function manejarTarjetas(tarjeta, vehiculo) {
     var caja = document.createElement('div');
     caja.className = 'cajaTarjeta';
@@ -449,10 +291,7 @@ function GuardarCambios(event) {
     else {
         window.alert("Corrije los campos en rojo");
     }
-
-
 }
-
 
 async function ListarMovimientos(event) {
     var caja = event.target.parentNode;
@@ -485,7 +324,7 @@ async function Validar() {
             document.getElementById("email").innerHTML = data.correo;
 
             for (let i = 0; i < data.tarjetas.length; i++) {
-                CargarTarjetas(data.tarjetas[i], data.vehiculos[i]);
+                manejarTarjetas(data.tarjetas[i], data.vehiculos[i]);
             }
         } else {
             alert(result.message);
@@ -526,8 +365,8 @@ async function CerrarSesion() {
             }
         });
         if (response.ok) {
-            localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
-            window.location.href = '../LogIn/Login.html'; // Redirigir al usuario a la página de inicio de sesión
+            localStorage.removeItem('token');
+            window.location.href = '../LogIn/Login.html';
         } else {
             alert('Error al cerrar sesión');
         }
