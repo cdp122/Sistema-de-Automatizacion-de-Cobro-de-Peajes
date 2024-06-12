@@ -257,6 +257,14 @@ function AgregarTarjeta(tarjeta, vehiculo) {
     boton2.textContent = 'Movimientos';
     boton2.addEventListener("click", ListarMovimientos);
 
+    var boton3 = document.createElement('button');
+    boton3.className = 'agregar';
+    boton3.textContent = 'Recargar Saldo';
+
+    boton3.addEventListener('click', function () {
+        recargarSaldo(spanModelo4);
+    });
+
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
 
@@ -307,6 +315,7 @@ function AgregarTarjeta(tarjeta, vehiculo) {
     caja.appendChild(lista);
     caja.appendChild(boton);
     caja.appendChild(boton2);
+    caja.appendChild(boton3);
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
 }
