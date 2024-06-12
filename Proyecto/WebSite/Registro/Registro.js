@@ -1,7 +1,8 @@
 function validarFormulario() {
     const form = document.getElementById('registroForm');
     const nombre = form.nombre.value;
-    const apellido = form.apellido.value;
+    const cedula = form.cedula.value;
+    const fechaNacimiento = form.fechaNacimiento.value;
     const email = form.email.value;
     const password = form.password.value;
     const telefono = form.telefono.value;
@@ -10,15 +11,22 @@ function validarFormulario() {
     const placa = form.placa.value;
 
     // Validar que los campos no estén vacíos
-    if (!nombre || !apellido || !email || !password || !telefono || !modeloVehiculo || !tipoVehiculo || !placa) {
+    if (!nombre || !cedula || !fechaNacimiento || !email || !password || !telefono || !modeloVehiculo || !tipoVehiculo || !placa) {
         alert('Todos los campos son obligatorios.');
         return false;
     }
 
-    // Validar nombre y apellido
-    const nombreApellidoRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,}$/;
-    if (!nombreApellidoRegex.test(nombre) || !nombreApellidoRegex.test(apellido)) {
-        alert('Nombre y Apellido deben contener solo letras y espacios, mínimo 2 caracteres.');
+    // Validar nombre
+    const nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,50}$/;
+    if (!nombreRegex.test(nombre)) {
+        alert('Nombre y Apellidos deben contener solo letras y espacios, máximo 50 caracteres.');
+        return false;
+    }
+
+    // Validar cédula
+    const cedulaRegex = /^\d{10}$/;
+    if (!cedulaRegex.test(cedula)) {
+        alert('Por favor, ingrese una cédula válida (10 dígitos numéricos).');
         return false;
     }
 

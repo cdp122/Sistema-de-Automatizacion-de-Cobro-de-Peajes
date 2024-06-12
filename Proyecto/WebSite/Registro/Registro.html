@@ -17,13 +17,18 @@
   <section class="form-container">
     <form id="registroForm" onsubmit="return validarFormulario()">
       <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,}" title="Solo letras y espacios, mínimo 2 caracteres" required>
+        <label for="nombre">Nombres y Apellidos:</label>
+        <input type="text" id="nombre" name="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,50}" title="Solo letras y espacios, hasta 50 caracteres" required>
       </div>
 
       <div class="form-group">
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,}" title="Solo letras y espacios, mínimo 2 caracteres" required>
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" pattern="\d{10}" title="Cédula válida (10 dígitos numéricos)" required>
+      </div>
+
+      <div class="form-group">
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
       </div>
 
       <div class="form-group">
