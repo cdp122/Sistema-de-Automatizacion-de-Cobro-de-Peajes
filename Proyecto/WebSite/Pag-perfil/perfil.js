@@ -68,17 +68,17 @@ function restaurarCampo(event) {
     }
 }
 
-function recargarSaldo() {
-    let balanceElement = document.getElementById("balance-amount");
-    let saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
+function recargarSaldo(saldo) {
+    let saldoActual = parseFloat(saldo.textContent.replace('$', ''));
     let nuevoSaldo = prompt("Ingrese el monto a recargar:");
     let actualizacionSaldo = parseFloat(saldoActual) + parseFloat(nuevoSaldo);
     console.log(actualizacionSaldo);
 
     if (nuevoSaldo !== null && !isNaN(nuevoSaldo) && nuevoSaldo > 0 && actualizacionSaldo <= 99.99) {
-        saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
-        let saldoNuevo = saldoActual + parseFloat(nuevoSaldo);
-        balanceElement.textContent = `$${saldoNuevo.toFixed(2)}`;
+        //saldoActual = parseFloat(balanceElement.textContent.replace('$', ''));
+        //let saldoNuevo = saldoActual + parseFloat(nuevoSaldo);
+        //balanceElement.textContent = `$${saldoNuevo.toFixed(2)}`;
+        saldo.textContent = `${actualizacionSaldo.toFixed(2)}`;
     }
     else if (actualizacionSaldo > 99.99) {
         alert("No se permite exceder la cantidad de Saldo de 99.99$");
@@ -106,7 +106,7 @@ async function Validar() {
             document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo);
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
-            
+
             document.getElementById("email").innerHTML = data.correo;
         } else {
             alert(result.message);
@@ -167,21 +167,20 @@ async function ActualizarDatos(validarDatos) {
     return false;
 }
 
-function AgregarTarjeta(){
+function AgregarTarjeta() {
     var caja = document.createElement('div');
-    caja.className ='perfil-details';
+    caja.className = 'perfil-details';
 
     var boton = document.createElement('button');
-    boton.className ='editar';
+    boton.className = 'editar';
     boton.textContent = 'Editar Tarjeta';
-    boton.addEventListener("click", EditarTarjeta);   
-    
+    boton.addEventListener("click", EditarTarjeta);
+
 
     var boton2 = document.createElement('button');
-    boton2.className ='agregar';
-    boton2.textContent = 'Movimientos';
-    boton2.addEventListener("click", ListarMovimientos);  
-    
+    boton2.className = 'agregar';
+    boton2.textContent = 'Recargar Saldo';
+
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
 
@@ -229,8 +228,13 @@ function AgregarTarjeta(){
     elemento4.appendChild(spanModelo4);
     lista.appendChild(elemento4);
 
+    boton2.addEventListener('click',function() {
+        recargarSaldo(spanModelo4);
+    });
+
     caja.appendChild(lista);
     caja.appendChild(boton);
+    caja.appendChild(boton2);
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
 }
@@ -242,13 +246,15 @@ function EditarTarjeta(event) {
 
     var spans = caja.querySelectorAll('span');
 
-    spans.forEach(function(span) {
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.value = span.textContent;
-        input.id = span.id;
+    spans.forEach(function (span) {
+        if (span.id !== 'saldo') {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.textContent;
+            input.id = span.id;
+            span.parentNode.replaceChild(input, span);
+        }
 
-        span.parentNode.replaceChild(input, span);
     });
 
     event.target.textContent = 'Guardar Cambios';
@@ -257,12 +263,12 @@ function EditarTarjeta(event) {
 }
 
 function GuardarCambios(event) {
-    
+
     var caja = event.target.parentNode;
 
     var inputs = caja.querySelectorAll('input');
 
-    inputs.forEach(function(input) {
+    inputs.forEach(function (input) {
         var span = document.createElement('span');
         span.id = input.id;
         span.textContent = input.value;
@@ -274,7 +280,7 @@ function GuardarCambios(event) {
     event.target.addEventListener("click", EditarTarjeta);
 }
 
-function ListarMovimientos(){
-    
+function Recargar() {
+
 
 }
