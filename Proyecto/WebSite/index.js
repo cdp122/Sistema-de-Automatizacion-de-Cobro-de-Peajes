@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const navbar = document.querySelector('.navbar');
 
     menuToggle.addEventListener('change', function() {
-      if (menuToggle.checked) {
-        navbar.classList.add('mostrar-menu');
-      } else {
-        navbar.classList.remove('mostrar-menu');
-      }
+        if (menuToggle.checked) {
+            navbar.classList.add('mostrar-menu');
+        } else {
+            navbar.classList.remove('mostrar-menu');
+        }
     });
-  });
+});
