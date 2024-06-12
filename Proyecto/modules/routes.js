@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const { generar, validar } = require("./auth.js");
 const { stringify } = require("querystring");
 const { env } = require("process");
+var { Usuario, Cliente } = require("./clases.js");
+Usuario = new Usuario();
+Cliente = new Cliente();
 
 const bd = express.Router();
 const clientes = express.Router();
@@ -80,75 +83,67 @@ bd.get('/access', async (res, req) => {
 //#endregion
 
 //#region Ruta 'clientes'
-clientes.get('/', async (req, res) => {
-    const conexion = bdd.crearConexion(uName, uPass);
-    if (!conexion) {
-        return res.status(500).json({ error: 'No hay conexión a la base de datos' });
+clientes.get('/', validar, async (req, res) => {
+    console.log("Intentando iniciar sesión...");
+
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "id", req.user.username
+    )
+    const cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "idCliente", req.user.username
+    )
+    const tarjetas = await conexion.ConseguirRegistros(
+        "tb_tarjetas", "idCliente", req.user.username
+    )
+
+    Cliente.Crear(usuario, cuenta, tarjetas);
+
+    for (const tarjeta of Cliente.tarjetas) {
+        const vehiculos = await conexion.ConseguirRegistros(
+            "tb_vehiculos", "tarjetaVeh", tarjeta.id
+        );
+        Cliente.AgregarVehiculo(vehiculos[0]);
     }
 
-    try {
-        const results = await bdd.consultar(conexion,
-            "SELECT * FROM tb_clientes_prueba " +
-            "WHERE cedula='" + cedula + "'");
-        const Clientes = results.map(result => ({
-            nombre: result.nombres,
-            contraseña: result.contraseña,
-            cedula: result.cedula,
-            correo: result.correo,
-            placa: result.placa,
-            tarjeta: result.tarjeta
-        }));
-        console.log("datos recibidos: " + Clientes);
-        res.json(Clientes);
-    } catch (error) {
-        console.error(error);
-        res.statusCode(400).send({ error: 'Error en la consulta' });
-    }
-    finally {
-        conexion.end();
-        console.log("Se cerró la conexión en get/bd/access")
-    }
-});
-
-clientes.post('/', async (req, res) => {
-    const registro = {
-        nombre: decodeURIComponent(req.query.nombre),
-        cedula: decodeURIComponent(req.query.cedula),
-        contraseña: decodeURIComponent(req.query.contraseña),
-        correo: decodeURIComponent(req.query.correo),
-        placa: decodeURIComponent(req.query.placa),
-        tarjeta: decodeURIComponent(req.query.tarjeta),
-        current: decodeURIComponent(req.query.current)
+    const enviar = {
+        nombre: Cliente.nombres,
+        saldo: Cliente.saldoTotal,
+        cedula: Cliente.cedula,
+        telefono: Cliente.telefono,
+        correo: Cliente.correo,
+        tarjetas: Cliente.tarjetas,
+        vehiculos: Cliente.vehiculos
     }
 
-    const conexion = bdd.crearConexion(uName, uPass);
-    if (!conexion) {
-        return res.status(500).json({ error: 'No hay conexión a la base de datos' });
+    console.log("Sesión autorizada a " + req.user.username);
+    res.json(enviar);
+})
+
+clientes.post('/', validar, async (req, res) => {
+    console.log("Intentando guardar datos...");
+
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "id", req.user.username
+    )
+    const cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "idCliente", req.user.username
+    )
+    const vehiculo = await conexion.ConseguirRegistros(
+        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
+    )
+
+    const enviar = {
+        nombre: usuario[0].nombres,
+        saldo: cuenta[0].saldo,
+        cedula: usuario[0].cedula,
+        telefono: usuario[0].telefono,
+        modelo: vehiculo[0].modelo,
+        placa: vehiculo[0].placa,
+        tarjeta: cuenta[0].tarjeta,
+        correo: cuenta[0].correo
     }
 
-
-    if (registro.current != 'undefined') {
-        const success = await conexion.ModificarRegistro(registro);
-
-        if (success) res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/bdd.html'));
-        else {
-            res.send('<script>alert("ERROR: No se pudo modificar el registro\n' +
-                error + '); window.location.href = "/";</script>');
-            res.status(400).send({ error: 'Error en la consulta' });
-        }
-        console.log("Se cerró la conexión en clientes -> post")
-    }
-    else {
-        const success = await conexion.ModificarRegistro(registro);
-
-        if (success) res.sendFile(path.resolve(__dirname, 'WebSite/BDDPrueba/bdd.html'));
-        else {
-            res.send('<script>alert("ERROR: No se pudo modificar el registro\n' +
-                error + '); window.location.href = "/";</script>');
-            res.status(400).send({ error: 'Error en la consulta' });
-        }
-        console.log("Se cerró la conexión en clientes -> post")
-    }
+    res.json(enviar);
 })
 //#endregion
 
@@ -206,62 +201,7 @@ login.get('/authemployee', async (req, res) => {
     }
 })
 
-login.get('/client', validar, async (req, res) => {
-    console.log("Intentando iniciar sesión...");
-
-    const usuario = await conexion.ConseguirRegistros(
-        "tb_usuarios", "id", req.user.username
-    )
-    const cuenta = await conexion.ConseguirRegistros(
-        "tb_clientes", "idCliente", req.user.username
-    )
-    const vehiculo = await conexion.ConseguirRegistros(
-        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
-    )
-
-    const enviar = {
-        nombre: usuario[0].nombres,
-        saldo: cuenta[0].saldo,
-        cedula: usuario[0].cedula,
-        telefono: usuario[0].telefono,
-        modelo: vehiculo[0].modelo,
-        placa: vehiculo[0].placa,
-        tarjeta: cuenta[0].tarjeta,
-        correo: cuenta[0].correo
-    }
-
-    console.log("Sesión autorizada a " + req.user.username);
-    res.json(enviar);
-})
-
-login.post('/client', validar, async (req, res) => {
-    console.log("Intentando guardar datos...");
-
-    const usuario = await conexion.ConseguirRegistros(
-        "tb_usuarios", "id", req.user.username
-    )
-    const cuenta = await conexion.ConseguirRegistros(
-        "tb_clientes", "idCliente", req.user.username
-    )
-    const vehiculo = await conexion.ConseguirRegistros(
-        "tb_vehiculos", "tarjetaVeh", cuenta[0].tarjeta
-    )
-
-    const enviar = {
-        nombre: usuario[0].nombres,
-        saldo: cuenta[0].saldo,
-        cedula: usuario[0].cedula,
-        telefono: usuario[0].telefono,
-        modelo: vehiculo[0].modelo,
-        placa: vehiculo[0].placa,
-        tarjeta: cuenta[0].tarjeta,
-        correo: cuenta[0].correo
-    }
-
-    res.json(enviar);
-})
-
-login.delete('/client', validar, (req, res) => {
+login.delete('/close', validar, (req, res) => {
     console.log("Cerrando sesión...");
     res.json({ message: 'Sesión cerrada exitosamente' });
 })

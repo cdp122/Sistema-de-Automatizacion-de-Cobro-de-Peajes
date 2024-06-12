@@ -126,7 +126,7 @@ async function CerrarSesion() {
             }
         });
         if (response.ok) {
-            localstorage.removeItem('token'); // Eliminar el token del almacenamiento local
+            localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
             window.location.href = '../LogIn/Login.html'; // Redirigir al usuario a la página de inicio de sesión
         } else {
             alert('Error al cerrar sesión');
@@ -177,7 +177,10 @@ function AgregarTargeta(){
     boton.textContent = 'Editar Tarjeta';
     boton.addEventListener("click", EditarTarjeta);   
 
-     
+    var boton2 = document.createElement('button');
+    boton2.className ='agregar';
+    boton2.textContent = 'Movimientos';
+    boton2.addEventListener("click", ListarMovimientos);  
     
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
@@ -270,4 +273,8 @@ function GuardarCambios(event) {
     event.target.textContent = 'Editar Tarjeta';
     event.target.removeEventListener("click", GuardarCambios);
     event.target.addEventListener("click", EditarTarjeta);
+}
+
+function ListarMovimientos(){
+    
 }

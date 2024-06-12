@@ -14,24 +14,22 @@
     <header class="menuContainer">
       <div class="izq">
         
-        <!-- input id="checkbox_toggle" type="checkbox" class="check">
-        <div class="checkbox">
-          <label class="slide" for="checkbox_toggle">
-            <label class="toggle" for="checkbox_toggle"></label>
-            <label class="text" for="checkbox_toggle">Day</label>
-            <label class="text" for="checkbox_toggle">Night</label>
-          </label>
-        </div>
-      -->
       <a href="../index.html" class="logo"></a>
     </div>
+    <label class="hamburger">
+      <input type="checkbox">
+      <svg viewBox="0 0 32 32">
+        <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+        <path class="line" d="M7 16 27 16"></path>
+      </svg>
+    </label>
       <nav class="navbar">
         <ul>
           <li><a href="../index.html">Inicio</a></li>
           <li><a href="#">Servicio</a></li>
           <li><a href="#">Producto</a></li>
           <li><a href="#">Contacto</a></li>
-          <li><a href="./Login.html">Inciar Sesión</a></li>
+          
         </ul>
       </nav>
     </header>
@@ -53,12 +51,14 @@
           </div>
           <div class="form-group">
             <button onclick="Validar()" class="btn" name="EnviarLogin">Iniciar Sesión</button>
+            <button class="btn" name="EnviarRegistro">Registrarse</button>
           </div>
         </form>
       </div>
     </div>
   </section>
   <script src="../LogIn/Login.js"></script>
+  <script src="decorator.js"></script>
   </div>
 </body>
 
