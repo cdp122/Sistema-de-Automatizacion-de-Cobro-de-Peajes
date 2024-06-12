@@ -103,7 +103,7 @@ async function Validar() {
             if (data.message) window.location.href = "../Error/PagError404.html";
 
             document.getElementById("full-name").innerHTML = data.nombre;
-            document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo);
+            document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo).toFixed(2);
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
 
