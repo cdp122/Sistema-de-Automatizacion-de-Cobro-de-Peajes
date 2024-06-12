@@ -2,10 +2,11 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PanaSolar</title>
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="../WebSite/Assets/Logo.png" type="image/png">
   <script src="index.js"></script>
 </head>
 
@@ -14,7 +15,7 @@
     <div class="menuContainer">
       <a href="index.html" class="logo"></a>
       <label for="menu-toggle" class="hamburger">
-      <input type="checkbox" id="menu-toggle" />
+        <input type="checkbox" id="menu-toggle">
         <svg viewBox="0 0 32 32">
           <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
           <path class="line" d="M7 16 27 16"></path>
@@ -24,7 +25,7 @@
         <ul>
           <li><a href="#">Servicio</a></li>
           <li><a href="#">Producto</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="#contacto">Contacto</a></li>
           <li><a href="LogIn/Login.html">Iniciar Sesión</a></li>
         </ul>
       </nav>
@@ -73,7 +74,7 @@
   <footer class="footer container">
     <div class="footer-content-wrapper">
       <div class="footer-flex">
-        <h2>Contáctanos</h2>
+        <h2 id="contacto">Contáctanos</h2> <!-- Cambiado a id="contacto" -->
         <div class="footer-txt">
           <h3>+593 995 817 315</h3>
           <p>panasolar@gmail.com</p>
@@ -82,10 +83,10 @@
       </div>
       <div class="footer-content">
         <form>
-          <input class="campo" type="text" placeholder="Nombre" />
-          <input class="campo" type="email" placeholder="Correo" />
+          <input class="campo" type="text" placeholder="Nombre">
+          <input class="campo" type="email" placeholder="Correo">
           <textarea class="campo" cols="30" rows="10" placeholder="Mensaje"></textarea>
-          <input class="btn-2" type="submit" value="Enviar"/>
+          <input class="btn-2" type="submit" value="Enviar">
         </form>
       </div>
     </div>

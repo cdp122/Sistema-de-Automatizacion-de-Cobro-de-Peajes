@@ -14,12 +14,15 @@ body {
     font-family: 'Bebas Neue', sans-serif;
     width: 100%;
     height: 100%;
-    color: #ffffff; /* Cambia el color del texto a blanco */
-    background: linear-gradient(60deg, #f8928d, #f8c48d); /* Ajusta los colores del degradado de fondo */
+    color: #ffffff;
+    /* Cambia el color del texto a blanco */
+    background: linear-gradient(60deg, #f8928d, #f8c48d);
+    /* Ajusta los colores del degradado de fondo */
     background-size: 400% 400%;
     position: relative;
     animation: cambiar 12.5s ease-in-out infinite;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5); /* Agrega una sombra al texto para mayor contraste */
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+    /* Agrega una sombra al texto para mayor contraste */
 }
 
 /* Encabezado */
@@ -30,7 +33,8 @@ body {
     align-items: center;
     justify-content: space-between;
     height: 90px;
-    padding: 0 20px; /* Ajustar el padding del encabezado */
+    padding: 0 20px;
+    /* Ajustar el padding del encabezado */
 }
 
 /* Contenedor de imagen */
@@ -71,23 +75,25 @@ body {
     stroke-dasharray: 12 63;
 }
 
-.hamburger input:checked + svg {
+.hamburger input:checked+svg {
     transform: rotate(-45deg);
 }
 
-.hamburger input:checked + svg .line-top-bottom {
+.hamburger input:checked+svg .line-top-bottom {
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
 }
 
 /* Menu de Navegacion */
 .menuContainer {
-    width: 95%; /* Ajusta el ancho según tus necesidades */
-    margin: 0 auto; 
+    width: 95%;
+    /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px; /* Ajustar el padding del menú */
+    padding: 0 20px;
+    /* Ajustar el padding del menú */
 }
 
 .menuContainer .navbar.active {
@@ -111,7 +117,8 @@ body {
 }
 
 .menuContainer .navbar ul li {
-    margin: 0 5px; /* Ajusta el margen según tus necesidades */
+    margin: 0 5px;
+    /* Ajusta el margen según tus necesidades */
 }
 
 .menuContainer .navbar ul {
@@ -126,14 +133,14 @@ body {
     display: block;
 }
 
-#menu-toggle:checked ~ .navbar ul {
+#menu-toggle:checked~.navbar ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
+}
 
 #menu-toggle {
     display: none;
@@ -146,24 +153,29 @@ body {
 }
 
 .headertxt h1 {
-    font-size: 80px; /* Aumenta el tamaño de la fuente */
+    font-size: 80px;
+    /* Aumenta el tamaño de la fuente */
     line-height: 130px;
     color: #ffffff;
     margin-bottom: 15px;
-    font-weight: bold; /* Aplica negrita al texto */
+    font-weight: bold;
+    /* Aplica negrita al texto */
 }
 
 .headertxt p {
-    font-size: 25px; /* Aumenta el tamaño de la fuente */
+    font-size: 25px;
+    /* Aumenta el tamaño de la fuente */
     color: #ffffff;
     margin-bottom: 15px;
-    font-weight: 500; /* Aplica un grosor medio al texto */
+    font-weight: 500;
+    /* Aplica un grosor medio al texto */
 }
 
 /* Botones */
 .btn-1 {
     display: block;
-    max-width: 200px; /* Establece un ancho máximo de 200 píxeles */
+    max-width: 200px;
+    /* Establece un ancho máximo de 200 píxeles */
     margin: 40px auto 0 auto;
     padding: 11px 45px;
     background-color: #b7975b;
@@ -269,6 +281,7 @@ h2 {
 .house-2 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Assets/empleado.jpg');
 }
+
 .house-3 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Assets/cajero.jpg');
 }
@@ -304,18 +317,23 @@ h2 {
 .footer {
     padding: 100px 0 0 0;
 }
+
 .footer-content-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 150px; /* Espacio entre footer-flex y footer-content */
+    gap: 150px;
+    /* Espacio entre footer-flex y footer-content */
 }
+
 .footer-flex {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px; /* Espacio entre el h2 y .footer-txt */
+    gap: 20px;
+    /* Espacio entre el h2 y .footer-txt */
 }
+
 .footer h2 {
     margin: 0;
 }
@@ -325,6 +343,7 @@ h2 {
     flex-direction: column;
     align-items: center;
 }
+
 .footer.container {
     display: flex;
     flex-direction: column;
@@ -384,118 +403,148 @@ form {
 
 /* Estilos responsivos */
 @media (max-width: 991px) {
+
     /* Encabezado */
     .header {
         height: auto;
-        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
         align-items: center;
     }
 
     .headertxt {
         padding-left: 0;
-        text-align: center; /* Centra el texto */
+        text-align: center;
+        /* Centra el texto */
     }
 
     /* Contenedor de imagen */
     .containerIMG {
-        min-height: 300px; /* Reduce la altura mínima */
+        min-height: 300px;
+        /* Reduce la altura mínima */
     }
 
     /* Menú hamburguesa */
     .menuContainer {
-        padding: 20px 0; /* Ajusta el padding */
+        padding: 20px 0;
+        /* Ajusta el padding */
     }
 
     /* Menú de Navegación */
     .menuContainer .navbar.active {
-        top: 90px; /* Ajusta la posición en dispositivos móviles */
+        top: 90px;
+        /* Ajusta la posición en dispositivos móviles */
     }
 
     /* Botón */
     .btn-1 {
-        margin-top: 20px; /* Ajusta el margen superior */
+        margin-top: 20px;
+        /* Ajusta el margen superior */
     }
 
     /* Dirección */
     .direction-container {
-        padding: 20px 0; /* Ajusta el padding */
+        padding: 20px 0;
+        /* Ajusta el padding */
     }
 
     /* Sección "Nosotros" */
     .about {
-        padding: 50px 0; /* Ajusta el padding */
+        padding: 50px 0;
+        /* Ajusta el padding */
     }
 
     /* Información */
     .informacion {
-        flex-direction: column; /* Cambia la dirección de los elementos a columna */
-        padding: 30px; /* Ajusta el padding */
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        padding: 30px;
+        /* Ajusta el padding */
     }
 
     /* Sección de casas */
     .house {
-        flex-direction: column; /* Cambia la dirección de los elementos a columna */
-        margin-top: 0; /* Elimina el margen superior */
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        margin-top: 0;
+        /* Elimina el margen superior */
     }
 
     .house-1,
     .house-2,
     .house-3,
     .house-4 {
-        height: auto; /* Cambia la altura a automática */
-        margin-bottom: 20px; /* Añade un margen inferior */
+        height: auto;
+        /* Cambia la altura a automática */
+        margin-bottom: 20px;
+        /* Añade un margen inferior */
     }
 
     .txt p {
-        position: static; /* Restaura la posición */
-        transform: rotate(0); /* Restaura la rotación */
-        margin-top: 10px; /* Ajusta el margen superior */
+        position: static;
+        /* Restaura la posición */
+        transform: rotate(0);
+        /* Restaura la rotación */
+        margin-top: 10px;
+        /* Ajusta el margen superior */
     }
 
     /* Pie de página */
     .footer-content-wrapper {
-        flex-direction: column; /* Cambia la dirección de los elementos a columna */
-        gap: 30px; /* Ajusta el espacio entre los elementos */
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        gap: 30px;
+        /* Ajusta el espacio entre los elementos */
     }
 
     .footer-flex {
-        align-items: center; /* Centra los elementos */
+        align-items: center;
+        /* Centra los elementos */
     }
 
     .footer-content {
-        width: 100%; /* Ajusta el ancho */
+        width: 100%;
+        /* Ajusta el ancho */
     }
 
     .footer-form {
-        width: 100%; /* Ajusta el ancho */
+        width: 100%;
+        /* Ajusta el ancho */
     }
 
     .footer-txt {
-        text-align: center; /* Centra el texto */
+        text-align: center;
+        /* Centra el texto */
     }
 
     form {
-        width: 100%; /* Ajusta el ancho */
+        width: 100%;
+        /* Ajusta el ancho */
     }
 }
+
 @media (max-width: 325px) {
-    #menu-toggle:checked ~ .navbar {
+    #menu-toggle:checked~.navbar {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
         position: absolute;
         top: 0px;
-        background-color: #fff; /* Agrega un fondo al menú desplegable */
+        background-color: #fff;
+        /* Agrega un fondo al menú desplegable */
     }
 }
+
 @media (min-width: 300px) and (max-width: 991px) {
+
     .house-2 p,
     .house-3 p,
     .house-4 p {
-      display: none;
+        display: none;
     }
-  }
+}
+
 @media (min-width: 621px) and (max-width: 767px) {
     .navbar {
         visibility: hidden;
@@ -503,7 +552,8 @@ form {
 
     .hamburger {
         position: absolute;
-        right: 20px; /* Ajusta el valor según tus necesidades */
+        right: 20px;
+        /* Ajusta el valor según tus necesidades */
     }
 }
 
@@ -514,12 +564,14 @@ form {
         padding: 0 20px;
         text-align: center;
     }
+
     .navbar {
         position: absolute;
         right: 20px;
         visibility: hidden;
     }
 }
+
 @media (max-width: 767px) {
     .navbar {
         display: none;
@@ -539,8 +591,9 @@ form {
         display: none;
     }
 }
+
 @media (max-width: 769px) {
-    
+
     .containerIMG .headertxt {
         width: 100%;
         padding: 0 20px;
@@ -553,9 +606,11 @@ form {
     0% {
         background-position: 0 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0 50%;
     }
