@@ -57,6 +57,20 @@ async function LogInEmpleado(idEmpleado) {
 async function RecibirDatos(idCliente) {
     return await ConseguirRegistros("tb_clientes", "idCliente", idCliente);
 }
+
+async function ConseguirNumFilas(tabla) {
+    const query = "SELECT TABLE_ROWS FROM information_schema.tables WHERE TABLE_NAME = '" + tabla + "'";
+
+    try {
+        const registro = await Consultar(query);
+        if (registro.length === 0) return null;
+        console.log("Cargando nro de Registros");
+        return registro;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
 //#endregion
 
 async function InsertarRegistro(tabla, params, values) {
@@ -132,6 +146,6 @@ async function BorrarRegistro(tabla, parametro, valor) {
 
 module.exports = {
     conexion, BorrarRegistro, ConseguirRegistros, LogInClient, LogInEmpleado,
-    RecibirDatos, ModificarRegistro, ModificarRegistros, InsertarRegistro
+    RecibirDatos, ConseguirNumFilas, ModificarRegistro, ModificarRegistros, InsertarRegistro
 };
 

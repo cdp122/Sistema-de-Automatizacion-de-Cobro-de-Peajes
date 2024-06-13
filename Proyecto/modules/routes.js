@@ -13,6 +13,18 @@ Cliente = new Cliente();
 
 const bd = express.Router();
 const error = express.Router();
+
+var nums, tarjetaID;
+
+async function recargarNums() {
+    let num = await conexion.ConseguirNumFilas("tb_movimientos");
+    nums = 10000 + parseInt(num[0].TABLE_ROWS);
+}
+
+async function recargarTarjetaID() {
+    let num = await conexion.ConseguirNumFilas("tb_tarjetas")
+    tarjetaID = 10000 + parseInt(num[0].TABLE_ROWS);
+}
 //#endregion
 
 //#region Ruta 'clientes'
@@ -119,11 +131,10 @@ clientes.delete('/movs', validar, async (req, res) => {
     res.json(eliminar);
 })
 
-var nums = 1000000000;
 clientes.post('/movs', validar, async (req, res) => {
     console.log(req.query.tarjeta, req.query.saldo, req.query.valor);
 
-    nums = nums + 1;
+    await recargarNums();
     const id = nums;
 
     await conexion.InsertarRegistro(
@@ -156,12 +167,18 @@ clientes.post('/account', validar, async (req, res) => {
     res.json("ok");
 })
 
-clientes.post('/passcode', validar, async (req, res) => {
-    const auto = req.body;
+clientes.get('/passcode', validar, async (req, res) => {
+    await recargarTarjetaID();
 
-    await conexion.ModificarRegistros("tb_vehiculos", ["modelo", "placa"],
-        [auto.modelo, auto.placa], "tarjetaVeh", auto.tarjeta
+    conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
+        [req.user.username, tarjetaID, 0]
     )
+
+    conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa", "modelo", "color", "tipo"],
+        [tarjetaID, "ABC1234", "Modelo", "GRIS", "CAMIONETA"]
+    )
+
+    res.json(tarjetaID);
 })
 //#endregion
 
@@ -234,9 +251,10 @@ const register = express.Router();
 register.use(bodyParser.urlencoded({ extended: true }));
 register.use(bodyParser.json());
 
-var tarjetaID = 10000;
 register.post("/", async (req, res) => {
     const registro = req.body;
+
+    await recargarTarjetaID();
 
     await conexion.InsertarRegistro("tb_usuarios", ["id", "nombres",
         "cedula", "telefono", "fecha_nacimiento"], ["C" + registro.cedula, registro.nombres, registro.cedula,
@@ -252,7 +270,6 @@ register.post("/", async (req, res) => {
     await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa",
         "modelo", "color", "tipo"], [tarjetaID.toString(), registro.placa,
         registro.modelo, registro.color, registro.tipoVehiculo.toUpperCase()]);
-    tarjetaID++;
 
     res.json("ok");
 })

@@ -89,7 +89,7 @@ async function recargarSaldo(saldo, tarjeta) {
     }
 }
 
-function manejarTarjetas(tarjeta, vehiculo) {
+async function manejarTarjetas(tarjeta, vehiculo) {
     var caja = document.createElement('div');
     caja.className = 'cajaTarjeta';
 
@@ -119,7 +119,7 @@ function manejarTarjetas(tarjeta, vehiculo) {
     letra.textContent = 'Modelo de Vehículo';
     var spanModelo = document.createElement('span');
     spanModelo.id = 'modelo-carro';
-    spanModelo.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Modelo de auto';
+    spanModelo.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Modelo';
     elemento.appendChild(letra);
     elemento.appendChild(spanModelo);
     lista.appendChild(elemento);
@@ -129,7 +129,7 @@ function manejarTarjetas(tarjeta, vehiculo) {
     letra2.textContent = 'Placa:';
     var spanModelo2 = document.createElement('span');
     spanModelo2.id = 'placa';
-    spanModelo2.textContent = vehiculo && vehiculo.placa ? vehiculo.placa : 'ABC-123';
+    spanModelo2.textContent = vehiculo && vehiculo.placa ? vehiculo.placa : 'ABC1234';
     elemento2.appendChild(letra2);
     elemento2.appendChild(spanModelo2);
     lista.appendChild(elemento2);
@@ -139,7 +139,9 @@ function manejarTarjetas(tarjeta, vehiculo) {
     letra3.textContent = 'Tarjeta Telepass';
     var spanModelo3 = document.createElement('span');
     spanModelo3.id = 'codigo-telepass';
-    spanModelo3.textContent = tarjeta && tarjeta.id ? tarjeta.id : '1234567890';
+
+    if (tarjeta && tarjeta.id) spanModelo3.textContent = tarjeta.id;
+    else spanModelo3.textContent = await CrearTarjeta();
     elemento3.appendChild(letra3);
     elemento3.appendChild(spanModelo3);
     lista.appendChild(elemento3);
@@ -149,7 +151,7 @@ function manejarTarjetas(tarjeta, vehiculo) {
     letra4.textContent = 'Saldo';
     var spanModelo4 = document.createElement('span');
     spanModelo4.id = 'saldo';
-    spanModelo4.textContent = tarjeta && tarjeta.saldo ? `$${parseFloat(tarjeta.saldo)}` : '10';
+    spanModelo4.textContent = tarjeta && tarjeta.saldo ? `$${parseFloat(tarjeta.saldo)}` : '0';
     elemento4.appendChild(letra4);
     elemento4.appendChild(spanModelo4);
     lista.appendChild(elemento4);
@@ -392,6 +394,30 @@ async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {
         console.error('Error:', error);
     }
 
+}
+
+async function CrearTarjeta() {
+    try {
+        const response = await fetch("/clientes/passcode", {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+        });
+        if (response.ok) {
+            const idTarjeta = await response.json();
+            return idTarjeta;
+        } else {
+            alert(result.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+
+    return false;
 }
 
 async function CerrarSesion() {
