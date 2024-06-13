@@ -42,7 +42,7 @@ function guardarCambios() {
     }
 
     if (guardar) {
-        if (!ActualizarDatos(cedula, telefono, correo)) {
+        if (!ActualizarPerfil(cedula, telefono, correo)) {
             alert("No se pudieron actualizar los datos");
             return;
         }
@@ -224,12 +224,12 @@ function EditarTarjeta(event) {
 }
 
 function GuardarCambios(event) {
-
     var caja = event.target.parentNode;
 
-    var inputs = caja.querySelectorAll('input');
-
     var datosValidos = true;
+
+    var inputs = caja.querySelectorAll('input');
+    var datos = []
 
     inputs.forEach(function (input) {
         if (!validarTarjeta(input)) {
@@ -242,11 +242,12 @@ function GuardarCambios(event) {
         }
         else {
             input.style.borderColor = '';
+            datos.push(input.value);
         }
     });
 
     if (datosValidos) {
-
+        ActualizarTarjeta(datos);
         inputs.forEach(function (input) {
             var span = document.createElement('span');
             span.id = input.id;
@@ -304,7 +305,7 @@ async function Validar() {
     }
 }
 
-async function ActualizarDatos(cedula, telefono, correo) {
+async function ActualizarPerfil(cedula, telefono, correo) {
     token = localStorage.getItem('token');
     const data = {
         cedula: cedula,
@@ -336,6 +337,37 @@ async function ActualizarDatos(cedula, telefono, correo) {
         return false;
     }
 
+
+    return false;
+}
+
+async function ActualizarTarjeta(datos) {
+    token = localStorage.getItem('token');
+    console.log(datos);
+
+    try {
+        const response = await fetch("/clientes/passcode", {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                modelo: datos[0],
+                placa: datos[1],
+                tarjeta: datos[2]
+            })
+        });
+        if (response.ok) {
+            alert("Datos actualizados correctamente");
+        } else {
+            alert(result.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
 
     return false;
 }

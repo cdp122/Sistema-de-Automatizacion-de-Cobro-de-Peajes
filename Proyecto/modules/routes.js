@@ -120,7 +120,6 @@ clientes.delete('/movs', validar, async (req, res) => {
 })
 
 var nums = 1000000000;
-
 clientes.post('/movs', validar, async (req, res) => {
     console.log(req.query.tarjeta, req.query.saldo, req.query.valor);
 
@@ -155,6 +154,14 @@ clientes.post('/account', validar, async (req, res) => {
     req.user.username = cuenta.id;
 
     res.json("ok");
+})
+
+clientes.post('/passcode', validar, async (req, res) => {
+    const auto = req.body;
+
+    await conexion.ModificarRegistros("tb_vehiculos", ["modelo", "placa"],
+        [auto.modelo, auto.placa], "tarjetaVeh", auto.tarjeta
+    )
 })
 //#endregion
 
