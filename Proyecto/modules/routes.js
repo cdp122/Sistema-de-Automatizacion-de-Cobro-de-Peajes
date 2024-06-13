@@ -167,6 +167,14 @@ clientes.post('/account', validar, async (req, res) => {
     res.json("ok");
 })
 
+clientes.post('/passcode', validar, async (req, res) => {
+    const auto = req.body;
+
+    await conexion.ModificarRegistros("tb_vehiculos", ["modelo", "placa"],
+        [auto.modelo, auto.placa], "tarjetaVeh", auto.tarjeta
+    )
+})
+
 clientes.get('/passcode', validar, async (req, res) => {
     await recargarTarjetaID();
 
