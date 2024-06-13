@@ -190,12 +190,6 @@ function validarTarjeta(input) {
                 return false;
             }
             break;
-        case 'codigo-telepass':
-            if (!/^\d{5}$/.test(valor)) {
-                input.dataset.error = "El código Telepass debe tener exactamente 5 dígitos.";
-                return false;
-            }
-            break;
         default:
             break;
     }
@@ -210,7 +204,7 @@ function EditarTarjeta(event) {
     var spans = caja.querySelectorAll('span');
 
     spans.forEach(function (span) {
-        if (span.id !== 'saldo') {
+        if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
             var input = document.createElement('input');
             input.type = 'text';
             input.value = span.textContent;

@@ -276,6 +276,11 @@ body {
     left: 25%;
 }
 
+#tar {
+    position: relative;
+    left: 43%;
+}
+
 /* Botón para guardar cambios */
 #guardar-cambios {
     display: block;
