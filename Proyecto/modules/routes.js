@@ -232,8 +232,8 @@ register.post("/", async (req, res) => {
     const registro = req.body;
 
     await conexion.InsertarRegistro("tb_usuarios", ["id", "nombres",
-        "cedula", "fecha_nacimiento"], ["C" + registro.cedula, registro.nombres, registro.cedula,
-        registro.fecha])
+        "cedula", "telefono", "fecha_nacimiento"], ["C" + registro.cedula, registro.nombres, registro.cedula,
+        registro.telefono, registro.fecha])
 
     await conexion.InsertarRegistro("tb_clientes", ["idCliente", "correo", "contraseña"],
         ["C" + registro.cedula, registro.correo, registro.contraseña])

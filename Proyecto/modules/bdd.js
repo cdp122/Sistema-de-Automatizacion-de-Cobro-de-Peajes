@@ -88,7 +88,6 @@ async function ModificarRegistro(tabla, nuevoParam, actual, paramTarg, target) {
     try {
         const query = "UPDATE " + tabla + " SET " + nuevoParam + " = '" + actual +
             "' WHERE " + paramTarg + " = '" + target + "'";
-        console.log(query);
         const registro = await Consultar(query);
         if (registro.length === 0) return null;
         console.log("Enviando resultado");

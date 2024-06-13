@@ -1,4 +1,4 @@
-function validarFormulario() {
+async function validarFormulario() {
     const form = document.getElementById('registroForm');
     const nombre = form.nombre.value;
     const cedula = form.cedula.value;
@@ -78,8 +78,7 @@ function validarFormulario() {
         return false;
     }
 
-    // Si todo es válido
-    alert('Registro exitoso');
+    await CrearCuenta();
     return true;
 }
 
@@ -107,7 +106,7 @@ async function CrearCuenta() {
         telefono: document.getElementById("telefono").value,
         modelo: document.getElementById("modeloVehiculo").value,
         tipoVehiculo: document.getElementById("tipoVehiculo").value,
-        color: "BLANCA",
+        color: document.getElementById("color").value,
         placa: document.getElementById("placa").value
     }
 
