@@ -276,6 +276,21 @@ body {
     left: 25%;
 }
 
+.eliminar {
+    display: block;
+    width: 20%;
+    height: 40px;
+    font-size: 18px;
+    top: -140px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f80000;
+    color: white;
+    position: relative;
+    left: 50%;
+}
+
 #tar {
     position: relative;
     left: 43%;

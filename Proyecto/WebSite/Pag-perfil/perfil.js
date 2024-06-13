@@ -107,6 +107,10 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     boton3.textContent = 'Movimientos';
     boton3.addEventListener("click", ListarMovimientos);
 
+    var boton4 = document.createElement('button');
+    boton4.className = 'eliminar';
+    boton4.textContent = 'Eliminar Tarjeta';
+
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
 
@@ -164,6 +168,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     caja.appendChild(boton);
     caja.appendChild(boton2);
     caja.appendChild(boton3);
+    caja.appendChild(boton4);
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
 }
