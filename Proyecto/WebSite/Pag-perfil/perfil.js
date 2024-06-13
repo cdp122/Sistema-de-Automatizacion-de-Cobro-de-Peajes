@@ -72,6 +72,8 @@ function restaurarCampo(event) {
     }
 }
 
+
+
 async function recargarSaldo(saldo, tarjeta) {
     let saldoActual = parseFloat(saldo.textContent.replace('$', ''));
     let nuevoSaldo = prompt("Ingrese el monto a recargar:");
@@ -80,6 +82,15 @@ async function recargarSaldo(saldo, tarjeta) {
     if (nuevoSaldo !== null && !isNaN(nuevoSaldo) && nuevoSaldo > 0 && actualizacionSaldo <= 99.99) {
         RecargarTarjeta(tarjeta.textContent, actualizacionSaldo.toFixed(2), parseFloat(nuevoSaldo).toFixed(2));
         saldo.textContent = `${actualizacionSaldo.toFixed(2)}`;
+
+        let saldoTotalElemento = document.getElementById('balance-amount');
+        let saldoTotalActual = parseFloat(saldoTotalElemento.textContent.replace('$', ''));
+        let nuevoSaldoTotal = saldoTotalActual + parseFloat(nuevoSaldo);
+
+        localStorage.setItem('saldoTotal', nuevoSaldoTotal.toFixed(2));
+
+        saldoTotalElemento.textContent = `$${nuevoSaldoTotal.toFixed(2)}`;
+
     }
     else if (actualizacionSaldo > 99.99) {
         alert("No se permite exceder la cantidad de Saldo de 99.99$");
@@ -87,7 +98,10 @@ async function recargarSaldo(saldo, tarjeta) {
     else {
         alert("Ingrese un monto válido.");
     }
+    location.reload();
 }
+
+
 
 async function manejarTarjetas(tarjeta, vehiculo) {
     var caja = document.createElement('div');
@@ -109,7 +123,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
 
     var boton4 = document.createElement('button');
     boton4.className = 'eliminar';
-    boton4.textContent = 'Eliminar Tarjeta';
+    boton4.textContent = 'Deshabilitar Tarjeta';
 
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
@@ -273,6 +287,10 @@ async function ListarMovimientos(event) {
     window.location.href = "./movimientos.html";
 }
 
+function Deshabilitar (){
+
+}
+
 //#region Backend
 async function Validar() {
     token = localStorage.getItem('token');
@@ -394,6 +412,8 @@ async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {
     }
 
 }
+
+
 
 async function CrearTarjeta() {
     try {
