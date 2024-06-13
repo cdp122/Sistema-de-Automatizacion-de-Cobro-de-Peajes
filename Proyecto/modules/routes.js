@@ -178,15 +178,21 @@ clientes.post('/passcode', validar, async (req, res) => {
 clientes.get('/passcode', validar, async (req, res) => {
     await recargarTarjetaID();
 
-    conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
+    await conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
         [req.user.username, tarjetaID, 0]
     )
 
-    conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa", "modelo", "color", "tipo"],
+    await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa", "modelo", "color", "tipo"],
         [tarjetaID, "ABC1234", "Modelo", "GRIS", "CAMIONETA"]
     )
 
     res.json(tarjetaID);
+})
+
+clientes.delete('/passcode', validar, async (req, res) => {
+    await conexion.BorrarRegistro("tb_tarjetas", "tarjeta", req.query.tarjeta);
+
+    res.json("ok");
 })
 //#endregion
 

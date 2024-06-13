@@ -419,6 +419,23 @@ async function CrearTarjeta() {
     return false;
 }
 
+async function EliminarTarjeta(tarjeta) {
+    try {
+        const response = await fetch('/login/close?tarjeta=' + tarjeta, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+        } else {
+            alert('Error al borrar la tarjeta');
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 async function CerrarSesion() {
     try {
         const response = await fetch('/login/close', {
