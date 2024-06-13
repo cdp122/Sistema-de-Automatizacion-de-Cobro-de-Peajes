@@ -20,6 +20,7 @@ app.use('/clientes', clientes);
 app.use('/login', login);
 app.use('/error', error);
 app.use('/register', register);
+app
 //#endregion
 
 //#region Inicio
