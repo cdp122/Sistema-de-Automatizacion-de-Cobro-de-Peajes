@@ -41,7 +41,11 @@ function guardarCambios() {
         guardar = false;
     }
 
-    if (guardar && ActualizarDatos()) {
+    if (guardar) {
+        if (!ActualizarDatos(cedula, telefono, correo)) {
+            alert("No se pudieron actualizar los datos");
+            return;
+        }
         camposEditables.forEach(id => {
             const campo = document.getElementById(id);
             campo.setAttribute("contenteditable", "false");
@@ -69,7 +73,6 @@ function restaurarCampo(event) {
 }
 
 async function recargarSaldo(saldo, tarjeta) {
-    console.log(tarjeta);
     let saldoActual = parseFloat(saldo.textContent.replace('$', ''));
     let nuevoSaldo = prompt("Ingrese el monto a recargar:");
     let actualizacionSaldo = parseFloat(saldoActual) + parseFloat(nuevoSaldo);
@@ -84,38 +87,6 @@ async function recargarSaldo(saldo, tarjeta) {
     else {
         alert("Ingrese un monto válido.");
     }
-}
-
-async function ActualizarDatos(validarDatos) {
-    if (!validarDatos) return false;
-
-    token = localStorage.getItem('token');
-
-    try {
-        const response = await fetch("/login/client", {
-            method: 'POST',
-            headers: {
-                'Authorization': token
-            }
-        });
-        if (response.ok) {
-            const data = await response.json();
-            if (data.message) window.location.href = "../Error/PagError404.html";
-
-            document.getElementById("full-name").innerHTML = data.nombre;
-            document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo);
-            document.getElementById("cedula").innerHTML = data.cedula;
-            document.getElementById("telefono").innerHTML = data.telefono;
-            document.getElementById("email").innerHTML = data.correo;
-        } else {
-            alert(result.message);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-
-
-    return false;
 }
 
 function manejarTarjetas(tarjeta, vehiculo) {
@@ -194,7 +165,6 @@ function manejarTarjetas(tarjeta, vehiculo) {
     var ubicacion = document.getElementById('tarjetas');
     ubicacion.appendChild(caja);
 }
-
 
 function validarTarjeta(input) {
     var valor = input.value.trim();
@@ -332,6 +302,42 @@ async function Validar() {
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+async function ActualizarDatos(cedula, telefono, correo) {
+    token = localStorage.getItem('token');
+    const data = {
+        cedula: cedula,
+        telefono: telefono,
+        correo: correo,
+        id: "C" + cedula
+    }
+
+    console.log(data);
+
+    try {
+        const response = await fetch("/clientes/account", {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if (response.ok) {
+            alert("Datos actualizados se cerrará la sesión para que los cambios se apliquen correctamente");
+            window.location.href = "../LogIn/Login.html";
+        } else {
+            alert(result.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+
+
+    return false;
 }
 
 async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {

@@ -12,11 +12,14 @@ Usuario = new Usuario();
 Cliente = new Cliente();
 
 const bd = express.Router();
-const clientes = express.Router();
 const error = express.Router();
 //#endregion
 
 //#region Ruta 'clientes'
+const clientes = express.Router();
+clientes.use(bodyParser.urlencoded({ extended: true }));
+clientes.use(bodyParser.json());
+
 clientes.get('/', validar, async (req, res) => {
     console.log("Intentando iniciar sesión...");
 
@@ -138,6 +141,21 @@ clientes.post('/movs', validar, async (req, res) => {
     console.log("Recarga realizada exitosamente");
     res.json("ok");
 })
+
+clientes.post('/account', validar, async (req, res) => {
+    const cuenta = req.body;
+
+    await conexion.ModificarRegistro("tb_clientes", "correo", cuenta.correo, "idCliente", req.user.username)
+
+    await conexion.ModificarRegistros("tb_usuarios",
+        ["id", "cedula", "telefono"], [cuenta.id, cuenta.cedula, cuenta.telefono],
+        "id", req.user.username
+    )
+
+    req.user.username = cuenta.id;
+
+    res.json("ok");
+})
 //#endregion
 
 //#region Ruta 'log-in'
@@ -226,7 +244,7 @@ register.post("/", async (req, res) => {
 
     await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa",
         "modelo", "color", "tipo"], [tarjetaID.toString(), registro.placa,
-        registro.modelo, "BLANCA", registro.tipoVehiculo.toUpperCase()]);
+        registro.modelo, registro.color, registro.tipoVehiculo.toUpperCase()]);
     tarjetaID++;
 
     res.json("ok");

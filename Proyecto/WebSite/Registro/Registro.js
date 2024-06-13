@@ -107,13 +107,12 @@ async function CrearCuenta() {
         telefono: document.getElementById("telefono").value,
         modelo: document.getElementById("modeloVehiculo").value,
         tipoVehiculo: document.getElementById("tipoVehiculo").value,
+        color: "BLANCA",
         placa: document.getElementById("placa").value
     }
 
-    console.log(data);
-
     try {
-        response = await fetch("/register", {
+        const response = await fetch("/register", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
