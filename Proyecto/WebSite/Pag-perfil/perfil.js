@@ -1,5 +1,5 @@
 var token;
-const camposEditables = ["cedula", "telefono", "email"];
+const camposEditables = ["cedula", "telefono", "email","contraseña"];
 const editarPerfilBtn = document.getElementById("editar-perfil");
 const guardarCambiosBtn = document.getElementById("guardar-cambios");
 
@@ -23,6 +23,7 @@ function guardarCambios() {
     let cedula = document.getElementById("cedula").textContent;
     let telefono = document.getElementById("telefono").textContent;
     let correo = document.getElementById("email").textContent;
+    let contraseña = document.getElementById("contraseña").textContent;
 
     let guardar = true;
 
@@ -41,8 +42,13 @@ function guardarCambios() {
         guardar = false;
     }
 
+    if (!/^\d{10}$/.test(contraseña)) {
+        alert("La crontaseña debe contener 10 dígitos.");
+        guardar = false;
+    }
+    
     if (guardar) {
-        if (!ActualizarPerfil(cedula, telefono, correo)) {
+        if (!ActualizarPerfil(cedula, telefono, correo,contraseña)) {
             alert("No se pudieron actualizar los datos");
             return;
         }
@@ -102,10 +108,12 @@ async function recargarSaldo(saldo, tarjeta) {
 }
 
 
-
 async function manejarTarjetas(tarjeta, vehiculo) {
     var caja = document.createElement('div');
     caja.className = 'cajaTarjeta';
+
+    var tar = document.createElement('div');
+    tar.className ='cajatar';
 
     var boton = document.createElement('button');
     boton.className = 'editar';
@@ -124,20 +132,25 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var boton4 = document.createElement('button');
     boton4.className = 'eliminar';
     boton4.textContent = 'Deshabilitar Tarjeta';
+    boton4.addEventListener('click',function(){
+        Deshabilitar(caja);
+
+    });
 
     var titulo = document.createElement('h2');
     titulo.textContent = 'Tarjeta';
 
     caja.appendChild(titulo);
+    caja.appendChild(tar);
 
     var lista = document.createElement('ul');
 
     var elemento = document.createElement('li');
     var letra = document.createElement('strong');
-    letra.textContent = 'Modelo de Vehículo';
+    letra.textContent = 'Saldo';
     var spanModelo = document.createElement('span');
-    spanModelo.id = 'modelo-carro';
-    spanModelo.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Modelo';
+    spanModelo.id = 'saldo';
+    spanModelo.textContent = tarjeta && tarjeta.saldo ? `$${parseFloat(tarjeta.saldo)}` : '0';
     elemento.appendChild(letra);
     elemento.appendChild(spanModelo);
     lista.appendChild(elemento);
@@ -152,30 +165,51 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento2.appendChild(spanModelo2);
     lista.appendChild(elemento2);
 
+    var elemento4 = document.createElement('li');
+    var letra4 = document.createElement('strong');
+    letra4.textContent = 'Modelo de Vehículo';
+    var spanModelo4 = document.createElement('span');
+    spanModelo4.id = 'modelo-carro';
+    spanModelo4.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Modelo';
+    elemento4.appendChild(letra4);
+    elemento4.appendChild(spanModelo4);
+    lista.appendChild(elemento4);
+
+    var elemento5 = document.createElement('li');
+    var letra5 = document.createElement('strong');
+    letra5.textContent = 'Tipo: ';
+    var spanModelo5 = document.createElement('span');
+    spanModelo5.id = 'tipo-carro';
+    spanModelo5.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Camioneta';
+    elemento5.appendChild(letra5);
+    elemento5.appendChild(spanModelo5);
+    lista.appendChild(elemento5);
+
+    var elemento6 = document.createElement('li');
+    var letra6 = document.createElement('strong');
+    letra6.textContent = 'Color:';
+    var spanModelo6 = document.createElement('span');
+    spanModelo6.id = 'color-carro';
+    spanModelo6.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Gris';
+    elemento6.appendChild(letra6);
+    elemento6.appendChild(spanModelo6);
+    lista.appendChild(elemento6);
+
     var elemento3 = document.createElement('li');
     var letra3 = document.createElement('strong');
-    letra3.textContent = 'Tarjeta Telepass';
     var spanModelo3 = document.createElement('span');
     spanModelo3.id = 'codigo-telepass';
 
     if (tarjeta && tarjeta.id) spanModelo3.textContent = tarjeta.id;
     else spanModelo3.textContent = await CrearTarjeta();
+
     elemento3.appendChild(letra3);
     elemento3.appendChild(spanModelo3);
-    lista.appendChild(elemento3);
-
-    var elemento4 = document.createElement('li');
-    var letra4 = document.createElement('strong');
-    letra4.textContent = 'Saldo';
-    var spanModelo4 = document.createElement('span');
-    spanModelo4.id = 'saldo';
-    spanModelo4.textContent = tarjeta && tarjeta.saldo ? `$${parseFloat(tarjeta.saldo)}` : '0';
-    elemento4.appendChild(letra4);
-    elemento4.appendChild(spanModelo4);
-    lista.appendChild(elemento4);
+    tar.appendChild(elemento3);
+    
 
     boton2.addEventListener('click', function () {
-        recargarSaldo(spanModelo4, spanModelo3);
+        recargarSaldo(spanModelo, spanModelo3);
     });
 
     caja.appendChild(lista);
@@ -279,7 +313,10 @@ function GuardarCambios(event) {
     }
 }
 
+
+
 async function ListarMovimientos(event) {
+
     var caja = event.target.parentNode;
     const codigoTelepas = caja.querySelector('#codigo-telepass').textContent;
 
@@ -287,8 +324,74 @@ async function ListarMovimientos(event) {
     window.location.href = "./movimientos.html";
 }
 
-function Deshabilitar (){
+function Deshabilitar (caja){
 
+
+    var botonA = caja.querySelector('.eliminar');
+    botonA.textContent = 'Habilitar';
+    botonA.removeEventListener('click',function(){
+        Deshabilitar(caja);
+    });
+
+    botonA.addEventListener('click',function(){
+        Habilitar(caja);
+    })
+
+    var titulo2 = caja.querySelector('h2');
+    titulo2.textContent = "Tarjeta Desabilitada";
+
+    var quitarBonotes = caja.querySelectorAll('button');
+    quitarBonotes.forEach(function(boton){
+        if(boton.className !== 'eliminar'){
+            boton.remove();
+        }
+    });
+
+    var ubicacion2 = document.getElementById('deshabilitadas');
+    ubicacion2.appendChild(caja);
+
+}
+
+function Habilitar (caja){
+    var botonDeshabilitar = caja.querySelector('.eliminar');
+    botonDeshabilitar.textContent = 'Deshabilitar Tarjeta';
+    botonDeshabilitar.removeEventListener('click', function () {
+        Habilitar(caja);
+    });
+    botonDeshabilitar.addEventListener('click', function () {
+        Deshabilitar(caja);
+    });
+
+    
+    var titulo = caja.querySelector('h2');
+    titulo.textContent = 'Tarjeta';
+
+    
+    var botonEditar = document.createElement('button');
+    botonEditar.className = 'editar';
+    botonEditar.textContent = 'Editar Tarjeta';
+    botonEditar.addEventListener('click', EditarTarjeta);
+    caja.appendChild(botonEditar);
+
+    var botonRecargar = document.createElement('button');
+    botonRecargar.className = 'agregar';
+    botonRecargar.textContent = 'Recargar Saldo';
+    var spanModelo = caja.querySelector('#saldo');
+    var spanModelo3 = caja.querySelector('#codigo-telepass');
+    botonRecargar.addEventListener('click', function () {
+        recargarSaldo(spanModelo, spanModelo3);
+    });
+    caja.appendChild(botonRecargar);
+
+    var botonMovimientos = document.createElement('button');
+    botonMovimientos.className = 'movi';
+    botonMovimientos.textContent = 'Movimientos';
+    botonMovimientos.addEventListener('click', ListarMovimientos);
+    caja.appendChild(botonMovimientos);
+
+    
+    var ubicacion = document.getElementById('tarjetas');
+    ubicacion.appendChild(caja);
 }
 
 //#region Backend
