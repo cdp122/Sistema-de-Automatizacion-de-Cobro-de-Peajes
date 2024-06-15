@@ -102,7 +102,7 @@ async function Devolucion(event) {
             }
         });
         if (response.ok) {
-            window.location.href = "./perfil.html"
+            window.location.href = "../html/perfil.html"
         } else {
             alert(result.message);
         }

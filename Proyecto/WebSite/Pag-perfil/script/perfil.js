@@ -358,7 +358,7 @@ async function Validar() {
         });
         if (response.ok) {
             const data = await response.json();
-            if (data.message) window.location.href = "../Error/PagError404.html";
+            if (data.message) window.location.href = "../../Error/PagError404.html";
 
             document.getElementById("full-name").innerHTML = data.nombre;
             document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo).toFixed(2);
@@ -400,7 +400,7 @@ async function ActualizarPerfil(cedula, telefono, correo) {
         });
         if (response.ok) {
             alert("Datos actualizados se cerrará la sesión para que los cambios se apliquen correctamente");
-            window.location.href = "../LogIn/Login.html";
+            window.location.href = "../../LogIn/html/Login.html";
         } else {
             alert(result.message);
             return false;
