@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+*{
+    font-family: 'Bebas Neue', sans-serif;   
+}
+body{
+    background-color: #212121;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.izq{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.menuContainer {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+        
+}
+.menuContainer .navbar ul li {
+    position: relative;
+    float: left;
+    text-decoration: none;
+    list-style: none;
+    
+}
+
+.menuContainer .navbar ul li a {
+    font-size: 20px;
+    padding: 20px;
+    color: #000000;
+    display: block;
+    text-decoration: none;
+}   
+.menuContainer .izq .logo{
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    background: url('../Assets/Logo.png') no-repeat 50% 50%;
+    background-size: cover;
+    margin-left: 20px;
+}
+
+.menuContainer .navbar ul li a:hover {
+    color: rgb(255, 230, 0);
+}
+.full {
+    width: 100%;
+    height: 100%;
+    background: url('../Assets/Panorámica.webp') no-repeat 50% 50%;
+    background-size: cover;
+    display: table;
+    margin: 0;
+    top: 0;
+}
+.day {
+    background: url('../Assets/Panorámica.webp') no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.night {
+    background: url('../Assets/PanorámicaNoche.webp') no-repeat 50% 50%;
+    background-size: cover;
+    
+}
+.full-inner {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width: 500px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    background: linear-gradient(#ffffff72, #ffffff37) padding-box,
+              linear-gradient(145deg, transparent 35%,  #ef112789, #eb9046d0) border-box;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 16px;
+    transition: width 0.5s, height 0.5s, font-size 0.5s;
+}
+
+.contentNight{
+    width: 500px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    background: linear-gradient(#ffffff72, #ffffff37) padding-box,
+              linear-gradient(145deg, transparent 35%,  #510e6594, #011b8fea) border-box;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 16px;
+    transition: width 0.5s, height 0.5s, font-size 0.5s;
+}
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: 'Bebas Neue', sans-serif;
+}
+  
+.btn {
+    width: 150px;   
+    height: 60px;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 24px;
+    color: white;
+    margin-top: 10px;
+    transition: background-color 0.5s, font-size 0.5s;
+}
+.btnNight{
+ width: 150px;   
+    height: 60px;
+    border-radius: 50px;
+    background-image: linear-gradient(135deg, #510e65 0%, #011b8fd0 100%);
+    box-shadow: 0 20px 30px -6px rgba(23, 32, 133, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 24px;
+    color: white;
+    margin-top: 10px;
+    transition: background-color 0.5s, font-size 0.5s;
+}
+  
+  .btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+  
+  .btn:active {
+    opacity: 0.5;
+  }
+
+  .username, .contraseña {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    transition: font-size 0.5s;
+    
+    
+}
+.username:focus{
+    animation: borderAnimationDay 2s infinite;
+    border: solid 5px #d48d07;
+}
+.contraseña:focus{
+    animation: borderAnimationDay 2s infinite;
+    border: solid 5px #d48d07;
+}
+
+.usernameNight:focus {
+    animation: borderAnimation 2s infinite;
+    border: solid 5px #691183;
+}
+
+.contraseñaNight:focus {
+    animation: borderAnimation 2s infinite;
+    border: solid 5px #691183;
+}
+
+
+.checkbox {
+    width: 223px;
+    height: 60px;
+    background-color: #d0d0d0;
+    border-radius: 30px;
+    position: relative;
+    color: black;
+    overflow: hidden;
+  }
+  
+  #checkbox_toggle {
+    display: none;
+  }
+  
+  .checkbox .toggle {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    border-radius: 30px;
+    left: 5px;
+    cursor: pointer;
+    background: linear-gradient(40deg, #FF0080,#FF8C00 70%);
+    transition: 0.4s;
+    box-shadow: 0px 0px 3px rgb(255, 255, 20), 0px 0px 5px rgb(255, 255, 20);
+  }
+  
+  .checkbox .slide {
+    width: 230px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+  }
+  
+  .checkbox .slide .text {
+    font-size: 16px;
+    font-weight: 700;
+    z-index: 100;
+    cursor: pointer;
+  }
+  
+  .check:checked + .checkbox .slide .toggle {
+    transform: translateX(113px);
+    background: linear-gradient(40deg, #8983F7, #A3DAFB 70%);
+    box-shadow: -0px -0px 10px #8983F7, -0px -0px 3px #8983F7;
+  }
+  
+  .check:checked + .checkbox .slide {
+    background-color: #0a1929;
+    color: #8116e4;
+  }
+
+@keyframes borderAnimation {
+    0% {
+        border-color: #691183;
+    }
+    50% {
+        border-color: #a379ff;
+    }
+    100% {
+        border-color: #4f0d63;
+    }
+}
+@keyframes borderAnimationDay {
+    0% {
+        border-color: #ef9608;
+    }
+    50% {
+        border-color: #e0d35e;
+    }
+    100% {
+        border-color: #ff9d00;
+    }
+}
+/* Dispositivos móviles pequeños (teléfonos) */
+@media (min-width: 320px) {
+    .content {
+        width: 200px;
+        height: 300px;
+    }
+    .menuContainer nav{
+        visibility: hidden;
+    }
+}
+
+/* Dispositivos móviles medianos (teléfonos más grandes) */
+@media (min-width: 375px) {
+    .content {
+        width: 270px;
+        height: 370px;
+    }
+    .menuContainer nav{
+        visibility: hidden;
+    }
+}
+
+/* Dispositivos móviles grandes (teléfonos grandes y pequeños tabletas) */
+@media (min-width: 425px) {
+    .content {
+        width: 300px;
+        height: 390px;
+    }
+    .form-group {
+        font-size: 25px;
+    }
+    .menuContainer nav{
+        visibility: hidden;
+    }
+}
+
+/* Dispositivos de tabletas */
+@media (min-width: 768px) {
+    .content {
+        width: 400px;
+        height: 460px;
+    }
+    .form-group {
+        font-size: 30px;
+    }
+    .menuContainer nav{
+        visibility: hidden;
+    }
+}
+
+/* Portátiles */
+@media (min-width: 1040px) {
+    .content {
+        width: 420px;
+        height: 500px;
+    }
+    .form-group {
+        font-size: 40px;
+    }
+    .menuContainer nav{
+        visibility:visible;
+    }
+}
+
+/* Portátiles grandes y pantallas de escritorio */
+@media (min-width: 1440px) {
+    .content {
+        width: 700px;
+        height: 560px;
+    }
+    .form-group {
+        font-size: 50px;
+    }
+    .menuContainer nav{
+        visibility:visible;
+    }
+}
+  /*
+Morado claro #8F1299
+Morado oscuro #72148E
+Rosa Claro #F970AE
+Palo de Rosa #EF2A78
+Rojo intenso #EF1126
+Naranja #EB8F46
+Amarillo #FBDA70 
+  */
