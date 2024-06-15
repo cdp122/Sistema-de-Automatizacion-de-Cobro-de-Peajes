@@ -18,7 +18,7 @@ var nums, tarjetaID;
 
 async function recargarNums() {
     let num = await conexion.ConseguirNumFilas("tb_movimientos");
-    nums = 10000 + parseInt(num[0].TABLE_ROWS);
+    nums = 1000000000 + parseInt(num[0].TABLE_ROWS);
 }
 
 async function recargarTarjetaID() {
