@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil del Usuario</title>
-    <link rel="stylesheet" href="../Pag-perfil/perfil.css">
-    <link rel="icon" href="../Assets/Logo.png" type="imagen/png" />
+    <link rel="stylesheet" href="../css/perfil.css">
+    <link rel="icon" href="../../Assets/Logo.png" type="imagen/png" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     </style>
@@ -17,7 +17,7 @@
     <div class="overlay"></div>
     <div class="perfil-container">
         <div class="perfil-header">
-            <img src="../Assets/Usuario.png" alt="Foto de Perfil" id="profile-pic">
+            <img src="../../Assets/Usuario.png" alt="Foto de Perfil" id="profile-pic">
             <h1 id="full-name">Nombre de Usuario</h1>
             <div class="balance">
                 <p>Saldo Total:</p>
@@ -43,10 +43,9 @@
 
            
         </div><br>
-        
         <br>
         <button class="agregar" onclick="manejarTarjetas()" >Agregar Tarjeta</button><br>
-        <h1>Deshabilitadas</h1>
+        <h1 id="tar2">Tarjetas Deshabilitadas</h1>
         <div id="deshabilitadas">
             
            
@@ -56,7 +55,7 @@
         </footer>
     </div>
     <button id="regresar-menu" onclick="CerrarSesion()">Cerrar Sesión</button>
-    <script src="../Pag-perfil/perfil.js"></script>
+    <script src="../script/perfil.js"></script>
 </body>
 
 </html>

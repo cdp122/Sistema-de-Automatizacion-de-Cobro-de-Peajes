@@ -54,7 +54,7 @@ async function Validar() {
 
             if (result.tipo === "Cliente") {
                 localStorage.setItem('token', result.token);
-                window.location.href = "../Pag-perfil/perfil.html";
+                window.location.href = "../../Pag-perfil/html/perfil.html";
             } else if (result.tipo === "Empleado") {
                 alert("Estamos trabajando en la página de Empleados. Así que aún no es accesible...");
             } else {
