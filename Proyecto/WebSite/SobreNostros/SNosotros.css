@@ -1,0 +1,119 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #004080;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header .back-button {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.intro,
+.who-we-are,
+.mission-vision,
+.values,
+.services,
+.important-info {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.intro-image {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.who-we-are,
+.mission-vision,
+.values,
+.important-info {
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.mission-vision {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.mission,
+.vision {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.values ul {
+    list-style: none;
+    padding: 0;
+}
+
+.values ul li {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.services {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.service-card img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+footer {
+    background-color: #004080;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+}
