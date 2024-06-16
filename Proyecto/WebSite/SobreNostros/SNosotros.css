@@ -1,42 +1,57 @@
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background: url('../Assets/PanorámicaNoche.webp') no-repeat center center fixed;
+    background-size: cover;
 }
 
 header {
-    background-color: #004080;
+    background-color: rgba(114, 20, 142, 0.8);
     color: white;
     padding: 15px 20px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 header nav {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-header .back-button {
+header .boton-regreso {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    background-color: #0066cc;
+    background-color: rgba(143, 18, 153, 0.8);
     border-radius: 5px;
     font-weight: 500;
 }
 
+header .boton-regreso:hover {
+    background-color: #ffffff;
+    color: #8F1299;
+}
+
 .intro,
-.who-we-are,
-.mission-vision,
-.values,
-.services,
-.important-info {
+.quienes-somos,
+.mision-vision,
+.valores,
+.servicios,
+.info-importante {
     padding: 20px;
     margin: 0 auto;
     max-width: 1200px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.intro-image {
+.imagen-inicio {
     display: block;
     margin: 0 auto 20px;
     max-width: 100%;
@@ -44,50 +59,38 @@ header .back-button {
     border-radius: 10px;
 }
 
-.who-we-are,
-.mission-vision,
-.values,
-.important-info {
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.mission-vision {
+.mision-vision {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.mission,
+.mision,
 .vision {
     flex: 1;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.values ul {
-    list-style: none;
-    padding: 0;
-}
-
-.values ul li {
-    background-color: white;
+.valores ul li {
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.services {
-    background-color: #f9f9f9;
+.servicios {
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.service-card {
-    background-color: white;
+.servicio-grua {
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -95,9 +98,11 @@ header .back-button {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.service-card img {
+.servicio-grua img {
     width: 100%;
     max-width: 300px;
     height: auto;
@@ -105,15 +110,63 @@ header .back-button {
     margin-bottom: 15px;
 }
 
-.service-card h3 {
+.servicio-grua h3 {
     margin: 10px 0;
-    font-size: 1.2em;
+    font-size: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 footer {
-    background-color: #004080;
+    background-color: rgba(0, 64, 128, 0.8);
     color: white;
     text-align: center;
     padding: 15px 0;
     margin-top: 20px;
+}
+
+/* Animaciones */
+.desvanecer {
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+}
+
+.deslizar {
+    transform: translateX(-100%);
+    animation: deslizar 1s forwards;
+}
+
+.resaltar {
+    animation: resaltar 1.5s ease-in-out forwards;
+}
+
+@keyframes desvanecer {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes deslizar {
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes resaltar {
+
+    to {
+        background: transparent;
+    }
+}
+
+/* Interacciones */
+.servicio-grua:hover {
+    transform: scale(1.05);
+}
+
+.quienes-somos:hover,
+.mision:hover,
+.vision:hover,
+.valores ul li:hover,
+.info-importante:hover {
+    transform: scale(1.02);
 }
