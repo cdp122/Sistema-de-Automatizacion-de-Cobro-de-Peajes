@@ -8,6 +8,32 @@ const taxRateValue = document.getElementById('tax-rate-value');
 const taxValue = document.getElementById('tax-value');
 const totalValue = document.getElementById('total-value');
 
+// Validar fecha y hora automaticamente
+document.addEventListener("DOMContentLoaded", function () {
+  // Obtener la fecha y hora actual
+  const now = new Date();
+
+  // Formatear la fecha en el formato YYYY-MM-DD
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses son de 0 a 11
+  const day = String(now.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+
+  // Formatear la hora en el formato HH:MM:SS
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+  // Configurar la fecha y la hora en los campos correspondientes
+  document.getElementById('fechaFactura').value = formattedDate;
+  document.getElementById('horaFactura').value = formattedTime.slice(0, 5); // solo HH:MM
+
+  // Opcional: Mostrar los segundos en un campo separado
+  // document.getElementById('segundosFactura').value = seconds;
+});
+
+
 // Definir productos y precios
 const products = {
   "Producto1": { name: "Manzanas", price: 2.00 },
@@ -21,8 +47,8 @@ const products = {
 
 // Función para agregar una nueva fila a la tabla
 function addRow() {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
+  const newRow = document.createElement('tr');
+  newRow.innerHTML = `
       <td>
         <select class="product-select">
           <option value="">Productos</option>
@@ -34,9 +60,9 @@ function addRow() {
       <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
       <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
     `;
-    itemRows.appendChild(newRow);
-    attachInputListeners(newRow);
-    updateTotals();
+  itemRows.appendChild(newRow);
+  attachInputListeners(newRow);
+  updateTotals();
 }
 
 // Función para adjuntar los event listeners a los campos de entrada
@@ -48,7 +74,7 @@ function attachInputListeners(row) {
 
   quantityInput.addEventListener('input', updateTotals);
   quantityInput.addEventListener('change', updateTotals);
-  productSelect.addEventListener('change', function() {
+  productSelect.addEventListener('change', function () {
     const selectedProduct = this.value;
     const price = products[selectedProduct] ? products[selectedProduct].price : 0;
     priceInput.value = price.toFixed(2);
@@ -56,7 +82,7 @@ function attachInputListeners(row) {
     updateTotals();
   });
 
-  newProductInput.addEventListener('input', function() {
+  newProductInput.addEventListener('input', function () {
     priceInput.readOnly = this.value.trim() === '';
     if (this.value.trim() === '') {
       priceInput.value = products[productSelect.value].price.toFixed(2);

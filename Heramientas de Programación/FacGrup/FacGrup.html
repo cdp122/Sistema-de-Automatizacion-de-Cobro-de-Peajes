@@ -10,10 +10,11 @@
 <body>
   <main>
     <header>
-      <h1>Pana del Sol</h1>
-      <div class="invoice-info">
-        <p>NÚMERO DE FACTURA: <input type="text" id="invoice-number" placeholder="Ingrese el número de factura"></p>
-        <p>FECHA DE FACTURA: <input type="text" id="invoice-date" placeholder="MM/DD/AAAA"></p>
+      <h1>FACTURA</h1>
+      <div class="invoice-info">  
+        <p>NÚMERO DE FACTURA:</p>
+        <p>FECHA DE FACTURA: <input type="date" id="fechaFactura" name="fechaFactura" required readonly></p>
+        <p>HORA DE FACTURA: <input type="time" id="horaFactura" name="horaFactura" required readonly></p>
       </div>
     </header>
 
