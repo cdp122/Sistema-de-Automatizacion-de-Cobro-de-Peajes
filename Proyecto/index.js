@@ -27,12 +27,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'WebSite/index.html'));
+    res.sendFile(path.resolve(__dirname, 'WebSite', 'Home', 'HTML', 'index.html'));
 });
 //#endregion
 
 //#region Cargar archivos
 app.use(express.static(path.join(__dirname, 'WebSite')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Home')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Home', 'HTML')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
