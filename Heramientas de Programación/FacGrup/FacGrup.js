@@ -17,6 +17,8 @@ const productNameInput = document.getElementById('product-name');
 const productPriceInput = document.getElementById('product-price');
 const productStockInput = document.getElementById('product-stock');
 const saveProductButton = document.getElementById('save-product');
+const cancelProductButton = document.getElementById('cancel-product'); // Nuevo botón de cancelar
+const productSelect = document.getElementById('product-select'); // Nuevo select para modificar producto
 
 // Inicializar número de factura
 let facturaNumero = localStorage.getItem('facturaNumero') ? parseInt(localStorage.getItem('facturaNumero')) : 0;
@@ -54,8 +56,13 @@ function saveProductsToLocalStorage() {
 }
 
 // Función para mostrar el formulario de productos
-function showProductForm() {
+function showProductForm(isModify = false) {
   productForm.style.display = 'block';
+  productNameInput.style.display = isModify ? 'none' : 'block';
+  productSelect.style.display = isModify ? 'block' : 'none';
+  if (isModify) {
+    updateModifyProductSelect();
+  }
 }
 
 // Función para ocultar el formulario de productos
@@ -64,9 +71,18 @@ function hideProductForm() {
   productNameInput.value = '';
   productPriceInput.value = '';
   productStockInput.value = '';
+  productSelect.value = '';
 }
 
-// Función para actualizar el select de productos
+// Función para actualizar el select de productos en el formulario de modificación
+function updateModifyProductSelect() {
+  productSelect.innerHTML = `
+    <option value="">Seleccione un producto</option>
+    ${products.map(product => `<option value="${product.id}">${product.name}</option>`).join('')}
+  `;
+}
+
+// Función para actualizar el select de productos en la tabla
 function updateProductSelects() {
   const productSelects = document.querySelectorAll('.product-select');
   productSelects.forEach(select => {
@@ -97,10 +113,10 @@ function addProduct() {
 
 // Función para modificar un producto existente
 function modifyProduct() {
-  const productName = productNameInput.value.trim();
+  const selectedProductId = productSelect.value;
   const productPrice = parseFloat(productPriceInput.value.trim());
   const productStock = parseInt(productStockInput.value.trim());
-  const product = products.find(p => p.name.toLowerCase() === productName.toLowerCase());
+  const product = products.find(p => p.id === selectedProductId);
   if (product && !isNaN(productPrice) && !isNaN(productStock)) {
     product.price = productPrice;
     product.stock = productStock;
@@ -231,17 +247,20 @@ reducirFacturaButton.addEventListener('click', reducirNumeroFactura);
 eliminarFacturaButton.addEventListener('click', limpiarFactura);
 
 // Asignar eventos click a los botones "Agregar Producto" y "Modificar Producto"
-addProductButton.addEventListener('click', showProductForm);
-modifyProductButton.addEventListener('click', showProductForm);
+addProductButton.addEventListener('click', () => showProductForm(false));
+modifyProductButton.addEventListener('click', () => showProductForm(true));
 
 // Asignar evento click al botón "Guardar Producto"
 saveProductButton.addEventListener('click', function() {
-  if (addProductButton.style.display !== 'none') {
+  if (productNameInput.style.display !== 'none') {
     addProduct();
-  } else if (modifyProductButton.style.display !== 'none') {
+  } else if (productSelect.style.display !== 'none') {
     modifyProduct();
   }
 });
+
+// Asignar evento click al botón "Cancelar"
+cancelProductButton.addEventListener('click', hideProductForm);
 
 // Función para calcular y actualizar los totales
 function updateTotals() {
