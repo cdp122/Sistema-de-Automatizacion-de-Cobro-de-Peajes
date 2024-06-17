@@ -15,6 +15,7 @@ const modifyProductButton = document.getElementById('modify-product');
 const productForm = document.getElementById('product-form');
 const productNameInput = document.getElementById('product-name');
 const productPriceInput = document.getElementById('product-price');
+const productStockInput = document.getElementById('product-stock');
 const saveProductButton = document.getElementById('save-product');
 
 // Inicializar número de factura
@@ -36,16 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('horaFactura').value = formattedTime.slice(0, 5);
 });
 
-// Definir productos y precios
-let products = {
-  "Producto1": { name: "Manzanas", price: 2.00 },
-  "Producto2": { name: "Platanos", price: 1.50 },
-  "Producto3": { name: "Peras", price: 3.50 },
-  "Producto4": { name: "Limas", price: 2.50 },
-  "Producto5": { name: "Uvas", price: 4.10 },
-  "Producto6": { name: "Kiwis", price: 4.50 },
-  "Producto7": { name: "Sandias", price: 1.10 }
-};
+// Cargar productos desde localStorage o usar los productos predeterminados
+let products = JSON.parse(localStorage.getItem('products')) || [
+  { id: "Producto1", name: "Manzanas", price: 2.00, stock: 10 },
+  { id: "Producto2", name: "Platanos", price: 1.50, stock: 10 },
+  { id: "Producto3", name: "Peras", price: 3.50, stock: 10 },
+  { id: "Producto4", name: "Limas", price: 2.50, stock: 10 },
+  { id: "Producto5", name: "Uvas", price: 4.10, stock: 10 },
+  { id: "Producto6", name: "Kiwis", price: 4.50, stock: 10 },
+  { id: "Producto7", name: "Sandias", price: 1.10, stock: 10 }
+];
+
+// Guardar productos en localStorage
+function saveProductsToLocalStorage() {
+  localStorage.setItem('products', JSON.stringify(products));
+}
 
 // Función para mostrar el formulario de productos
 function showProductForm() {
@@ -57,19 +63,35 @@ function hideProductForm() {
   productForm.style.display = 'none';
   productNameInput.value = '';
   productPriceInput.value = '';
+  productStockInput.value = '';
+}
+
+// Función para actualizar el select de productos
+function updateProductSelects() {
+  const productSelects = document.querySelectorAll('.product-select');
+  productSelects.forEach(select => {
+    select.innerHTML = `
+      <option value="">Productos</option>
+      ${products.map(product => `<option value="${product.id}">${product.name}</option>`).join('')}
+    `;
+  });
 }
 
 // Función para agregar un nuevo producto
 function addProduct() {
   const productName = productNameInput.value.trim();
   const productPrice = parseFloat(productPriceInput.value.trim());
-  if (productName && !isNaN(productPrice)) {
-    const productId = `Producto${Object.keys(products).length + 1}`;
-    products[productId] = { name: productName, price: productPrice };
+  const productStock = parseInt(productStockInput.value.trim());
+  if (productName && !isNaN(productPrice) && !isNaN(productStock)) {
+    const productId = `Producto${products.length + 1}`;
+    const newProduct = { id: productId, name: productName, price: productPrice, stock: productStock };
+    products.push(newProduct);
     alert('Producto agregado exitosamente');
     hideProductForm();
+    updateProductSelects();
+    saveProductsToLocalStorage();
   } else {
-    alert('Por favor, ingrese un nombre y un precio válido para el producto');
+    alert('Por favor, ingrese un nombre, precio y stock válido para el producto');
   }
 }
 
@@ -77,13 +99,17 @@ function addProduct() {
 function modifyProduct() {
   const productName = productNameInput.value.trim();
   const productPrice = parseFloat(productPriceInput.value.trim());
-  const productKey = Object.keys(products).find(key => products[key].name.toLowerCase() === productName.toLowerCase());
-  if (productKey && !isNaN(productPrice)) {
-    products[productKey].price = productPrice;
+  const productStock = parseInt(productStockInput.value.trim());
+  const product = products.find(p => p.name.toLowerCase() === productName.toLowerCase());
+  if (product && !isNaN(productPrice) && !isNaN(productStock)) {
+    product.price = productPrice;
+    product.stock = productStock;
     alert('Producto modificado exitosamente');
     hideProductForm();
+    updateProductSelects();
+    saveProductsToLocalStorage();
   } else {
-    alert('Producto no encontrado o precio inválido');
+    alert('Producto no encontrado, precio o stock inválido');
   }
 }
 
@@ -91,18 +117,18 @@ function modifyProduct() {
 function addRow() {
   const newRow = document.createElement('tr');
   newRow.innerHTML = `
-      <td>
-        <select class="product-select">
-          <option value="">Productos</option>
-          ${Object.entries(products).map(([key, product]) => `<option value="${key}">${product.name}</option>`).join('')}
-        </select>
-      </td>
-      <td><input type="text" placeholder="Nuevo Producto" class="new-product-input"></td>
-      <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
-      <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
-      <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
-      <td><button class="delete-row-btn">Eliminar fila</button></td>
-    `;
+    <td>
+      <select class="product-select">
+        <option value="">Productos</option>
+        ${products.map(product => `<option value="${product.id}">${product.name}</option>`).join('')}
+      </select>
+    </td>
+    <td><input type="text" placeholder="Nuevo Producto" class="new-product-input"></td>
+    <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
+    <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
+    <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
+    <td><button class="delete-row-btn">Eliminar fila</button></td>
+  `;
   itemRows.appendChild(newRow);
   attachInputListeners(newRow);
   attachDeleteListener(newRow);
@@ -119,8 +145,8 @@ function attachInputListeners(row) {
   quantityInput.addEventListener('input', updateTotals);
   quantityInput.addEventListener('change', updateTotals);
   productSelect.addEventListener('change', function () {
-    const selectedProduct = this.value;
-    const price = products[selectedProduct] ? products[selectedProduct].price : 0;
+    const selectedProduct = products.find(product => product.id === this.value);
+    const price = selectedProduct ? selectedProduct.price : 0;
     priceInput.value = price.toFixed(2);
     priceInput.readOnly = newProductInput.value.trim() === '';
     updateTotals();
@@ -129,7 +155,8 @@ function attachInputListeners(row) {
   newProductInput.addEventListener('input', function () {
     priceInput.readOnly = this.value.trim() === '';
     if (this.value.trim() === '') {
-      priceInput.value = products[productSelect.value].price.toFixed(2);
+      const selectedProduct = products.find(product => product.id === productSelect.value);
+      priceInput.value = selectedProduct ? selectedProduct.price.toFixed(2) : '0.00';
     }
   });
 }
@@ -187,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     attachInputListeners(row);
     attachDeleteListener(row);
   });
+  updateProductSelects();
   updateTotals();
 });
 
