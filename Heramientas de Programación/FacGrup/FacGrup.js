@@ -12,6 +12,7 @@ const taxValue = document.getElementById('tax-value');
 const totalValue = document.getElementById('total-value');
 const addProductButton = document.getElementById('add-product');
 const modifyProductButton = document.getElementById('modify-product');
+const deleteProductButton = document.getElementById('delete-product'); // Nuevo botón para eliminar producto
 const productForm = document.getElementById('product-form');
 const productNameInput = document.getElementById('product-name');
 const productPriceInput = document.getElementById('product-price');
@@ -56,11 +57,14 @@ function saveProductsToLocalStorage() {
 }
 
 // Función para mostrar el formulario de productos
-function showProductForm(isModify = false) {
+function showProductForm(action) {
   productForm.style.display = 'block';
-  productNameInput.style.display = isModify ? 'none' : 'block';
-  productSelect.style.display = isModify ? 'block' : 'none';
-  if (isModify) {
+  productNameInput.style.display = action === 'add' ? 'block' : 'none';
+  productSelect.style.display = action !== 'add' ? 'block' : 'none';
+  productPriceInput.style.display = action !== 'delete' ? 'block' : 'none';
+  productStockInput.style.display = action !== 'delete' ? 'block' : 'none';
+  saveProductButton.dataset.action = action;
+  if (action === 'modify' || action === 'delete') {
     updateModifyProductSelect();
   }
 }
@@ -126,6 +130,21 @@ function modifyProduct() {
     saveProductsToLocalStorage();
   } else {
     alert('Producto no encontrado, precio o stock inválido');
+  }
+}
+
+// Función para eliminar un producto existente
+function deleteProduct() {
+  const selectedProductId = productSelect.value;
+  const productIndex = products.findIndex(p => p.id === selectedProductId);
+  if (productIndex !== -1) {
+    products.splice(productIndex, 1);
+    alert('Producto eliminado exitosamente');
+    hideProductForm();
+    updateProductSelects();
+    saveProductsToLocalStorage();
+  } else {
+    alert('Producto no encontrado');
   }
 }
 
@@ -246,16 +265,20 @@ reducirFacturaButton.addEventListener('click', reducirNumeroFactura);
 // Asignar evento click al botón "Eliminar factura"
 eliminarFacturaButton.addEventListener('click', limpiarFactura);
 
-// Asignar eventos click a los botones "Agregar Producto" y "Modificar Producto"
-addProductButton.addEventListener('click', () => showProductForm(false));
-modifyProductButton.addEventListener('click', () => showProductForm(true));
+// Asignar eventos click a los botones "Agregar Producto", "Modificar Producto" y "Eliminar Producto"
+addProductButton.addEventListener('click', () => showProductForm('add'));
+modifyProductButton.addEventListener('click', () => showProductForm('modify'));
+deleteProductButton.addEventListener('click', () => showProductForm('delete'));
 
 // Asignar evento click al botón "Guardar Producto"
 saveProductButton.addEventListener('click', function() {
-  if (productNameInput.style.display !== 'none') {
+  const action = saveProductButton.dataset.action;
+  if (action === 'add') {
     addProduct();
-  } else if (productSelect.style.display !== 'none') {
+  } else if (action === 'modify') {
     modifyProduct();
+  } else if (action === 'delete') {
+    deleteProduct();
   }
 });
 
