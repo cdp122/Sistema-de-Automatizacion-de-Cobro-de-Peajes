@@ -1,31 +1,3 @@
-// Obtener referencias a los elementos del DOM
-const itemRows = document.getElementById('item-rows');
-const addRowButton = document.getElementById('add-row');
-const enviarFacturaButton = document.getElementById('enviar-factura');
-const reducirFacturaButton = document.getElementById('reducir-factura');
-const eliminarFacturaButton = document.getElementById('eliminar-factura');
-const numeroFactura = document.getElementById('numeroFactura');
-const subtotalValue = document.getElementById('subtotal-value');
-const discountValue = document.getElementById('discount-value');
-const taxRateValue = document.getElementById('tax-rate-value');
-const taxValue = document.getElementById('tax-value');
-const totalValue = document.getElementById('total-value');
-const addProductButton = document.getElementById('add-product');
-const modifyProductButton = document.getElementById('modify-product');
-const deleteProductButton = document.getElementById('delete-product'); // Nuevo botón para eliminar producto
-const productForm = document.getElementById('product-form');
-const productNameInput = document.getElementById('product-name');
-const productPriceInput = document.getElementById('product-price');
-const productStockInput = document.getElementById('product-stock');
-const saveProductButton = document.getElementById('save-product');
-const cancelProductButton = document.getElementById('cancel-product'); // Nuevo botón de cancelar
-const productSelect = document.getElementById('product-select'); // Nuevo select para modificar producto
-
-// Inicializar número de factura
-let facturaNumero = localStorage.getItem('facturaNumero') ? parseInt(localStorage.getItem('facturaNumero')) : 0;
-numeroFactura.textContent = facturaNumero.toString().padStart(5, '0');
-
-// Validar fecha y hora automáticamente
 document.addEventListener("DOMContentLoaded", function () {
   const now = new Date();
   const year = now.getFullYear();
@@ -38,281 +10,467 @@ document.addEventListener("DOMContentLoaded", function () {
   const formattedTime = `${hours}:${minutes}:${seconds}`;
   document.getElementById('fechaFactura').value = formattedDate;
   document.getElementById('horaFactura').value = formattedTime.slice(0, 5);
-});
 
-// Cargar productos desde localStorage o usar los productos predeterminados
-let products = JSON.parse(localStorage.getItem('products')) || [
-  { id: "Producto1", name: "Manzanas", price: 2.00, stock: 10 },
-  { id: "Producto2", name: "Platanos", price: 1.50, stock: 10 },
-  { id: "Producto3", name: "Peras", price: 3.50, stock: 10 },
-  { id: "Producto4", name: "Limas", price: 2.50, stock: 10 },
-  { id: "Producto5", name: "Uvas", price: 4.10, stock: 10 },
-  { id: "Producto6", name: "Kiwis", price: 4.50, stock: 10 },
-  { id: "Producto7", name: "Sandias", price: 1.10, stock: 10 }
-];
+  const addProductButton = document.getElementById('add-product');
+  const modifyProductButton = document.getElementById('modify-product');
+  const deleteProductButton = document.getElementById('delete-product');
+  const saveProductButton = document.getElementById('save-product');
+  const cancelProductButton = document.getElementById('cancel-product');
+  const enviarFacturaButton = document.getElementById('enviar-factura');
+  const cedulaClienteInput = document.getElementById('client-id');
+  const productForm = document.getElementById('product-form');
+  const productSelect = document.getElementById('product-select');
+  let currentAction = 'add';
+  let invoiceCounter = 1; // Inicializa el contador de facturas
 
-// Guardar productos en localStorage
-function saveProductsToLocalStorage() {
-  localStorage.setItem('products', JSON.stringify(products));
-}
+  addProductButton.addEventListener('click', () => showProductForm('add'));
+  modifyProductButton.addEventListener('click', () => showProductForm('modify'));
+  deleteProductButton.addEventListener('click', () => showProductForm('delete'));
 
-// Función para mostrar el formulario de productos
-function showProductForm(action) {
-  productForm.style.display = 'block';
-  productNameInput.style.display = action === 'add' ? 'block' : 'none';
-  productSelect.style.display = action !== 'add' ? 'block' : 'none';
-  productPriceInput.style.display = action !== 'delete' ? 'block' : 'none';
-  productStockInput.style.display = action !== 'delete' ? 'block' : 'none';
-  saveProductButton.dataset.action = action;
-  if (action === 'modify' || action === 'delete') {
-    updateModifyProductSelect();
-  }
-}
-
-// Función para ocultar el formulario de productos
-function hideProductForm() {
-  productForm.style.display = 'none';
-  productNameInput.value = '';
-  productPriceInput.value = '';
-  productStockInput.value = '';
-  productSelect.value = '';
-}
-
-// Función para actualizar el select de productos en el formulario de modificación
-function updateModifyProductSelect() {
-  productSelect.innerHTML = `
-    <option value="">Seleccione un producto</option>
-    ${products.map(product => `<option value="${product.id}">${product.name}</option>`).join('')}
-  `;
-}
-
-// Función para actualizar el select de productos en la tabla
-function updateProductSelects() {
-  const productSelects = document.querySelectorAll('.product-select');
-  productSelects.forEach(select => {
-    select.innerHTML = `
-      <option value="">Productos</option>
-      ${products.map(product => `<option value="${product.id}">${product.name}</option>`).join('')}
-    `;
+  saveProductButton.addEventListener('click', saveProduct);
+  cancelProductButton.addEventListener('click', () => {
+    productForm.style.display = 'none';
   });
-}
 
-// Función para agregar un nuevo producto
-function addProduct() {
-  const productName = productNameInput.value.trim();
-  const productPrice = parseFloat(productPriceInput.value.trim());
-  const productStock = parseInt(productStockInput.value.trim());
-  if (productName && !isNaN(productPrice) && !isNaN(productStock)) {
-    const productId = `Producto${products.length + 1}`;
-    const newProduct = { id: productId, name: productName, price: productPrice, stock: productStock };
-    products.push(newProduct);
-    alert('Producto agregado exitosamente');
-    hideProductForm();
-    updateProductSelects();
-    saveProductsToLocalStorage();
-  } else {
-    alert('Por favor, ingrese un nombre, precio y stock válido para el producto');
+  enviarFacturaButton.addEventListener('click', validateAndSendInvoice);
+
+  let db;
+  const request = indexedDB.open("FacturacionDB", 2); // Incrementa el número de versión para forzar la actualización
+
+  request.onerror = function (event) {
+    alert("Error al abrir la base de datos: " + event.target.errorCode);
+  };
+
+  request.onsuccess = function (event) {
+    db = event.target.result;
+    console.log("Database initialized successfully");
+    loadProductOptions(); // Cargar las opciones de productos al iniciar
+    getInvoiceCounter(); // Obtener el contador de facturas
+  };
+
+  request.onupgradeneeded = function (event) {
+    db = event.target.result;
+
+    if (!db.objectStoreNames.contains("Productos")) {
+      const productoStore = db.createObjectStore("Productos", { keyPath: "idProd", autoIncrement: true });
+      productoStore.createIndex("NombreProd", "NombreProd", { unique: false });
+      productoStore.createIndex("PrecioProd", "PrecioProd", { unique: false });
+      productoStore.createIndex("StockProd", "StockProd", { unique: false });
+    }
+
+    if (!db.objectStoreNames.contains("Clientes")) {
+      const clienteStore = db.createObjectStore("Clientes", { keyPath: "cedula" });
+      clienteStore.createIndex("NombreCliente", "NombreCliente", { unique: false });
+      clienteStore.createIndex("Ciudad", "Ciudad", { unique: false });
+      clienteStore.createIndex("Direccion", "Direccion", { unique: false });
+      clienteStore.createIndex("Correo", "Correo", { unique: false });
+      clienteStore.createIndex("Telefono", "Telefono", { unique: false });
+    }
+
+    if (!db.objectStoreNames.contains("Ventas")) {
+      const ventasStore = db.createObjectStore("Ventas", { keyPath: "numFactura", autoIncrement: true });
+      ventasStore.createIndex("fechaVent", "fechaVent", { unique: false });
+      ventasStore.createIndex("subtotalVent", "subtotalVent", { unique: false });
+      ventasStore.createIndex("IvaVent", "IvaVent", { unique: false });
+      ventasStore.createIndex("totalVent", "totalVent", { unique: false });
+      ventasStore.createIndex("cedulaCliente", "cedulaCliente", { unique: false });
+    }
+
+    if (!db.objectStoreNames.contains("Settings")) {
+      const settingsStore = db.createObjectStore("Settings", { keyPath: "id" });
+      settingsStore.add({ id: "invoiceCounter", value: 1 }); // Inicializa el contador de facturas
+    }
+  };
+
+  function getInvoiceCounter() {
+    const transaction = db.transaction(["Settings"], "readonly");
+    const store = transaction.objectStore("Settings");
+    const request = store.get("invoiceCounter");
+
+    request.onsuccess = function (event) {
+      if (event.target.result) {
+        invoiceCounter = event.target.result.value;
+      }
+    };
+
+    request.onerror = function (event) {
+      console.error("Error al obtener el contador de facturas: ", event.target.errorCode);
+    };
   }
-}
 
-// Función para modificar un producto existente
-function modifyProduct() {
-  const selectedProductId = productSelect.value;
-  const productPrice = parseFloat(productPriceInput.value.trim());
-  const productStock = parseInt(productStockInput.value.trim());
-  const product = products.find(p => p.id === selectedProductId);
-  if (product && !isNaN(productPrice) && !isNaN(productStock)) {
-    product.price = productPrice;
-    product.stock = productStock;
-    alert('Producto modificado exitosamente');
-    hideProductForm();
-    updateProductSelects();
-    saveProductsToLocalStorage();
-  } else {
-    alert('Producto no encontrado, precio o stock inválido');
+  function incrementInvoiceCounter() {
+    invoiceCounter++;
+    const transaction = db.transaction(["Settings"], "readwrite");
+    const store = transaction.objectStore("Settings");
+    store.put({ id: "invoiceCounter", value: invoiceCounter });
   }
-}
 
-// Función para eliminar un producto existente
-function deleteProduct() {
-  const selectedProductId = productSelect.value;
-  const productIndex = products.findIndex(p => p.id === selectedProductId);
-  if (productIndex !== -1) {
-    products.splice(productIndex, 1);
-    alert('Producto eliminado exitosamente');
-    hideProductForm();
-    updateProductSelects();
-    saveProductsToLocalStorage();
-  } else {
-    alert('Producto no encontrado');
+  function showProductForm(action) {
+    currentAction = action;
+    productForm.style.display = 'block';
+
+    if (action === 'add') {
+      productSelect.style.display = 'none';
+      document.getElementById('product-name').style.display = 'block';
+      document.getElementById('product-price').style.display = 'block';
+      document.getElementById('product-stock').style.display = 'block';
+    } else if (action === 'modify') {
+      productSelect.style.display = 'block';
+      document.getElementById('product-name').style.display = 'none';
+      document.getElementById('product-price').style.display = 'block';
+      document.getElementById('product-stock').style.display = 'block';
+      productSelect.addEventListener('change', loadProductDetails);
+    } else if (action === 'delete') {
+      productSelect.style.display = 'block';
+      document.getElementById('product-name').style.display = 'none';
+      document.getElementById('product-price').style.display = 'none';
+      document.getElementById('product-stock').style.display = 'none';
+    }
   }
-}
 
-// Función para agregar una nueva fila a la tabla
-function addRow() {
-  const newRow = document.createElement('tr');
-  newRow.innerHTML = `
-    <td>
-      <select class="product-select">
-        <option value="">Productos</option>
-        ${products.map(product => `<option value="${product.id}">${product.name}</option>`).join('')}
-      </select>
-    </td>
-    <td><input type="text" placeholder="Nuevo Producto" class="new-product-input"></td>
-    <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
-    <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
-    <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
-    <td><button class="delete-row-btn">Eliminar fila</button></td>
-  `;
-  itemRows.appendChild(newRow);
-  attachInputListeners(newRow);
-  attachDeleteListener(newRow);
-  updateTotals();
-}
+  function saveProduct() {
+    if (currentAction === 'add') {
+      addProduct();
+    } else if (currentAction === 'modify') {
+      modifyProduct();
+    } else if (currentAction === 'delete') {
+      deleteProduct();
+    }
+  }
 
-// Función para adjuntar los event listeners a los campos de entrada
-function attachInputListeners(row) {
-  const quantityInput = row.querySelector('.quantity');
-  const priceInput = row.querySelector('.price');
-  const productSelect = row.querySelector('.product-select');
-  const newProductInput = row.querySelector('.new-product-input');
+  function addProduct() {
+    const nombreProd = document.getElementById('product-name').value;
+    const precioProd = parseFloat(document.getElementById('product-price').value);
+    const stockProd = parseInt(document.getElementById('product-stock').value);
 
-  quantityInput.addEventListener('input', updateTotals);
-  quantityInput.addEventListener('change', updateTotals);
-  productSelect.addEventListener('change', function () {
-    const selectedProduct = products.find(product => product.id === this.value);
-    const price = selectedProduct ? selectedProduct.price : 0;
-    priceInput.value = price.toFixed(2);
-    priceInput.readOnly = newProductInput.value.trim() === '';
+    const transaction = db.transaction(["Productos"], "readwrite");
+    const store = transaction.objectStore("Productos");
+    const product = { NombreProd: nombreProd, PrecioProd: precioProd, StockProd: stockProd };
+    const requestAdd = store.add(product);
+
+    requestAdd.onsuccess = function () {
+      console.log("Producto agregado exitosamente");
+      productForm.style.display = 'none';
+      clearProductForm();
+      loadProductOptions(); // Cargar las opciones de productos después de agregar uno nuevo
+    };
+
+    requestAdd.onerror = function (event) {
+      console.error("Error al agregar producto: ", event.target.errorCode);
+    };
+  }
+
+  function modifyProduct() {
+    const idProd = parseInt(productSelect.value);
+    const precioProd = parseFloat(document.getElementById('product-price').value);
+    const stockProd = parseInt(document.getElementById('product-stock').value);
+
+    const transaction = db.transaction(["Productos"], "readwrite");
+    const store = transaction.objectStore("Productos");
+    const request = store.get(idProd);
+
+    request.onsuccess = function (event) {
+      const product = event.target.result;
+      product.PrecioProd = precioProd;
+      product.StockProd = stockProd;
+
+      const requestUpdate = store.put(product);
+
+      requestUpdate.onsuccess = function () {
+        console.log("Producto modificado exitosamente");
+        productForm.style.display = 'none';
+        clearProductForm();
+        loadProductOptions(); // Cargar las opciones de productos después de modificar
+      };
+
+      requestUpdate.onerror = function (event) {
+        console.error("Error al modificar producto: ", event.target.errorCode);
+      };
+    };
+
+    request.onerror = function (event) {
+      console.error("Error al obtener producto: ", event.target.errorCode);
+    };
+  }
+
+  function deleteProduct() {
+    const idProd = parseInt(productSelect.value);
+
+    const transaction = db.transaction(["Productos"], "readwrite");
+    const store = transaction.objectStore("Productos");
+    const requestDelete = store.delete(idProd);
+
+    requestDelete.onsuccess = function () {
+      console.log("Producto eliminado exitosamente");
+      productForm.style.display = 'none';
+      clearProductForm();
+      loadProductOptions(); // Cargar las opciones de productos después de eliminar
+    };
+
+    requestDelete.onerror = function (event) {
+      console.error("Error al eliminar producto: ", event.target.errorCode);
+    };
+  }
+
+  function clearProductForm() {
+    document.getElementById('product-name').value = '';
+    document.getElementById('product-price').value = '';
+    document.getElementById('product-stock').value = '';
+    productSelect.removeEventListener('change', loadProductDetails);
+  }
+
+  function loadProductDetails() {
+    const idProd = parseInt(productSelect.value);
+
+    if (!isNaN(idProd)) {
+      const transaction = db.transaction(["Productos"], "readonly");
+      const store = transaction.objectStore("Productos");
+      const request = store.get(idProd);
+
+      request.onsuccess = function (event) {
+        const product = event.target.result;
+        if (product) {
+          document.getElementById('product-price').value = product.PrecioProd;
+          document.getElementById('product-stock').value = product.StockProd;
+        }
+      };
+
+      request.onerror = function (event) {
+        console.error("Error al obtener detalles del producto: ", event.target.errorCode);
+      };
+    }
+  }
+
+  function loadProductOptions() {
+    const transaction = db.transaction(["Productos"], "readonly");
+    const store = transaction.objectStore("Productos");
+    const request = store.getAll();
+
+    request.onsuccess = function (event) {
+      const products = event.target.result;
+      const options = products.map(product => `<option value="${product.idProd}">${product.NombreProd}</option>`).join('');
+      document.querySelectorAll('.product-select').forEach(select => {
+        select.innerHTML = '<option value="">Productos</option>' + options;
+      });
+      productSelect.innerHTML = '<option value="">Seleccione un producto</option>' + options;
+    };
+
+    request.onerror = function (event) {
+      console.error("Error al cargar opciones de productos: ", event.target.errorCode);
+    };
+  }
+
+  function validateAndSendInvoice() {
+    // Validar que todos los campos necesarios estén llenos
+    const clientFields = [
+      'client-id', 'client-name', 'client-city', 'client-street', 'client-email', 'client-phone'
+    ];
+    const productFields = document.querySelectorAll('.product-select');
+    const quantityFields = document.querySelectorAll('.quantity');
+
+    let allFieldsFilled = true;
+
+    clientFields.forEach(id => {
+      if (!document.getElementById(id).value) {
+        allFieldsFilled = false;
+      }
+    });
+
+    productFields.forEach(select => {
+      if (!select.value) {
+        allFieldsFilled = false;
+      }
+    });
+
+    quantityFields.forEach(input => {
+      if (!input.value || input.value <= 0) {
+        allFieldsFilled = false;
+      }
+    });
+
+    if (allFieldsFilled) {
+      enviarFactura();
+    } else {
+      alert('Por favor, complete todos los campos antes de enviar la factura.');
+    }
+  }
+
+  function enviarFactura() {
+    const cliente = {
+      cedula: document.getElementById('client-id').value,
+      NombreCliente: document.getElementById('client-name').value,
+      Ciudad: document.getElementById('client-city').value,
+      Direccion: document.getElementById('client-street').value,
+      Correo: document.getElementById('client-email').value,
+      Telefono: document.getElementById('client-phone').value
+    };
+
+    const transaction = db.transaction(["Clientes", "Ventas"], "readwrite");
+    const clienteStore = transaction.objectStore("Clientes");
+    const ventasStore = transaction.objectStore("Ventas");
+
+    const requestAddCliente = clienteStore.add(cliente);
+
+    requestAddCliente.onsuccess = function () {
+      console.log("Cliente agregado exitosamente");
+      const venta = {
+        numFactura: invoiceCounter,
+        fechaVent: document.getElementById('fechaFactura').value,
+        subtotalVent: parseFloat(document.getElementById('subtotal-value').innerText),
+        IvaVent: parseFloat(document.getElementById('tax-value').innerText),
+        totalVent: parseFloat(document.getElementById('total-value').innerText),
+        cedulaCliente: cliente.cedula
+      };
+
+      const requestAddVenta = ventasStore.add(venta);
+
+      requestAddVenta.onsuccess = function () {
+        console.log("Venta agregada exitosamente");
+        incrementInvoiceCounter(); // Incrementar el contador de facturas después de agregar una venta
+        document.getElementById('numeroFactura').innerText = String(invoiceCounter).padStart(5, '0'); // Actualizar el número de factura en la UI
+      };
+
+      requestAddVenta.onerror = function (event) {
+        console.error("Error al agregar venta: ", event.target.errorCode);
+      };
+    };
+
+    requestAddCliente.onerror = function (event) {
+      console.error("Error al agregar cliente: ", event.target.errorCode);
+    };
+  }
+
+  document.getElementById('add-row').addEventListener('click', addRow);
+  document.getElementById('eliminar-factura').addEventListener('click', limpiarFactura);
+
+  const itemRows = document.getElementById('item-rows');
+
+  function addRow() {
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+          <td>
+              <select class="product-select">
+                  <option value="">Productos</option>
+              </select>
+          </td>
+          <td><input type="text" placeholder="Nuevo Producto" class="new-product-input" readonly></td>
+          <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
+          <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price" readonly></td>
+          <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
+          <td><button class="delete-row-btn">Eliminar fila</button></td>
+      `;
+    itemRows.appendChild(newRow);
+    attachInputListeners(newRow);
+    attachDeleteListener(newRow);
+    loadProductOptions(); // Cargar las opciones de productos para la nueva fila
     updateTotals();
-  });
+  }
 
-  newProductInput.addEventListener('input', function () {
-    priceInput.readOnly = this.value.trim() === '';
-    if (this.value.trim() === '') {
-      const selectedProduct = products.find(product => product.id === productSelect.value);
-      priceInput.value = selectedProduct ? selectedProduct.price.toFixed(2) : '0.00';
+  function limpiarFactura() {
+    document.getElementById('client-id').value = '';
+    document.getElementById('client-name').value = '';
+    document.getElementById('client-city').value = '';
+    document.getElementById('client-street').value = '';
+    document.getElementById('client-email').value = '';
+    document.getElementById('client-phone').value = '';
+    itemRows.innerHTML = '';
+    addRow();
+    updateTotals();
+  }
+
+  function attachInputListeners(row) {
+    const selectInput = row.querySelector('.product-select');
+    const quantityInput = row.querySelector('.quantity');
+    selectInput.addEventListener('change', function () {
+      const productId = selectInput.value;
+      if (productId) {
+        const transaction = db.transaction(["Productos"], "readonly");
+        const store = transaction.objectStore("Productos");
+        const request = store.get(parseInt(productId));
+
+        request.onsuccess = function (event) {
+          const product = event.target.result;
+          const priceInput = row.querySelector('.price');
+          const detailInput = row.querySelector('.new-product-input');
+          priceInput.value = product.PrecioProd;
+          detailInput.value = product.NombreProd;
+          updateRowTotal(row);
+          updateTotals();
+        };
+
+        request.onerror = function (event) {
+          console.error("Error al obtener producto: ", event.target.errorCode);
+        };
+      } else {
+        row.querySelector('.price').value = "0.00";
+        row.querySelector('.new-product-input').value = "";
+        updateRowTotal(row);
+        updateTotals();
+      }
+    });
+    quantityInput.addEventListener('input', function () {
+      updateRowTotal(row);
+      updateTotals();
+    });
+  }
+
+  function attachDeleteListener(row) {
+    const deleteButton = row.querySelector('.delete-row-btn');
+    deleteButton.addEventListener('click', function () {
+      row.remove();
+      updateTotals();
+    });
+  }
+
+  function updateRowTotal(row) {
+    const quantity = row.querySelector('.quantity').value;
+    const price = row.querySelector('.price').value;
+    const total = quantity * price;
+    row.querySelector('.row-total').value = total.toFixed(2);
+  }
+
+  function updateTotals() {
+    let subtotal = 0;
+    itemRows.querySelectorAll('tr').forEach(row => {
+      const total = parseFloat(row.querySelector('.row-total').value);
+      subtotal += total;
+    });
+    const taxRate = parseFloat(document.getElementById('tax-rate-value').innerText) / 100;
+    const tax = subtotal * taxRate;
+    const total = subtotal + tax;
+    document.getElementById('subtotal-value').innerText = subtotal.toFixed(2);
+    document.getElementById('tax-value').innerText = tax.toFixed(2);
+    document.getElementById('total-value').innerText = total.toFixed(2);
+  }
+
+  // Escuchar cambios en el campo de cédula del cliente
+  cedulaClienteInput.addEventListener('input', function () {
+    if (cedulaClienteInput.value.length === 10) {
+      loadClientDetails(cedulaClienteInput.value);
     }
   });
-}
 
-// Función para adjuntar el evento de clic al botón de eliminar
-function attachDeleteListener(row) {
-  const deleteButton = row.querySelector('.delete-row-btn');
-  if (deleteButton) {
-    deleteButton.addEventListener('click', deleteRow);
+  function loadClientDetails(cedula) {
+    const transaction = db.transaction(["Clientes"], "readonly");
+    const store = transaction.objectStore("Clientes");
+    const request = store.get(cedula);
+
+    request.onsuccess = function (event) {
+      const client = event.target.result;
+      if (client) {
+        document.getElementById('client-name').value = client.NombreCliente;
+        document.getElementById('client-city').value = client.Ciudad;
+        document.getElementById('client-street').value = client.Direccion;
+        document.getElementById('client-email').value = client.Correo;
+        document.getElementById('client-phone').value = client.Telefono;
+      }
+    };
+
+    request.onerror = function (event) {
+      console.error("Error al obtener detalles del cliente: ", event.target.errorCode);
+    };
   }
-}
 
-// Función para eliminar una fila de la tabla
-function deleteRow(event) {
-  const button = event.target;
-  const row = button.closest('tr');
-  if (row) {
-    row.remove();
-    updateTotals();
-  }
-}
-
-// Función para incrementar el número de factura y guardarlo en localStorage
-function incrementarNumeroFactura() {
-  facturaNumero += 1;
-  numeroFactura.textContent = facturaNumero.toString().padStart(5, '0');
-  localStorage.setItem('facturaNumero', facturaNumero);
-}
-
-// Función para reducir el número de factura y guardarlo en localStorage
-function reducirNumeroFactura() {
-  if (facturaNumero > 0) {
-    facturaNumero -= 1;
-    numeroFactura.textContent = facturaNumero.toString().padStart(5, '0');
-    localStorage.setItem('facturaNumero', facturaNumero);
-  }
-}
-
-// Función para limpiar los campos de la factura actual
-function limpiarFactura() {
-  document.getElementById('client-id').value = '';
-  document.getElementById('client-name').value = '';
-  document.getElementById('client-city').value = '';
-  document.getElementById('client-street').value = '';
-  document.getElementById('client-email').value = '';
-  document.getElementById('client-phone').value = '';
-  itemRows.innerHTML = ''; 
-  addRow();
-  updateTotals();
-}
-
-// Asignar la función a todos los botones de eliminar existentes al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-  itemRows.querySelectorAll('tr').forEach(row => {
-    attachInputListeners(row);
-    attachDeleteListener(row);
-  });
-  updateProductSelects();
-  updateTotals();
+  // Adjuntar listeners para la fila inicial
+  attachInputListeners(document.querySelector('#item-rows tr'));
 });
-
-// Asignar evento click al botón "Agregar fila"
-addRowButton.addEventListener('click', addRow);
-
-// Asignar evento click al botón "Enviar factura"
-enviarFacturaButton.addEventListener('click', incrementarNumeroFactura);
-
-// Asignar evento click al botón "Reducir factura"
-reducirFacturaButton.addEventListener('click', reducirNumeroFactura);
-
-// Asignar evento click al botón "Eliminar factura"
-eliminarFacturaButton.addEventListener('click', limpiarFactura);
-
-// Asignar eventos click a los botones "Agregar Producto", "Modificar Producto" y "Eliminar Producto"
-addProductButton.addEventListener('click', () => showProductForm('add'));
-modifyProductButton.addEventListener('click', () => showProductForm('modify'));
-deleteProductButton.addEventListener('click', () => showProductForm('delete'));
-
-// Asignar evento click al botón "Guardar Producto"
-saveProductButton.addEventListener('click', function() {
-  const action = saveProductButton.dataset.action;
-  if (action === 'add') {
-    addProduct();
-  } else if (action === 'modify') {
-    modifyProduct();
-  } else if (action === 'delete') {
-    deleteProduct();
-  }
-});
-
-// Asignar evento click al botón "Cancelar"
-cancelProductButton.addEventListener('click', hideProductForm);
-
-// Función para calcular y actualizar los totales
-function updateTotals() {
-  let subtotal = 0;
-  let discount = 0;
-  let taxRate = 15;
-  let tax = 0;
-  let total = 0;
-
-  const rowInputs = itemRows.querySelectorAll('tr');
-  rowInputs.forEach(row => {
-    const quantityInput = row.querySelector('.quantity');
-    const priceInput = row.querySelector('.price');
-    const newProductInput = row.querySelector('.new-product-input');
-    const totalInput = row.querySelector('.row-total');
-
-    const quantity = parseFloat(quantityInput.value) || 0;
-    const price = newProductInput.value.trim() !== '' ? parseFloat(priceInput.value) || 0 : parseFloat(priceInput.value) || 0;
-    const rowTotal = quantity * price;
-
-    totalInput.value = rowTotal.toFixed(2);
-    subtotal += rowTotal;
-  });
-
-  subtotalValue.textContent = subtotal.toFixed(2);
-  discountValue.textContent = discount.toFixed(2);
-  taxRateValue.textContent = taxRate;
-  tax = subtotal * (taxRate / 100);
-  taxValue.textContent = tax.toFixed(2);
-  total = subtotal - discount + tax;
-  totalValue.textContent = total.toFixed(2);
-}
