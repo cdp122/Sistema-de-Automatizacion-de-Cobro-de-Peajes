@@ -6,13 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contáctanos - Panasolar</title>
     <link rel="stylesheet" href="../CSS/telepass.css">
+    <link rel="icon" href="../../Assets/Logo.png" type="image/png">
+
 </head>
 
 <body>
-    <header>
-        <img src="../Imagenes/PANA SOLAR.png" alt="Panasolar Logo" class="logo">
-        <h1>PANASOLAR</h1>
-    </header>
+    <header class="header">
+        <div class="menuContainer">
+          <a href="../HTML/index.html" class="logo"></a>
+          <label for="menu-toggle" class="hamburger">
+            <input type="checkbox" id="menu-toggle">
+            <svg viewBox="0 0 32 32">
+              <path class="line line-top-bottom"
+                d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+              </path>
+              <path class="line" d="M7 16 27 16"></path>
+            </svg>
+          </label>
+          <nav class="navbar">
+            <ul>
+              <li><a href="../HTML/Servicios.html">Servicios</a></li>
+              <li><a href="./telepass.html">Telepass</a></li>
+              <li><a href="../../LogIn/html/Login.html">Iniciar Sesión</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
     <div class="container">
         <div class="contact-content">
             <div class="contact-card">
@@ -38,10 +57,11 @@
             </div>
         </div>
     </div>
+    
     <div class="footer">
         <p>&copy; 2024 PANASOLAR. Todos los derechos reservados.</p>
     </div>
-    <script src="../Script/scripts.js"></script>
+    <script src="../Script/telepass.js"></script>
 </body>
 
 </html>
