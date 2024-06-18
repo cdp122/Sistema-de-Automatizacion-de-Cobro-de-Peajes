@@ -1,4 +1,8 @@
+/**
+ * Función principal que se ejecuta una vez que el DOM se ha cargado completamente.
+ */
 document.addEventListener("DOMContentLoaded", function () {
+  // Inicializar fecha y hora actual
   const now = new Date();
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -11,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('fechaFactura').value = formattedDate;
   document.getElementById('horaFactura').value = formattedTime.slice(0, 5);
 
+  // Referencias a elementos de la interfaz
   const addProductButton = document.getElementById('add-product');
   const modifyProductButton = document.getElementById('modify-product');
   const deleteProductButton = document.getElementById('delete-product');
@@ -23,24 +28,25 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentAction = 'add';
   let invoiceCounter = 1; // Inicializa el contador de facturas
 
+  // Asignar eventos a botones
   addProductButton.addEventListener('click', () => showProductForm('add'));
   modifyProductButton.addEventListener('click', () => showProductForm('modify'));
   deleteProductButton.addEventListener('click', () => showProductForm('delete'));
-
   saveProductButton.addEventListener('click', saveProduct);
   cancelProductButton.addEventListener('click', () => {
     productForm.style.display = 'none';
   });
-
   enviarFacturaButton.addEventListener('click', validateAndSendInvoice);
 
   let db;
   const request = indexedDB.open("FacturacionDB", 2); // Incrementa el número de versión para forzar la actualización
 
+  // Manejar errores de apertura de la base de datos
   request.onerror = function (event) {
     alert("Error al abrir la base de datos: " + event.target.errorCode);
   };
 
+  // Inicializar la base de datos exitosamente
   request.onsuccess = function (event) {
     db = event.target.result;
     console.log("Database initialized successfully");
@@ -48,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     getInvoiceCounter(); // Obtener el contador de facturas
   };
 
+  // Crear almacenes de objetos en la base de datos
   request.onupgradeneeded = function (event) {
     db = event.target.result;
 
@@ -82,6 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  /**
+   * Obtiene el contador de facturas desde la base de datos.
+   */
   function getInvoiceCounter() {
     const transaction = db.transaction(["Settings"], "readonly");
     const store = transaction.objectStore("Settings");
@@ -98,6 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+  /**
+   * Incrementa el contador de facturas en la base de datos.
+   */
   function incrementInvoiceCounter() {
     invoiceCounter++;
     const transaction = db.transaction(["Settings"], "readwrite");
@@ -105,6 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
     store.put({ id: "invoiceCounter", value: invoiceCounter });
   }
 
+  /**
+   * Muestra el formulario de productos según la acción seleccionada (agregar, modificar, eliminar).
+   * @param {string} action - La acción actual (add, modify, delete).
+   */
   function showProductForm(action) {
     currentAction = action;
     productForm.style.display = 'block';
@@ -128,6 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /**
+   * Guarda el producto según la acción actual (agregar, modificar, eliminar).
+   */
   function saveProduct() {
     if (currentAction === 'add') {
       addProduct();
@@ -138,6 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /**
+   * Agrega un nuevo producto a la base de datos.
+   */
   function addProduct() {
     const nombreProd = document.getElementById('product-name').value;
     const precioProd = parseFloat(document.getElementById('product-price').value);
@@ -160,6 +183,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+  /**
+   * Modifica un producto existente en la base de datos.
+   */
   function modifyProduct() {
     const idProd = parseInt(productSelect.value);
     const precioProd = parseFloat(document.getElementById('product-price').value);
@@ -193,6 +219,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+  /**
+   * Elimina un producto de la base de datos.
+   */
   function deleteProduct() {
     const idProd = parseInt(productSelect.value);
 
@@ -212,6 +241,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+  /**
+   * Limpia el formulario de productos.
+   */
   function clearProductForm() {
     document.getElementById('product-name').value = '';
     document.getElementById('product-price').value = '';
@@ -219,6 +251,9 @@ document.addEventListener("DOMContentLoaded", function () {
     productSelect.removeEventListener('change', loadProductDetails);
   }
 
+  /**
+   * Carga los detalles del producto seleccionado en el formulario.
+   */
   function loadProductDetails() {
     const idProd = parseInt(productSelect.value);
 
@@ -241,6 +276,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /**
+   * Carga las opciones de productos en los campos select.
+   */
   function loadProductOptions() {
     const transaction = db.transaction(["Productos"], "readonly");
     const store = transaction.objectStore("Productos");
@@ -260,8 +298,10 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
+  /**
+   * Valida que todos los campos necesarios estén llenos antes de enviar la factura.
+   */
   function validateAndSendInvoice() {
-    // Validar que todos los campos necesarios estén llenos
     const clientFields = [
       'client-id', 'client-name', 'client-city', 'client-street', 'client-email', 'client-phone'
     ];
@@ -295,6 +335,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  /**
+   * Guarda los datos del cliente y la venta en la base de datos y actualiza el contador de facturas.
+   */
   function enviarFactura() {
     const cliente = {
       cedula: document.getElementById('client-id').value,
@@ -309,42 +352,73 @@ document.addEventListener("DOMContentLoaded", function () {
     const clienteStore = transaction.objectStore("Clientes");
     const ventasStore = transaction.objectStore("Ventas");
 
-    const requestAddCliente = clienteStore.add(cliente);
+    // Verificar si el cliente ya existe en la base de datos
+    const requestCheckCliente = clienteStore.get(cliente.cedula);
 
-    requestAddCliente.onsuccess = function () {
-      console.log("Cliente agregado exitosamente");
-      const venta = {
-        numFactura: invoiceCounter,
-        fechaVent: document.getElementById('fechaFactura').value,
-        subtotalVent: parseFloat(document.getElementById('subtotal-value').innerText),
-        IvaVent: parseFloat(document.getElementById('tax-value').innerText),
-        totalVent: parseFloat(document.getElementById('total-value').innerText),
-        cedulaCliente: cliente.cedula
-      };
+    requestCheckCliente.onsuccess = function (event) {
+      const existingClient = event.target.result;
 
-      const requestAddVenta = ventasStore.add(venta);
+      if (!existingClient) {
+        // Si el cliente no existe, agregarlo a la base de datos
+        const requestAddCliente = clienteStore.add(cliente);
 
-      requestAddVenta.onsuccess = function () {
-        console.log("Venta agregada exitosamente");
-        incrementInvoiceCounter(); // Incrementar el contador de facturas después de agregar una venta
-        document.getElementById('numeroFactura').innerText = String(invoiceCounter).padStart(5, '0'); // Actualizar el número de factura en la UI
-      };
+        requestAddCliente.onsuccess = function () {
+          console.log("Cliente agregado exitosamente");
+          addVenta(cliente.cedula);
+        };
 
-      requestAddVenta.onerror = function (event) {
-        console.error("Error al agregar venta: ", event.target.errorCode);
-      };
+        requestAddCliente.onerror = function (event) {
+          console.error("Error al agregar cliente: ", event.target.errorCode);
+        };
+      } else {
+        // Si el cliente ya existe, solo agregar la venta
+        addVenta(cliente.cedula);
+      }
     };
 
-    requestAddCliente.onerror = function (event) {
-      console.error("Error al agregar cliente: ", event.target.errorCode);
+    requestCheckCliente.onerror = function (event) {
+      console.error("Error al verificar existencia del cliente: ", event.target.errorCode);
     };
   }
 
+  /**
+   * Agrega una nueva venta a la base de datos.
+   * @param {string} cedula - La cédula del cliente asociado a la venta.
+   */
+  function addVenta(cedula) {
+    const venta = {
+      numFactura: invoiceCounter,
+      fechaVent: document.getElementById('fechaFactura').value,
+      subtotalVent: parseFloat(document.getElementById('subtotal-value').innerText),
+      IvaVent: parseFloat(document.getElementById('tax-value').innerText),
+      totalVent: parseFloat(document.getElementById('total-value').innerText),
+      cedulaCliente: cedula
+    };
+
+    const transaction = db.transaction(["Ventas"], "readwrite");
+    const ventasStore = transaction.objectStore("Ventas");
+    const requestAddVenta = ventasStore.add(venta);
+
+    requestAddVenta.onsuccess = function () {
+      console.log("Venta agregada exitosamente");
+      incrementInvoiceCounter(); // Incrementar el contador de facturas después de agregar una venta
+      document.getElementById('numeroFactura').innerText = String(invoiceCounter).padStart(5, '0'); // Actualizar el número de factura en la UI
+    };
+
+    requestAddVenta.onerror = function (event) {
+      console.error("Error al agregar venta: ", event.target.errorCode);
+    };
+  }
+
+  // Agregar eventos para los botones de agregar fila y eliminar factura
   document.getElementById('add-row').addEventListener('click', addRow);
   document.getElementById('eliminar-factura').addEventListener('click', limpiarFactura);
 
   const itemRows = document.getElementById('item-rows');
 
+  /**
+   * Agrega una nueva fila de productos a la factura.
+   */
   function addRow() {
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
@@ -366,6 +440,9 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTotals();
   }
 
+  /**
+   * Limpia los campos de la factura y reinicia la tabla de productos.
+   */
   function limpiarFactura() {
     document.getElementById('client-id').value = '';
     document.getElementById('client-name').value = '';
@@ -378,6 +455,10 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTotals();
   }
 
+  /**
+   * Asigna listeners de entrada a una fila para actualizar el precio y total automáticamente.
+   * @param {HTMLElement} row - La fila a la que se le asignarán los listeners.
+   */
   function attachInputListeners(row) {
     const selectInput = row.querySelector('.product-select');
     const quantityInput = row.querySelector('.quantity');
@@ -414,6 +495,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /**
+   * Asigna un listener para eliminar una fila de la factura.
+   * @param {HTMLElement} row - La fila a la que se le asignará el listener de eliminación.
+   */
   function attachDeleteListener(row) {
     const deleteButton = row.querySelector('.delete-row-btn');
     deleteButton.addEventListener('click', function () {
@@ -422,6 +507,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /**
+   * Actualiza el total de una fila según la cantidad y el precio unitario.
+   * @param {HTMLElement} row - La fila a actualizar.
+   */
   function updateRowTotal(row) {
     const quantity = row.querySelector('.quantity').value;
     const price = row.querySelector('.price').value;
@@ -429,6 +518,9 @@ document.addEventListener("DOMContentLoaded", function () {
     row.querySelector('.row-total').value = total.toFixed(2);
   }
 
+  /**
+   * Actualiza los totales de la factura (subtotal, IVA y total).
+   */
   function updateTotals() {
     let subtotal = 0;
     itemRows.querySelectorAll('tr').forEach(row => {
@@ -450,6 +542,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  /**
+   * Carga los detalles del cliente desde la base de datos según su cédula.
+   * @param {string} cedula - La cédula del cliente.
+   */
   function loadClientDetails(cedula) {
     const transaction = db.transaction(["Clientes"], "readonly");
     const store = transaction.objectStore("Clientes");
@@ -474,3 +570,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // Adjuntar listeners para la fila inicial
   attachInputListeners(document.querySelector('#item-rows tr'));
 });
+
