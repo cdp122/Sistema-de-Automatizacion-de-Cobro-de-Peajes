@@ -1,4 +1,3 @@
-/* Importar fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 /* Estilos base */
@@ -285,7 +284,7 @@ body {
     color: #ffffff;
     text-align: center;
     padding: 10px 0;
-    position: block;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }

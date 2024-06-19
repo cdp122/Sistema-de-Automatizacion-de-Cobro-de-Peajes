@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const despDiv = document.querySelector(".Desp");
     const navLinks = document.querySelectorAll(".navDes a");
 
+    const handleResize = () => {
+        if (window.innerWidth >= 769) {
+            menuToggle.checked = false;
+            despDiv.style.display = "none";
+        }
+    };
+
     menuToggle.addEventListener("change", () => {
         if (menuToggle.checked) {
             despDiv.style.display = "block";
@@ -20,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
             despDiv.style.display = "none";
         });
     });
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Llamar a handleResize al cargar la página
 });
 
 async function Validar() {
