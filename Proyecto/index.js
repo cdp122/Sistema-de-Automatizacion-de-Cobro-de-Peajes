@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, 'WebSite')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Client', 'html')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Home')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Home', 'HTML')));

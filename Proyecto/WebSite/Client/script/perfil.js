@@ -1,12 +1,15 @@
+//#region Carga Inicial
 var token;
-const camposEditables = ["cedula", "telefono", "email","contraseña"];
+const camposEditables = ["cedula", "telefono", "email", "contraseña"];
 const editarPerfilBtn = document.getElementById("editar-perfil");
 const guardarCambiosBtn = document.getElementById("guardar-cambios");
 
 document.addEventListener("DOMContentLoaded", function () {
     Validar();
 });
+//#endregion
 
+//#region Front-End
 function editarPerfil() {
     camposEditables.forEach(id => {
         const campo = document.getElementById(id);
@@ -46,11 +49,11 @@ function guardarCambios() {
 
     if (!regex.test(contraseña)) {
         alert("La contraseña debe contener 10 caracteres.");
-        guardar =  false;
+        guardar = false;
     }
-    
+
     if (guardar) {
-        if (!ActualizarPerfil(cedula, telefono, correo,contraseña)) {
+        if (!ActualizarPerfil(cedula, telefono, correo, contraseña)) {
             alert("No se pudieron actualizar los datos");
             return;
         }
@@ -115,7 +118,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     caja.className = 'cajaTarjeta';
 
     var tar = document.createElement('div');
-    tar.className ='cajatar';
+    tar.className = 'cajatar';
 
     var boton = document.createElement('button');
     boton.className = 'editar';
@@ -134,7 +137,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var boton4 = document.createElement('button');
     boton4.className = 'eliminar';
     boton4.textContent = 'Deshabilitar Tarjeta';
-    boton4.addEventListener('click',function(){
+    boton4.addEventListener('click', function () {
         Deshabilitar(caja);
 
     });
@@ -208,7 +211,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento3.appendChild(letra3);
     elemento3.appendChild(spanModelo3);
     tar.appendChild(elemento3);
-    
+
 
     boton2.addEventListener('click', function () {
         recargarSaldo(spanModelo, spanModelo3);
@@ -326,14 +329,14 @@ async function ListarMovimientos(event) {
     window.location.href = "./movimientos.html";
 }
 
-function Deshabilitar (caja){
+function Deshabilitar(caja) {
 
     var titulo2 = caja.querySelector('h2');
     titulo2.textContent = "Deshabilitada";
 
     var quitarBonotes = caja.querySelectorAll('button');
-    quitarBonotes.forEach(function(boton){
-        if(boton.className ){
+    quitarBonotes.forEach(function (boton) {
+        if (boton.className) {
             boton.remove();
         }
     });
@@ -342,8 +345,7 @@ function Deshabilitar (caja){
     ubicacion2.appendChild(caja);
 
 }
-
-
+//#endregion
 
 //#region Backend
 async function Validar() {
@@ -360,7 +362,7 @@ async function Validar() {
             const data = await response.json();
             if (data.message) window.location.href = "../../Error/PagError404.html";
 
-            document.getElementById("full-name").innerHTML = data.nombre;
+            document.getElementById("full-name").innerHTML = data.nombre + data.apellido;
             document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo).toFixed(2);
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
