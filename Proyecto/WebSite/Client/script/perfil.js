@@ -185,7 +185,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     letra5.textContent = 'Tipo: ';
     var spanModelo5 = document.createElement('span');
     spanModelo5.id = 'tipo-carro';
-    spanModelo5.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Camioneta';
+    spanModelo5.textContent = vehiculo && vehiculo.modelo ? vehiculo.tipo : 'Camioneta';
     elemento5.appendChild(letra5);
     elemento5.appendChild(spanModelo5);
     lista.appendChild(elemento5);
@@ -195,7 +195,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     letra6.textContent = 'Color:';
     var spanModelo6 = document.createElement('span');
     spanModelo6.id = 'color-carro';
-    spanModelo6.textContent = vehiculo && vehiculo.modelo ? vehiculo.modelo : 'Gris';
+    spanModelo6.textContent = vehiculo && vehiculo.modelo ? vehiculo.color : 'Gris';
     elemento6.appendChild(letra6);
     elemento6.appendChild(spanModelo6);
     lista.appendChild(elemento6);
@@ -328,23 +328,6 @@ async function ListarMovimientos(event) {
     localStorage.setItem("tarjeta", codigoTelepas);
     window.location.href = "./movimientos.html";
 }
-
-function Deshabilitar(caja) {
-
-    var titulo2 = caja.querySelector('h2');
-    titulo2.textContent = "Deshabilitada";
-
-    var quitarBonotes = caja.querySelectorAll('button');
-    quitarBonotes.forEach(function (boton) {
-        if (boton.className) {
-            boton.remove();
-        }
-    });
-
-    var ubicacion2 = document.getElementById('deshabilitadas');
-    ubicacion2.appendChild(caja);
-
-}
 //#endregion
 
 //#region Backend
@@ -366,11 +349,11 @@ async function Validar() {
             document.getElementById("balance-amount").innerHTML = "$" + parseFloat(data.saldo).toFixed(2);
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
-
             document.getElementById("email").innerHTML = data.correo;
+            document.getElementById("contraseña").innerHTML = data.contraseña;
 
             for (let i = 0; i < data.tarjetas.length; i++) {
-                manejarTarjetas(data.tarjetas[i], data.vehiculos[i]);
+                manejarTarjetas(data.tarjetas[i], data.vehiculos[i]); //aqui falta lo de validar la tarjeta
             }
         } else {
             alert(result.message);
@@ -469,8 +452,6 @@ async function RecargarTarjeta(tarjeta, nuevoSaldo, valor) {
 
 }
 
-
-
 async function CrearTarjeta() {
     try {
         const response = await fetch("/clientes/passcode", {
@@ -495,9 +476,11 @@ async function CrearTarjeta() {
     return false;
 }
 
-async function EliminarTarjeta(tarjeta) {
+async function Deshabilitar(caja) {
+    const tarjeta = caja.querySelector("#codigo-telepass").textContent;
+
     try {
-        const response = await fetch('/login/close?tarjeta=' + tarjeta, {
+        const response = await fetch('/clientes/passcode?tarjeta=' + tarjeta, {
             method: 'DELETE',
             headers: {
                 'Authorization': token
@@ -505,11 +488,25 @@ async function EliminarTarjeta(tarjeta) {
         });
         if (response.ok) {
         } else {
-            alert('Error al borrar la tarjeta');
+            alert('Error al deshabilitar la tarjeta');
         }
     } catch (error) {
         console.error("Error:", error);
     }
+
+    var titulo2 = caja.querySelector('h2');
+    titulo2.textContent = "Deshabilitada";
+
+    var quitarBonotes = caja.querySelectorAll('button');
+    quitarBonotes.forEach(function (boton) {
+        if (boton.className) {
+            boton.remove();
+        }
+    });
+
+    var ubicacion2 = document.getElementById('deshabilitadas');
+    ubicacion2.appendChild(caja);
+
 }
 
 async function CerrarSesion() {
@@ -522,7 +519,7 @@ async function CerrarSesion() {
         });
         if (response.ok) {
             localStorage.removeItem('token');
-            window.location.href = '../LogIn/Login.html';
+            window.location.href = '../../LogIn/html/Login.html';
         } else {
             alert('Error al cerrar sesión');
         }

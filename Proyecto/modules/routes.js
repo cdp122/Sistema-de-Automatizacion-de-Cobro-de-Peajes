@@ -57,6 +57,7 @@ clientes.get('/', validar, async (req, res) => {
     const enviar = {
         nombre: Cliente.nombres,
         apellido: Cliente.apellidos,
+        contraseña: Cliente.contraseña,
         saldo: Cliente.saldoTotal,
         cedula: Cliente.cedula,
         telefono: Cliente.telefono,
@@ -191,8 +192,8 @@ clientes.get('/passcode', validar, async (req, res) => {
 })
 
 clientes.delete('/passcode', validar, async (req, res) => {
-    await conexion.BorrarRegistro("tb_tarjetas", "tarjeta", req.query.tarjeta);
-
+    await conexion.ModificarRegistro("tb_tarjetas", "estado", 0, "tarjeta", req.query.tarjeta);
+    console.log("Tarjeta deshabilitada de " + req.query.tarjeta + " del user " +  req.user.username);
     res.json("ok");
 })
 //#endregion

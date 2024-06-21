@@ -13,9 +13,10 @@ class Usuario {
 }
 
 class Tarjeta {
-    constructor(id, saldo) {
+    constructor(id, saldo, estado) {
         this.id = id;
         this.saldo = parseFloat(saldo);
+        this.estado = estado;
     }
 }
 
@@ -47,7 +48,7 @@ class Cliente extends Usuario {
     AgregarTarjeta(tarjetas) {
         try {
             tarjetas.forEach(tarjeta => {
-                this.tarjetas.push(new Tarjeta(tarjeta.tarjeta, tarjeta.saldo));
+                this.tarjetas.push(new Tarjeta(tarjeta.tarjeta, tarjeta.saldo, tarjeta.estado));
             });
         }
         catch { console.error("Posiblemente no se entregaron datos de tarjetas para", this.nombres) };
