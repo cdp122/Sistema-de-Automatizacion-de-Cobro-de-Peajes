@@ -56,13 +56,14 @@ clientes.get('/', validar, async (req, res) => {
 
     const enviar = {
         nombre: Cliente.nombres,
+        apellido: Cliente.apellidos,
         saldo: Cliente.saldoTotal,
         cedula: Cliente.cedula,
         telefono: Cliente.telefono,
         correo: Cliente.correo,
         tarjetas: Cliente.tarjetas,
         vehiculos: Cliente.vehiculos
-    }
+    } 
 
     console.log("Sesión autorizada a " + req.user.username);
     res.json(enviar);

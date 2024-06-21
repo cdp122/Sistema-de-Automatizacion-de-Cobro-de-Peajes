@@ -33,13 +33,12 @@ app.get('/', (req, res) => {
 
 //#region Cargar archivos
 app.use(express.static(path.join(__dirname, 'WebSite')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'Home')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'Home', 'HTML')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Home')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Home', 'HTML')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn')));
-app.use(express.static(path.join(__dirname, 'WebSite', 'Pag-perfil')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Registro')));
 //#endregion
 

@@ -4,7 +4,8 @@ class Usuario {
 
     Crear(data) {
         this.id = data[0].id;
-        this.nombres = data[0].nombres;
+        this.nombres = data[0].nombre;
+        this.apellidos = data[0].apellido;
         this.cedula = data[0].cedula;
         this.telefono = data[0].telefono;
         this.fechaNac = JSON.stringify(data[0].fecha_nacimiento).slice(1, 11);
