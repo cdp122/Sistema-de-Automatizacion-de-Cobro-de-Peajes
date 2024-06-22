@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: url('../Assets/PanorámicaNoche.webp') no-repeat center center fixed;
+    background: url('../../Assets/PanorámicaNoche.webp') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -36,27 +36,24 @@ header .boton-regreso:hover {
     color: #8F1299;
 }
 
+.imagen-inicio {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+}
+
 .intro,
 .quienes-somos,
 .mision-vision,
 .valores,
-.servicios,
 .info-importante {
     padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px;
+    margin: 20px auto;
+    max-width: 800px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.imagen-inicio {
-    display: block;
-    margin: 0 auto 20px;
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
 }
 
 .mision-vision {
@@ -67,53 +64,28 @@ header .boton-regreso:hover {
 
 .mision,
 .vision {
-    flex: 1;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 48%;
 }
 
-.valores ul li {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.servicios {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.servicio-grua {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+h1,
+h2 {
+    font-family: 'Patua One', cursive;
+    font-family: 'Paytone One', sans-serif;
+    font-size: 24px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
 }
 
-.servicio-grua img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
+h2 {
+    font-size: 20px;
 }
 
-.servicio-grua h3 {
-    margin: 10px 0;
-    font-size: 50px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
 }
 
 footer {
@@ -152,21 +124,7 @@ footer {
 }
 
 @keyframes resaltar {
-
     to {
         background: transparent;
     }
-}
-
-/* Interacciones */
-.servicio-grua:hover {
-    transform: scale(1.05);
-}
-
-.quienes-somos:hover,
-.mision:hover,
-.vision:hover,
-.valores ul li:hover,
-.info-importante:hover {
-    transform: scale(1.02);
 }
