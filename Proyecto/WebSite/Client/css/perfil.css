@@ -371,6 +371,9 @@ body {
     background: #e69600b4;
 }
 
+.ocultar {
+    display: none;
+}
 /* Botón para regresar al menú */
 #regresar-menu {
     position: fixed;

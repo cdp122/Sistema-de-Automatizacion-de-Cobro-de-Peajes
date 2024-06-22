@@ -11,10 +11,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //#region Front-End
 function editarPerfil() {
+
     camposEditables.forEach(id => {
         const campo = document.getElementById(id);
         campo.setAttribute("contenteditable", "true");
         campo.classList.add("editable");
+
+        campo.classList.remove("ocultar");
+        const pl = document.getElementById('muestra');
+        if(id == 'contraseña'){
+            pl.classList.add("ocultar");
+        }
+
         campo.addEventListener("focus", limpiarCampo);
         campo.addEventListener("blur", restaurarCampo);
     });
@@ -61,8 +69,14 @@ function guardarCambios() {
             const campo = document.getElementById(id);
             campo.setAttribute("contenteditable", "false");
             campo.classList.remove("editable");
+            if(id== 'contraseña'){
+                campo.classList.add("ocultar");
+                document.getElementById('muestra').classList.remove("ocultar");
+            }
+
             campo.removeEventListener("focus", limpiarCampo);
             campo.removeEventListener("blur", restaurarCampo);
+            
         });
 
         alert("Cambios guardados exitosamente.");
