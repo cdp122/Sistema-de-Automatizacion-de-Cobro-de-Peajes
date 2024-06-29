@@ -23,6 +23,8 @@ body {
     text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
+
+
 .menuContainerNight {
     background: #050e3af1;
 }
@@ -81,6 +83,7 @@ body {
     box-sizing: border-box;
     border-radius: 16px;
     transition: width 0.5s, height 0.5s, font-size 0.5s;
+
 }
 
 .contentNight {
@@ -111,10 +114,7 @@ body {
     align-items: center;
 }
 
-.btn {
-    transition: all 0.3s ease-in-out;
-    font-family: 'Bebas Neue', sans-serif;
-}
+
 
 .btn {
     width: 150px;
@@ -129,11 +129,21 @@ body {
     color: white;
     margin-top: 10px;
     transition: background-color 0.5s, font-size 0.5s;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Bebas Neue', sans-serif;
+    text-decoration: none;
+    color: white;
+    text-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .btnNight {
     background-image: linear-gradient(135deg, #510e65 0%, #011b8fd0 100%);
     box-shadow: 0 20px 30px -6px rgba(23, 32, 133, 0.5);
+    text-shadow: none;
 }
 
 .btn:hover {
@@ -143,11 +153,6 @@ body {
 
 .btn:active {
     opacity: 0.5;
-}
-
-.btn a {
-    text-decoration: none;
-    color: white;
 }
 
 .username,
@@ -569,7 +574,7 @@ body {
     }
 }
 
-@media (max-height: 400px) {}
+
 
 /*
 Morado claro #8F1299

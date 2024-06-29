@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleado</title>
+    <link rel="stylesheet" href="../Empleado/empleado.css" type="text/css" />
+    <link rel="icon" href="../Assets/Logo.png" type="imagen/png" />
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="overlay"></div>
+    <div class="perfil-container">
+        <div class="perfil-header">
+            <img src="../Assets/Usuario.png" alt="Foto de Perfil" id="profile-pic">
+            <h1 id="full-name">Nombre de Usuario</h1>
+        </div>
+        <div class="perfil-details">
+            <h2>Información del Usuario</h2>
+            <ul>
+                <li><strong>Cédula:</strong> <span id="cedula">0000000000</span></li>
+                <li><strong>Teléfono:</strong> <span id="telefono" class="editable">000-000-0000</span></li>
+                <li><strong>Correo Electrónico:</strong> <span id="email" class="editable">correo@ejemplo.com</span></li>
+                <li><strong>Contraseña:</strong> <span id="contraseña" class="editable">********</span></li>
+            </ul>
+            <button id="editar-perfil" onclick="editarPerfil()">Editar Perfil</button>
+            <button id="guardar-cambios" onclick="guardarCambios()" style="display: none;">Guardar Cambios</button>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 Sistema de Peajes. Todos los derechos reservados.</p>
+    </footer>
+    <script src="../Empleado/empleado.js"></script>
+</body>
+</html>

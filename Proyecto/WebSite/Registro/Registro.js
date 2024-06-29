@@ -1,3 +1,6 @@
+
+
+
 async function validarFormulario() {
     const form = document.getElementById('registroForm');
     const nombre = form.nombre.value;
