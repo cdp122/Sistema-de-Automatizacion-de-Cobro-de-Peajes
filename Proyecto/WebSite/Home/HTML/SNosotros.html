@@ -6,19 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros</title>
     <link rel="stylesheet" href="../CSS/SNosotros.css">
+    <link rel="icon" href="../../Assets/Logo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Patua+One&family=Paytone+One&display=swap" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    </style>
 </head>
 
 <body>
     <header class="desvanecer">
-        <h1>Acerca de Panasolar</h1>
-        <nav>
-            <a href="../Home/HTML/index.html" class="boton-regreso">Volver al Menú</a>
-            <a href="Servicios.html" class="boton-regreso">Servicios</a>
-        </nav>
+        
+        <div class="menuContainer">
+            <a href="../HTML/index.html" class="logo"></a>
+            <h1>Acerca de Panasolar</h1>    
+            <label for="menu-toggle" class="hamburger">
+              <input type="checkbox" id="menu-toggle">
+              <svg viewBox="0 0 32 32">
+                <path class="line line-top-bottom"
+                  d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                </path>
+                <path class="line" d="M7 16 27 16"></path>
+              </svg>
+            </label>
+            <nav class="navbar">
+              <ul>
+                <li><a href="../HTML/Servicios.html">Servicios</a></li>
+                <li><a href="../HTML/telepass.html">Telepass</a></li>
+                <li><a href="../HTML/contactanos.html">Contacto</a></li>
+                <li><a href="../../LogIn/html/Login.html">Iniciar Sesión</a></li>
+              </ul>
+            </nav>
+          </div>
     </header>
 
     <section class="intro desvanecer">
@@ -72,7 +87,16 @@
         <p>Para acceder a los servicios brindados por Panamericana Vial, los usuarios deben estar dentro de los tramos
             concesionados.</p>
     </section>
-
+    <div class="Desp">
+        <nav class="navDes">
+          <ul>
+            <li><a href="../HTML/Servicios.html">Servicios</a></li>
+              <li><a href="../HTML/telepass.html">Telepass</a></li>
+              <li><a href="../HTML/contactanos.html">Contacto</a></li>
+              <li><a href="../../LogIn/html/Login.html">Iniciar Sesión</a></li>
+          </ul>
+        </nav>
+      </div>
     <footer class="desvanecer">
         <p>&copy; 2024 Panasolar. Todos los derechos reservados.</p>
     </footer>

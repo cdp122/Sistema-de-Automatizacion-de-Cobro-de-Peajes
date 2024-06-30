@@ -1,10 +1,19 @@
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 400;
-    font-style: normal;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* Estilos base */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Bebas Neue', sans-serif; /* Aplica la fuente a todos los elementos */
+}
+
+body {
+    font-family: 'Bebas Neue', sans-serif;
+    width: 100%;
+    height: 100%;
     background: url('../../Assets/PanorámicaNoche.webp') no-repeat center center fixed;
     background-size: cover;
 }
@@ -16,24 +25,137 @@ header {
     text-align: center;
     position: relative;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    padding: 0 20px;
 }
 
 header nav {
     margin-top: 15px;
 }
 
-header .boton-regreso {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: rgba(143, 18, 153, 0.8);
-    border-radius: 5px;
-    font-weight: 500;
+.hamburger {
+    cursor: pointer;
 }
 
-header .boton-regreso:hover {
-    background-color: #ffffff;
-    color: #8F1299;
+.hamburger input {
+    display: none;
+}
+
+.hamburger svg {
+    height: 3em;
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+    fill: none;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+    stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+    transform: rotate(-45deg);
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+}
+
+/* Menú de Navegación */
+.menuContainer {
+    width: 95%;
+    /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    /* Ajustar el padding del menú */
+}
+
+.menuContainer .navbar.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+}
+
+.logo {
+    color: #fffdfc;
+    font-size: 25px;
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    background: url('../../Assets/Logo.png') no-repeat 50% 50%;
+    background-size: cover;
+    margin-left: 20px;
+}
+
+.menuContainer .navbar ul li {
+    margin: 0 5px;
+    /* Ajusta el margen según tus necesidades */
+}
+
+.menuContainer .navbar ul {
+    display: flex;
+    justify-content: center;
+}
+
+.menuContainer .navbar ul li a {
+    font-size: 20px;
+    padding: 20px;
+    color: white;
+    display: block;
+}
+
+#menu-toggle:checked ~ .navbar ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+/* Texto del encabezado */
+.headertxt {
+    width: 50%;
+    padding-left: 30px;
+}
+
+.headertxt h1 {
+    font-size: 80px;
+    /* Aumenta el tamaño de la fuente */
+    line-height: 130px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: bold;
+    /* Aplica negrita al texto */
+}
+
+.headertxt p {
+    font-size: 25px;
+    /* Aumenta el tamaño de la fuente */
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 500;
+    /* Aplica un grosor medio al texto */
 }
 
 .imagen-inicio {
@@ -69,8 +191,6 @@ header .boton-regreso:hover {
 
 h1,
 h2 {
-    font-family: 'Patua One', cursive;
-    font-family: 'Paytone One', sans-serif;
     font-size: 24px;
     text-align: center;
 }
@@ -110,7 +230,250 @@ footer {
 .resaltar {
     animation: resaltar 1.5s ease-in-out forwards;
 }
+.Desp {
+    text-align: center;
+    align-items: center;
+    width: 200px;
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    z-index: 1000;
+    /* Asegura que se sobreponga a otros elementos */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Fondo semi-transparente */
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra para mayor visibilidad */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    display: none;
+    /* Ocultar por defecto */
+}
 
+#menu-toggle:checked~.Desp {
+    display: block;
+    /* Mostrar cuando el checkbox esté seleccionado */
+}
+
+.navDes ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navDes ul li {
+    margin: 5px 0;
+}
+
+.navDes ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.navDes ul li a:hover {
+    color: #007BFF;
+    /* Color de enlace al pasar el mouse */
+}  
+/* Estilos responsivos */
+@media (max-width: 991px) {
+
+    /* Encabezado */
+    .header {
+        height: auto;
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        align-items: center;
+    }
+
+    .headertxt {
+        padding-left: 0;
+        text-align: center;
+        /* Centra el texto */
+    }
+
+    /* Contenedor de imagen */
+    .containerIMG {
+        min-height: 300px;
+        /* Reduce la altura mínima */
+    }
+
+    /* Menú hamburguesa */
+    .menuContainer {
+        padding: 20px 0;
+        /* Ajusta el padding */
+    }
+
+    /* Menú de Navegación */
+    .menuContainer .navbar.active {
+        top: 90px;
+        /* Ajusta la posición en dispositivos móviles */
+    }
+
+    /* Botón */
+    .btn-1 {
+        margin-top: 20px;
+        /* Ajusta el margen superior */
+    }
+
+    /* Dirección */
+    .direction-container {
+        padding: 20px 0;
+        /* Ajusta el padding */
+    }
+
+    /* Sección "Nosotros" */
+    .about {
+        padding: 50px 0;
+        /* Ajusta el padding */
+    }
+
+    /* Información */
+    .informacion {
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        padding: 30px;
+        /* Ajusta el padding */
+    }
+
+    /* Sección de casas */
+    .house {
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        margin-top: 0;
+        /* Elimina el margen superior */
+    }
+
+    .house-1,
+    .house-2,
+    .house-3,
+    .house-4 {
+        height: auto;
+        /* Cambia la altura a automática */
+        margin-bottom: 20px;
+        /* Añade un margen inferior */
+    }
+
+    .txt p {
+        position: static;
+        /* Restaura la posición */
+        transform: rotate(0);
+        /* Restaura la rotación */
+        margin-top: 10px;
+        /* Ajusta el margen superior */
+    }
+
+    /* Pie de página */
+    .footer-content-wrapper {
+        flex-direction: column;
+        /* Cambia la dirección de los elementos a columna */
+        gap: 30px;
+        /* Ajusta el espacio entre los elementos */
+    }
+
+    .footer-flex {
+        align-items: center;
+        /* Centra los elementos */
+    }
+
+    .footer-content {
+        width: 100%;
+        /* Ajusta el ancho */
+    }
+
+    .footer-form {
+        width: 100%;
+        /* Ajusta el ancho */
+    }
+
+    .footer-txt {
+        text-align: center;
+        /* Centra el texto */
+    }
+
+    form {
+        width: 100%;
+        /* Ajusta el ancho */
+    }
+}
+
+@media (max-width: 325px) {
+    #menu-toggle:checked~.navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        background-color: #fff;
+        /* Agrega un fondo al menú desplegable */
+    }
+}
+
+@media (min-width: 300px) and (max-width: 991px) {
+
+    .house-2 p,
+    .house-3 p,
+    .house-4 p {
+        display: none;
+    }
+}
+
+@media (min-width: 621px) and (max-width: 767px) {
+    .navbar {
+        visibility: hidden;
+    }
+
+    .hamburger {
+        position: absolute;
+        right: 20px;
+        /* Ajusta el valor según tus necesidades */
+    }
+}
+
+
+@media (max-width: 620px) {
+    .containerIMG .headertxt {
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .navbar {
+        position: absolute;
+        right: 20px;
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 769px) {
+    .navbar {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .navbar {
+        display: flex;
+    }
+
+    .hamburger {
+        display: none;
+    }
+}
+
+@media (max-width: 769px) {
+
+    .containerIMG .headertxt {
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+}
 @keyframes desvanecer {
     to {
         opacity: 1;
