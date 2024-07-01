@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura de Peaje</title>
+  <link rel="stylesheet" href="FacGrup.css">
+  <script src="FacGrup.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>FACTURA</h1>
+      <div class="header-info-container">
+        <div class="product-control-container">
+          <section class="product-info">
+            <h2>AÑADIR / CONTROLAR TRANSPORTE:</h2>
+            <button id="add-product">Agregar Transporte</button>
+            <button id="modify-product">Modificar Transporte</button>
+            <button id="delete-product">Eliminar Transporte</button>
+            <div id="product-form" style="display:none;">
+              <select id="product-select" style="display:none;"></select>
+              <input type="text" id="product-name" placeholder="Nombre del Transporte">
+              <input type="number" id="product-price" placeholder="Tarifa a pagar" step="0.01">
+              
+              <button id="save-product">Guardar cambios</button>
+              <button id="cancel-product">Cancelar</button>
+            </div>
+          </section>
+        </div>
+        <div class="header-info">
+          <section class="company-info">
+            <h2>SISTEMA DE PEAJES</h2>
+            <div class="invoice-info">
+              <p class="factura-numero">NÚMERO DE FACTURA: <span id="numeroFactura">00000</span></p>
+              <p>FECHA DE FACTURA: <input type="date" id="fechaFactura" name="fechaFactura" required readonly></p>
+              <p>HORA DE FACTURA: <input type="time" id="horaFactura" name="horaFactura" required readonly></p>
+            </div>
+            <div class="info-item">
+              <p class="label">Dirección:</p>
+              <p class="value">ECUADOR-PICHINCHA-IBARRA</p>
+            </div>
+            <div class="info-item">
+              <p class="label">Teléfono:</p>
+              <p class="value">+593 995817315</p>
+            </div>
+            <div class="info-item">
+              <p class="label">Correo electrónico:</p>
+              <p class="value">peajes@sistemapeajes.com</p>
+            </div>
+            <div class="info-item">
+              <p class="label">Sitio web:</p>
+              <p class="value">www.PanaSolar.com.ec</p>
+            </div>
+            <a href="../empleado.html">Regresar</a>
+          </section>
+        </div>
+        <div class="client-company-info">
+          <section class="client-info">
+            <h2>FACTURAR A:</h2>
+            <p>Cédula del cliente: <input type="text" id="client-id" placeholder="Ingrese la cédula del cliente"></p>
+            <p>Nombre del cliente: <input type="text" id="client-name" placeholder="Ingrese el nombre del cliente"></p>
+            <p>Ciudad: <input type="text" id="client-city" placeholder="Ingrese la ciudad"></p>
+            <p>Dirección: <input type="text" id="client-street" placeholder="Ingrese la dirección"></p>
+            <p>Correo Electrónico: <input type="text" id="client-email" placeholder="Ingrese el correo electrónico"></p>
+            <p>Teléfono: <input type="text" id="client-phone" placeholder="Ingrese el teléfono"></p>
+          </section>
+        </div>
+      </div>
+    </header>
+    <table>
+      <thead>
+        <tr>
+          <th>TRANSPORTE</th>
+          <th>DETALLES</th>
+          <th>UNIDADES</th>
+          <th>PRECIO</th>
+          <th>TOTAL</th>
+          <th>ELIMINAR</th>
+        </tr>
+      </thead>
+      <tbody id="item-rows">
+        <tr>
+          <td>
+            <div class="product-input-container">
+              <select class="product-select">
+                <option value="">Transportes</option>
+              </select>
+            </div>
+          </td>
+          <td><input type="text"  class="new-product-input"></td>
+          <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
+          <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
+          <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
+          <td><button class="delete-row-btn">Eliminar fila</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="button-container">
+      <button id="add-row">Agregar fila</button>
+      <button id="enviar-factura">Enviar factura</button>
+      <button id="eliminar-factura">Limpiar factura</button>
+    </div>
+
+    <footer>
+      <div class="totals">
+        <p id="total" class="total">TOTAL FACTURA: $<span id="total-value">0.00</span></p>
+      </div>
+      <p class="thanks">Gracias por confiarnos su seguridad.</p>
+      <p class="company-address">Pana Solar, Dirección (Ibarra, Pichincha, Ecuador)</p>
+      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail: peajes@sistemapeajes.com</p>
+    </footer>
+  </main>
+</body>
+</html>
