@@ -7,12 +7,13 @@ const { generar, validar } = require("./auth.js");
 const { stringify } = require("querystring");
 const { env } = require("process");
 var { Usuario, Cliente } = require("./clases.js");
-const { compareSync } = require("bcryptjs");
 Usuario = new Usuario();
 Cliente = new Cliente();
+const { compareSync } = require("bcryptjs");
 
 const bd = express.Router();
 const error = express.Router();
+const employee = express.Router();
 
 var nums, tarjetaID;
 
@@ -25,6 +26,70 @@ async function recargarTarjetaID() {
     let num = await conexion.ConseguirNumFilas("tb_tarjetas")
     tarjetaID = 10000 + parseInt(num[0].TABLE_ROWS);
 }
+//#endregion
+
+//#region Ruta 'log-in'
+const login = express.Router();
+login.use(bodyParser.urlencoded({ extended: true }));
+login.use(bodyParser.json());
+
+login.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../WebSite/Client/Login.html'));
+})
+
+login.get('/authclient', async (req, res) => {
+    try {
+        const username = decodeURIComponent(req.query.username).toUpperCase();
+        const password = decodeURIComponent(req.query.password);
+
+        console.log(`Autorización solicitada por: ${username}`);
+
+        const credenciales = await conexion.LogInClient(username)
+        if (credenciales && credenciales[0] &&
+            credenciales[0].idCliente === username &&
+            credenciales[0].contraseña === password) {
+            const user = { username: username };
+            const token = generar(user);
+            console.log("Usuario enviado " + username);
+            res.json({
+                message: "Usuario autenticado",
+                tipo: "Cliente",
+                token: token,
+            });
+        } else {
+            console.log(`Autorización denegeada a: ${username}`);
+            res.status(401).json({ message: "Error, usuario no detectado" });
+        }
+    } catch (error) {
+        console.error("Error en /authclient:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+login.get('/authemployee', async (req, res) => {
+    const username = decodeURIComponent(req.query.username);
+    const password = decodeURIComponent(req.query.password);
+
+    const credenciales = await conexion.LogInEmpleado(username)
+    if (credenciales != null && credenciales[0] != null &&
+        credenciales[0].idEmpleado == username &&
+        credenciales[0].contraseña == password) {
+        const user = { username: username };
+        const token = generar(user);
+        res.json({
+            message: "Usuario autenticado",
+            tipo: "Empleado",
+            token: token,
+        });
+    } else {
+        return res.status(401).json({ message: "Error, usuario no detectado" });
+    }
+})
+
+login.delete('/close', validar, (req, res) => {
+    console.log("Cerrando sesión...");
+    res.json({ message: 'Sesión cerrada exitosamente' });
+})
 //#endregion
 
 //#region Ruta 'clientes'
@@ -64,7 +129,7 @@ clientes.get('/', validar, async (req, res) => {
         correo: Cliente.correo,
         tarjetas: Cliente.tarjetas,
         vehiculos: Cliente.vehiculos
-    } 
+    }
 
     console.log("Sesión autorizada a " + req.user.username);
     res.json(enviar);
@@ -193,72 +258,8 @@ clientes.get('/passcode', validar, async (req, res) => {
 
 clientes.delete('/passcode', validar, async (req, res) => {
     await conexion.ModificarRegistro("tb_tarjetas", "estado", 0, "tarjeta", req.query.tarjeta);
-    console.log("Tarjeta deshabilitada de " + req.query.tarjeta + " del user " +  req.user.username);
+    console.log("Tarjeta deshabilitada de " + req.query.tarjeta + " del user " + req.user.username);
     res.json("ok");
-})
-//#endregion
-
-//#region Ruta 'log-in'
-const login = express.Router();
-login.use(bodyParser.urlencoded({ extended: true }));
-login.use(bodyParser.json());
-
-login.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../WebSite/Client/Login.html'));
-})
-
-login.get('/authclient', async (req, res) => {
-    try {
-        const username = decodeURIComponent(req.query.username).toUpperCase();
-        const password = decodeURIComponent(req.query.password);
-
-        console.log(`Autorización solicitada por: ${username}`);
-
-        const credenciales = await conexion.LogInClient(username)
-        if (credenciales && credenciales[0] &&
-            credenciales[0].idCliente === username &&
-            credenciales[0].contraseña === password) {
-            const user = { username: username };
-            const token = generar(user);
-            console.log("Usuario enviado " + username);
-            res.json({
-                message: "Usuario autenticado",
-                tipo: "Cliente",
-                token: token,
-            });
-        } else {
-            console.log(`Autorización denegeada a: ${username}`);
-            res.status(401).json({ message: "Error, usuario no detectado" });
-        }
-    } catch (error) {
-        console.error("Error en /authclient:", error);
-        res.status(500).json({ message: "Error interno del servidor" });
-    }
-});
-
-login.get('/authemployee', async (req, res) => {
-    const username = decodeURIComponent(req.query.username);
-    const password = decodeURIComponent(req.query.password);
-
-    const credenciales = await conexion.LogInEmpleado(username)
-    if (credenciales != null && credenciales[0] != null &&
-        credenciales[0].idEmpleado == username &&
-        credenciales[0].contraseña == password) {
-        const user = { username: username };
-        const token = generar(user);
-        res.json({
-            message: "Usuario autenticado",
-            tipo: "Empleado",
-            token: token,
-        });
-    } else {
-        return res.status(401).json({ message: "Error, usuario no detectado" });
-    }
-})
-
-login.delete('/close', validar, (req, res) => {
-    console.log("Cerrando sesión...");
-    res.json({ message: 'Sesión cerrada exitosamente' });
 })
 //#endregion
 
@@ -291,6 +292,12 @@ register.post("/", async (req, res) => {
 })
 //#endregion
 
+//#region Ruta employee
+employee.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'WebSite', 'Empleado', 'empleado.html')); //no es funcional
+})
+//#endregion
+
 //#region Ruta error404 
 //IMPORTANTE: SIEMPRE MANTENER AL PENULTIMO ESTA SECCIÓN
 error.get('/404', (req, res) => {
@@ -299,4 +306,4 @@ error.get('/404', (req, res) => {
 //#endregion
 
 module.exports =
-    { bd, clientes, login, error, register };
+    { bd, clientes, login, error, register, employee };

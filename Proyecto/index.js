@@ -1,7 +1,7 @@
 //#region Dependencias
 const bodyParser = require('body-parser');
 const path = require("path");
-const { bd, clientes, login, error, register } = require("./modules/routes");
+const { bd, clientes, login, error, register, employee } = require("./modules/routes");
 //#endregion
 
 //#region Setup del Server !Importante
@@ -20,6 +20,7 @@ app.use('/clientes', clientes);
 app.use('/login', login);
 app.use('/error', error);
 app.use('/register', register);
+app.use('/employee', employee)
 //#endregion
 
 //#region Inicio
@@ -36,6 +37,8 @@ app.use(express.static(path.join(__dirname, 'WebSite')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Assets')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Client', 'html')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Empleado')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'Empleado', 'html')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Home')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Home', 'HTML')));
@@ -43,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Registro')));
 //#endregion
 
-//#region exportaciones
+//#region exportaciones. NO MOVER
 module.exports = { app };
 //#endregion
 
