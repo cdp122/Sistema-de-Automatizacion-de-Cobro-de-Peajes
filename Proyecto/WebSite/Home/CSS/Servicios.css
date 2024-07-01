@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 /* Estilos base */
 * {
     margin: 0;
@@ -6,8 +7,10 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    font-family: 'Bebas Neue', sans-serif; /* Aplica la fuente a todos los elementos */
+    font-family: 'Bebas Neue', sans-serif;
+    /* Aplica la fuente a todos los elementos */
 }
+
 body {
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 400;
@@ -15,15 +18,16 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: url('../../Assets/PanorámicaNoche.webp') no-repeat center center fixed;
     background-size: cover;
+    background: url('../../Assets/ParqueCentral.webp') no-repeat center center fixed;
+    position: relative;
+    animation: cambiar 15s ease-in-out infinite;
 }
 
 
 header {
-    background-color: rgba(114, 20, 142, 0.8);
-    color: white;
-    padding: 15px 20px;
+    background: #e4a451d8;
+    color: White;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -32,17 +36,15 @@ header {
     justify-content: space-between;
     height: 90px;
     padding: 0 20px;
+
 }
 
-header nav {
-    margin-top: 15px;
-}
 
 .servicios {
     padding: 20px;
     margin: 0 auto;
-    max-width: 1200px;
-    background-color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.774);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -76,19 +78,21 @@ header nav {
 }
 
 footer {
-    background-color: rgba(0, 64, 128, 0.8);
+    background-color: rgba(232, 159, 63, 0.8);
     color: white;
     text-align: center;
     padding: 15px 0;
     margin-top: 20px;
 }
+
 h1 {
-    font-size: 24px; 
+    font-size: 24px;
     text-align: center;
 }
 
 /* Animaciones */
 .desvanecer {
+    padding: 0 20px;
     opacity: 0;
     animation: desvanecer 1s forwards;
 }
@@ -152,23 +156,23 @@ h1 {
     stroke-dasharray: 12 63;
 }
 
-.hamburger input:checked + svg {
+.hamburger input:checked+svg {
     transform: rotate(-45deg);
 }
 
-.hamburger input:checked + svg .line-top-bottom {
+.hamburger input:checked+svg .line-top-bottom {
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
 }
 
 .menuContainer {
-    width: 95%;
+    width: 100%;
     /* Ajusta el ancho según tus necesidades */
-    margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+
     /* Ajustar el padding del menú */
 }
 
@@ -179,6 +183,7 @@ h1 {
     width: 100%;
     position: absolute;
     top: 60px;
+    padding: 0 20px;
 }
 
 .logo {
@@ -205,11 +210,15 @@ h1 {
 .menuContainer .navbar ul li a {
     font-size: 20px;
     padding: 20px;
-    color: #ffffff;
+    color: white;
     display: block;
 }
 
-#menu-toggle:checked ~ .navbar ul {
+p {
+    font-size: 0.55cm;
+}
+
+#menu-toggle:checked~.navbar ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -244,7 +253,7 @@ h1 {
     /* Ocultar por defecto */
 }
 
-#menu-toggle:checked ~ .Desp {
+#menu-toggle:checked~.Desp {
     display: block;
     /* Mostrar cuando el checkbox esté seleccionado */
 }
@@ -268,6 +277,20 @@ h1 {
 .navDes ul li a:hover {
     color: #007BFF;
     /* Color de enlace al pasar el mouse */
+}
+
+@keyframes cambiar {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Estilos responsivos */
@@ -294,7 +317,7 @@ h1 {
 }
 
 @media (max-width: 325px) {
-    #menu-toggle:checked ~ .navbar {
+    #menu-toggle:checked~.navbar {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -307,6 +330,7 @@ h1 {
 }
 
 @media (min-width: 300px) and (max-width: 991px) {
+
     .house-2 p,
     .house-3 p,
     .house-4 p {

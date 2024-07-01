@@ -7,19 +7,23 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    font-family: 'Bebas Neue', sans-serif; /* Aplica la fuente a todos los elementos */
+    font-family: 'Bebas Neue', sans-serif;
+    /* Aplica la fuente a todos los elementos */
 }
 
 body {
     font-family: 'Bebas Neue', sans-serif;
     width: 100%;
     height: 100%;
-    background: url('../../Assets/PanorámicaNoche.webp') no-repeat center center fixed;
     background-size: cover;
+    background: url('../../Assets/ParqueCentral.webp') no-repeat center center fixed;
+    position: relative;
+    animation: cambiar 15s ease-in-out infinite;
 }
 
 header {
-    background-color: rgba(114, 20, 142, 0.8);
+
+    background: #e4a451d8;
     color: white;
     padding: 15px 20px;
     text-align: center;
@@ -30,10 +34,6 @@ header {
     justify-content: space-between;
     height: 90px;
     padding: 0 20px;
-}
-
-header nav {
-    margin-top: 15px;
 }
 
 .hamburger {
@@ -62,25 +62,23 @@ header nav {
     stroke-dasharray: 12 63;
 }
 
-.hamburger input:checked + svg {
+.hamburger input:checked+svg {
     transform: rotate(-45deg);
 }
 
-.hamburger input:checked + svg .line-top-bottom {
+.hamburger input:checked+svg .line-top-bottom {
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
 }
 
 /* Menú de Navegación */
 .menuContainer {
-    width: 95%;
-    /* Ajusta el ancho según tus necesidades */
+    width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    /* Ajustar el padding del menú */
 }
 
 .menuContainer .navbar.active {
@@ -118,9 +116,11 @@ header nav {
     padding: 20px;
     color: white;
     display: block;
+
+
 }
 
-#menu-toggle:checked ~ .navbar ul {
+#menu-toggle:checked~.navbar ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -141,21 +141,17 @@ header nav {
 
 .headertxt h1 {
     font-size: 80px;
-    /* Aumenta el tamaño de la fuente */
     line-height: 130px;
     color: #ffffff;
     margin-bottom: 15px;
     font-weight: bold;
-    /* Aplica negrita al texto */
 }
 
 .headertxt p {
     font-size: 25px;
-    /* Aumenta el tamaño de la fuente */
     color: #ffffff;
     margin-bottom: 15px;
     font-weight: 500;
-    /* Aplica un grosor medio al texto */
 }
 
 .imagen-inicio {
@@ -172,7 +168,7 @@ header nav {
     padding: 20px;
     margin: 20px auto;
     max-width: 800px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.774);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -209,7 +205,7 @@ li {
 }
 
 footer {
-    background-color: rgba(0, 64, 128, 0.8);
+    background-color: rgba(232, 159, 63, 0.8);
     color: white;
     text-align: center;
     padding: 15px 0;
@@ -230,6 +226,7 @@ footer {
 .resaltar {
     animation: resaltar 1.5s ease-in-out forwards;
 }
+
 .Desp {
     text-align: center;
     align-items: center;
@@ -274,7 +271,8 @@ footer {
 .navDes ul li a:hover {
     color: #007BFF;
     /* Color de enlace al pasar el mouse */
-}  
+}
+
 /* Estilos responsivos */
 @media (max-width: 991px) {
 
@@ -474,6 +472,21 @@ footer {
         text-align: center;
     }
 }
+
+@keyframes cambiar {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 @keyframes desvanecer {
     to {
         opacity: 1;

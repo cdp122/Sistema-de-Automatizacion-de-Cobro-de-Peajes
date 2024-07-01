@@ -1,4 +1,3 @@
-/* Importar fuentes */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 /* Estilos base */
@@ -8,21 +7,18 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    font-family: 'Bebas Neue', sans-serif;
+
 }
 
 body {
-    font-family: 'Bebas Neue', sans-serif;
+
     width: 100%;
     height: 100%;
     color: #ffffff;
-    /* Cambia el color del texto a blanco */
-    background: linear-gradient(60deg, #f8928d, #f8c48d);
-    /* Ajusta los colores del degradado de fondo */
-    background-size: 400% 400%;
+    background: linear-gradient(60deg, #e17670, #fbd4ab);
     position: relative;
-    animation: cambiar 12.5s ease-in-out infinite;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
-    /* Agrega una sombra al texto para mayor contraste */
+    animation: cambiar 1s ease-in-out infinite;
 }
 
 /* Encabezado */
@@ -34,7 +30,8 @@ body {
     justify-content: space-between;
     height: 90px;
     padding: 0 20px;
-    /* Ajustar el padding del encabezado */
+    animation: desvanecer 1s forwards;
+    opacity: 0;
 }
 
 /* Contenedor de imagen */
@@ -46,6 +43,8 @@ body {
     min-height: 500px;
     display: flex;
     align-items: center;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+
 }
 
 /* Menú hamburguesa */
@@ -84,9 +83,9 @@ body {
     stroke-dashoffset: -32.42;
 }
 
-/* Menu de Navegacion */
+/* Menú de Navegación */
 .menuContainer {
-    width: 95%;
+    width: 100%;
     /* Ajusta el ancho según tus necesidades */
     margin: 0 auto;
     display: flex;
@@ -129,7 +128,7 @@ body {
 .menuContainer .navbar ul li a {
     font-size: 20px;
     padding: 20px;
-    color: #000000;
+    color: #ffffff;
     display: block;
 }
 
@@ -150,6 +149,7 @@ body {
 .headertxt {
     width: 50%;
     padding-left: 30px;
+
 }
 
 .headertxt h1 {
@@ -208,6 +208,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 0px;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .about-txt {
@@ -224,12 +225,14 @@ h2 {
     font-size: 60px;
     color: #fefcfb;
     margin-bottom: 15px;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .about-txt p {
     font-size: 16px;
     color: #e0e0e0;
     margin-bottom: 35px;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Información */
@@ -237,6 +240,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     padding: 30px 30px 0 30px;
+
 }
 
 .information-1 {
@@ -316,6 +320,7 @@ h2 {
 /* Pie de página */
 .footer {
     padding: 100px 0 0 0;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 .footer-content-wrapper {
@@ -648,6 +653,12 @@ form {
 }
 
 /* Animaciones */
+@keyframes desvanecer {
+    to {
+        opacity: 1;
+    }
+}
+
 @keyframes cambiar {
     0% {
         background-position: 0 50%;
@@ -660,4 +671,10 @@ form {
     100% {
         background-position: 0 50%;
     }
+}
+
+/* Aplicar animación de desvanecer a navbar */
+.navbar {
+    opacity: 0;
+    animation: desvanecer 1s forwards;
 }

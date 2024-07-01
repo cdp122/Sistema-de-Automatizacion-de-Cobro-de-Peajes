@@ -9,21 +9,19 @@
 }
 
 body {
-    background-color: #212121;
     width: 100%;
-    height: 101vh;
+    height: 100vh;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* Asegura que los elementos se alineen al inicio */
     align-items: center;
     overflow: hidden;
     text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+    background: url('../../Assets/Panorámica.webp') no-repeat center center fixed;
+    background-size: cover;
 }
-
-
 
 .menuContainerNight {
     background: #050e3af1;
@@ -36,21 +34,9 @@ body {
 .full {
     width: 100%;
     height: 100%;
-    background: url('../../Assets/Panorámica.webp') no-repeat 50% 50%;
-    background-size: cover;
     display: table;
     margin: 0;
     top: 0;
-}
-
-.day {
-    background: url('../../Assets/Panorámica.webp') no-repeat 50% 50%;
-    background-size: cover;
-}
-
-.night {
-    background: url('../../Assets/PanorámicaNoche.webp') no-repeat 50% 50%;
-    background-size: cover;
 
 }
 
@@ -83,6 +69,9 @@ body {
     box-sizing: border-box;
     border-radius: 16px;
     transition: width 0.5s, height 0.5s, font-size 0.5s;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
 
 }
 
@@ -104,6 +93,10 @@ body {
     box-sizing: border-box;
     border-radius: 16px;
     transition: width 0.5s, height 0.5s, font-size 0.5s;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
+
 }
 
 .form-group {
@@ -113,8 +106,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-
 
 .btn {
     width: 150px;
@@ -132,12 +123,10 @@ body {
     transition: all 0.3s ease-in-out;
     font-family: 'Bebas Neue', sans-serif;
     text-decoration: none;
-    color: white;
     text-shadow: none;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .btnNight {
@@ -165,8 +154,6 @@ body {
     outline: none;
     font-size: 20px;
     transition: font-size 0.5s;
-
-
 }
 
 .username:focus {
@@ -191,19 +178,24 @@ body {
 
 /* =================================================================Rocha*/
 .header {
-    background-color: #e4a451d8;
+    text-shadow: none;
+    background: #e4a451d8;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 90px;
-
-    /* Ajustar el padding del encabezado */
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
 }
 
 /* Menú hamburguesa */
 .hamburger {
     cursor: pointer;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
 }
 
 .hamburger input {
@@ -239,16 +231,18 @@ body {
 
 /* Menu de Navegacion */
 .menuContainer {
-    background-color: #e4a451d8;
+    color: white;
+    background-color: transparent;
     width: 100%;
-    /* Ajusta el ancho según tus necesidades */
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 70px;
     size: 50px;
-    /* Ajustar el padding del menú */
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
 }
 
 .menuContainer .navbar.active {
@@ -269,12 +263,13 @@ body {
     background: url('../../Assets/Logo.png') no-repeat 50% 50%;
     background-size: cover;
     margin-left: 20px;
-
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
 }
 
 .menuContainer .navbar ul li {
     margin: 0 5px;
-    /* Ajusta el margen según tus necesidades */
 }
 
 .menuContainer .navbar ul {
@@ -285,8 +280,11 @@ body {
 .menuContainer .navbar ul li a {
     font-size: 20px;
     padding: 20px;
-    color: #000000;
+    color: #ffffff;
     display: block;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    /* Agregar animación */
 }
 
 .Desp {
@@ -297,16 +295,11 @@ body {
     top: 80px;
     right: 10px;
     z-index: 1000;
-    /* Asegura que se sobreponga a otros elementos */
     background-color: rgba(255, 255, 255, 0.9);
-    /* Fondo semi-transparente */
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Sombra para mayor visibilidad */
     border-radius: 5px;
-    /* Bordes redondeados */
     display: none;
-    /* Ocultar por defecto */
 }
 
 #menu-toggle:checked~.Desp {
@@ -326,7 +319,7 @@ body {
 
 .navDes ul li a {
     text-decoration: none;
-    color: #333;
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -334,7 +327,6 @@ body {
     color: #007BFF;
     /* Color de enlace al pasar el mouse */
 }
-
 
 #menu-toggle:checked~.navbar {
     display: flex;
@@ -372,11 +364,10 @@ body {
         position: absolute;
         top: 90px;
         /* Ajusta esta posición según sea necesario */
-        background: #e4a451d8;
+        background: #000000d8;
         /* Ajusta el fondo según sea necesario */
     }
 }
-
 
 /* Ocultar el menú de hamburguesa en pantallas más grandes */
 @media (min-width: 1025px) {
@@ -392,7 +383,6 @@ body {
         visibility: hidden;
     }
 }
-
 
 @keyframes borderAnimation {
     0% {
@@ -419,6 +409,12 @@ body {
 
     100% {
         border-color: #ff9d00;
+    }
+}
+
+@keyframes desvanecer {
+    to {
+        opacity: 1;
     }
 }
 
@@ -573,15 +569,3 @@ body {
         height: 20px;
     }
 }
-
-
-
-/*
-Morado claro #8F1299
-Morado oscuro #72148E
-Rosa Claro #F970AE
-Palo de Rosa #EF2A78
-Rojo intenso #EF1126
-Naranja #EB8F46
-Amarillo #FBDA70 
-  */
