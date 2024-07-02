@@ -69,7 +69,7 @@ function guardarCambios() {
             const campo = document.getElementById(id);
             campo.setAttribute("contenteditable", "false");
             campo.classList.remove("editable");
-            if(id== 'contraseña'){
+            if(id == 'contraseña'){
                 campo.classList.add("ocultar");
                 document.getElementById('muestra').classList.remove("ocultar");
             }
@@ -377,17 +377,15 @@ async function Validar() {
     }
 }
 
-async function ActualizarPerfil(cedula, telefono, correo) {
+async function ActualizarPerfil(cedula, telefono, correo, contraseña) {
     token = localStorage.getItem('token');
     const data = {
         cedula: cedula,
         telefono: telefono,
         correo: correo,
-        id: "C" + cedula
+        id: "C" + cedula,
+        contraseña: contraseña
     }
-
-    console.log(data);
-
     try {
         const response = await fetch("/clientes/account", {
             method: 'POST',
@@ -408,15 +406,11 @@ async function ActualizarPerfil(cedula, telefono, correo) {
         console.error('Error:', error);
         return false;
     }
-
-
     return false;
 }
 
 async function ActualizarTarjeta(datos) {
     token = localStorage.getItem('token');
-    console.log(datos);
-
     try {
         const response = await fetch("/clientes/passcode", {
             method: 'POST',
@@ -440,7 +434,6 @@ async function ActualizarTarjeta(datos) {
         console.error('Error:', error);
         return false;
     }
-
     return false;
 }
 

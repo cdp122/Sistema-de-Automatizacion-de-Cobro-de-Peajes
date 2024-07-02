@@ -1,6 +1,6 @@
 //#region Carga Inicial
 var token;
-const camposEditables = ["telefono", "email", "contraseña"];
+const camposEditables = ["cedula", "telefono", "email", "contraseña"];
 const editarPerfilBtn = document.getElementById("editar-perfil");
 const guardarCambiosBtn = document.getElementById("guardar-cambios");
 
@@ -15,11 +15,6 @@ function editarPerfil() {
         const campo = document.getElementById(id);
         campo.setAttribute("contenteditable", "true");
         campo.classList.add("editable");
-
-        if (id == 'contraseña') {
-            campo.textContent = '';
-        }
-
         campo.addEventListener("focus", limpiarCampo);
         campo.addEventListener("blur", restaurarCampo);
     });
@@ -28,11 +23,17 @@ function editarPerfil() {
 }
 
 function guardarCambios() {
+    let cedula = document.getElementById("cedula").textContent;
     let telefono = document.getElementById("telefono").textContent;
     let correo = document.getElementById("email").textContent;
     let contraseña = document.getElementById("contraseña").textContent;
 
     let guardar = true;
+
+    if (!/^\d{10}$/.test(cedula)) {
+        alert("La cédula debe contener 10 dígitos y solo números.");
+        guardar = false;
+    }
 
     if (!/^\d{10}$/.test(telefono)) {
         alert("El nro de Telefono debe contener 10 dígitos y solo números.");
@@ -52,7 +53,7 @@ function guardarCambios() {
     }
 
     if (guardar) {
-        if (!ActualizarPerfil(telefono, correo, contraseña)) {
+        if (!ActualizarPerfil(cedula, telefono, correo, contraseña)) {
             alert("No se pudieron actualizar los datos");
             return;
         }
@@ -60,9 +61,14 @@ function guardarCambios() {
             const campo = document.getElementById(id);
             campo.setAttribute("contenteditable", "false");
             campo.classList.remove("editable");
+            if (id == 'contraseña') {
+                campo.classList.add("ocultar");
+                document.getElementById('muestra').classList.remove("ocultar");
+            }
 
             campo.removeEventListener("focus", limpiarCampo);
             campo.removeEventListener("blur", restaurarCampo);
+
         });
 
         alert("Cambios guardados exitosamente.");
@@ -103,13 +109,65 @@ async function Validar() {
             document.getElementById("telefono").innerHTML = data.telefono;
             document.getElementById("email").innerHTML = data.correo;
             document.getElementById("contraseña").innerHTML = data.contraseña;
-
-            console.log(data);
         } else {
             alert(result.message);
         }
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+async function CerrarSesion() {
+    try {
+        const response = await fetch('/login/close', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            localStorage.removeItem('token');
+            window.location.href = '../../LogIn/html/Login.html';
+        } else {
+            alert('Error al cerrar sesión');
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function ActualizarPerfil(cedula, telefono, correo, contraseña) {
+    token = localStorage.getItem('token');
+    const data = {
+        cedula: cedula,
+        telefono: telefono,
+        correo: correo,
+        id: "E" + cedula,
+        contraseña: contraseña
+    }
+
+    console.log(data);
+
+    try {
+        const response = await fetch("/employee/account", {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if (response.ok) {
+            alert("Datos actualizados se cerrará la sesión para que los cambios se apliquen correctamente");
+            window.location.href = "../../LogIn/html/Login.html";
+        } else {
+            alert(result.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+    return false;
 }
 //#endregion

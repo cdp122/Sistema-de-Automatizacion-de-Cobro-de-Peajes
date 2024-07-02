@@ -222,14 +222,14 @@ clientes.post('/movs', validar, async (req, res) => {
 clientes.post('/account', validar, async (req, res) => {
     const cuenta = req.body;
 
-    await conexion.ModificarRegistro("tb_clientes", "correo", cuenta.correo, "idCliente", req.user.username)
+    await conexion.ModificarRegistros("tb_clientes",
+        ["correo", "contraseña"], [cuenta.correo, cuenta.contraseña],
+        "idCliente", req.user.username)
 
     await conexion.ModificarRegistros("tb_usuarios",
         ["id", "cedula", "telefono"], [cuenta.id, cuenta.cedula, cuenta.telefono],
         "id", req.user.username
     )
-
-    req.user.username = cuenta.id;
 
     res.json("ok");
 })
@@ -296,13 +296,9 @@ register.post("/", async (req, res) => {
 employee.get('/', validar, async (req, res) => {
     console.log("Intentando iniciar sesión...");
 
-    console.log(req.user.username);
-
     const usuario = await conexion.ConseguirRegistros(
         "tb_usuarios", "id", req.user.username
     )
-
-    console.log(usuario);
 
     const empleado = await conexion.ConseguirRegistros(
         "tb_empleados", "idEmpleado", req.user.username
@@ -318,17 +314,32 @@ employee.get('/', validar, async (req, res) => {
         rol: empleado[0].rol
     }
 
-    console.log(enviar);
-
     console.log("Sesión autorizada al Empleado " + req.user.username);
     res.json(enviar);
+})
+
+employee.post('/account', validar, async (req, res) => {
+    const cuenta = req.body;
+
+    console.log(req);
+
+    await conexion.ModificarRegistros("tb_empleados",
+        ["correo", "contraseña"], [cuenta.correo, cuenta.contraseña],
+        "idCliente", req.user.username)
+
+    await conexion.ModificarRegistros("tb_usuarios",
+        ["id", "cedula", "telefono"], [cuenta.id, cuenta.cedula, cuenta.telefono],
+        "id", req.user.username
+    )
+
+    res.json("ok");
 })
 //#endregion
 
 //#region Ruta error404 
 //IMPORTANTE: SIEMPRE MANTENER AL PENULTIMO ESTA SECCIÓN
 error.get('/404', (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../WebSite/Error/PagError404.html"));
+    res.sendFile(path.resolve(__dirname, "../WebSite/Error/Html/PagError404.html"));
 })
 //#endregion
 
