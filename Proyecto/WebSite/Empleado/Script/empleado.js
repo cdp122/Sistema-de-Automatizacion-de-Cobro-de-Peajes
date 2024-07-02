@@ -82,3 +82,34 @@ function restaurarCampo(event) {
         event.target.textContent = event.target.defaultValue;
     }
 }
+
+//#region Backend
+async function Validar() {
+    token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch("/employee", {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.message) window.location.href = "../../Error/PagError404.html";
+
+            document.getElementById("full-name").innerHTML = data.nombre + data.apellido;
+            document.getElementById("cedula").innerHTML = data.cedula;
+            document.getElementById("telefono").innerHTML = data.telefono;
+            document.getElementById("email").innerHTML = data.correo;
+            document.getElementById("contraseña").innerHTML = data.contraseña;
+
+            console.log(data);
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+//#endregion

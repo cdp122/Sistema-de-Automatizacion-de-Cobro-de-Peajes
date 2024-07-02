@@ -77,7 +77,7 @@ login.get('/authemployee', async (req, res) => {
         const user = { username: username };
         const token = generar(user);
         res.json({
-            message: "Usuario autenticado",
+            message: "Empeado autenticado",
             tipo: "Empleado",
             token: token,
         });
@@ -293,8 +293,35 @@ register.post("/", async (req, res) => {
 //#endregion
 
 //#region Ruta employee
-employee.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'WebSite', 'Empleado', 'empleado.html')); //no es funcional
+employee.get('/', validar, async (req, res) => {
+    console.log("Intentando iniciar sesión...");
+
+    console.log(req.user.username);
+
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "id", req.user.username
+    )
+
+    console.log(usuario);
+
+    const empleado = await conexion.ConseguirRegistros(
+        "tb_empleados", "idEmpleado", req.user.username
+    )
+
+    const enviar = {
+        nombre: usuario[0].nombre,
+        apellido: usuario[0].apellido,
+        cedula: usuario[0].cedula,
+        telefono: usuario[0].telefono,
+        correo: empleado[0].correo,
+        contraseña: empleado[0].contraseña,
+        rol: empleado[0].rol
+    }
+
+    console.log(enviar);
+
+    console.log("Sesión autorizada al Empleado " + req.user.username);
+    res.json(enviar);
 })
 //#endregion
 

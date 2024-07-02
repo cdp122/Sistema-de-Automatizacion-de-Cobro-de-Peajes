@@ -66,7 +66,8 @@ async function Validar() {
                 localStorage.setItem('token', result.token);
                 window.location.href = "../../Client/html/perfil.html";
             } else if (result.tipo === "Empleado") {
-                alert("Estamos trabajando en la página de Empleados. Así que aún no es accesible...");
+                localStorage.setItem('token', result.token);
+                window.location.href = "../../Empleado/Html/empleado.html";
             } else {
                 alert("Tipo de usuario desconocido: " + result.tipo);
             }
