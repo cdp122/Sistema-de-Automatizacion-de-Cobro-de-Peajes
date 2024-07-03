@@ -337,6 +337,11 @@ employee.post('/account', validar, async (req, res) => {
     res.json("ok");
 })
 
+employee.get('/numfacs', validar, async (req, res) => {
+    await recargarNums();
+    res.json(nums);
+})
+
 employee.get('/search-client', validar, async (req, res) => {
     //Si se busca al cliente por la cédula
     if (req.query.cedula) {

@@ -572,6 +572,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //#region Backend
+async function CargarNumFactura(){
+  token = localStorage.getItem('token');
+  try {
+    const response = await fetch("/employee/numfacs", {
+      method: 'GET',
+      headers: {
+        'Authorization': token
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
 async function BuscarCliente() {
   const cedula = ""; //Aqui va la cédula. 
   token = localStorage.getItem('token');
@@ -597,7 +617,6 @@ async function BuscarCliente() {
 
 async function RellenarInfoCliente(infoCliente) {
   //infoCliente es un arreglo de toda la información recibida en json. 
-
 }
 
 async function RealizarTransacción(infoTransacción) {
