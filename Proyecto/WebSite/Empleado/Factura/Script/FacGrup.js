@@ -4,35 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   clientIdInput.addEventListener('input', async (event) => {
     const cedula = event.target.value;
     if (cedula.length === 10) {
-      await buscarCliente(cedula);
+      await BuscarCliente(cedula);
     }
   });
 });
-
-async function buscarCliente(cedula) {
-  const token = localStorage.getItem('token');
-  try {
-    const response = await fetch(`/employee/search-client?cedula=${cedula}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': token
-      }
-    });
-    if (response.ok) {
-      const data = await response.json();
-      if (data.message) {
-        window.location.href = "../../Error/PagError404.html";
-      } else {
-        rellenarInfoCliente(data);
-      }
-    } else {
-      const result = await response.json();
-      alert(result.message);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
 
 function rellenarInfoCliente(infoCliente) {
   document.getElementById('client-name').value = infoCliente.nombre || '';
@@ -40,11 +15,6 @@ function rellenarInfoCliente(infoCliente) {
   document.getElementById('client-phone').value = infoCliente.telefono || '';
   document.getElementById('client-placa').value = infoCliente.placa || '';
 }
-
-
-
-
-
 
 //#region Backend
 async function CargarNumFactura() {
@@ -67,8 +37,7 @@ async function CargarNumFactura() {
   }
 }
 
-async function BuscarCliente() {
-  const cedula = ""; //Aqui va la cédula. 
+async function BuscarCliente(cedula) {
   token = localStorage.getItem('token');
   try {
     const response = await fetch("/employee/search-client?cedula=" + cedula, {
@@ -81,7 +50,7 @@ async function BuscarCliente() {
       const data = await response.json();
       if (data.message) window.location.href = "../../Error/PagError404.html";
       RellenarInfoCliente(data);
-      console.log(data);
+      console.log(data)
     } else {
       alert(result.message);
     }
@@ -91,7 +60,9 @@ async function BuscarCliente() {
 }
 
 async function RellenarInfoCliente(infoCliente) {
-  //infoCliente es un arreglo de toda la información recibida en json. 
+  document.getElementById("client-name").value = infoCliente.nombres;
+  document.getElementById("client-email").value = infoCliente.correo;
+  document.getElementById("client-phone").value = infoCliente.telefono;
 }
 
 async function RealizarTransacción(infoTransacción) {
