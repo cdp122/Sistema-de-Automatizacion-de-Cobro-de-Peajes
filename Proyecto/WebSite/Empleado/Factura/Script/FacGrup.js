@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const clientIdInput = document.getElementById('client-id');
+document.addEventListener('DOMContentLoaded', async () => {
+  document.getElementById("numeroFactura").innerHTML = await CargarNumFactura();
 
-  clientIdInput.addEventListener('input', async (event) => {
+  document.getElementById('client-id').addEventListener('input', async (event) => {
     const cedula = event.target.value;
     if (cedula.length === 10) {
       await BuscarCliente(cedula);
@@ -28,7 +28,7 @@ async function CargarNumFactura() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      return data;
     } else {
       alert(result.message);
     }
@@ -50,7 +50,6 @@ async function BuscarCliente(cedula) {
       const data = await response.json();
       if (data.message) window.location.href = "../../Error/PagError404.html";
       RellenarInfoCliente(data);
-      console.log(data)
     } else {
       alert(result.message);
     }
