@@ -450,21 +450,26 @@ recover.use(bodyParser.json());
 recover.post('/', async (req, res) => {
     const datos = req.body;
 
-    if (!datos) res.json({ message: "Ingrese datos" });
+    if (!datos) { res.json("Ingrese datos"); return; }
     const usuario = await conexion.ConseguirRegistros(
         "tb_usuarios", "cedula", datos.cedula);
-    if (!usuario) res.json({ message: "Datos inválidos" });
+    if (!usuario) { res.json("Datos inválidos"); return; }
     const fecha = await conexion.ConseguirRegistros(
         "tb_usuarios", "fecha_nacimiento", datos.fecha
     )
-    if (!fecha) res.json({ message: "Datos inválidos" });
+    if (!fecha) { res.json("Datos inválidos"); return; }
     const cuenta = await conexion.ConseguirRegistros(
         "tb_clientes", "correo", datos.correo);
-    if (!cuenta) res.json({ message: "Datos inválidos" });
+    if (!cuenta) { res.json("Datos inválidos"); return; }
 
     if (datos.cedula == usuario[0].cedula &&
-        datos.correo == cuenta[0].correo)
-        res.json("Cuenta encontrada, se procede con la recuperación de la cuenta");
+        datos.correo == cuenta[0].correo) {
+        await conexion.ModificarRegistro(
+            "tb_clientes", 'contraseña', datos.cedula.split('').reverse().join(''),
+            "correo", datos.correo);
+        res.json(datos.cedula.split('').reverse().join(''));
+    }
+    return;
 })
 //#endregion
 

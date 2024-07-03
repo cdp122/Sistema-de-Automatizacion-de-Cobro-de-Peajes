@@ -44,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'WebSite', 'Error')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Home')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Home', 'HTML')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn')));
+app.use(express.static(path.join(__dirname, 'WebSite', 'LogIn', 'Recover')));
 app.use(express.static(path.join(__dirname, 'WebSite', 'Registro')));
 //#endregion
 
