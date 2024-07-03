@@ -442,6 +442,32 @@ employee.post('/payment', validar, async (req, res) => {
 })
 //#endregion
 
+//#region Ruta recover
+const recover = express.Router();
+recover.use(bodyParser.urlencoded({ extended: true }));
+recover.use(bodyParser.json());
+
+recover.post('/', async (req, res) => {
+    const datos = req.body;
+
+    if (!datos) res.json({ message: "Ingrese datos" });
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "cedula", datos.cedula);
+    if (!usuario) res.json({ message: "Datos inválidos" });
+    const fecha = await conexion.ConseguirRegistros(
+        "tb_usuarios", "fecha_nacimiento", datos.fecha
+    )
+    if (!fecha) res.json({ message: "Datos inválidos" });
+    const cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "correo", datos.correo);
+    if (!cuenta) res.json({ message: "Datos inválidos" });
+
+    if (datos.cedula == usuario[0].cedula &&
+        datos.correo == cuenta[0].correo)
+        res.json("Cuenta encontrada, se procede con la recuperación de la cuenta");
+})
+//#endregion
+
 //#region Ruta error404 
 //IMPORTANTE: SIEMPRE MANTENER AL PENULTIMO ESTA SECCIÓN
 error.get('/404', (req, res) => {
@@ -450,4 +476,4 @@ error.get('/404', (req, res) => {
 //#endregion
 
 module.exports =
-    { bd, clientes, login, error, register, employee };
+    { bd, clientes, login, error, register, employee, recover };

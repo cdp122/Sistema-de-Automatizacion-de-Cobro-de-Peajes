@@ -1,7 +1,7 @@
 //#region Dependencias
 const bodyParser = require('body-parser');
 const path = require("path");
-const { bd, clientes, login, error, register, employee } = require("./modules/routes");
+const { bd, clientes, login, error, register, employee, recover } = require("./modules/routes");
 //#endregion
 
 //#region Setup del Server !Importante
@@ -20,7 +20,8 @@ app.use('/clientes', clientes);
 app.use('/login', login);
 app.use('/error', error);
 app.use('/register', register);
-app.use('/employee', employee)
+app.use('/employee', employee);
+app.use('/recover', recover);
 //#endregion
 
 //#region Inicio
