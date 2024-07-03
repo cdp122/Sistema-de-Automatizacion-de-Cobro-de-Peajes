@@ -39,8 +39,10 @@ h1 {
 
 .header-info-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  gap: 20px; /* Espacio entre los elementos */
+  justify-content: center;
+  /* Centra horizontalmente */
+  gap: 20px;
+  /* Espacio entre los elementos */
   align-items: flex-start;
   margin-bottom: 30px;
 }
@@ -48,8 +50,10 @@ h1 {
 .header-info,
 .product-control-container,
 .client-company-info {
-  flex: 1; /* Para que ambos ocupen el mismo espacio */
-  max-width: 600px; /* Ancho máximo para limitar el tamaño */
+  flex: 1;
+  /* Para que ambos ocupen el mismo espacio */
+  max-width: 600px;
+  /* Ancho máximo para limitar el tamaño */
 }
 
 .company-info {
@@ -57,7 +61,8 @@ h1 {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  margin: 0 auto;
+  /* Centra el contenedor horizontalmente */
 }
 
 .invoice-info {
@@ -96,7 +101,8 @@ h1 {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  margin: 0 auto;
+  /* Centra el contenedor horizontalmente */
 }
 
 .client-info p,
@@ -246,17 +252,23 @@ footer {
 .factura-numero {
   font-size: 18px;
   font-weight: bold;
-  color: #4a90e2; /* Color principal */
+  color: #4a90e2;
+  /* Color principal */
   padding: 10px;
-  background-color: #f4f4f4; /* Color de fondo para resaltar */
+  background-color: #f4f4f4;
+  /* Color de fondo para resaltar */
   border-radius: 5px;
-  border: 1px solid #ddd; /* Borde sutil */
-  display: inline-block; /* Ajusta el tamaño del contenedor al contenido */
-  margin-bottom: 10px; /* Espacio debajo del elemento */
+  border: 1px solid #ddd;
+  /* Borde sutil */
+  display: inline-block;
+  /* Ajusta el tamaño del contenedor al contenido */
+  margin-bottom: 10px;
+  /* Espacio debajo del elemento */
 }
 
 .factura-numero span {
-  color: #e74c3c; /* Color diferente para el número */
+  color: #e74c3c;
+  /* Color diferente para el número */
   font-weight: bold;
 }
 

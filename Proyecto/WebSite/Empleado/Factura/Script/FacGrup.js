@@ -424,12 +424,12 @@ document.addEventListener("DOMContentLoaded", function () {
     newRow.innerHTML = `
           <td>
               <select class="product-select">
-                  <option value="">Productos</option>
+                  <option value="">Transportes</option>
               </select>
           </td>
-          <td><input type="text" placeholder="Nuevo Producto" class="new-product-input" readonly></td>
-          <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
-          <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price" readonly></td>
+          <td><input type="text" class="new-product-input" readonly></td>
+          <td><input type="number"  min="1" value="1" class="quantity"></td>
+          <td><input type="number"  min="0" step="0.01" value="0.00" class="price" readonly></td>
           <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
           <td><button class="delete-row-btn">Eliminar fila</button></td>
       `;
