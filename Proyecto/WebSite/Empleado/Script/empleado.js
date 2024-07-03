@@ -105,6 +105,7 @@ async function Validar() {
             if (data.message) window.location.href = "../../Error/PagError404.html";
 
             document.getElementById("full-name").innerHTML = data.nombre + data.apellido;
+            document.getElementById("rol").innerHTML = data.rol;
             document.getElementById("cedula").innerHTML = data.cedula;
             document.getElementById("telefono").innerHTML = data.telefono;
             document.getElementById("email").innerHTML = data.correo;
@@ -145,8 +146,6 @@ async function ActualizarPerfil(cedula, telefono, correo, contraseña) {
         id: "E" + cedula,
         contraseña: contraseña
     }
-
-    console.log(data);
 
     try {
         const response = await fetch("/employee/account", {

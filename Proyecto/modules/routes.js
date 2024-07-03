@@ -13,7 +13,6 @@ const { compareSync } = require("bcryptjs");
 
 const bd = express.Router();
 const error = express.Router();
-const employee = express.Router();
 
 var nums, tarjetaID;
 
@@ -293,6 +292,10 @@ register.post("/", async (req, res) => {
 //#endregion
 
 //#region Ruta employee
+const employee = express.Router();
+employee.use(bodyParser.urlencoded({ extended: true }));
+employee.use(bodyParser.json());
+
 employee.get('/', validar, async (req, res) => {
     console.log("Intentando iniciar sesión...");
 
@@ -321,11 +324,9 @@ employee.get('/', validar, async (req, res) => {
 employee.post('/account', validar, async (req, res) => {
     const cuenta = req.body;
 
-    console.log(req);
-
     await conexion.ModificarRegistros("tb_empleados",
         ["correo", "contraseña"], [cuenta.correo, cuenta.contraseña],
-        "idCliente", req.user.username)
+        "idEmpleado", req.user.username)
 
     await conexion.ModificarRegistros("tb_usuarios",
         ["id", "cedula", "telefono"], [cuenta.id, cuenta.cedula, cuenta.telefono],
