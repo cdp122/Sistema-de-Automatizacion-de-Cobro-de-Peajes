@@ -481,6 +481,7 @@ recover.post('/', async (req, res) => {
                 "correo", datos.correo);
         res.json(nuevaContraseña);
     }
+    console.log("El usuario", datos.cedula, "recuperó su cuenta");
     return;
 })
 //#endregion
