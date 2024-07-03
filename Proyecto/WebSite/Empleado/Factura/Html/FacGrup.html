@@ -13,22 +13,7 @@
     <header>
       <h1>FACTURA</h1>
       <div class="header-info-container">
-        <div class="product-control-container">
-          <section class="product-info">
-            <h2>AÑADIR / CONTROLAR TRANSPORTE:</h2>
-            <button id="add-product">Agregar Transporte</button>
-            <button id="modify-product">Modificar Transporte</button>
-            <button id="delete-product">Eliminar Transporte</button>
-            <div id="product-form" style="display:none;">
-              <select id="product-select" style="display:none;"></select>
-              <input type="text" id="product-name" placeholder="Nombre del Transporte">
-              <input type="number" id="product-price" placeholder="Tarifa a pagar" step="0.01">
-              
-              <button id="save-product">Guardar cambios</button>
-              <button id="cancel-product">Cancelar</button>
-            </div>
-          </section>
-        </div>
+        
         <div class="header-info">
           <section class="company-info">
             <h2>SISTEMA DE PEAJES</h2>
@@ -71,12 +56,11 @@
     <table>
       <thead>
         <tr>
+          <th>MOVIMIENTO</th>
           <th>TRANSPORTE</th>
-          <th>DETALLES</th>
-          <th></th>
           <th>PRECIO</th>
           <th>TOTAL</th>
-          <th>ELIMINAR</th>
+          <th>LIMPIAR</th>
         </tr>
       </thead>
       <tbody id="item-rows">
@@ -88,19 +72,18 @@
               </select>
             </div>
           </td>
-          <td><input type="text"  class="new-product-input"></td>
-          <td><input type="number" placeholder="Ingrese la cantidad" min="1" value="1" class="quantity"></td>
+          
           <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
           <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
-          <td><button class="delete-row-btn">Eliminar fila</button></td>
+          <td><button id="eliminar-factura">Limpiar factura</button></td>
         </tr>
-      </tbody>
+      </tbody>  
     </table>
 
     <div class="button-container">
-      <button id="add-row">Agregar fila</button>
+      
       <button id="enviar-factura">Enviar factura</button>
-      <button id="eliminar-factura">Limpiar factura</button>
+      
     </div>
 
     <footer>

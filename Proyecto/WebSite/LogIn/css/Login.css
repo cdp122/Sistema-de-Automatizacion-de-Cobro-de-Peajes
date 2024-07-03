@@ -288,6 +288,7 @@ body {
 }
 
 .Desp {
+
     text-align: center;
     align-items: center;
     width: 200px;
@@ -319,8 +320,9 @@ body {
 
 .navDes ul li a {
     text-decoration: none;
-    color: #ffffff;
+    color: black;
     font-weight: bold;
+    text-shadow: none;
 }
 
 .navDes ul li a:hover {
