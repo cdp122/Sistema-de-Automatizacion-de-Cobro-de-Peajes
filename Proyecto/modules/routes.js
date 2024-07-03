@@ -458,16 +458,28 @@ recover.post('/', async (req, res) => {
         "tb_usuarios", "fecha_nacimiento", datos.fecha
     )
     if (!fecha) { res.json("Datos inválidos"); return; }
-    const cuenta = await conexion.ConseguirRegistros(
+    var cuenta = await conexion.ConseguirRegistros(
         "tb_clientes", "correo", datos.correo);
-    if (!cuenta) { res.json("Datos inválidos"); return; }
+    var cliente = true;
+    if (!cuenta) {
+        cliente = false;
+        cuenta = await conexion.ConseguirRegistros(
+            "tb_empleados", "correo", datos.correo);
+        if (!cuenta) { res.json("Datos inválidos"); return; }
+    }
 
     if (datos.cedula == usuario[0].cedula &&
         datos.correo == cuenta[0].correo) {
-        await conexion.ModificarRegistro(
-            "tb_clientes", 'contraseña', datos.cedula.split('').reverse().join(''),
-            "correo", datos.correo);
-        res.json(datos.cedula.split('').reverse().join(''));
+        const nuevaContraseña = datos.cedula.split('').reverse().join('');
+        if (cliente)
+            await conexion.ModificarRegistro(
+                "tb_clientes", 'contraseña', nuevaContraseña,
+                "correo", datos.correo);
+        else
+            await conexion.ModificarRegistro(
+                "tb_empleados", 'contraseña', nuevaContraseña,
+                "correo", datos.correo);
+        res.json(nuevaContraseña);
     }
     return;
 })
