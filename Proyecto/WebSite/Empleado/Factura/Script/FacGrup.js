@@ -571,3 +571,30 @@ document.addEventListener("DOMContentLoaded", function () {
   attachInputListeners(document.querySelector('#item-rows tr'));
 });
 
+//#region Backend
+async function BuscarCliente(cedula) {
+  token = localStorage.getItem('token');
+  try {
+    const response = await fetch("/employee/search-client?cedula=" + cedula, {
+      method: 'GET',
+      headers: {
+        'Authorization': token
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      if (data.message) window.location.href = "../../Error/PagError404.html";
+      RellenarInfoCliente(data);
+      console.log(data);
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+async function RellenarInfoCliente(infoCliente) {
+  //infoCliente es un arreglo de toda la información recibida en json. 
+}
+//#endregion

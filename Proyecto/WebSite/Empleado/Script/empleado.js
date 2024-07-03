@@ -45,9 +45,7 @@ function guardarCambios() {
         guardar = false;
     }
 
-    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{10}$/;
-
-    if (!regex.test(contraseña)) {
+    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{5,10}$/.test(contraseña)) {
         alert("La contraseña debe contener 10 caracteres.");
         guardar = false;
     }

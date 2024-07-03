@@ -1,1 +1,1 @@
-GET http://localhost:3000/login/authclient?username=C1002003001&password=1002003001
+GET http://localhost:3000/employee/search-client?cedula=1002003001

@@ -10,6 +10,7 @@ var { Usuario, Cliente } = require("./clases.js");
 Usuario = new Usuario();
 Cliente = new Cliente();
 const { compareSync } = require("bcryptjs");
+const { unsubscribe } = require("diagnostics_channel");
 
 const bd = express.Router();
 const error = express.Router();
@@ -334,6 +335,36 @@ employee.post('/account', validar, async (req, res) => {
     )
 
     res.json("ok");
+})
+
+employee.get('/search-client', validar, async (req, res) => {
+    const target = req.query.cedula;
+    console.log("Empleado", req.user.username, "buscando a", target);
+
+    const usuario = await conexion.ConseguirRegistros("tb_usuarios", "cedula", target);
+    const cuenta = await conexion.ConseguirRegistros("tb_clientes", "idCliente", "C" + target);
+    const tarjetas = await conexion.ConseguirRegistros("tb_tarjetas", "idCliente", "C" + target)
+    var vehiculos = [];
+
+    for (const tarjeta of tarjetas) {
+        const vehiculo = await conexion.ConseguirRegistros(
+            "tb_vehiculos", "tarjetaVeh", tarjeta.tarjeta
+        );
+        vehiculos.push(vehiculo[0].placa);
+    }
+
+    const data = {
+        nombres : usuario[0].nombre + usuario[0].apellido,
+        telefono : usuario[0].telefono,
+        correo : cuenta[0].correo,
+        vehiculos: vehiculos
+    }
+
+    res.json(data);
+})
+
+employee.post('/payment', validar, async (req, res) => {
+
 })
 //#endregion
 
