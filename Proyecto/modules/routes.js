@@ -199,8 +199,6 @@ clientes.delete('/movs', validar, async (req, res) => {
 })
 
 clientes.post('/movs', validar, async (req, res) => {
-    console.log(req.query.tarjeta, req.query.saldo, req.query.valor);
-
     await recargarNums();
     const id = nums;
 
@@ -298,28 +296,30 @@ employee.use(bodyParser.urlencoded({ extended: true }));
 employee.use(bodyParser.json());
 
 employee.get('/', validar, async (req, res) => {
-    console.log("Intentando iniciar sesión...");
+    if (req.user) {
+        console.log("Intentando iniciar sesión...");
 
-    const usuario = await conexion.ConseguirRegistros(
-        "tb_usuarios", "id", req.user.username
-    )
+        const usuario = await conexion.ConseguirRegistros(
+            "tb_usuarios", "id", req.user.username
+        )
 
-    const empleado = await conexion.ConseguirRegistros(
-        "tb_empleados", "idEmpleado", req.user.username
-    )
+        const empleado = await conexion.ConseguirRegistros(
+            "tb_empleados", "idEmpleado", req.user.username
+        )
 
-    const enviar = {
-        nombre: usuario[0].nombre,
-        apellido: usuario[0].apellido,
-        cedula: usuario[0].cedula,
-        telefono: usuario[0].telefono,
-        correo: empleado[0].correo,
-        contraseña: empleado[0].contraseña,
-        rol: empleado[0].rol
+        const enviar = {
+            nombre: usuario[0].nombre,
+            apellido: usuario[0].apellido,
+            cedula: usuario[0].cedula,
+            telefono: usuario[0].telefono,
+            correo: empleado[0].correo,
+            contraseña: empleado[0].contraseña,
+            rol: empleado[0].rol
+        }
+
+        console.log("Sesión autorizada al Empleado " + req.user.username);
+        res.json(enviar);
     }
-
-    console.log("Sesión autorizada al Empleado " + req.user.username);
-    res.json(enviar);
 })
 
 employee.post('/account', validar, async (req, res) => {
@@ -338,33 +338,102 @@ employee.post('/account', validar, async (req, res) => {
 })
 
 employee.get('/search-client', validar, async (req, res) => {
-    const target = req.query.cedula;
-    console.log("Empleado", req.user.username, "buscando a", target);
+    //Si se busca al cliente por la cédula
+    if (req.query.cedula) {
+        const target = req.query.cedula;
+        console.log("Empleado", req.user.username, "buscando al cliente", target);
 
-    const usuario = await conexion.ConseguirRegistros("tb_usuarios", "cedula", target);
-    const cuenta = await conexion.ConseguirRegistros("tb_clientes", "idCliente", "C" + target);
-    const tarjetas = await conexion.ConseguirRegistros("tb_tarjetas", "idCliente", "C" + target)
-    var vehiculos = [];
+        const usuario = await conexion.ConseguirRegistros("tb_usuarios", "cedula", target);
+        if (usuario) {
+            const cuenta = await conexion.ConseguirRegistros("tb_clientes", "idCliente", "C" + target);
+            const tarjetas = await conexion.ConseguirRegistros("tb_tarjetas", "idCliente", "C" + target)
+            var vehiculos = [];
 
-    for (const tarjeta of tarjetas) {
-        const vehiculo = await conexion.ConseguirRegistros(
-            "tb_vehiculos", "tarjetaVeh", tarjeta.tarjeta
-        );
-        vehiculos.push(vehiculo[0].placa);
+            for (const tarjeta of tarjetas) {
+                const vehiculo = await conexion.ConseguirRegistros(
+                    "tb_vehiculos", "tarjetaVeh", tarjeta.tarjeta
+                );
+                vehiculos.push([vehiculo[0].placa, vehiculo[0].tipo]);
+            }
+
+            const data = {
+                nombres: usuario[0].nombre + usuario[0].apellido,
+                telefono: usuario[0].telefono,
+                correo: cuenta[0].correo,
+                vehiculos: vehiculos
+            }
+
+            res.json(data);
+        }
+        else {
+            res.json({ message: "No se encontó el cliente" });
+        }
     }
+    //Si se busca al cliente por la placa
+    else {
+        const target = req.query.placa;
+        console.log("Empleado", req.user.username, "buscando con placa", target);
 
-    const data = {
-        nombres : usuario[0].nombre + usuario[0].apellido,
-        telefono : usuario[0].telefono,
-        correo : cuenta[0].correo,
-        vehiculos: vehiculos
+        const placa = await conexion.ConseguirRegistros("tb_vehiculos", "placa", target);
+        if (placa) {
+            const tarjeta = await conexion.ConseguirRegistros("tb_tarjetas", "tarjeta", placa[0].tarjetaVeh);
+            const cuenta = await conexion.ConseguirRegistros("tb_clientes", "idCliente", tarjeta[0].idCliente);
+            const usuario = await conexion.ConseguirRegistros("tb_usuarios", "id", tarjeta[0].idCliente);
+
+            const data = {
+                nombres: usuario[0].nombre + usuario[0].apellido,
+                cedula: usuario[0].cedula,
+                telefono: usuario[0].telefono,
+                correo: cuenta[0].correo,
+            }
+            res.json(data);
+        }
+        else {
+            res.json({ message: "No se encontó el cliente" });
+        }
     }
-
-    res.json(data);
 })
 
 employee.post('/payment', validar, async (req, res) => {
+    const registro = req.query.body;
+    console.log("El empleado", req.user.username, " cobró al", registro.placa);
 
+    const vehiculo = await conexion.ConseguirRegistros(
+        "tb_vehiculos", "placa", registro.placa);
+
+    if (vehiculo) {
+        const tarjeta = await conexion.ConseguirRegistros(
+            "tb_tarjetas", "tarjeta", vehiculo.tarjetaVeh);
+        if (tarjeta[0].saldo + registro.valor <= 99.99 &&
+            tarjeta[0].saldo + registro.valor >= 0) {
+            await conexion.InsertarRegistro(
+                "tb_movimientos", ["idTransaccion", "tarjetaMov",
+                "tipoMovimiento", "valor", "fecha"], [registro.id,
+                registro.tarjeta, registro.tipoMov, registro.valor,
+                "current_timestamp()"]
+            )
+            await conexion.ModificarRegistro(
+                "tb_tarjetas", "saldo", tarjeta[0].saldo, "tarjeta", req.query.tarjeta
+            )
+            console.log("Recarga realizada exitosamente");
+            res.json({ message: "Transacción Realizada Correctamente" });
+        }
+        else {
+            res.json({
+                message:
+                    "Error valores incorrectos para la transacción" + (tarjeta[0].saldo + registro.valor)
+            });
+        }
+    }
+    else {
+        await conexion.InsertarRegistro(
+            "tb_movimientos", ["idTransaccion", "tarjetaMov",
+            "tipoMovimiento", "valor", "fecha"], [registro.id,
+            "#####", registro.tipoMov, registro.valor,
+            "current_timestamp()"]
+        )
+        res.json({ message: "Transacción Realizada Correctamente" });
+    }
 })
 //#endregion
 

@@ -572,7 +572,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //#region Backend
-async function BuscarCliente(cedula) {
+async function BuscarCliente() {
+  const cedula = ""; //Aqui va la cédula. 
   token = localStorage.getItem('token');
   try {
     const response = await fetch("/employee/search-client?cedula=" + cedula, {
@@ -596,5 +597,31 @@ async function BuscarCliente(cedula) {
 
 async function RellenarInfoCliente(infoCliente) {
   //infoCliente es un arreglo de toda la información recibida en json. 
+
+}
+
+async function RealizarTransacción(infoTransacción) {
+  token = localStorage.getItem('token');
+  try {
+    const response = await fetch("/employee/payment", {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(infoTransacción)
+    });
+    if (response.ok) {
+      alert("Datos actualizados se cerrará la sesión para que los cambios se apliquen correctamente");
+      window.location.href = "../../LogIn/html/Login.html";
+    } else {
+      alert(result.message);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    return false;
+  }
+  return false;
 }
 //#endregion
