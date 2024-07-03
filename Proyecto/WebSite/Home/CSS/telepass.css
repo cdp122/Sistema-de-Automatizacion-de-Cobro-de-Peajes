@@ -18,9 +18,9 @@ body {
     /* Cambia el color del texto a blanco */
     background: linear-gradient(60deg, #e17670, #f5c592);
     /* Ajusta los colores del degradado de fondo */
-    background: url('../../Assets/ParqueCentral.webp') no-repeat center center fixed;
+    background: url('../Images/ParqueCentral.webp') no-repeat center center fixed;
     position: relative;
-    animation: cambiar 35s ease-in-out infinite;
+    animation: cambiar 60s ease-in-out infinite;
 }
 
 /* Encabezado */
@@ -72,7 +72,7 @@ header h1 {
     width: 80px;
     height: 80px;
     align-items: center;
-    background: url('../../Assets/Logo.png') no-repeat 50% 50%;
+    background: url('../Images/Logo.png') no-repeat 50% 50%;
     background-size: cover;
     margin-left: 20px;
     opacity: 0;

@@ -15,9 +15,9 @@ body {
     width: 100%;
     height: 100%;
     color: #ffffff;
-    background: url('../../Assets/ParqueCentral.webp') no-repeat center center fixed;
+    background: url('../Images/ParqueCentral.webp') no-repeat center center fixed;
     position: relative;
-    animation: desvanecer 1s forwards, cambiar 35s ease-in-out infinite;
+    animation: desvanecer 1s forwards, cambiar 60s ease-in-out infinite;
 }
 
 /* Encabezado */
@@ -74,7 +74,7 @@ body {
     width: 80px;
     height: 80px;
     align-items: center;
-    background: url('../../Assets/Logo.png') no-repeat 50% 50%;
+    background: url('../Images/Logo.png') no-repeat 50% 50%;
     background-size: cover;
     margin-left: 20px;
     opacity: 0;
