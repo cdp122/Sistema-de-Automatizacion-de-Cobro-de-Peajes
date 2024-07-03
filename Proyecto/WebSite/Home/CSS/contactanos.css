@@ -274,7 +274,7 @@ body {
     color: #fff;
     background-color: #b7975b;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -282,14 +282,21 @@ body {
     transition: background-color 0.3s;
 }
 
+#a {
+    text-decoration: none;
+    border-radius: 25px;
+
+}
+
+
 .redirect-button:hover,
 .back-button:hover {
-    background-color: #e6ab16;
+    background-color: #a0845a;
 }
 
 /* Pie de página */
 .footer {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(232, 159, 63, 0.8);
     color: #ffffff;
     text-align: center;
     padding: 10px 0;

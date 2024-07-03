@@ -340,13 +340,26 @@ p {
 
 @media (min-width: 621px) and (max-width: 767px) {
     .navbar {
-        visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-color: #e4a451d8;
+        visibility: visible;
     }
 
     .hamburger {
-        position: absolute;
-        right: 20px;
-        /* Ajusta el valor según tus necesidades */
+        display: none;
+    }
+
+    .navbar ul {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar ul li {
+        margin: 0 10px;
     }
 }
 

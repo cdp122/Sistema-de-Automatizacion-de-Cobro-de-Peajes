@@ -344,6 +344,18 @@ body {
     display: none;
 }
 
+.footer {
+    background-color: rgba(232, 159, 63, 0.8);
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    animation: desvanecer 1s forwards, deslizar 1s forwards;
+}
+
 /* Mostrar el menú de hamburguesa en dispositivos móviles y tabletas */
 @media (min-width: 320px) and (max-width: 1024px) {
     .hamburger {
