@@ -57,7 +57,7 @@
       <thead>
         <tr>
           <th>MOVIMIENTO</th>
-          <th>TRANSPORTE</th>
+          <th>TIPO TRANSPORTE</th>
           <th>PRECIO</th>
           <th>TOTAL</th>
           <th>LIMPIAR</th>
@@ -68,11 +68,20 @@
           <td>
             <div class="product-input-container">
               <select class="product-select">
-                <option value="">Transportes</option>
+                <option value="">Cobro</option>
+                <option value="">Recargas</option>
               </select>
             </div>
           </td>
-          
+          <td><select class="product-select">
+            <option value="Automóvil">Livianos</option>
+          <option value="Motocicleta">2 Ejes</option>
+          <option value="Motocicleta">3 Ejes</option>
+          <option value="Motocicleta">4 Ejes</option>
+          <option value="Motocicleta">5 Ejes</option>
+          <option value="Motocicleta">6 o más Ejes</option>
+          <option value="Camión">Motos</option>
+          </select></td>
           <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
           <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
           <td><button id="eliminar-factura">Limpiar factura</button></td>
