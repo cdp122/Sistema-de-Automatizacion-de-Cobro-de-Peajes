@@ -23,6 +23,8 @@ async function Validar() {
         console.error('Error:', error);
     }
 
+    movimientos = movimientos.reverse();
+
     AgregarPMovimiento(movimientos[0]);
     for (let i = 1; i < movimientos.length; i++) {
         AgregarMovimiento(movimientos[i]);

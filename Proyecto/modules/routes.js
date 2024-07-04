@@ -351,6 +351,7 @@ employee.get('/search-client', validar, async (req, res) => {
         const usuario = await conexion.ConseguirRegistros("tb_usuarios", "cedula", target);
         if (usuario) {
             const cuenta = await conexion.ConseguirRegistros("tb_clientes", "idCliente", "C" + target);
+            if (!cuenta) { res.json({ message: "No se encontó el cliente" }); return; }
             const tarjetas = await conexion.ConseguirRegistros("tb_tarjetas", "idCliente", "C" + target)
             var vehiculos = [];
 
@@ -408,32 +409,43 @@ employee.post('/payment', validar, async (req, res) => {
     if (vehiculo) {
         const tarjeta = await conexion.ConseguirRegistros(
             "tb_tarjetas", "tarjeta", vehiculo[0].tarjetaVeh);
-        if (tarjeta[0].saldo + registro.precio <= 99.99 &&
+        if (tarjeta[0].estado == 1 &&
+            tarjeta[0].saldo + registro.precio <= 99.99 &&
             tarjeta[0].saldo + registro.precio >= 0) {
             await conexion.InsertarRegistro(
                 "tb_movimientos", ["idTransaccion", "tarjetaMov",
                 "tipoMovimiento", "valor", "fecha"], [registro.id,
-                tarjeta[0].tarjeta, registro.tipoMov, registro.precio,
+                tarjeta[0].tarjeta, registro.tipoMov, Math.abs(registro.precio),
                 "current_timestamp()"]
             )
             await conexion.ModificarRegistro(
-                "tb_tarjetas", "saldo", tarjeta[0].saldo, "tarjeta", req.query.tarjeta
+                "tb_tarjetas", "saldo", tarjeta[0].saldo + registro.precio, "tarjeta", tarjeta[0].tarjeta
             )
             console.log("Recarga realizada exitosamente");
             res.json({ message: "Transacción Realizada Correctamente" });
         }
         else {
-            res.json({
-                message:
-                    "Error valores incorrectos para la transacción " + (tarjeta[0].saldo + registro.precio)
-            });
+            if (tarjeta[0].estado == 0) {
+                res.json({
+                    message:
+                        "La tarjeta no se encuentra activa"
+                })
+                return;
+            }
+            else {
+                res.json({
+                    message:
+                        "Error valores incorrectos para la transacción " + (tarjeta[0].saldo + registro.precio)
+                });
+                return;
+            }
         }
     }
     else {
         await conexion.InsertarRegistro(
             "tb_movimientos", ["idTransaccion", "tarjetaMov",
             "tipoMovimiento", "valor", "fecha"], [registro.id,
-            "#####", registro.tipoMov, registro.precio,
+            "#####", registro.tipoMov, Math.abs(registro.precio),
             "current_timestamp()"]
         )
         res.json({ message: "Transacción Realizada Correctamente" });

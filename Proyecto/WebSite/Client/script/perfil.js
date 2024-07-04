@@ -114,7 +114,6 @@ async function recargarSaldo(saldo, tarjeta) {
         localStorage.setItem('saldoTotal', nuevoSaldoTotal.toFixed(2));
 
         saldoTotalElemento.textContent = `$${nuevoSaldoTotal.toFixed(2)}`;
-
     }
     else if (actualizacionSaldo > 99.99) {
         alert("No se permite exceder la cantidad de Saldo de 99.99$");
@@ -330,8 +329,6 @@ function GuardarCambios(event) {
         window.alert("Corrije los campos en rojo");
     }
 }
-
-
 
 async function ListarMovimientos(event) {
 
