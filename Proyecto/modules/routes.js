@@ -400,21 +400,20 @@ employee.get('/search-client', validar, async (req, res) => {
 })
 
 employee.post('/payment', validar, async (req, res) => {
-    const registro = req.query.body;
-    console.log("El empleado", req.user.username, " cobró al", registro.placa);
-
+    const registro = req.body;
+    console.log("El empleado", req.user.username, "cobró al", registro.placa);
     const vehiculo = await conexion.ConseguirRegistros(
         "tb_vehiculos", "placa", registro.placa);
 
     if (vehiculo) {
         const tarjeta = await conexion.ConseguirRegistros(
-            "tb_tarjetas", "tarjeta", vehiculo.tarjetaVeh);
-        if (tarjeta[0].saldo + registro.valor <= 99.99 &&
-            tarjeta[0].saldo + registro.valor >= 0) {
+            "tb_tarjetas", "tarjeta", vehiculo[0].tarjetaVeh);
+        if (tarjeta[0].saldo + registro.precio <= 99.99 &&
+            tarjeta[0].saldo + registro.precio >= 0) {
             await conexion.InsertarRegistro(
                 "tb_movimientos", ["idTransaccion", "tarjetaMov",
                 "tipoMovimiento", "valor", "fecha"], [registro.id,
-                registro.tarjeta, registro.tipoMov, registro.valor,
+                tarjeta[0].tarjeta, registro.tipoMov, registro.precio,
                 "current_timestamp()"]
             )
             await conexion.ModificarRegistro(
@@ -426,7 +425,7 @@ employee.post('/payment', validar, async (req, res) => {
         else {
             res.json({
                 message:
-                    "Error valores incorrectos para la transacción" + (tarjeta[0].saldo + registro.valor)
+                    "Error valores incorrectos para la transacción " + (tarjeta[0].saldo + registro.precio)
             });
         }
     }
@@ -434,7 +433,7 @@ employee.post('/payment', validar, async (req, res) => {
         await conexion.InsertarRegistro(
             "tb_movimientos", ["idTransaccion", "tarjetaMov",
             "tipoMovimiento", "valor", "fecha"], [registro.id,
-            "#####", registro.tipoMov, registro.valor,
+            "#####", registro.tipoMov, registro.precio,
             "current_timestamp()"]
         )
         res.json({ message: "Transacción Realizada Correctamente" });

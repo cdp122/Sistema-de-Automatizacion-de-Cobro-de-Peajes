@@ -107,7 +107,7 @@ async function CargarNumFactura() {
 async function BuscarPlaca(placa) {
   token = localStorage.getItem('token');
   try {
-    const response = await fetch("/employee/search-client-by-placa?placa=" + placa, {
+    const response = await fetch("/employee/search-client?placa=" + placa, {
       method: 'GET',
       headers: {
         'Authorization': token
@@ -153,6 +153,24 @@ async function RellenarInfoCliente(infoCliente) {
   document.getElementById("client-phone").value = infoCliente.telefono;
 }
 
+async function EnviarFactura() {
+  const id = document.getElementById("numeroFactura").textContent;
+  const movimiento = parseInt(document.getElementById("mov-select").value == "Cobro" ? 0 : 1);
+  const placa = document.getElementById("client-placa").value;
+  const tipoVehiculo = document.getElementById("type-select").value;
+  const precio = parseFloat(document.getElementById("price").value);
+
+  await RealizarTransacción({
+    id: id,
+    tipoMov: movimiento,
+    placa: placa,
+    tipoVehiculo: tipoVehiculo,
+    precio: movimiento == 0 ? -1 * precio : precio
+  })
+
+  console.log("Aqui se reiniciaría la página");
+  //window.location.reload();
+}
 
 async function RealizarTransacción(infoTransacción) {
   token = localStorage.getItem('token');
@@ -166,16 +184,17 @@ async function RealizarTransacción(infoTransacción) {
       body: JSON.stringify(infoTransacción)
     });
     if (response.ok) {
-      alert("Datos actualizados se cerrará la sesión para que los cambios se apliquen correctamente");
-      window.location.href = "../../LogIn/html/Login.html";
+      const resultado = await response.json();
+      alert(resultado.message);
+      return;
     } else {
       alert(result.message);
-      return false;
+      return;
     }
   } catch (error) {
     console.error('Error:', error);
-    return false;
+    return;
   }
-  return false;
+  return;
 }
 //#endregion

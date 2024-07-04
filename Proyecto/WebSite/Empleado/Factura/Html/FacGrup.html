@@ -19,7 +19,7 @@
           <section class="company-info">
             <h2>SISTEMA DE PEAJES</h2>
             <div class="invoice-info">
-              <p class="factura-numero">NÚMERO DE FACTURA: <span id="numeroFactura">00000</span></p>
+              <p class="factura-numero">NÚMERO DE FACTURA: <span id="numeroFactura">10000000000</span></p>
               <p>FECHA DE FACTURA: <input type="date" id="fechaFactura" name="fechaFactura" required readonly></p>
               <p>HORA DE FACTURA: <input type="time" id="horaFactura" name="horaFactura" required readonly></p>
             </div>
@@ -29,15 +29,15 @@
             </div>
             <div class="info-item">
               <p class="label">Teléfono:</p>
-              <p class="value">+593 995817315</p>
+              <p class="value">+593 995 817 315</p>
             </div>
             <div class="info-item">
               <p class="label">Correo electrónico:</p>
-              <p class="value">peajes@sistemapeajes.com</p>
+              <p class="value">pana@solar.com</p>
             </div>
             <div class="info-item">
               <p class="label">Sitio web:</p>
-              <p class="value">www.PanaSolar.com.ec</p>
+              <p class="value">www.panasolar.com.ec</p>
             </div>
             <a class="btn" href="../../Html/empleado.html">Regresar</a>
           </section>
@@ -82,7 +82,8 @@
               <option value="6 o más Ejes">6 o más Ejes</option>
               <option value="Motos">Motos</option>
             </select></td>
-          <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="1" id="price"></td>
+          <td><input type="number" placeholder="Precio unitario" min="0.01" max="99.99" step="0.01" value="1"
+              id="price"></td>
           <td><button id="eliminar-factura" onclick="limpiarFactura()">Limpiar factura</button></td>
         </tr>
       </tbody>
@@ -90,7 +91,7 @@
 
     <div class="button-container">
 
-      <button id="enviar-factura">Enviar factura</button>
+      <button id="enviar-factura" onclick="EnviarFactura()">Enviar factura</button>
 
     </div>
 
