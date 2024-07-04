@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,12 @@
   <link rel="icon" href="../../../Home/Images/Logo.png" type="imagen/png" />
   <script src="../Script/FacGrup.js" defer></script>
 </head>
+
 <body>
   <main>
     <header>
       <h1>FACTURA</h1>
       <div class="header-info-container">
-        
         <div class="header-info">
           <section class="company-info">
             <h2>SISTEMA DE PEAJES</h2>
@@ -59,7 +60,6 @@
           <th>MOVIMIENTO</th>
           <th>TIPO TRANSPORTE</th>
           <th>PRECIO</th>
-          <th>TOTAL</th>
           <th>LIMPIAR</th>
         </tr>
       </thead>
@@ -67,32 +67,31 @@
         <tr>
           <td>
             <div class="product-input-container">
-              <select class="product-select">
-                <option value="">Cobro</option>
-                <option value="">Recargas</option>
+              <select id="mov-select">
+                <option value="Cobro">Cobro</option>
+                <option value="Recargas">Recargas</option>
               </select>
             </div>
           </td>
-          <td><select class="product-select">
-            <option value="Automóvil">Livianos</option>
-          <option value="Motocicleta">2 Ejes</option>
-          <option value="Motocicleta">3 Ejes</option>
-          <option value="Motocicleta">4 Ejes</option>
-          <option value="Motocicleta">5 Ejes</option>
-          <option value="Motocicleta">6 o más Ejes</option>
-          <option value="Camión">Motos</option>
-          </select></td>
-          <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="0.00" class="price"></td>
-          <td><input type="number" placeholder="Total" min="0" step="0.01" value="0.00" readonly class="row-total"></td>
+          <td><select id="type-select">
+              <option value="Livianos">Livianos</option>
+              <option value="2 Ejes">2 Ejes</option>
+              <option value="3 Ejes">3 Ejes</option>
+              <option value="4 Ejes">4 Ejes</option>
+              <option value="5 Ejes">5 Ejes</option>
+              <option value="6 o más Ejes">6 o más Ejes</option>
+              <option value="Motos">Motos</option>
+            </select></td>
+          <td><input type="number" placeholder="Precio unitario" min="0" step="0.01" value="1" id="price"></td>
           <td><button id="eliminar-factura">Limpiar factura</button></td>
         </tr>
-      </tbody>  
+      </tbody>
     </table>
 
     <div class="button-container">
-      
+
       <button id="enviar-factura">Enviar factura</button>
-      
+
     </div>
 
     <footer>
@@ -101,8 +100,10 @@
       </div>
       <p class="thanks">Gracias por confiarnos su seguridad.</p>
       <p class="company-address">Pana Solar, Dirección (Ibarra, Pichincha, Ecuador)</p>
-      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail: peajes@sistemapeajes.com</p>
+      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail:
+        peajes@sistemapeajes.com</p>
     </footer>
   </main>
 </body>
+
 </html>

@@ -7,6 +7,27 @@ document.addEventListener('DOMContentLoaded', async () => {
       await BuscarCliente(cedula);
     }
   });
+
+  document.getElementById("mov-select").addEventListener('change', (event) => {
+    const mov = event.target.value;
+    const tipo = document.getElementById("type-select");
+    console.log(mov);
+    if (mov == "Cobro") { tipo.value = "Livianos"; tipo.disabled = false; }
+    else { tipo.value = ""; tipo.disabled = true; }
+    console.log(tipo.disabled);
+  })
+
+  document.getElementById("type-select").addEventListener('change', (event) => {
+    const tipo = event.target.value;
+    const precio = document.getElementById("price");
+    if (tipo == "Livianos") precio.value = 1;
+    else if (tipo == "2 Ejes") precio.value = 2;
+    else if (tipo == "3 Ejes") precio.value = 3;
+    else if (tipo == "4 Ejes") precio.value = 4;
+    else if (tipo == "5 Ejes") precio.value = 5;
+    else if (tipo == "6 o más Ejes") precio.value = 6;
+    else precio.value = 0.5;
+  })
 });
 
 function rellenarInfoCliente(infoCliente) {
