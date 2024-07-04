@@ -442,6 +442,50 @@ employee.post('/payment', validar, async (req, res) => {
 })
 //#endregion
 
+//#region Ruta recover
+const recover = express.Router();
+recover.use(bodyParser.urlencoded({ extended: true }));
+recover.use(bodyParser.json());
+
+recover.post('/', async (req, res) => {
+    const datos = req.body;
+
+    if (!datos) { res.json("Ingrese datos"); return; }
+    const usuario = await conexion.ConseguirRegistros(
+        "tb_usuarios", "cedula", datos.cedula);
+    if (!usuario) { res.json("Datos inválidos"); return; }
+    const fecha = await conexion.ConseguirRegistros(
+        "tb_usuarios", "fecha_nacimiento", datos.fecha
+    )
+    if (!fecha) { res.json("Datos inválidos"); return; }
+    var cuenta = await conexion.ConseguirRegistros(
+        "tb_clientes", "correo", datos.correo);
+    var cliente = true;
+    if (!cuenta) {
+        cliente = false;
+        cuenta = await conexion.ConseguirRegistros(
+            "tb_empleados", "correo", datos.correo);
+        if (!cuenta) { res.json("Datos inválidos"); return; }
+    }
+
+    if (datos.cedula == usuario[0].cedula &&
+        datos.correo == cuenta[0].correo) {
+        const nuevaContraseña = datos.cedula.split('').reverse().join('');
+        if (cliente)
+            await conexion.ModificarRegistro(
+                "tb_clientes", 'contraseña', nuevaContraseña,
+                "correo", datos.correo);
+        else
+            await conexion.ModificarRegistro(
+                "tb_empleados", 'contraseña', nuevaContraseña,
+                "correo", datos.correo);
+        res.json(nuevaContraseña);
+    }
+    console.log("El usuario", datos.cedula, "recuperó su cuenta");
+    return;
+})
+//#endregion
+
 //#region Ruta error404 
 //IMPORTANTE: SIEMPRE MANTENER AL PENULTIMO ESTA SECCIÓN
 error.get('/404', (req, res) => {
@@ -450,4 +494,4 @@ error.get('/404', (req, res) => {
 //#endregion
 
 module.exports =
-    { bd, clientes, login, error, register, employee };
+    { bd, clientes, login, error, register, employee, recover };

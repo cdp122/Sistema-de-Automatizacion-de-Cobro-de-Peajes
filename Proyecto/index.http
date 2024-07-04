@@ -1,1 +1,8 @@
-GET http://localhost:3000/employee/
+POST http://localhost:3000/recover/
+Content-Type: application/json
+
+{
+    "cedula": "1002003001",
+    "fecha" : "1961-07-13",
+    "correo": "carlosemilio@1961.com"
+}
