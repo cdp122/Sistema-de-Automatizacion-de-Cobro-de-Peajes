@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //#region Front-End
 function editarPerfil() {
-
     camposEditables.forEach(id => {
         const campo = document.getElementById(id);
         campo.setAttribute("contenteditable", "true");
@@ -19,7 +18,7 @@ function editarPerfil() {
 
         campo.classList.remove("ocultar");
         const pl = document.getElementById('muestra');
-        if(id == 'contraseña'){
+        if (id == 'contraseña') {
             pl.classList.add("ocultar");
         }
 
@@ -68,14 +67,14 @@ function guardarCambios() {
             const campo = document.getElementById(id);
             campo.setAttribute("contenteditable", "false");
             campo.classList.remove("editable");
-            if(id == 'contraseña'){
+            if (id == 'contraseña') {
                 campo.classList.add("ocultar");
                 document.getElementById('muestra').classList.remove("ocultar");
             }
 
             campo.removeEventListener("focus", limpiarCampo);
             campo.removeEventListener("blur", restaurarCampo);
-            
+
         });
 
         alert("Cambios guardados exitosamente.");
@@ -95,8 +94,6 @@ function restaurarCampo(event) {
         event.target.textContent = event.target.defaultValue;
     }
 }
-
-
 
 async function recargarSaldo(saldo, tarjeta) {
     let saldoActual = parseFloat(saldo.textContent.replace('$', ''));
@@ -124,7 +121,6 @@ async function recargarSaldo(saldo, tarjeta) {
     location.reload();
 }
 
-
 async function manejarTarjetas(tarjeta, vehiculo) {
     var caja = document.createElement('div');
     caja.className = 'cajaTarjeta';
@@ -151,7 +147,6 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     boton4.textContent = 'Deshabilitar Tarjeta';
     boton4.addEventListener('click', function () {
         Deshabilitar(caja);
-
     });
 
     var titulo = document.createElement('h2');
@@ -234,7 +229,14 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     caja.appendChild(boton2);
     caja.appendChild(boton3);
     caja.appendChild(boton4);
-    var ubicacion = document.getElementById('tarjetas');
+    console.log(tarjeta);
+
+    if (tarjeta.estado == 0) {
+        Deshabilitar(caja);
+        return;
+    }
+
+    var ubicacion = document.getElementById('tarjetas')
     ubicacion.appendChild(caja);
 }
 
