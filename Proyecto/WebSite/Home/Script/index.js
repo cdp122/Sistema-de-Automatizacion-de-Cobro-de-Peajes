@@ -39,13 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.addEventListener('scroll', function() {
+
     const scrollIndicator = document.querySelector('.Scroll');
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
     if (scrollTop > 0 && scrollTop < scrollHeight) {
         scrollIndicator.style.opacity = 1;
+        console.log("holaaaa");
     } else {
         scrollIndicator.style.opacity = 0;
+        console.log("adios");
     }
 });
