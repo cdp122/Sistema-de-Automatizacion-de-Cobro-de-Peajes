@@ -27,6 +27,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("resize", handleResize);
     handleResize(); // Llamar a handleResize al cargar la página
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            link.style.backgroundColor = "yellow";
+            setTimeout(() => {
+                link.style.backgroundColor = "";
+            }, 100);
+        });
+    });
 });
 
+window.addEventListener('scroll', function() {
+    const scrollIndicator = document.querySelector('.Scroll');
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
+    if (scrollTop > 0 && scrollTop < scrollHeight) {
+        scrollIndicator.style.opacity = 1;
+    } else {
+        scrollIndicator.style.opacity = 0;
+    }
+});

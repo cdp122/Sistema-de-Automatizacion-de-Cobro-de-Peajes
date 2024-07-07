@@ -83,6 +83,21 @@ body {
     stroke-dashoffset: -32.42;
 }
 
+/*luz al scroll*/
+.Scroll {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8), transparent); 
+    pointer-events: none; 
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+
+
 /* Menú de Navegación */
 .menuContainer {
     width: 100%;
@@ -187,6 +202,10 @@ body {
 
 .btn-1:hover {
     background-color: #a0845a;
+}
+.btn-1:hover {
+    transform: scale(1.05); 
+    transition: transform 0.3s ease-in-out; 
 }
 
 /* Dirección */
@@ -294,6 +313,13 @@ h2 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/paramedico.jpg');
 }
 
+/*Control de tamanio*/
+
+.house-1:hover, .house-2:hover, .house-3:hover, .house-4:hover {
+    transform: scale(1.05); 
+    transition: transform 0.3s ease-in-out; 
+}
+
 .txt {
     position: relative;
 }
@@ -388,7 +414,10 @@ form {
     border-radius: 25px;
     text-transform: uppercase;
 }
-
+.btn-2:hover {
+    transform: scale(1.05); 
+    transition: transform 0.3s ease-in-out;
+}
 .footer-txt h3 {
     color: #fefcfb;
     font-size: 35px;
@@ -690,4 +719,17 @@ form {
 .navbar {
     opacity: 0;
     animation: desvanecer 1s forwards;
+}
+
+/* efecto al menu */
+.navbar ul li a {
+    transition: transform 0.3s, color 0.0s;
+}
+
+.navbar ul li a:hover {
+    transform: scale(1.5); 
+}
+
+.navbar ul li a:active {
+    color: rgb(75, 238, 250); 
 }
