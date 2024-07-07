@@ -1,7 +1,7 @@
 //#region Funciones de Botones etc
 /**
  * Método que obtiene la hora y la fecha de sistema y la coloca en el documento HTML
- * aplica tambien que la placa se ingrese solo en mayusculas
+ * aplica también que la placa se ingrese solo en mayúsculas
  */
 document.addEventListener('DOMContentLoaded', () => {
   // Obtener la fecha y hora actuales
@@ -18,16 +18,42 @@ document.addEventListener('DOMContentLoaded', () => {
   // Asignar la fecha y hora a los campos correspondientes
   document.getElementById('fechaFactura').value = date;
   document.getElementById('horaFactura').value = time;
-  // placa solo como mayusculas
+
+  // Placa solo como mayúsculas
   document.getElementById('client-placa').addEventListener('input', (event) => {
     event.target.value = event.target.value.toUpperCase();
-    const placa = event.target.value;
     if (busquedaCedulaHabilitada) {
       const placa = event.target.value;
       if (placa.length === 7) { // Asumiendo que la placa tiene 7 caracteres
         BuscarPlaca(placa);
       }
     }
+  });
+
+  // Habilitar/deshabilitar campo de precio basado en movimiento seleccionado
+  document.getElementById("mov-select").addEventListener('change', (event) => {
+    const mov = event.target.value;
+    const precio = document.getElementById("price");
+
+    if (mov === "Cobro") {
+      precio.readOnly = true;
+      actualizarPrecio(); // Actualizar precio basado en el tipo de vehículo
+    } else {
+      precio.readOnly = false;
+      precio.value = ''; // Limpiar el campo de precio para permitir ingreso manual
+      actualizarTotal();
+    }
+  });
+
+  // Actualizar total cuando cambie el precio
+  document.getElementById("price").addEventListener('input', actualizarTotal);
+
+  // Actualizar precio y total cuando cambie el tipo de vehículo
+  document.getElementById("type-select").addEventListener('change', () => {
+    if (document.getElementById("mov-select").value === "Cobro") {
+      actualizarPrecio();
+    }
+    actualizarTotal();
   });
 });
 
@@ -40,9 +66,10 @@ function limpiarFactura() {
   document.getElementById('client-placa').value = '';
   document.getElementById('mov-select').selectedIndex = 0;
   document.getElementById('type-select').selectedIndex = 0;
+  document.getElementById('price').value = '1.00';
+  document.getElementById('total-value').textContent = '1.00';
   busquedaCedulaHabilitada = true; // Habilitar búsqueda por cédula
   busquedaPlacaHabilitada = true; // Habilitar búsqueda por placa
-
 }
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById("numeroFactura").innerHTML = await CargarNumFactura();
@@ -80,6 +107,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 let busquedaCedulaHabilitada = true;
 let busquedaPlacaHabilitada = true;
 
+function actualizarPrecio() {
+  const tipo = document.getElementById("type-select").value;
+  const precio = document.getElementById("price");
+  if (document.getElementById("mov-select").value === "Cobro") {
+    if (tipo == "Livianos") precio.value = 1;
+    else if (tipo == "2 Ejes") precio.value = 2;
+    else if (tipo == "3 Ejes") precio.value = 3;
+    else if (tipo == "4 Ejes") precio.value = 4;
+    else if (tipo == "5 Ejes") precio.value = 5;
+    else if (tipo == "6 o más Ejes") precio.value = 6;
+    else precio.value = 0.5;
+  }
+}
+function actualizarTotal() {
+  const precio = parseFloat(document.getElementById('price').value);
+  if (!isNaN(precio) && precio >= 0) {
+    document.getElementById('total-value').textContent = precio.toFixed(2);
+  } else {
+    document.getElementById('total-value').textContent = '0.00';
+  }
+}
 function rellenarInfoCliente(infoCliente) {
   document.getElementById('client-name').value = infoCliente.nombre || '';
   document.getElementById('client-email').value = infoCliente.email || '';

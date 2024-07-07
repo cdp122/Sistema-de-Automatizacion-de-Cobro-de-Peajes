@@ -1,3 +1,4 @@
+/*
 // Inicializar EmailJS
 (function () {
     emailjs.init("-YbO7MjhVJ0lwF7TC"); // Reemplaza "-YbO7MjhVJ0lwF7TC" con tu Public Key
@@ -13,45 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('fechaFactura').value = date;
     document.getElementById('horaFactura').value = time;
-
-    // Añadir event listener para actualizar el total cuando cambia el tipo de vehículo
-    document.getElementById('type-select').addEventListener('change', actualizarTotal);
+    
 });
-
-function actualizarTotal() {
-    const typeSelect = document.getElementById('type-select').value;
-    let price;
-
-    switch (typeSelect) {
-        case "Livianos":
-            price = 1.00;
-            break;
-        case "2 Ejes":
-            price = 2.00;
-            break;
-        case "3 Ejes":
-            price = 3.00;
-            break;
-        case "4 Ejes":
-            price = 4.00;
-            break;
-        case "5 Ejes":
-            price = 5.00;
-            break;
-        case "6 o más Ejes":
-            price = 6.00;
-            break;
-        case "Motos":
-            price = 0.50;
-            break;
-        default:
-            price = 0.00;
-            break;
-    }
-
-    document.getElementById('price').value = price.toFixed(2);
-    document.getElementById('total-value').textContent = price.toFixed(2);
-}
 
 function enviarFactura() {
     // Recopilar datos del formulario
@@ -106,3 +70,4 @@ function limpiarFactura() {
     document.getElementById('price').value = '1.00';
     document.getElementById('total-value').textContent = '0.00';
 }
+*/
