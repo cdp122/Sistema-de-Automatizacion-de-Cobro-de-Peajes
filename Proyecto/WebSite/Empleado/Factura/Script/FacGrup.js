@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // placa solo como mayusculas
   document.getElementById('client-placa').addEventListener('input', (event) => {
     event.target.value = event.target.value.toUpperCase();
+    const placa = event.target.value;
+    if (busquedaCedulaHabilitada) {
+      const placa = event.target.value;
+      if (placa.length === 7) { // Asumiendo que la placa tiene 7 caracteres
+        BuscarPlaca(placa);
+      }
+    }
   });
 });
 
@@ -33,6 +40,8 @@ function limpiarFactura() {
   document.getElementById('client-placa').value = '';
   document.getElementById('mov-select').selectedIndex = 0;
   document.getElementById('type-select').selectedIndex = 0;
+  busquedaCedulaHabilitada = true; // Habilitar búsqueda por cédula
+  busquedaPlacaHabilitada = true; // Habilitar búsqueda por placa
 
 }
 document.addEventListener('DOMContentLoaded', async () => {
@@ -66,6 +75,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     else precio.value = 0.5;
   })
 });
+
+// Variables de estado para habilitar/deshabilitar búsquedas
+let busquedaCedulaHabilitada = true;
+let busquedaPlacaHabilitada = true;
 
 function rellenarInfoCliente(infoCliente) {
   document.getElementById('client-name').value = infoCliente.nombre || '';

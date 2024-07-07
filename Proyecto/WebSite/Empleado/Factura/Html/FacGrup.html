@@ -7,7 +7,9 @@
   <title>Factura de Peaje</title>
   <link rel="stylesheet" href="../Css/FacGrup.css">
   <link rel="icon" href="../../../Home/Images/Logo.png" type="imagen/png" />
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="../Script/FacGrup.js" defer></script>
+  <script src="../Script/SentFact.js" defer></script>
 </head>
 
 <body>
@@ -39,7 +41,7 @@
               <p class="label">Sitio web:</p>
               <p class="value">www.panasolar.com.ec</p>
             </div>
-            <a class="btn" href="../../Html/empleado.html">Regresar</a>
+            <a id="btnReturn" class="btn" href="../../Html/empleado.html">Regresar</a>
           </section>
         </div>
         <div class="client-company-info">
@@ -90,9 +92,7 @@
     </table>
 
     <div class="button-container">
-
-      <button id="enviar-factura" onclick="EnviarFactura()">Enviar factura</button>
-
+      <button id="enviar-factura">Enviar factura</button>
     </div>
 
     <footer>
@@ -100,11 +100,9 @@
         <p id="total" class="total">TOTAL FACTURA: $<span id="total-value">0.00</span></p>
       </div>
       <p class="thanks">Gracias por confiarnos su seguridad.</p>
-      <p class="company-address">Pana Solar, Dirección (Ibarra, Pichincha, Ecuador)</p>
-      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail:
-        peajes@sistemapeajes.com</p>
+      <p class="company-address">Pana Solar, Dirección (Ibarra, Imbabura, Ecuador)</p>
+      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail: panasolarfact.com</p>
     </footer>
   </main>
 </body>
-
 </html>

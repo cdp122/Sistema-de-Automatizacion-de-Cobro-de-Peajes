@@ -129,6 +129,11 @@ body {
     align-items: center;
 }
 
+.recuperar {
+    font-size: 17px !important;
+    height: 40px !important;
+}
+
 .btnNight {
     background-image: linear-gradient(135deg, #510e65 0%, #011b8fd0 100%);
     box-shadow: 0 20px 30px -6px rgba(23, 32, 133, 0.5);

@@ -18,15 +18,15 @@
     <form id="registroForm" onsubmit="return validarFormulario()">
       <div class="form-group">
         <label for="nombre">Nombres:</label>
-        <input type="text" id="nombre" name="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,25}" title="Solo letras y espacios, hasta 25 caracteres" required>
+        <input type="text" id="nombre" name="nombre" maxlength="25"pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,25}" title="Solo letras y espacios, hasta 25 caracteres" required>
       </div>
       <div class="form-group">
         <label for="nombre">Apellidos</label>
-        <input type="text" id="apellido" name="apellido" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,25}" title="Solo letras y espacios, hasta 25 caracteres" required>
+        <input type="text" id="apellido" name="apellido" maxlength="25"pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,25}" title="Solo letras y espacios, hasta 25 caracteres" required>
       </div>
       <div class="form-group">
         <label for="cedula">Cédula:</label>
-        <input type="text" id="cedula" name="cedula" pattern="\d{10}" title="Cédula válida (10 dígitos numéricos)" required>
+        <input type="text" id="cedula" name="cedula" pattern="\d{10}" maxlength="10" title="Cédula válida (10 dígitos numéricos)" required>
       </div>
 
       <div class="form-group">
@@ -41,12 +41,12 @@
 
       <div class="form-group">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" pattern=".{8,}" title="Mínimo 8 caracteres" required>
+        <input type="password" id="password" name="password" minlength="8" pattern=".{8,}" title="Mínimo 8 caracteres" required>
       </div>
 
       <div class="form-group">
         <label for="confirmacionPasswd">Confirmar Contraseña:</label>
-        <input type="password" id="confirmacionPasswd" name="confirmacionPasswd" pattern=".{8,}" title="Mínimo 8 caracteres" required>
+        <input type="password" id="confirmacionPasswd" minlength="8" name="confirmacionPasswd" pattern=".{8,}" title="Mínimo 8 caracteres" required>
       </div>
 
       <div class="form-group horizontal-group">
@@ -60,7 +60,7 @@
 
       <div class="form-group">
         <label for="telefono">Número de Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" pattern="\d{10}" title="Número de teléfono válido (10 dígitos)" required>
+        <input type="tel" id="telefono" name="telefono" maxlength="10" pattern="\d{10}" title="Número de teléfono válido (10 dígitos)" required>
       </div>
 
       <div class="form-group">
@@ -89,7 +89,7 @@
 
       <div class="form-group">
         <label for="placa">Placa:</label>
-        <input type="text" id="placa" name="placa" pattern="[A-Za-z0-9]{6,7}" title="Placa válida (6 o 7 caracteres alfanuméricos)" required>
+        <input type="text" id="placa" name="placa" maxlength="7" title="Placa válida (6 o 7 caracteres alfanuméricos)" required>
       </div>
 
       <div class="form-group">

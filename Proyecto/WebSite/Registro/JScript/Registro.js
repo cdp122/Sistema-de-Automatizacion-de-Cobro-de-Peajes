@@ -1,3 +1,30 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const placaInput = document.getElementById('placa');
+
+    // Convertir el campo de placa a mayúsculas en tiempo real y limitar a 7 caracteres
+    placaInput.addEventListener('input', (event) => {
+        const input = event.target;
+        input.value = input.value.toUpperCase();
+    });
+
+    // Limitar el número de caracteres a 7
+    placaInput.addEventListener('keypress', (event) => {
+        if (placaInput.value.length >= 7) {
+            event.preventDefault();
+        }
+    });
+
+    // Validar que la placa sea alfanumérica y tenga 6 o 7 caracteres
+    placaInput.addEventListener('input', (event) => {
+        const input = event.target;
+        const placaPattern = /^[A-Z0-9]{6,7}$/;
+        if (!placaPattern.test(input.value)) {
+            input.setCustomValidity('Placa inválida. Debe tener 6 o 7 caracteres alfanuméricos.');
+        } else {
+            input.setCustomValidity('');
+        }
+    });
+});
 
 
 
@@ -96,7 +123,7 @@ function mostrarOcultarContraseña() {
         confirmacionPasswd.type = "password";
     }
 }
-
+//#region Backend
 async function CrearCuenta() {
     event.preventDefault();
 
