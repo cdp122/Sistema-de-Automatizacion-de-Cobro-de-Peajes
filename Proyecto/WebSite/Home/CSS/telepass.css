@@ -10,6 +10,12 @@
     list-style: none;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Oculta el scrollbar nativo */
+}
+
 body {
     font-family: 'Bebas Neue', sans-serif;
     width: 100%;
@@ -21,6 +27,28 @@ body {
     background: url('../Images/ParqueCentral.webp') no-repeat center center fixed;
     position: relative;
     animation: cambiar 60s ease-in-out infinite;
+    overflow: auto; /* Habilita el scroll en el body */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*luz al scroll*/
+.Scroll {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(44, 248, 255, 0.9), rgba(255, 255, 255, 0.9)); /* Cambia la opacidad para mayor visibilidad */
+    pointer-events: none; 
+    opacity: 1;
+    transition: opacity 0.5s;
+    border-left: 2px solid white;
+    box-shadow: 0 0 5px whitesmoke;
 }
 
 /* Encabezado */
@@ -77,6 +105,11 @@ header h1 {
     margin-left: 20px;
     opacity: 0;
     animation: desvanecer 1s forwards;
+    transition: transform 0.9s ease-in-out;
+}
+
+.logo:hover {
+    transform: rotate(360deg); 
 }
 
 .menuContainer .navbar ul li {
@@ -107,6 +140,20 @@ header h1 {
     padding: 0;
     margin: 0;
 }
+
+/* efecto al menu */
+.navbar ul li a {
+    transition: transform 0.3s, color 0.0s;
+}
+
+.navbar ul li a:hover {
+    transform: scale(1.5); 
+}
+
+.navbar ul li a:active {
+    color: rgb(75, 238, 250); 
+}
+
 
 /* Texto del encabezado */
 .headertxt {
@@ -166,11 +213,16 @@ header h1 {
     display: flex;
     justify-content: center;
 }
+.image-container:hover{
+    transform: scale(1.05); 
+    transition: transform 0.3s ease-in-out; 
+}
 
 .telepass-image {
     max-width: 100%;
     height: auto;
 }
+
 
 .main-content,
 .contact-content {

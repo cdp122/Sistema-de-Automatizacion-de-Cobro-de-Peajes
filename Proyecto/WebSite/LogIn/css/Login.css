@@ -270,7 +270,11 @@ body {
     margin-left: 20px;
     opacity: 0;
     animation: desvanecer 1s forwards;
-    /* Agregar animación */
+    transition: transform 0.9s ease-in-out;
+}
+
+.logo:hover {
+    transform: rotate(360deg); 
 }
 
 .menuContainer .navbar ul li {
@@ -345,6 +349,19 @@ body {
     /* Ajusta esta posición según sea necesario */
     background: #000000d8;
     /* Ajusta el fondo según sea necesario */
+}
+
+/* efecto al menu */
+.navbar ul li a {
+    transition: transform 0.3s, color 0.0s;
+}
+
+.navbar ul li a:hover {
+    transform: scale(1.5); 
+}
+
+.navbar ul li a:active {
+    color: rgb(75, 238, 250); 
 }
 
 #menu-toggle {

@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("resize", handleResize);
     handleResize(); // Llamar a handleResize al cargar la página
+
+    
 });
 
 
