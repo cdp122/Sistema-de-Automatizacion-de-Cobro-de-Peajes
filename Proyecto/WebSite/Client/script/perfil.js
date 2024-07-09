@@ -240,6 +240,12 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     ubicacion.appendChild(caja);
 }
 
+async function crearTarjeta() {
+    await CrearTarjeta();
+    alert("Tarjeta creada exitosamente");
+    window.location.reload();
+}
+
 function validarTarjeta(input) {
     var valor = input.value.trim();
     var id = input.id;
@@ -477,8 +483,6 @@ async function CrearTarjeta() {
         console.error('Error:', error);
         return false;
     }
-
-    return false;
 }
 
 async function Deshabilitar(caja) {

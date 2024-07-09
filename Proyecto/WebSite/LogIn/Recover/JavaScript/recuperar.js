@@ -15,7 +15,7 @@ async function Recuperar() {
         if (response.ok) {
             const data = await response.json();
             if (data != "Datos inválidos") {
-                alert("Su cuenta ha sido reestablecida por: " + data + ".\nSe le regresará al LogIn");
+                alert("Su cuenta ha sido reestablecida, su nueva contraseña es: " + data + ".\nSe le regresará al LogIn");
                 window.location.href = "../../html/Login.html";
             }
             else alert(data);

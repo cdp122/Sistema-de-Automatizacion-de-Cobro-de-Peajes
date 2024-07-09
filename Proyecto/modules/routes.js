@@ -4,13 +4,9 @@ const conexion = require("./bdd.js")
 const path = require("path");
 const bodyParser = require('body-parser');
 const { generar, validar } = require("./auth.js");
-const { stringify } = require("querystring");
-const { env } = require("process");
 var { Usuario, Cliente } = require("./clases.js");
 Usuario = new Usuario();
 Cliente = new Cliente();
-const { compareSync } = require("bcryptjs");
-const { unsubscribe } = require("diagnostics_channel");
 
 const bd = express.Router();
 const error = express.Router();
@@ -235,19 +231,23 @@ clientes.post('/account', validar, async (req, res) => {
 clientes.post('/passcode', validar, async (req, res) => {
     const auto = req.body;
 
-    await conexion.ModificarRegistros("tb_vehiculos", ["modelo", "placa"],
-        [auto.modelo, auto.placa], "tarjetaVeh", auto.tarjeta
+    await conexion.ModificarRegistros("tb_vehiculos",
+        ["modelo", "placa"],
+        [auto.modelo, auto.placa],
+        "tarjetaVeh", auto.tarjeta
     )
 })
 
 clientes.get('/passcode', validar, async (req, res) => {
     await recargarTarjetaID();
 
-    await conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
-        [req.user.username, tarjetaID, 0]
+    await conexion.InsertarRegistro("tb_tarjetas",
+        ["idCliente", "tarjeta", "saldo", "estado"],
+        [req.user.username, tarjetaID, 0, 1]
     )
 
-    await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa", "modelo", "color", "tipo"],
+    await conexion.InsertarRegistro("tb_vehiculos",
+        ["tarjetaVeh", "placa", "modelo", "color", "tipo"],
         [tarjetaID, "ABC1234", "Modelo", "GRIS", "CAMIONETA"]
     )
 
@@ -279,16 +279,21 @@ register.post("/", async (req, res) => {
             registro.apellido, registro.cedula,
             registro.telefono, registro.fecha])
 
-        if (exito) exito = await conexion.InsertarRegistro("tb_clientes", ["idCliente", "correo", "contraseña"],
-            ["C" + registro.cedula, registro.correo, registro.contraseña])
+        if (exito) exito = await conexion.InsertarRegistro(
+            "tb_clientes", ["idCliente", "correo", "contraseña"],
+            ["C" + registro.cedula, registro.correo,
+            registro.contraseña])
 
-        if (exito) exito = await conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
-            ["C" + registro.cedula, tarjetaID.toString(), 0]
+        if (exito) exito = await conexion.InsertarRegistro(
+            "tb_tarjetas", ["idCliente", "tarjeta", "saldo", "estado"],
+            ["C" + registro.cedula, tarjetaID.toString(), 0, 1]
         )
 
-        if (exito) exito = await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa",
-            "modelo", "color", "tipo"], [tarjetaID.toString(), registro.placa,
-            registro.modelo, registro.color, registro.tipoVehiculo]);
+        if (exito) exito = await conexion.InsertarRegistro(
+            "tb_vehiculos", ["tarjetaVeh", "placa",
+            "modelo", "color", "tipo"], [tarjetaID.toString(),
+            registro.placa, registro.modelo, registro.color,
+            registro.tipoVehiculo]);
 
         if (exito) res.json("ok");
         else res.json("Error, no se pudo crear el usuario.")
@@ -463,6 +468,10 @@ employee.post('/payment', validar, async (req, res) => {
         res.json({ message: "Transacción Realizada Correctamente" });
     }
 })
+//#endregion
+
+//#region Ruta admin
+
 //#endregion
 
 //#region Ruta recover
