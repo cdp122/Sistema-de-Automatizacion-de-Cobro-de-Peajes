@@ -1,5 +1,3 @@
-const { json } = require("express");
-
 document.addEventListener('DOMContentLoaded', () => {
     const placaInput = document.getElementById('placa');
 
