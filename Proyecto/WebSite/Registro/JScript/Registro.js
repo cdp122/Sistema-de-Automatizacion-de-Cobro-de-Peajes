@@ -33,7 +33,7 @@ async function validarFormulario() {
     const nombre = form.nombre.value;
     const cedula = form.cedula.value;
     const fechaNacimiento = form.fechaNacimiento.value;
-    const email = form.email.value;
+    const email = form.email.value.toLowerCase();
     const password = form.password.value;
     const confirmacionPasswd = form.confirmacionPasswd.value;
     const telefono = form.telefono.value;
@@ -41,25 +41,26 @@ async function validarFormulario() {
     const color = form.color.value;
     const tipoVehiculo = form.tipoVehiculo.value;
     const placa = form.placa.value;
+    var validado = true;
 
     // Validar que los campos no estén vacíos
     if (!nombre || !cedula || !fechaNacimiento || !email || !password || !confirmacionPasswd || !telefono || !modeloVehiculo || !color || !tipoVehiculo || !placa) {
         alert('Todos los campos son obligatorios.');
-        return false;
+        validado = false;
     }
 
     // Validar nombre
     const nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,50}$/;
     if (!nombreRegex.test(nombre)) {
         alert('Nombre y Apellidos deben contener solo letras y espacios, máximo 50 caracteres.');
-        return false;
+        validado = false;
     }
 
     // Validar cédula
     const cedulaRegex = /^\d{10}$/;
     if (!cedulaRegex.test(cedula)) {
         alert('Por favor, ingrese una cédula válida (10 dígitos numéricos).');
-        return false;
+        validado = false;
     }
 
     // Validar fecha de nacimiento
@@ -72,44 +73,43 @@ async function validarFormulario() {
 
     if (fechaNacimientoDate > fechaActual || fechaNacimientoDate < fechaMinima || fechaNacimientoDate > edadMinima) {
         alert('Por favor, ingrese una fecha de nacimiento válida. Debe ser mayor de 18 años.');
-        return false;
+        validado = false;
     }
 
     // Validar correo electrónico
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     if (!emailRegex.test(email)) {
         alert('Por favor, ingrese un correo electrónico válido.');
-        return false;
+        validado = false;
     }
 
     // Validar contraseña
     if (password.length < 8) {
         alert('La contraseña debe tener al menos 8 caracteres.');
-        return false;
+        validado = false;
     }
 
     // Confirmar contraseña
     if (password !== confirmacionPasswd) {
         alert('Las contraseñas no coinciden.');
-        return false;
+        validado = false;
     }
 
     // Validar teléfono
     const telefonoRegex = /^\d{10}$/;
     if (!telefonoRegex.test(telefono)) {
         alert('Por favor, ingrese un número de teléfono válido (10 dígitos).');
-        return false;
+        validado = false;
     }
 
     // Validar placa
     const placaRegex = /^[A-Za-z0-9]{6,7}$/;
     if (!placaRegex.test(placa)) {
         alert('Por favor, ingrese una placa válida (6 o 7 caracteres alfanuméricos).');
-        return false;
+        validado = false;
     }
 
-    await CrearCuenta();
-    return true;
+    if (validado) await CrearCuenta();
 }
 
 function mostrarOcultarContraseña() {
@@ -128,7 +128,8 @@ async function CrearCuenta() {
     event.preventDefault();
 
     const data = {
-        nombres: document.getElementById("nombre").value,
+        nombre: document.getElementById("nombre").value,
+        apellido: document.getElementById("apellido").value,
         cedula: document.getElementById("cedula").value,
         fecha: document.getElementById("fechaNacimiento").value,
         correo: document.getElementById("email").value,
@@ -151,7 +152,7 @@ async function CrearCuenta() {
 
         if (response.ok) {
             alert("Usuario creado correctamente con el ID C" + data.cedula) //Cambiar aqui lo que quiere que haga
-            window.location.href = "../LogIn/Login.html";
+            window.location.href = "../../LogIn/html/Login.html";
         } else {
             const errorResult = await response.json();
             alert(errorResult.message || "Error desconocido");

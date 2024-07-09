@@ -127,12 +127,7 @@ function actualizarTotal() {
     document.getElementById('total-value').textContent = '0.00';
   }
 }
-function rellenarInfoCliente(infoCliente) {
-  document.getElementById('client-name').value = infoCliente.nombre || '';
-  document.getElementById('client-email').value = infoCliente.email || '';
-  document.getElementById('client-phone').value = infoCliente.telefono || '';
-  document.getElementById('client-placa').value = infoCliente.placa || '';
-}
+
 function rellenarInfoPlaca(infoPlaca) {
   console.log(infoPlaca);
   document.getElementById('client-name').value = infoPlaca.nombres || '';
@@ -212,6 +207,10 @@ async function RellenarInfoCliente(infoCliente) {
   document.getElementById("client-name").value = infoCliente.nombres;
   document.getElementById("client-email").value = infoCliente.correo;
   document.getElementById("client-phone").value = infoCliente.telefono;
+  var tipo = document.getElementById('client-placa');
+  console.log(infoCliente);
+
+  busquedaPlacaHabilitada = false;
 }
 
 async function EnviarFactura() {

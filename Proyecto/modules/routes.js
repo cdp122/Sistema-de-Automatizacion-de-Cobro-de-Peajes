@@ -271,8 +271,11 @@ register.post("/", async (req, res) => {
 
     await recargarTarjetaID();
 
-    await conexion.InsertarRegistro("tb_usuarios", ["id", "nombres",
-        "cedula", "telefono", "fecha_nacimiento"], ["C" + registro.cedula, registro.nombres, registro.cedula,
+    await conexion.InsertarRegistro("tb_usuarios",
+        ["id", "nombre", "apellido", "cedula",
+            "telefono", "fecha_nacimiento"],
+        ["C" + registro.cedula, registro.nombre,
+        registro.apellido, registro.cedula,
         registro.telefono, registro.fecha])
 
     await conexion.InsertarRegistro("tb_clientes", ["idCliente", "correo", "contraseña"],
