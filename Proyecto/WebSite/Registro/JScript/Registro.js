@@ -26,11 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function limpiarErrores() {
+    const errores = document.querySelectorAll('.error');
+    errores.forEach((error) => {
+        error.textContent = '';
+    });
+}
 
+async function validarFormulario(event) {
+    event.preventDefault();
+    limpiarErrores();
 
-async function validarFormulario() {
     const form = document.getElementById('registroForm');
     const nombre = form.nombre.value;
+    const apellido = form.apellido.value;
     const cedula = form.cedula.value;
     const fechaNacimiento = form.fechaNacimiento.value;
     const email = form.email.value.toLowerCase();
@@ -43,23 +52,24 @@ async function validarFormulario() {
     const placa = form.placa.value;
     var validado = true;
 
-    // Validar que los campos no estén vacíos
-    if (!nombre || !cedula || !fechaNacimiento || !email || !password || !confirmacionPasswd || !telefono || !modeloVehiculo || !color || !tipoVehiculo || !placa) {
-        alert('Todos los campos son obligatorios.');
+    // Validar nombre
+    const nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,25}$/;
+    if (!nombreRegex.test(nombre)) {
+        document.getElementById('nombreError').textContent = 'Nombre inválido. Solo letras y espacios, hasta 25 caracteres.';
         validado = false;
     }
 
-    // Validar nombre
-    const nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,50}$/;
-    if (!nombreRegex.test(nombre)) {
-        alert('Nombre y Apellidos deben contener solo letras y espacios, máximo 50 caracteres.');
+    // Validar apellido
+    const apellidoRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,25}$/;
+    if (!apellidoRegex.test(apellido)) {
+        document.getElementById('apellidoError').textContent = 'Apellido inválido. Solo letras y espacios, hasta 25 caracteres.';
         validado = false;
     }
 
     // Validar cédula
     const cedulaRegex = /^\d{10}$/;
     if (!cedulaRegex.test(cedula)) {
-        alert('Por favor, ingrese una cédula válida (10 dígitos numéricos).');
+        document.getElementById('cedulaError').textContent = 'Cédula inválida. Debe tener 10 dígitos.';
         validado = false;
     }
 
@@ -72,44 +82,46 @@ async function validarFormulario() {
     edadMinima.setFullYear(fechaActual.getFullYear() - 18);
 
     if (fechaNacimientoDate > fechaActual || fechaNacimientoDate < fechaMinima || fechaNacimientoDate > edadMinima) {
-        alert('Por favor, ingrese una fecha de nacimiento válida. Debe ser mayor de 18 años.');
+        document.getElementById('fechaNacimientoError').textContent = 'Fecha de nacimiento inválida. Debe ser mayor de 18 años.';
         validado = false;
     }
 
     // Validar correo electrónico
     const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     if (!emailRegex.test(email)) {
-        alert('Por favor, ingrese un correo electrónico válido.');
+        document.getElementById('emailError').textContent = 'Correo electrónico inválido.';
         validado = false;
     }
 
     // Validar contraseña
     if (password.length < 8) {
-        alert('La contraseña debe tener al menos 8 caracteres.');
+        document.getElementById('passwordError').textContent = 'La contraseña debe tener al menos 8 caracteres.';
         validado = false;
     }
 
     // Confirmar contraseña
     if (password !== confirmacionPasswd) {
-        alert('Las contraseñas no coinciden.');
+        document.getElementById('confirmacionPasswdError').textContent = 'Las contraseñas no coinciden.';
         validado = false;
     }
 
     // Validar teléfono
     const telefonoRegex = /^\d{10}$/;
     if (!telefonoRegex.test(telefono)) {
-        alert('Por favor, ingrese un número de teléfono válido (10 dígitos).');
+        document.getElementById('telefonoError').textContent = 'Número de teléfono inválido. Debe tener 10 dígitos.';
         validado = false;
     }
 
     // Validar placa
     const placaRegex = /^[A-Za-z0-9]{6,7}$/;
     if (!placaRegex.test(placa)) {
-        alert('Por favor, ingrese una placa válida (6 o 7 caracteres alfanuméricos).');
+        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener 6 o 7 caracteres alfanuméricos.';
         validado = false;
     }
 
-    if (validado) await CrearCuenta();
+    if (validado) {
+        await CrearCuenta();
+    }
 }
 
 function mostrarOcultarContraseña() {
