@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 document.addEventListener('DOMContentLoaded', () => {
     const placaInput = document.getElementById('placa');
 
@@ -151,8 +153,14 @@ async function CrearCuenta() {
         });
 
         if (response.ok) {
-            alert("Usuario creado correctamente con el ID C" + data.cedula) //Cambiar aqui lo que quiere que haga
-            window.location.href = "../../LogIn/html/Login.html";
+            const result = await response.json();
+            if (result == "ok") {
+                alert("Usuario creado correctamente con el ID C" + data.cedula) //Cambiar aqui lo que quiere que haga
+                window.location.href = "../../LogIn/html/Login.html";
+            }
+            else {
+                alert(result);
+            }
         } else {
             const errorResult = await response.json();
             alert(errorResult.message || "Error desconocido");

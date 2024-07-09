@@ -267,29 +267,38 @@ register.use(bodyParser.urlencoded({ extended: true }));
 register.use(bodyParser.json());
 
 register.post("/", async (req, res) => {
-    const registro = req.body;
+    try {
+        const registro = req.body;
+        var exito = true;
+        await recargarTarjetaID();
 
-    await recargarTarjetaID();
+        exito = await conexion.InsertarRegistro("tb_usuarios",
+            ["id", "nombre", "apellido", "cedula",
+                "telefono", "fecha_nacimiento"],
+            ["C" + registro.cedula, registro.nombre,
+            registro.apellido, registro.cedula,
+            registro.telefono, registro.fecha])
 
-    await conexion.InsertarRegistro("tb_usuarios",
-        ["id", "nombre", "apellido", "cedula",
-            "telefono", "fecha_nacimiento"],
-        ["C" + registro.cedula, registro.nombre,
-        registro.apellido, registro.cedula,
-        registro.telefono, registro.fecha])
+        if (exito) exito = await conexion.InsertarRegistro("tb_clientes", ["idCliente", "correo", "contraseña"],
+            ["C" + registro.cedula, registro.correo, registro.contraseña])
 
-    await conexion.InsertarRegistro("tb_clientes", ["idCliente", "correo", "contraseña"],
-        ["C" + registro.cedula, registro.correo, registro.contraseña])
+        if (exito) exito = await conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
+            ["C" + registro.cedula, tarjetaID.toString(), 0]
+        )
 
-    await conexion.InsertarRegistro("tb_tarjetas", ["idCliente", "tarjeta", "saldo"],
-        ["C" + registro.cedula, tarjetaID.toString(), 0]
-    )
+        if (exito) exito = await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa",
+            "modelo", "color", "tipo"], [tarjetaID.toString(), registro.placa,
+            registro.modelo, registro.color, registro.tipoVehiculo]);
 
-    await conexion.InsertarRegistro("tb_vehiculos", ["tarjetaVeh", "placa",
-        "modelo", "color", "tipo"], [tarjetaID.toString(), registro.placa,
-        registro.modelo, registro.color, registro.tipoVehiculo.toUpperCase()]);
-
-    res.json("ok");
+        if (exito) res.json("ok");
+        else res.json("Error, no se pudo crear el usuario.")
+        return;
+    }
+    catch (error) {
+        console.error('Error al registrar usuario:', error);
+        res.json("Error, no se pudo crear el usuario.")
+        return;
+    }
 })
 //#endregion
 
