@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Placa solo como mayúsculas
   document.getElementById('client-placa').addEventListener('input', (event) => {
     event.target.value = event.target.value.toUpperCase();
-    if (busquedaCedulaHabilitada) {
+    if (busquedaPlacaHabilitada) {
       const placa = event.target.value;
-      if (placa.length === 7) { // Asumiendo que la placa tiene 7 caracteres
+      if (placa.length === 6 || placa.length === 7) { // Asumiendo que la placa tiene 7 caracteres
         BuscarPlaca(placa);
       }
     }
@@ -84,10 +84,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById("mov-select").addEventListener('change', (event) => {
     const mov = event.target.value;
     const tipo = document.getElementById("type-select");
-    console.log(mov);
     if (mov == "Cobro") { tipo.value = "Livianos"; tipo.disabled = false; }
     else { tipo.value = ""; tipo.disabled = true; }
-    console.log(tipo.disabled);
   })
 
   document.getElementById("type-select").addEventListener('change', (event) => {
@@ -108,7 +106,8 @@ let busquedaCedulaHabilitada = true;
 let busquedaPlacaHabilitada = true;
 
 function actualizarPrecio() {
-  const tipo = document.getElementById("type-select").value;
+  const tipo = document.getElementById("type-select").value == ''
+    ? 'Livianos' : document.getElementById("type-select").value;
   const precio = document.getElementById("price");
   if (document.getElementById("mov-select").value === "Cobro") {
     if (tipo == "Livianos") precio.value = 1;
@@ -135,8 +134,9 @@ function rellenarInfoCliente(infoCliente) {
   document.getElementById('client-placa').value = infoCliente.placa || '';
 }
 function rellenarInfoPlaca(infoPlaca) {
-  document.getElementById('client-name').value = infoPlaca.nombre || '';
-  document.getElementById('client-email').value = infoPlaca.email || '';
+  console.log(infoPlaca);
+  document.getElementById('client-name').value = infoPlaca.nombres || '';
+  document.getElementById('client-email').value = infoPlaca.correo || '';
   document.getElementById('client-phone').value = infoPlaca.telefono || '';
   document.getElementById('client-id').value = infoPlaca.cedula || '';
 }
@@ -161,9 +161,10 @@ async function CargarNumFactura() {
     console.error('Error:', error);
   }
 }
+
 /**
  * Es el método para buscar en la base de datos por el uso de la placa by:Adrián
- * @param {*} placa 
+ * @param {String} placa 
  */
 async function BuscarPlaca(placa) {
   token = localStorage.getItem('token');
@@ -185,7 +186,6 @@ async function BuscarPlaca(placa) {
     console.error('Error:', error);
   }
 }
-
 
 async function BuscarCliente(cedula) {
   token = localStorage.getItem('token');
