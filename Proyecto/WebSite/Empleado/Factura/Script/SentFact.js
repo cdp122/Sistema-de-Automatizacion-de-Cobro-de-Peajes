@@ -1,4 +1,3 @@
-/*
 // Inicializar EmailJS
 (function () {
     emailjs.init("-YbO7MjhVJ0lwF7TC"); // Reemplaza "-YbO7MjhVJ0lwF7TC" con tu Public Key
@@ -58,16 +57,3 @@ function enviarFactura() {
 
 // Enlace de función al botón de envío
 document.getElementById('enviar-factura').addEventListener('click', enviarFactura);
-
-function limpiarFactura() {
-    document.getElementById('client-id').value = '';
-    document.getElementById('client-name').value = '';
-    document.getElementById('client-email').value = '';
-    document.getElementById('client-phone').value = '';
-    document.getElementById('client-placa').value = '';
-    document.getElementById('mov-select').selectedIndex = 0;
-    document.getElementById('type-select').selectedIndex = 0;
-    document.getElementById('price').value = '1.00';
-    document.getElementById('total-value').textContent = '0.00';
-}
-*/

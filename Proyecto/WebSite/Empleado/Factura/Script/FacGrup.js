@@ -1,4 +1,6 @@
 //#region Funciones de Botones etc
+//Info de las placas
+var placas;
 /**
  * Método que obtiene la hora y la fecha de sistema y la coloca en el documento HTML
  * aplica también que la placa se ingrese solo en mayúsculas
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (busquedaPlacaHabilitada) {
       const placa = event.target.value;
       if (placa.length === 6 || placa.length === 7) { // Asumiendo que la placa tiene 7 caracteres
+        console.log("Se ejecuta");
         BuscarPlaca(placa);
       }
     }
@@ -71,6 +74,13 @@ function limpiarFactura() {
   busquedaCedulaHabilitada = true; // Habilitar búsqueda por cédula
   busquedaPlacaHabilitada = true; // Habilitar búsqueda por placa
   const tipo = document.getElementById('client-placa');
+  if (tipo.tagName.toLocaleLowerCase() === "select") {
+    const text = document.createElement("input");
+    text.type = "text";
+    text.id = "client-placa";
+    text.placeholder = "Ingrese la placa del cliente";
+    tipo.parentNode.replaceChild(text, tipo);
+  }
   //Aqui toca reemplazar por el original
 }
 document.addEventListener('DOMContentLoaded', async () => {
