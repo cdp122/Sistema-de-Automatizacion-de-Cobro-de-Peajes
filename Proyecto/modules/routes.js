@@ -414,7 +414,7 @@ employee.get('/search-client', validar, async (req, res) => {
 
 employee.post('/payment', validar, async (req, res) => {
     const registro = req.body;
-    console.log("El empleado", req.user.username, "cobró al", registro.placa);
+    console.log("El empleado", req.user.username, "cobró al vehiculo", registro.placa);
     const vehiculo = await conexion.ConseguirRegistros(
         "tb_vehiculos", "placa", registro.placa);
 
@@ -433,7 +433,7 @@ employee.post('/payment', validar, async (req, res) => {
             await conexion.ModificarRegistro(
                 "tb_tarjetas", "saldo", tarjeta[0].saldo + registro.precio, "tarjeta", tarjeta[0].tarjeta
             )
-            console.log("Recarga realizada exitosamente");
+            console.log("Transacción realizada exitosamente");
             res.json({ message: "Transacción Realizada Correctamente" });
         }
         else {

@@ -47,11 +47,13 @@
         <div class="client-company-info">
           <section class="client-info">
             <h2>FACTURAR A:</h2>
-            <p>Cédula del cliente: <input type="text" id="client-id" placeholder="Ingrese la cédula del cliente" maxlength="10"></p>
+            <p>Cédula del cliente: <input type="text" id="client-id" placeholder="Ingrese la cédula del cliente"
+                maxlength="10"></p>
             <p>Nombre del cliente: <input type="text" id="client-name" placeholder="Ingrese el nombre del cliente"></p>
             <p>Correo Electrónico: <input type="text" id="client-email" placeholder="Ingrese el correo electrónico"></p>
             <p>Teléfono: <input type="text" id="client-phone" placeholder="Ingrese el teléfono" maxlength="10"></p>
-            <p>Placa del cliente: <input type="text" id="client-placa" placeholder="Ingrese la placa del cliente" maxlength="7"></p>
+            <p>Placa del cliente: <input type="text" id="client-placa" placeholder="Ingrese la placa del cliente"
+                maxlength="7"></p>
           </section>
         </div>
       </div>
@@ -84,15 +86,14 @@
               <option value="6 o más Ejes">6 o más Ejes</option>
               <option value="Motos">Motos</option>
             </select></td>
-          <td><input type="number" placeholder="Precio unitario" readonly value="1"
-              id="price"></td>
+          <td><input type="number" placeholder="Precio unitario" readonly value="1" id="price"></td>
           <td><button id="eliminar-factura" onclick="limpiarFactura()">Limpiar factura</button></td>
         </tr>
       </tbody>
     </table>
 
     <div class="button-container">
-      <button id="enviar-factura">Enviar factura</button>
+      <button id="enviar-factura" onclick="EnviarFactura()">Enviar factura</button>
     </div>
 
     <footer>
@@ -101,8 +102,10 @@
       </div>
       <p class="thanks">Gracias por confiarnos su seguridad.</p>
       <p class="company-address">Pana Solar, Dirección (Ibarra, Imbabura, Ecuador)</p>
-      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail: panasolarfact.com</p>
+      <p class="bank-info">Tel: +593 995817315 | Método de pago: Tarjeta de Crédito/Débito | E-mail: panasolarfact.com
+      </p>
     </footer>
   </main>
 </body>
+
 </html>

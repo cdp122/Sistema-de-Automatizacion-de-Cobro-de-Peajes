@@ -38,7 +38,7 @@ async function ConseguirRegistros(tabla, nombreParametro, parametroBusqueda) {
         const query = "SELECT * FROM " + tabla + " WHERE " + nombreParametro + " = ?";
         const registro = await Consultar(mysql.format(query, [parametroBusqueda]));
         if (registro.length === 0) return null;
-        console.log("Enviando resultado");
+        console.log("Enviando resultado:", query);
         return registro;
     } catch (error) {
         console.error(error);
@@ -63,7 +63,6 @@ async function ConseguirNumFilas(tabla) {
 
     try {
         const registro = await Consultar(query);
-        if (registro.length === 0) return null;
         console.log("Cargando nro de Registros");
         return registro;
     } catch (error) {
@@ -90,7 +89,7 @@ async function InsertarRegistro(tabla, params, values) {
     query = query.slice(0, - 2) + ")";
     try {
         await Consultar(query);
-        console.log("Registro ingresado");
+        console.log("Registro ingresado:", query);
         return true;
     } catch (error) {
         console.error(error);
@@ -104,7 +103,7 @@ async function ModificarRegistro(tabla, nuevoParam, actual, paramTarg, target) {
             "' WHERE " + paramTarg + " = '" + target + "'";
         const registro = await Consultar(query);
         if (registro.length === 0) return null;
-        console.log("Enviando resultado");
+        console.log("Registro Modificado:", query);
         return true;
     } catch (error) {
         console.error(error);
@@ -123,7 +122,7 @@ async function ModificarRegistros(tabla, params, nuevosValores, paramTarg, targe
 
     try {
         await Consultar(query);
-        console.log("Registros modificados exitosamente");
+        console.log("Registros modificados exitosamente: ", query);
         return true;
     } catch (error) {
         console.error(error);
@@ -136,7 +135,7 @@ async function BorrarRegistro(tabla, parametro, valor) {
         const query = "DELETE FROM " + tabla + " WHERE " +
             parametro + " = '" + valor + "'";
         await Consultar(query);
-        console.log("Registro Eliminado");
+        console.log("Registro Eliminado:", query);
         return true;
     } catch (error) {
         console.error(error);

@@ -240,9 +240,6 @@ async function EnviarFactura() {
     tipoVehiculo: tipoVehiculo,
     precio: movimiento == 0 ? -1 * precio : precio
   })
-
-  console.log("Aqui se reiniciaría la página");
-  //window.location.reload();
 }
 
 async function RealizarTransacción(infoTransacción) {
@@ -258,16 +255,17 @@ async function RealizarTransacción(infoTransacción) {
     });
     if (response.ok) {
       const resultado = await response.json();
-      alert(resultado.message);
+      if (resultado.message != "Transacción Realizada Correctamente")
+        alert(resultado.message);
+      else window.location.reload();
       return;
     } else {
-      alert(result.message);
+      alert(resultado.message);
       return;
     }
   } catch (error) {
     console.error('Error:', error);
     return;
   }
-  return;
 }
 //#endregion
