@@ -70,6 +70,8 @@ function limpiarFactura() {
   document.getElementById('total-value').textContent = '1.00';
   busquedaCedulaHabilitada = true; // Habilitar búsqueda por cédula
   busquedaPlacaHabilitada = true; // Habilitar búsqueda por placa
+  const tipo = document.getElementById('client-placa');
+  //Aqui toca reemplazar por el original
 }
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById("numeroFactura").innerHTML = await CargarNumFactura();
@@ -207,8 +209,19 @@ async function RellenarInfoCliente(infoCliente) {
   document.getElementById("client-name").value = infoCliente.nombres;
   document.getElementById("client-email").value = infoCliente.correo;
   document.getElementById("client-phone").value = infoCliente.telefono;
-  var tipo = document.getElementById('client-placa');
-  console.log(infoCliente);
+  const tipo = document.getElementById('client-placa');
+
+  const select = document.createElement("select");
+  select.id = "client-placa";
+
+  infoCliente.vehiculos.forEach(vehiculo => {
+    const opcion = document.createElement("option");
+    opcion.value = vehiculo[0];
+    opcion.textContent = vehiculo[0];
+    select.appendChild(opcion);
+  });
+
+  tipo.parentNode.replaceChild(select, tipo);
 
   busquedaPlacaHabilitada = false;
 }
