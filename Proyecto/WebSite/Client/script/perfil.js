@@ -206,6 +206,8 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         selectModelo5.appendChild(option);
     });
 
+    elemento5.textContent = vehiculo && vehiculo.tipo ? vehiculo.tipo : 'Tipo';
+
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
