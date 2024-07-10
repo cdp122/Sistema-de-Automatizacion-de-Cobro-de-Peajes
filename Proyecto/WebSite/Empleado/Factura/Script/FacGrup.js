@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (busquedaPlacaHabilitada) {
       const placa = event.target.value;
       if (placa.length === 6 || placa.length === 7) { // Asumiendo que la placa tiene 7 caracteres
-        console.log("Se ejecuta");
         BuscarPlaca(placa);
       }
     }
@@ -39,7 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const precio = document.getElementById("price");
 
     if (mov === "Cobro") {
+      const tipo = document.getElementById("type-select");
       precio.readOnly = true;
+      if (!busquedaPlacaHabilitada) tipo.disabled = true;
+      else tipo.disabled = false;
       actualizarPrecio(); // Actualizar precio basado en el tipo de vehículo
     } else {
       precio.readOnly = false;
@@ -78,7 +80,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById("mov-select").addEventListener('change', (event) => {
     const mov = event.target.value;
     const tipo = document.getElementById("type-select");
-    if (mov == "Cobro") { tipo.value = "Livianos"; tipo.disabled = false; }
+    if (mov == "Cobro") {
+      tipo.value = "Livianos";
+      if (!busquedaPlacaHabilitada) tipo.disabled = true;
+      else tipo.disabled = false;
+    }
     else { tipo.value = ""; tipo.disabled = true; }
   })
 
@@ -123,7 +129,6 @@ function actualizarTotal() {
 }
 
 function rellenarInfoPlaca(infoPlaca) {
-  console.log(infoPlaca);
   document.getElementById('client-name').value = infoPlaca.nombres || '';
   document.getElementById('client-email').value = infoPlaca.correo || '';
   document.getElementById('client-phone').value = infoPlaca.telefono || '';
