@@ -1,17 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     const placaInput = document.getElementById('placa');
+    const vehiculoSelecionado = document.getElementById('tipoVehiculo');
 
-    // Convertir el campo de placa a mayúsculas en tiempo real y limitar a 7 caracteres
+    // Convertir el campo de placa a mayúsculas en tiempo real
     placaInput.addEventListener('input', (event) => {
         const input = event.target;
         input.value = input.value.toUpperCase();
-    });
-
-    // Limitar el número de caracteres a 7
-    placaInput.addEventListener('keypress', (event) => {
-        if (placaInput.value.length >= 7) {
-            event.preventDefault();
-        }
     });
 
     // Validar que la placa sea alfanumérica y tenga 6 o 7 caracteres
@@ -24,7 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
             input.setCustomValidity('');
         }
     });
+
+    // Ajustar el límite de caracteres en función del tipo de vehículo seleccionado
+    vehiculoSelecionado.addEventListener('change', () => {
+
+        if (vehiculoSelecionado.value === 'Motos') {
+            placaInput.maxLength = 6;
+            if (placaInput.value.length > 6) {
+                placaInput.value = placaInput.value.substring(0, 6);
+            }
+        } else {
+            placaInput.maxLength = 7;
+        }
+    });
+
+    // Llamar al evento change al cargar la página para ajustar el límite inicial
+    vehiculoSelecionado.dispatchEvent(new Event('change'));
 });
+
 
 function limpiarErrores() {
     const errores = document.querySelectorAll('.error');

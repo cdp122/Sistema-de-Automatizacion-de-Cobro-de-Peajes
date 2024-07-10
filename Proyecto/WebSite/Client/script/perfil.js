@@ -187,15 +187,44 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento4.appendChild(spanModelo4);
     lista.appendChild(elemento4);
 
+    // Crear el elemento select y agregar opciones
     var elemento5 = document.createElement('li');
     var letra5 = document.createElement('strong');
     letra5.textContent = 'Tipo: ';
-    var spanModelo5 = document.createElement('span');
-    spanModelo5.id = 'tipo-carro';
-    spanModelo5.textContent = vehiculo && vehiculo.modelo ? vehiculo.tipo : 'Camioneta';
+    var selectModelo5 = document.createElement('select');
+    selectModelo5.id = 'tipoVehiculo';
+    selectModelo5.name = 'tipoVehiculo';
+    selectModelo5.required = true;
+
+    var opciones = ['', 'Livianos', '2 Ejes', '3 Ejes', '4 Ejes', '5 Ejes', '6 o más Ejes', 'Motos'];
+    var opcionesText = ['Seleccione', 'Livianos', '2 Ejes', '3 Ejes', '4 Ejes', '5 Ejes', '6 o más Ejes', 'Motos'];
+
+    opciones.forEach((opcion, index) => {
+        var option = document.createElement('option');
+        option.value = opcion;
+        option.textContent = opcionesText[index];
+        selectModelo5.appendChild(option);
+    });
+
     elemento5.appendChild(letra5);
-    elemento5.appendChild(spanModelo5);
+    elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
+
+    // Controlar el tamaño de la placa según la opción seleccionada
+    selectModelo5.addEventListener('change', () => {
+        if (selectModelo5.value === 'Motos') {
+            spanModelo2.maxLength = 6;
+            if (spanModelo2.textContent.length > 6) {
+                spanModelo2.textContent = spanModelo2.textContent.substring(0, 6);
+            }
+        } else {
+            spanModelo2.maxLength = 7;
+        }
+    });
+
+    // Llamar al evento change al cargar la página para ajustar el límite inicial
+    selectModelo5.dispatchEvent(new Event('change'));
+
 
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
