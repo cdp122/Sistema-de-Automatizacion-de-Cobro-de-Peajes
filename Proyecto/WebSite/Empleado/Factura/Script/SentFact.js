@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('fechaFactura').value = date;
     document.getElementById('horaFactura').value = time;
-    
+
 });
 
 function enviarFactura() {
@@ -28,7 +28,7 @@ function enviarFactura() {
     const clientPlaca = document.getElementById('client-placa').value;
     const movSelect = document.getElementById('mov-select').value;
     const typeSelect = document.getElementById('type-select').value;
-    const price = document.getElementById('price').value;
+    const price = document.getElementById('total-value').textContent;
     const total = document.getElementById('total-value').textContent;
 
     // Enviar la factura por correo electrónico usando EmailJS
