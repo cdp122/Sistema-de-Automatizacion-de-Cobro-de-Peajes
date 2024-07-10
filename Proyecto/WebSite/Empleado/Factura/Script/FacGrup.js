@@ -212,8 +212,8 @@ async function BuscarCliente(cedula) {
     });
     if (response.ok) {
       const data = await response.json();
-      if (data.message) window.location.href = "../../Error/PagError404.html";
-      RellenarInfoCliente(data);
+      if (!data.message)
+        RellenarInfoCliente(data);
     } else {
       alert(result.message);
     }
@@ -267,6 +267,11 @@ async function EnviarFactura() {
   const tipoVehiculo = document.getElementById("type-select").value;
   const precio = parseFloat(document.getElementById("price").value);
 
+  if (precio > 99.99 || precio < 0) {
+    alert("Valor de transacción inválido")
+    return;
+  }
+
   await RealizarTransacción({
     id: id,
     tipoMov: movimiento,
@@ -289,9 +294,9 @@ async function RealizarTransacción(infoTransacción) {
     });
     if (response.ok) {
       const resultado = await response.json();
-      if (resultado.message != "Transacción Realizada Correctamente")
-        alert(resultado.message);
-      else window.location.reload();
+      alert(resultado.message);
+      if (resultado.message == "Transacción Realizada Correctamente")
+        window.location.reload();
       return;
     } else {
       alert(resultado.message);
