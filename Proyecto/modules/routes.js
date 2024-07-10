@@ -232,8 +232,8 @@ clientes.post('/passcode', validar, async (req, res) => {
     const auto = req.body;
 
     await conexion.ModificarRegistros("tb_vehiculos",
-        ["modelo", "placa"],
-        [auto.modelo, auto.placa],
+        ["placa", "modelo", "color", "tipo"],
+        [auto.placa, auto.modelo, auto.color, auto.tipo],
         "tarjetaVeh", auto.tarjeta
     )
 })

@@ -1,6 +1,6 @@
 //#region Funciones de Botones etc
 //Info de las placas
-var placas;
+var placas = null;
 /**
  * Método que obtiene la hora y la fecha de sistema y la coloca en el documento HTML
  * aplica también que la placa se ingrese solo en mayúsculas
@@ -62,27 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Función para limpiar los campos de la factura
 function limpiarFactura() {
-  document.getElementById('client-id').value = '';
-  document.getElementById('client-name').value = '';
-  document.getElementById('client-email').value = '';
-  document.getElementById('client-phone').value = '';
-  document.getElementById('client-placa').value = '';
-  document.getElementById('mov-select').selectedIndex = 0;
-  document.getElementById('type-select').selectedIndex = 0;
-  document.getElementById('price').value = '1.00';
-  document.getElementById('total-value').textContent = '1.00';
-  busquedaCedulaHabilitada = true; // Habilitar búsqueda por cédula
-  busquedaPlacaHabilitada = true; // Habilitar búsqueda por placa
-  const tipo = document.getElementById('client-placa');
-  if (tipo.tagName.toLocaleLowerCase() === "select") {
-    const text = document.createElement("input");
-    text.type = "text";
-    text.id = "client-placa";
-    text.placeholder = "Ingrese la placa del cliente";
-    tipo.parentNode.replaceChild(text, tipo);
-  }
-  //Aqui toca reemplazar por el original
+  window.location.reload();
 }
+
 document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById("numeroFactura").innerHTML = await CargarNumFactura();
 
@@ -148,6 +130,31 @@ function rellenarInfoPlaca(infoPlaca) {
   document.getElementById('client-id').value = infoPlaca.cedula || '';
 }
 
+function CambiarTipo(event) {
+  if (!placas) return;
+  const placa = event.target.value;
+  var tipo;
+  for (let i = 0; i < placas.length; i++) {
+    if (placa === placas[i][0]) {
+      tipo = placas[i][1];
+      break;
+    }
+  }
+
+  const tipoT = document.getElementById("type-select");
+  tipoT.value = tipo;
+  tipoT.disabled = true;
+
+  const precio = document.getElementById("price");
+  if (tipo == "Livianos") precio.value = 1;
+  else if (tipo == "2 Ejes") precio.value = 2;
+  else if (tipo == "3 Ejes") precio.value = 3;
+  else if (tipo == "4 Ejes") precio.value = 4;
+  else if (tipo == "5 Ejes") precio.value = 5;
+  else if (tipo == "6 o más Ejes") precio.value = 6;
+  else precio.value = 0.5;
+}
+//#endregion
 //#region Backend
 async function CargarNumFactura() {
   token = localStorage.getItem('token');
@@ -223,6 +230,23 @@ async function RellenarInfoCliente(infoCliente) {
 
   const select = document.createElement("select");
   select.id = "client-placa";
+
+  placas = infoCliente.vehiculos;
+
+  const tipoT = document.getElementById("type-select");
+  const tipo0 = infoCliente.vehiculos[0][1];
+  tipoT.value = tipo0;
+  tipoT.disabled = true;
+
+  const precio = document.getElementById("price");
+  if (tipo0 == "Livianos") precio.value = 1;
+  else if (tipo0 == "2 Ejes") precio.value = 2;
+  else if (tipo0 == "3 Ejes") precio.value = 3;
+  else if (tipo0 == "4 Ejes") precio.value = 4;
+  else if (tipo0 == "5 Ejes") precio.value = 5;
+  else if (tipo0 == "6 o más Ejes") precio.value = 6;
+  else precio.value = 0.5;
+  select.addEventListener('change', CambiarTipo);
 
   infoCliente.vehiculos.forEach(vehiculo => {
     const opcion = document.createElement("option");

@@ -307,7 +307,6 @@ function GuardarCambios(event) {
 
     inputs.forEach(function (input) {
         if (!validarTarjeta(input)) {
-
             datosValidos = false;
             input.style.borderColor = 'red';
             if (input.dataset.error) {
@@ -319,6 +318,9 @@ function GuardarCambios(event) {
             datos.push(input.value);
         }
     });
+
+    datos.push(caja.querySelector("#codigo-telepass").textContent);
+    console.log(datos);
 
     if (datosValidos) {
         ActualizarTarjeta(datos);
@@ -415,6 +417,7 @@ async function ActualizarPerfil(cedula, telefono, correo, contraseña) {
 
 async function ActualizarTarjeta(datos) {
     token = localStorage.getItem('token');
+    console.log(datos);
     try {
         const response = await fetch("/clientes/passcode", {
             method: 'POST',
@@ -423,9 +426,11 @@ async function ActualizarTarjeta(datos) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                modelo: datos[0],
-                placa: datos[1],
-                tarjeta: datos[2]
+                placa: datos[0],
+                modelo: datos[1],
+                tipo: datos[2],
+                color: datos[3],
+                tarjeta: datos[4]
             })
         });
         if (response.ok) {
