@@ -19,8 +19,9 @@ body {
     justify-content: flex-start;
     align-items: center;
     text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
-    /* Aplica un zoom inicial */
-    zoom: 0.8;
+    /* Ajuste inicial del zoom */
+    transform: scale(0.8);
+    transform-origin: top left;
 }
 
 .background-image {
@@ -222,6 +223,7 @@ body {
 /* Ajuste del zoom para pantallas más grandes */
 @media (min-width: 1200px) {
     body {
-        zoom: 0.8;
+        transform: scale(1);
+        transform-origin: top left;
     }
 }
