@@ -1,219 +1,227 @@
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-    * {
-        font-family: 'Bebas Neue', sans-serif;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-        list-style: none;
+* {
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    background-color: #212121;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+    /* Aplica un zoom inicial */
+    zoom: 0.8;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../Home/Images/ParqueCentral.webp') no-repeat center center/cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.166);
+    z-index: -1;
+}
+
+.perfil-container {
+    background: #0000004f;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px auto;
+    height: auto;
+}
+
+.perfil-header {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    background: #f9b470c7;
+    border-radius: 10px;
+}
+
+.perfil-header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+    animation: profilePicScale 0.5s ease-in-out;
+}
+
+.perfil-header h1,
+.perfil-container h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: white;
+}
+
+.perfil-details {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.perfil-details h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.perfil-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.perfil-details li {
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.perfil-details li strong {
+    display: inline-block;
+    width: 150px;
+}
+
+.perfil-details li span {
+    color: #555;
+}
+
+.editable[contenteditable="true"] {
+    background: #4a493f57;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background 0.3s ease, border 0.3s ease;
+}
+
+#editar-perfil,
+#guardar-cambios,
+#cerrar-sesion {
+    display: block;
+    width: 20%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+}
+
+#editar-perfil {
+    background: #f9b470;
+    align-self: flex-end;
+}
+
+#editar-perfil:hover {
+    background: #e69600b4;
+}
+
+#guardar-cambios {
+    background: #1ee55a;
+    align-self: flex-start;
+}
+
+#guardar-cambios:hover {
+    background: #19c24a;
+}
+
+#cerrar-sesion {
+    background: #f44336;
+    align-self: flex-start;
+}
+
+#cerrar-sesion:hover {
+    background: #d32f2f;
+}
+
+#ver-factura {
+    text-align: center;
+    display: block;
+    width: calc(100% - 40px);
+    /* Ajusta el ancho para considerar el padding del contenedor */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #2196F3;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin: 20px auto 0 auto;
+    /* Centra el botón horizontalmente y añade margen superior */
+}
+
+#ver-factura:hover {
+    background: #1e88e5;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes profilePicScale {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Ajuste del zoom para pantallas más grandes */
+@media (min-width: 1200px) {
     body {
-        background-color: #212121;
-        width: 100%;
-        height: 100vh;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+        zoom: 0.8;
     }
-
-    .background-image {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('../../Home/Images/ParqueCentral.webp') no-repeat center center/cover;
-        z-index: -2;
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.166);
-        z-index: -1;
-    }
-
-    .perfil-container {
-        background: #0000004f;
-        width: 80%;
-        max-width: 900px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-        animation: fadeIn 1s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 20px;
-        margin: 20px auto;
-        height: auto;
-    }
-
-    .perfil-header {
-        text-align: center;
-        padding: 20px;
-        position: relative;
-        background: #f9b470c7;
-        border-radius: 10px;
-    }
-
-    .perfil-header img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 5px solid white;
-        object-fit: cover;
-        animation: profilePicScale 0.5s ease-in-out;
-    }
-
-    .perfil-header h1,
-    .perfil-container h1 {
-        margin: 10px 0;
-        font-size: 24px;
-        color: white;
-    }
-
-    .perfil-details {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        margin-top: 20px;
-    }
-
-    .perfil-details h2 {
-        margin-bottom: 20px;
-        color: #333;
-        text-align: center;
-    }
-
-    .perfil-details ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .perfil-details li {
-        margin-bottom: 15px;
-        font-size: 18px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .perfil-details li strong {
-        display: inline-block;
-        width: 150px;
-    }
-
-    .perfil-details li span {
-        color: #555;
-    }
-
-    .editable[contenteditable="true"] {
-        background: #4a493f57;
-        border: 1px solid #000000;
-        border-radius: 5px;
-        padding: 5px;
-        transition: background 0.3s ease, border 0.3s ease;
-    }
-
-    #editar-perfil,
-    #guardar-cambios,
-    #cerrar-sesion {
-        display: block;
-        width: 20%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        margin-top: 20px;
-    }
-
-    #editar-perfil {
-        background: #f9b470;
-        align-self: flex-end;
-    }
-
-    #editar-perfil:hover {
-        background: #e69600b4;
-    }
-
-    #guardar-cambios {
-        background: #1ee55a;
-        align-self: flex-start;
-    }
-
-    #guardar-cambios:hover {
-        background: #19c24a;
-    }
-
-    #cerrar-sesion {
-        background: #f44336;
-        align-self: flex-start;
-    }
-
-    #cerrar-sesion:hover {
-        background: #d32f2f;
-    }
-
-    #ver-factura {
-        text-align: center;
-        display: block;
-        width: calc(100% - 40px);
-        /* Ajusta el ancho para considerar el padding del contenedor */
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background: #2196F3;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        margin: 20px auto 0 auto;
-        /* Centra el botón horizontalmente y añade margen superior */
-    }
-
-    #ver-factura:hover {
-        background: #1e88e5;
-    }
-
-    .footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes profilePicScale {
-        from {
-            transform: scale(0);
-        }
-
-        to {
-            transform: scale(1);
-        }
-    }
+}
