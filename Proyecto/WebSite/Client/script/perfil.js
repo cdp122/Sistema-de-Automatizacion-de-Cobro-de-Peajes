@@ -241,7 +241,18 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
     });
 
+    // Mostrar el select en modo de edición para cada tarjeta
+    boton.addEventListener('click', () => {
+        selectModelo5.style.display = 'inline-block';
+        tipotexto.style.display = 'none';
+    });
 
+    // Ocultar el select cuando se guarden los cambios para cada tarjeta
+    boton4.addEventListener('click', () => {
+        selectModelo5.style.display = 'none';
+        tipotexto.style.display = 'inline-block';
+        tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
+    });
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {
         if (selectModelo5.value === 'Motos') {
