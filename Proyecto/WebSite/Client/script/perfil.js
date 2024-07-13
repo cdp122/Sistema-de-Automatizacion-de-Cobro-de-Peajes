@@ -146,7 +146,12 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     boton4.className = 'eliminar';
     boton4.textContent = 'Deshabilitar Tarjeta';
     boton4.addEventListener('click', function () {
-        Deshabilitar(caja);
+        var saldo = parseFloat(spanModelo.textContent.replace('$', ''));
+        if (saldo === 0) {
+            Deshabilitar(caja);
+        } else {
+        alert('La tarjeta no puede ser deshabilitada porque el saldo no es 0.');
+        }
     });
 
     var titulo = document.createElement('h2');
@@ -203,8 +208,10 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         var option = document.createElement('option');
         option.value = opcion;
         option.textContent = opcionesText[index];
+        if (vehiculo && vehiculo.tipo && vehiculo.tipo === opcion) {
+            option.selected = true;
+        }
         selectModelo5.appendChild(option);
-        elemento5.textContent = opcionesText[index];
     });
 
     
@@ -212,6 +219,28 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
+
+     // Mostrar solo el valor seleccionado cuando no esté en modo de edición
+    var tipotexto = document.createElement('span');
+    tipotexto.id = 'tipo-carro';
+    tipotexto.textContent = vehiculo && vehiculo.tipo ? vehiculo.tipo : 'Seleccione';
+
+    elemento5.appendChild(tipotexto);
+    selectModelo5.style.display = 'none';
+
+    // Mostrar el select en modo de edición
+    document.getElementById('editar-perfil').addEventListener('click', () => {
+        selectModelo5.style.display = 'inline-block';
+        tipotexto.style.display = 'none';
+    });
+
+    // Ocultar el select cuando se guarden los cambios
+    document.getElementById('guardar-cambios').addEventListener('click', () => {
+        selectModelo5.style.display = 'none';
+        tipotexto.style.display = 'inline-block';
+        tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
+    });
+
 
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {

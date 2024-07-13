@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     
     const placaInput = document.getElementById('placa');
@@ -124,10 +125,14 @@ async function validarFormulario(event) {
         validado = false;
     }
 
-    // Validar placa
-    const placaRegex = /^[A-Za-z0-9]{6,7}$/;
-    if (!placaRegex.test(placa)) {
-        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener 6 o 7 caracteres alfanuméricos.';
+    // Validar placa según el tipo de vehículo
+    const placaMoto = /^[A-Za-z0-9]{6}$/;
+    const placaAutos = /^[A-Za-z0-9]{7}$/;
+    if (tipoVehiculo === 'Motos' && !placaMoto.test(placa)) {
+        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener 6 caracteres para motos.';
+        validado = false;
+    } else if (tipoVehiculo !== 'Motos' && !placaAutos.test(placa)) {
+        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener 7 caracteres para vehículos.';
         validado = false;
     }
 
