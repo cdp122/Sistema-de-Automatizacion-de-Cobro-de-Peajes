@@ -26,11 +26,26 @@ async function Recuperar() {
                         const copiarBtn = document.getElementById('copiarBtn');
                         copiarBtn.addEventListener('click', () => {
                             const nuevaContrasena = document.getElementById('nuevaContrasena').textContent;
-                            navigator.clipboard.writeText(nuevaContrasena).then(() => {
-                                Swal.fire('Copiado!', 'La contraseña ha sido copiada al portapapeles', 'success');
-                            }).catch(err => {
-                                Swal.fire('Error', 'No se pudo copiar la contraseña', 'error');
-                            });
+                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                navigator.clipboard.writeText(nuevaContrasena).then(() => {
+                                    Swal.fire('Copiado!', 'La contraseña ha sido copiada al portapapeles', 'success');
+                                }).catch(err => {
+                                    Swal.fire('Error', 'No se pudo copiar la contraseña', 'error');
+                                });
+                            } else {
+                                const textarea = document.createElement('textarea');
+                                textarea.value = nuevaContrasena;
+                                document.body.appendChild(textarea);
+                                textarea.select();
+
+                                try {
+                                    document.execCommand('copy');
+                                    Swal.fire('¡Copiado!', 'La contraseña ha sido copiada al portapapeles.', 'success');
+                                } catch (err) {
+                                    Swal.fire('Error', 'Hubo un problema al copiar la contraseña.', 'error');
+                                }
+                                document.body.removeChild(textarea);
+                            }
                         });
                     }
                 }).then(() => {

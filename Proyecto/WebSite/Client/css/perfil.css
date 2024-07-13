@@ -311,6 +311,10 @@ body {
     left: 50%;
 }
 
+.select-hidden {
+    display: none;
+}
+
 #tar {
     position: relative;
     left: 33%;

@@ -218,41 +218,31 @@ async function manejarTarjetas(tarjeta, vehiculo) {
 
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
-    lista.appendChild(elemento5);
 
-     // Mostrar solo el valor seleccionado cuando no esté en modo de edición
+    // Mostrar solo el valor seleccionado cuando no esté en modo de edición
     var tipotexto = document.createElement('span');
     tipotexto.id = 'tipo-carro';
     tipotexto.textContent = vehiculo && vehiculo.tipo ? vehiculo.tipo : 'Seleccione';
 
     elemento5.appendChild(tipotexto);
-    selectModelo5.style.display = 'none';
+    lista.appendChild(elemento5);
+
+    selectModelo5.classList.add('select-hidden');
 
     // Mostrar el select en modo de edición
     document.getElementById('editar-perfil').addEventListener('click', () => {
-        selectModelo5.style.display = 'inline-block';
-        tipotexto.style.display = 'none';
+        selectModelo5.classList.remove('select-hidden');
+        tipotexto.classList.add('select-hidden');
     });
 
     // Ocultar el select cuando se guarden los cambios
     document.getElementById('guardar-cambios').addEventListener('click', () => {
-        selectModelo5.style.display = 'none';
-        tipotexto.style.display = 'inline-block';
+        selectModelo5.classList.add('select-hidden');
+        tipotexto.classList.remove('select-hidden');
         tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
     });
 
-    // Mostrar el select en modo de edición para cada tarjeta
-    boton.addEventListener('click', () => {
-        selectModelo5.style.display = 'inline-block';
-        tipotexto.style.display = 'none';
-    });
-
-    // Ocultar el select cuando se guarden los cambios para cada tarjeta
-    boton4.addEventListener('click', () => {
-        selectModelo5.style.display = 'none';
-        tipotexto.style.display = 'inline-block';
-        tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
-    });
+    
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {
         if (selectModelo5.value === 'Motos') {
