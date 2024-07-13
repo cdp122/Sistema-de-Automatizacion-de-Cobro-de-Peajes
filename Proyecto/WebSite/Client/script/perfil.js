@@ -231,18 +231,20 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     selectModelo5.classList.add('select-hidden');
 
     // Mostrar el select en modo de edición
-    document.getElementById('editar-tarjeta').addEventListener('click', () => {
+    boton.addEventListener('click', () => {
         selectModelo5.classList.remove('select-hidden');
         tipotexto.classList.add('select-hidden');
     });
 
     // Ocultar el select cuando se guarden los cambios
-    document.getElementById('guardar-cambios').addEventListener('click', () => {
-        selectModelo5.classList.add('select-hidden');
-        tipotexto.classList.remove('select-hidden');
-        tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
+    document.addEventListener('click', (event) => {
+        if (event.target.textContent === 'Guardar Cambios') {
+            selectModelo5.classList.add('select-hidden');
+            tipotexto.classList.remove('select-hidden');
+            tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
+            GuardarCambios(event); // Llamar a la función GuardarCambios
+        }
     });
-
     
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {
