@@ -131,6 +131,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var boton = document.createElement('button');
     boton.className = 'editar';
     boton.textContent = 'Editar Tarjeta';
+    boton.id ="editar-tarejta";
     boton.addEventListener("click", EditarTarjeta);
 
     var boton2 = document.createElement('button');
@@ -230,7 +231,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     selectModelo5.classList.add('select-hidden');
 
     // Mostrar el select en modo de edición
-    document.getElementById('editar-perfil').addEventListener('click', () => {
+    document.getElementById('editar-tarjeta').addEventListener('click', () => {
         selectModelo5.classList.remove('select-hidden');
         tipotexto.classList.add('select-hidden');
     });
