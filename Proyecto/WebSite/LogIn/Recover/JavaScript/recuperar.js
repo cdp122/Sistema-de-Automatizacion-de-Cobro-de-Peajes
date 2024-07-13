@@ -15,12 +15,34 @@ async function Recuperar() {
         if (response.ok) {
             const data = await response.json();
             if (data != "Datos inválidos") {
-                alert("Su contraseña ha sido restablecida. Su nueva contraseña es: " + data + ".\nSe le regresará al LogIn");
-                window.location.href = "../../html/Login.html";
+                Swal.fire({
+                    title: 'Contraseña restablecida',
+                    html: `
+                        <p>Su contraseña ha sido restablecida. Su nueva contraseña es:</p>
+                        <p><strong id="nuevaContrasena">${data}</strong></p>
+                        <button id="copiarBtn" class="swal2-confirm swal2-styled">Copiar Contraseña</button>
+                    `,
+                    didOpen: () => {
+                        const copiarBtn = document.getElementById('copiarBtn');
+                        copiarBtn.addEventListener('click', () => {
+                            const nuevaContrasena = document.getElementById('nuevaContrasena').textContent;
+                            navigator.clipboard.writeText(nuevaContrasena).then(() => {
+                                Swal.fire('Copiado!', 'La contraseña ha sido copiada al portapapeles', 'success');
+                            }).catch(err => {
+                                Swal.fire('Error', 'No se pudo copiar la contraseña', 'error');
+                            });
+                        });
+                    }
+                }).then(() => {
+                    window.location.href = "../../html/Login.html";
+                });
             }
-            else alert(data);
+            else {
+                Swal.fire('Error', 'Datos inválidos', 'error');
+            }
         }
     } catch (error) {
         console.error('Error:', error);
+        Swal.fire('Error', 'Ocurrió un error. Inténtelo de nuevo más tarde.', 'error');
     }
 }
