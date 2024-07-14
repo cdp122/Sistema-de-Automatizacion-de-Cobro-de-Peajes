@@ -1,5 +1,3 @@
-const { text } = require("body-parser");
-
 //#region Carga Inicial
 var token;
 const camposEditables = ["cedula", "telefono", "email", "contraseña"];
