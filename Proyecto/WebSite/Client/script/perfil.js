@@ -205,31 +205,36 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     selectModelo5.name = 'tipoVehiculo';
     selectModelo5.required = true;
 
-    opciones.forEach(opcion => {
-        var option = document.createElement('option');
-        option.value = opcion.valor;
-        option.textContent = opcion.texto;
-        selectModelo5.appendChild(option);
-    });
-
-    var opciones = [
-        { valor:'', texto:'Sleccione'},
-        { valor:'livianos', texto:'Livianos'},
-        { valor:'2 ejes', texto:'2 ejes'},
-        { valor:'3 ejes', texto:'3 ejes'},
-        { valor:'4 ejes', texto:'4 ejes'},
-        { valor:'5 ejes', texto:'5 ejes'},
-        { valor:'6 o mas ejes', texto:'6 o mas ejes'},
-        { valor:'motos', texto:'motos'},
-    ]
-
-    
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
 
-    
-   
-    
+    // Array de opciones
+const opciones = [
+    { valor: '', texto: 'Selecciona' },
+    { valor: 'Livianos', texto: 'Livianos' },
+    { valor: '2 Ejes', texto: '2 Ejes' },
+    { valor: '3 Ejes', texto: '3 Ejes' },
+    { valor: '4 Ejes', texto: '4 Ejes' },
+    { valor: '5 Ejes', texto: '5 Ejes' },
+    { valor: '6 o 7 Ejes', texto: '6 0 7 Ejes' },
+    { valor: 'Motos', texto: 'Motos' }
+];
+
+// Añadir opciones al select
+opciones.forEach(opcion => {
+    var option = document.createElement('option');
+    option.value = opcion.valor;
+    option.text = opcion.texto;
+    selectModelo5.appendChild(option);
+});
+
+    // Establecer el valor seleccionado del select
+if (vehiculo && vehiculo.tipo) {
+    selectModelo5.value = vehiculo.tipo;
+}
+
+    lista.appendChild(elemento5);
+
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {
         if (selectModelo5.value === 'Motos') {
@@ -241,10 +246,6 @@ async function manejarTarjetas(tarjeta, vehiculo) {
             spanModelo2.maxLength = 7;
         }
     });
-
-    // Llamar al evento change al cargar la página para ajustar el límite inicial
-    selectModelo5.dispatchEvent(new Event('change'));
-
 
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
@@ -332,13 +333,32 @@ function EditarTarjeta(event) {
 
     spans.forEach(function (span) {
         if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.value = span.textContent;
-            input.id = span.id;
+            var input;
+            if (span.id === 'tipoVehiculo') {
+                input = document.createElement('select');
+                input.id = span.id;
+                const opciones = [
+                    { valor: 'automovil', texto: 'Automóvil' },
+                    { valor: 'moto', texto: 'Moto' },
+                    { valor: 'camion', texto: 'Camión' }
+                ];
+
+                opciones.forEach(opcion => {
+                    var option = document.createElement('option');
+                    option.value = opcion.valor;
+                    option.text = opcion.texto;
+                    input.appendChild(option);
+                });
+
+                input.value = span.textContent.toLowerCase(); // Asegurar que coincida con el valor del select
+            } else {
+                input = document.createElement('input');
+                input.type = 'text';
+                input.value = span.textContent;
+                input.id = span.id;
+            }
             span.parentNode.replaceChild(input, span);
         }
-
     });
 
     event.target.textContent = 'Guardar Cambios';
@@ -367,6 +387,15 @@ function GuardarCambios(event) {
             datos.push(input.value);
         }
     });
+
+    // Añadir el valor del select a los datos
+const selectTipo = caja.querySelector('select#tipoVehiculo');
+if (selectTipo) {
+    datos.push(selectTipo.value);
+} else {
+    datos.push(caja.querySelector('span#tipoVehiculo').textContent.toLowerCase());
+}
+
 
     datos.push(caja.querySelector("#codigo-telepass").textContent);
     console.log(datos);
