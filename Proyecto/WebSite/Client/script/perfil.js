@@ -1,3 +1,5 @@
+const { text } = require("body-parser");
+
 //#region Carga Inicial
 var token;
 const camposEditables = ["cedula", "telefono", "email", "contraseña"];
@@ -197,54 +199,36 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var elemento5 = document.createElement('li');
     var letra5 = document.createElement('strong');
     letra5.textContent = 'Tipo: ';
+
     var selectModelo5 = document.createElement('select');
     selectModelo5.id = 'tipoVehiculo';
     selectModelo5.name = 'tipoVehiculo';
     selectModelo5.required = true;
 
-    var opciones = ['', 'Livianos', '2 Ejes', '3 Ejes', '4 Ejes', '5 Ejes', '6 o más Ejes', 'Motos'];
-    var opcionesText = ['Seleccione', 'Livianos', '2 Ejes', '3 Ejes', '4 Ejes', '5 Ejes', '6 o más Ejes', 'Motos'];
-
-    opciones.forEach((opcion, index) => {
+    opciones.forEach(opcion => {
         var option = document.createElement('option');
-        option.value = opcion;
-        option.textContent = opcionesText[index];
-        if (vehiculo && vehiculo.tipo && vehiculo.tipo === opcion) {
-            option.selected = true;
-        }
+        option.value = opcion.valor;
+        option.textContent = opcion.texto;
         selectModelo5.appendChild(option);
     });
 
-    
+    var opciones = [
+        { valor:'', texto:'Sleccione'},
+        { valor:'livianos', texto:'Livianos'},
+        { valor:'2 ejes', texto:'2 ejes'},
+        { valor:'3 ejes', texto:'3 ejes'},
+        { valor:'4 ejes', texto:'4 ejes'},
+        { valor:'5 ejes', texto:'5 ejes'},
+        { valor:'6 o mas ejes', texto:'6 o mas ejes'},
+        { valor:'motos', texto:'motos'},
+    ]
 
+    
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
 
-    // Mostrar solo el valor seleccionado cuando no esté en modo de edición
-    var tipotexto = document.createElement('span');
-    tipotexto.id = 'tipo-carro';
-    tipotexto.textContent = vehiculo && vehiculo.tipo ? vehiculo.tipo : 'Seleccione';
-
-    elemento5.appendChild(tipotexto);
-    lista.appendChild(elemento5);
-
-    selectModelo5.classList.add('select-hidden');
-
-    // Mostrar el select en modo de edición
-    boton.addEventListener('click', () => {
-        selectModelo5.classList.remove('select-hidden');
-        tipotexto.classList.add('select-hidden');
-    });
-
-    // Ocultar el select cuando se guarden los cambios
-    document.addEventListener('click', (event) => {
-        if (event.target.textContent === 'Guardar Cambios') {
-            selectModelo5.classList.add('select-hidden');
-            tipotexto.classList.remove('select-hidden');
-            tipotexto.textContent = selectModelo5.options[selectModelo5.selectedIndex].text;
-            GuardarCambios(event); // Llamar a la función GuardarCambios
-        }
-    });
+    
+   
     
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {
