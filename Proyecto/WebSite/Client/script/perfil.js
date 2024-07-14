@@ -200,40 +200,14 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var letra5 = document.createElement('strong');
     letra5.textContent = 'Tipo: ';
 
-    var selectModelo5 = document.createElement('select');
-    selectModelo5.id = 'tipoVehiculo';
-    selectModelo5.name = 'tipoVehiculo';
-    selectModelo5.required = true;
+    var spanModelo5 = document.createElement('span');
+    spanModelo5.id = 'tipoVehiculo';
+    spanModelo5.textContent = vehiculo && vehiculo.tipo ? vehiculo.tipo : 'Selecciona';
 
     elemento5.appendChild(letra5);
-    elemento5.appendChild(selectModelo5);
-
-    // Array de opciones
-const opciones = [
-    { valor: '', texto: 'Selecciona' },
-    { valor: 'Livianos', texto: 'Livianos' },
-    { valor: '2 Ejes', texto: '2 Ejes' },
-    { valor: '3 Ejes', texto: '3 Ejes' },
-    { valor: '4 Ejes', texto: '4 Ejes' },
-    { valor: '5 Ejes', texto: '5 Ejes' },
-    { valor: '6 o 7 Ejes', texto: '6 0 7 Ejes' },
-    { valor: 'Motos', texto: 'Motos' }
-];
-
-// Añadir opciones al select
-opciones.forEach(opcion => {
-    var option = document.createElement('option');
-    option.value = opcion.valor;
-    option.text = opcion.texto;
-    selectModelo5.appendChild(option);
-});
-
-    // Establecer el valor seleccionado del select
-if (vehiculo && vehiculo.tipo) {
-    selectModelo5.value = vehiculo.tipo;
-}
-
+    elemento5.appendChild(spanModelo5);
     lista.appendChild(elemento5);
+    
 
     // Controlar el tamaño de la placa según la opción seleccionada
     selectModelo5.addEventListener('change', () => {
@@ -326,6 +300,29 @@ function validarTarjeta(input) {
     return true;
 }
 
+/*
+function EditarTarjeta(event) {
+    var caja = event.target.parentNode;
+
+    var spans = caja.querySelectorAll('span');
+
+    spans.forEach(function (span) {
+        if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.textContent;
+            input.id = span.id;
+            span.parentNode.replaceChild(input, span);
+        }
+
+    });
+
+    event.target.textContent = 'Guardar Cambios';
+    event.target.removeEventListener("click", EditarTarjeta);
+    event.target.addEventListener("click", GuardarCambios);
+}
+*/
+
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
 
@@ -338,9 +335,14 @@ function EditarTarjeta(event) {
                 input = document.createElement('select');
                 input.id = span.id;
                 const opciones = [
-                    { valor: 'automovil', texto: 'Automóvil' },
-                    { valor: 'moto', texto: 'Moto' },
-                    { valor: 'camion', texto: 'Camión' }
+                    { valor: 'Selecciona', texto: 'Selecciona' },
+                    { valor: 'Livianos', texto: 'Livianos' },
+                    { valor: '2 Ejes', texto: '2 Ejes' },
+                    { valor: '3 Ejes', texto: '3 Ejes' },
+                    { valor: '4 Ejes', texto: '4 Ejes' },
+                    { valor: '5 Ejes', texto: '5 Ejes' },
+                    { valor: '6 o 7 Ejes', texto: '6 0 7 Ejes' },
+                    { valor: 'Motos', texto: 'Motos' }
                 ];
 
                 opciones.forEach(opcion => {
@@ -350,7 +352,7 @@ function EditarTarjeta(event) {
                     input.appendChild(option);
                 });
 
-                input.value = span.textContent.toLowerCase(); // Asegurar que coincida con el valor del select
+                input.value = span.textContent; // Asegurar que coincida con el valor del select
             } else {
                 input = document.createElement('input');
                 input.type = 'text';
@@ -366,6 +368,7 @@ function EditarTarjeta(event) {
     event.target.addEventListener("click", GuardarCambios);
 }
 
+/*
 function GuardarCambios(event) {
     var caja = event.target.parentNode;
 
@@ -388,15 +391,6 @@ function GuardarCambios(event) {
         }
     });
 
-    // Añadir el valor del select a los datos
-const selectTipo = caja.querySelector('select#tipoVehiculo');
-if (selectTipo) {
-    datos.push(selectTipo.value);
-} else {
-    datos.push(caja.querySelector('span#tipoVehiculo').textContent.toLowerCase());
-}
-
-
     datos.push(caja.querySelector("#codigo-telepass").textContent);
     console.log(datos);
 
@@ -417,6 +411,49 @@ if (selectTipo) {
         window.alert("Corrije los campos en rojo");
     }
 }
+*/
+
+function GuardarCambios(event) {
+    var caja = event.target.parentNode;
+
+    var datosValidos = true;
+
+    var inputs = caja.querySelectorAll('input, select');
+    var datos = [];
+
+    inputs.forEach(function (input) {
+        if (!validarTarjeta(input)) {
+            datosValidos = false;
+            input.style.borderColor = 'red';
+            if (input.dataset.error) {
+                window.alert(input.dataset.error);
+            }
+        } else {
+            input.style.borderColor = '';
+            datos.push(input.value);
+        }
+    });
+
+    datos.push(caja.querySelector("#codigo-telepass").textContent);
+    console.log(datos);
+
+    if (datosValidos) {
+        ActualizarTarjeta(datos);
+        inputs.forEach(function (input) {
+            var span = document.createElement('span');
+            span.id = input.id;
+            span.textContent = input.value;
+            input.parentNode.replaceChild(span, input);
+        });
+
+        event.target.textContent = 'Editar Tarjeta';
+        event.target.removeEventListener("click", GuardarCambios);
+        event.target.addEventListener("click", EditarTarjeta);
+    } else {
+        window.alert("Corrige los campos en rojo");
+    }
+}
+
 
 async function ListarMovimientos(event) {
 
