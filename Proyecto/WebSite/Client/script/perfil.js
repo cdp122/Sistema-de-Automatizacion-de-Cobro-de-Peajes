@@ -3,7 +3,7 @@ var token;
 const camposEditables = ["cedula", "telefono", "email", "contraseña"];
 const editarPerfilBtn = document.getElementById("editar-perfil");
 const guardarCambiosBtn = document.getElementById("guardar-cambios");
-
+var selectModelo5;
 document.addEventListener("DOMContentLoaded", function () {
     Validar();
 });
@@ -199,7 +199,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     letra5.textContent = 'Tipo: ';
 
     // Crear el elemento select
-    var selectModelo5 = document.createElement('select');
+    selectModelo5 = document.createElement('select');
     selectModelo5.id = 'tipoVehiculo';
     selectModelo5.required = true;
     selectModelo5.disabled = true;
@@ -310,7 +310,11 @@ function validarTarjeta(input) {
 }
 
 function habilitarSelect() {
-    selectModelo5.disabled = false;
+    if (selectModelo5) {
+        selectModelo5.disabled = false;
+    } else {
+        console.error('El select no está definido');
+    }
 }
 
 
