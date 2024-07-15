@@ -229,11 +229,6 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
-
-    // Asegúrate de que el valor se mantiene después de recargar la página
-    if (vehiculo && vehiculo.tipo) {
-        selectModelo5.value = vehiculo && vehiculo.tipo ? vehiculo.tipo :'Selecciona';
-    }
     
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
@@ -314,6 +309,21 @@ function validarTarjeta(input) {
     return true;
 }
 
+function habilitarSelect() {
+    if (selectModelo5) {
+        selectModelo5.disabled = false;
+    } else {
+        console.error('El select no está definido');
+    }
+}
+
+function deshabilitarSelect() {
+    if (selectModelo5) {
+        selectModelo5.disabled = true;
+    } else {
+        console.error('El select no está definido');
+    }
+}
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
@@ -385,7 +395,7 @@ function GuardarCambios(event) {
             input.parentNode.replaceChild(span, input);
         });
 
-        // Mantener el select pero asegurarse de que sea editable solo cuando se edite la tarjeta
+        // Mantener el select, pero asegurarse de que sea editable solo cuando se edite la tarjeta
         select.disabled = true;
 
         event.target.textContent = 'Editar Tarjeta';
