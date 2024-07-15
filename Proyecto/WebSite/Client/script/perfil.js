@@ -299,9 +299,20 @@ function validarTarjeta(input) {
             }
             break;
         case 'placa':
-            if (!/^[a-zA-Z0-9]{6,7}$/.test(valor)) {
-                input.dataset.error = "La placa debe tener exactamente 6 0 7 digitos.";
-                return false;
+            var selectTipoVehiculo = document.querySelector('#tipoVehiculo');
+            if (selectTipoVehiculo) {
+                var tipoVehiculo = selectTipoVehiculo.value;
+                if (tipoVehiculo === 'Motos') {
+                    if (!/^[A-Z]{2}\d{3}[A-Z]$/.test(valor) || valor.length !== 6) {
+                        input.dataset.error = "La placa de la moto debe tener el formato ZZ###Z y tener exactamente 6 caracteres.";
+                        return false;
+                    }
+                } else {
+                    if (!/^[A-Z]{3}\d{4}$/.test(valor) || valor.length !== 7) {
+                        input.dataset.error = "La placa del vehículo debe tener el formato ZZZ#### y tener exactamente 7 caracteres.";
+                        return false;
+                    }
+                }
             }
             break;
         default:
@@ -311,6 +322,7 @@ function validarTarjeta(input) {
     delete input.dataset.error;
     return true;
 }
+
 
 
 function EditarTarjeta(event) {
