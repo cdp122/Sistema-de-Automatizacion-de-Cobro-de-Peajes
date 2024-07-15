@@ -319,11 +319,13 @@ function EditarTarjeta(event) {
     var spans = caja.querySelectorAll('span');
 
     spans.forEach(function (span) {
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.value = span.textContent;
-        input.id = span.id;
-        span.parentNode.replaceChild(input, span);
+        if (span.id !== 'saldo') {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.textContent;
+            input.id = span.id;
+            span.parentNode.replaceChild(input, span);
+        }
     });
 
     // Habilitar el select para edición
