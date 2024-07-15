@@ -309,38 +309,25 @@ function validarTarjeta(input) {
     return true;
 }
 
-function habilitarSelect() {
-    if (selectModelo5) {
-        selectModelo5.disabled = false;
-    } else {
-        console.error('El select no está definido');
-    }
-}
-
-function deshabilitarSelect() {
-    if (selectModelo5) {
-        selectModelo5.disabled = true;
-    } else {
-        console.error('El select no está definido');
-    }
-}
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
-    habilitarSelect();
 
     var spans = caja.querySelectorAll('span');
 
     spans.forEach(function (span) {
-        if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.value = span.textContent;
-            input.id = span.id;
-            span.parentNode.replaceChild(input, span);
-        }
-
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.value = span.textContent;
+        input.id = span.id;
+        span.parentNode.replaceChild(input, span);
     });
+
+    // Habilitar el select para edición
+    var select = caja.querySelector('#tipoVehiculo');
+    if (select) {
+        select.disabled = false;
+    }
 
     event.target.textContent = 'Guardar Cambios';
     event.target.removeEventListener("click", EditarTarjeta);
@@ -385,7 +372,7 @@ function GuardarCambios(event) {
     if (datosValidos) {
         ActualizarTarjeta(datos);
 
-        // Reemplazar inputs y select con spans
+        // Reemplazar inputs con spans
         inputs.forEach(function (input) {
             var span = document.createElement('span');
             span.id = input.id;
@@ -393,17 +380,12 @@ function GuardarCambios(event) {
             input.parentNode.replaceChild(span, input);
         });
 
-        if (select) {
-            var spanSelect = document.createElement('span');
-            spanSelect.id = select.id;
-            spanSelect.textContent = select.options[select.selectedIndex].text;
-            select.parentNode.replaceChild(spanSelect, select);
-        }
+        // Mantener el select, pero asegurarse de que sea editable solo cuando se edite la tarjeta
+        select.disabled = true;
 
         event.target.textContent = 'Editar Tarjeta';
         event.target.removeEventListener("click", GuardarCambios);
         event.target.addEventListener("click", EditarTarjeta);
-        deshabilitarSelect();
     } else {
         window.alert("Corrija los campos en rojo.");
     }
