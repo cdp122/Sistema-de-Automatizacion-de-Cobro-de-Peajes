@@ -206,19 +206,6 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento5.appendChild(spanModelo5);
     lista.appendChild(elemento5);
     
-
-    // Controlar el tamaño de la placa según la opción seleccionada
-    selectModelo5.addEventListener('change', () => {
-        if (selectModelo5.value === 'Motos') {
-            spanModelo2.maxLength = 6;
-            if (spanModelo2.textContent.length > 6) {
-                spanModelo2.textContent = spanModelo2.textContent.substring(0, 6);
-            }
-        } else {
-            spanModelo2.maxLength = 7;
-        }
-    });
-
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
     letra6.textContent = 'Color:';
