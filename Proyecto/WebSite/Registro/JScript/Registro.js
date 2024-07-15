@@ -13,15 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validar que la placa sea alfanumérica y tenga 6 o 7 caracteres
     placaInput.addEventListener('input', (event) => {
         const input = event.target;
-        const tipoVehiculo = vehiculoSelecionado.value;
-        let placaPattern;
-        if (tipoVehiculo === 'Motos') {
-            placaPattern = /^[A-Z]{2}\d{3}[A-Z]$/; // Patrón ZZ###Z
-        } else {
-            placaPattern = /^[A-Z]{3}\d{4}$/; // Patrón ZZZ####
-        }
+        const placaPattern = /^[A-Z0-9]{6,7}$/;
         if (!placaPattern.test(input.value)) {
-            input.setCustomValidity('Placa inválida. Verifique el formato y longitud.');
+            input.setCustomValidity('Placa inválida. Debe tener 6 o 7 caracteres alfanuméricos.');
         } else {
             input.setCustomValidity('');
         }
@@ -29,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ajustar el límite de caracteres en función del tipo de vehículo seleccionado
     vehiculoSelecionado.addEventListener('change', () => {
+
         if (vehiculoSelecionado.value === 'Motos') {
             placaInput.maxLength = 6;
             if (placaInput.value.length > 6) {
@@ -36,12 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             placaInput.maxLength = 7;
-            if (placaInput.value.length > 7) {
-                placaInput.value = placaInput.value.substring(0, 7);
-            }
         }
-        // Disparar el evento input para validar inmediatamente después de cambiar el tipo de vehículo
-        placaInput.dispatchEvent(new Event('input'));
     });
 
     // Llamar al evento change al cargar la página para ajustar el límite inicial
@@ -110,7 +100,7 @@ async function validarFormulario(event) {
     }
 
     // Validar correo electrónico
-    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     if (!emailRegex.test(email)) {
         document.getElementById('emailError').textContent = 'Correo electrónico inválido.';
         validado = false;
@@ -136,13 +126,13 @@ async function validarFormulario(event) {
     }
 
     // Validar placa según el tipo de vehículo
-    const placaMoto = /^[A-Z]{2}\d{3}[A-Z]$/; // Patrón ZZ###Z
-    const placaAutos = /^[A-Z]{3}\d{4}$/; // Patrón ZZZ####
+    const placaMoto = /^[A-Za-z0-9]{6}$/;
+    const placaAutos = /^[A-Za-z0-9]{7}$/;
     if (tipoVehiculo === 'Motos' && !placaMoto.test(placa)) {
-        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener el formato ZZ###Z para motos.';
+        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener 6 caracteres para motos.';
         validado = false;
     } else if (tipoVehiculo !== 'Motos' && !placaAutos.test(placa)) {
-        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener el formato ZZZ#### para vehículos.';
+        document.getElementById('placaError').textContent = 'Placa inválida. Debe tener 7 caracteres para vehículos.';
         validado = false;
     }
 
