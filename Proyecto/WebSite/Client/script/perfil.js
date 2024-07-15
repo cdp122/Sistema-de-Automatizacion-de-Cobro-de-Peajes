@@ -193,18 +193,15 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento4.appendChild(spanModelo4);
     lista.appendChild(elemento4);
 
-    // Crear el elemento select y agregar opciones
     var elemento5 = document.createElement('li');
     var letra5 = document.createElement('strong');
     letra5.textContent = 'Tipo: ';
 
-    // Crear el elemento select
     selectModelo5 = document.createElement('select');
     selectModelo5.id = 'tipoVehiculo';
     selectModelo5.required = true;
-    selectModelo5.disabled = true;
+    selectModelo5.disabled = true; // Inicialmente deshabilitado
 
-    // Añadir opciones al select
     var opciones = [
         { value: '', text: 'Seleccione' },
         { value: 'Livianos', text: 'Livianos' },
@@ -216,7 +213,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         { value: 'Motos', text: 'Motos' }
     ];
 
-    opciones.forEach(function (opcion) {
+    opciones.forEach(function(opcion) {
         var option = document.createElement('option');
         option.value = opcion.value;
         option.text = opcion.text;
@@ -229,6 +226,12 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
+
+    // Asegúrate de que el valor se mantiene después de recargar la página
+    if (vehiculo && vehiculo.tipo) {
+        selectModelo5.value = vehiculo.tipo;
+    }
+
 
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
@@ -309,38 +312,25 @@ function validarTarjeta(input) {
     return true;
 }
 
-function habilitarSelect() {
-    if (selectModelo5) {
-        selectModelo5.disabled = false;
-    } else {
-        console.error('El select no está definido');
-    }
-}
-
-function deshabilitarSelect() {
-    if (selectModelo5) {
-        selectModelo5.disabled = true;
-    } else {
-        console.error('El select no está definido');
-    }
-}
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
-    habilitarSelect();
 
     var spans = caja.querySelectorAll('span');
 
     spans.forEach(function (span) {
-        if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
-            var input = document.createElement('input');
-            input.type = 'text';
-            input.value = span.textContent;
-            input.id = span.id;
-            span.parentNode.replaceChild(input, span);
-        }
-
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.value = span.textContent;
+        input.id = span.id;
+        span.parentNode.replaceChild(input, span);
     });
+
+    // Habilitar el select para edición
+    var select = caja.querySelector('#tipoVehiculo');
+    if (select) {
+        select.disabled = false;
+    }
 
     event.target.textContent = 'Guardar Cambios';
     event.target.removeEventListener("click", EditarTarjeta);
@@ -354,7 +344,7 @@ function GuardarCambios(event) {
     var datosValidos = true;
 
     var inputs = caja.querySelectorAll('input');
-    var datos = []
+    var datos = [];
 
     inputs.forEach(function (input) {
         if (!validarTarjeta(input)) {
@@ -363,18 +353,29 @@ function GuardarCambios(event) {
             if (input.dataset.error) {
                 window.alert(input.dataset.error);
             }
-        }
-        else {
+        } else {
             input.style.borderColor = '';
             datos.push(input.value);
         }
     });
+
+    // Validar y agregar el valor del select
+    var select = caja.querySelector('#tipoVehiculo');
+    if (select && select.value) {
+        datos.push(select.value);
+    } else {
+        datosValidos = false;
+        window.alert("Seleccione un tipo de vehículo.");
+        select.style.borderColor = 'red';
+    }
 
     datos.push(caja.querySelector("#codigo-telepass").textContent);
     console.log(datos);
 
     if (datosValidos) {
         ActualizarTarjeta(datos);
+
+        // Reemplazar inputs con spans
         inputs.forEach(function (input) {
             var span = document.createElement('span');
             span.id = input.id;
@@ -382,14 +383,14 @@ function GuardarCambios(event) {
             input.parentNode.replaceChild(span, input);
         });
 
+        // Mantener el select pero asegurarse de que sea editable solo cuando se edite la tarjeta
+        select.disabled = true;
+
         event.target.textContent = 'Editar Tarjeta';
         event.target.removeEventListener("click", GuardarCambios);
         event.target.addEventListener("click", EditarTarjeta);
-        deshabilitarSelect();
-
-    }
-    else {
-        window.alert("Corrije los campos en rojo");
+    } else {
+        window.alert("Corrija los campos en rojo.");
     }
 }
 
