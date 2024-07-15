@@ -317,6 +317,13 @@ function habilitarSelect() {
     }
 }
 
+function deshabilitarSelect() {
+    if (selectModelo5) {
+        selectModelo5.disabled = true;
+    } else {
+        console.error('El select no está definido');
+    }
+}
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
@@ -378,6 +385,8 @@ function GuardarCambios(event) {
         event.target.textContent = 'Editar Tarjeta';
         event.target.removeEventListener("click", GuardarCambios);
         event.target.addEventListener("click", EditarTarjeta);
+        deshabilitarSelect();
+
     }
     else {
         window.alert("Corrije los campos en rojo");
