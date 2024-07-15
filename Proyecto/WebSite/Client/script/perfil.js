@@ -131,7 +131,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var boton = document.createElement('button');
     boton.className = 'editar';
     boton.textContent = 'Editar Tarjeta';
-    boton.id ="editar-tarejta";
+    boton.id = "editar-tarejta";
     boton.addEventListener("click", EditarTarjeta);
 
     var boton2 = document.createElement('button');
@@ -151,7 +151,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         if (saldo === 0) {
             Deshabilitar(caja);
         } else {
-        alert('La tarjeta no puede ser deshabilitada porque el saldo no es 0.');
+            alert('La tarjeta no puede ser deshabilitada porque el saldo no es 0.');
         }
     });
 
@@ -216,7 +216,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         { value: 'Motos', text: 'Motos' }
     ];
 
-    opciones.forEach(function(opcion) {
+    opciones.forEach(function (opcion) {
         var option = document.createElement('option');
         option.value = opcion.value;
         option.text = opcion.text;
@@ -229,7 +229,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
-    
+
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
     letra6.textContent = 'Color:';
@@ -494,11 +494,11 @@ async function ActualizarTarjeta(datos) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                placa: datos[0],
-                modelo: datos[1],
-                tipo: datos[2],
-                color: datos[3],
-                tarjeta: datos[4]
+                placa: datos[2],
+                modelo: datos[3],
+                tipo: datos[5],
+                color: datos[4],
+                tarjeta: datos[0]
             })
         });
         if (response.ok) {
