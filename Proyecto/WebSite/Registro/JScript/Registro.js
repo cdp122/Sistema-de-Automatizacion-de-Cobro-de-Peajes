@@ -110,7 +110,7 @@ async function validarFormulario(event) {
     }
 
     // Validar correo electrónico
-    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
     if (!emailRegex.test(email)) {
         document.getElementById('emailError').textContent = 'Correo electrónico inválido.';
         validado = false;
