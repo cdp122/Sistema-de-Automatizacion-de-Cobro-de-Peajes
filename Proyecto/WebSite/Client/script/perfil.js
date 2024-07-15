@@ -319,7 +319,7 @@ function EditarTarjeta(event) {
     var spans = caja.querySelectorAll('span');
 
     spans.forEach(function (span) {
-        if (span.id !== 'saldo') {
+        if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
             var input = document.createElement('input');
             input.type = 'text';
             input.value = span.textContent;
@@ -338,6 +338,7 @@ function EditarTarjeta(event) {
     event.target.removeEventListener("click", EditarTarjeta);
     event.target.addEventListener("click", GuardarCambios);
 }
+
 
 
 function GuardarCambios(event) {
