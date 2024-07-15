@@ -202,6 +202,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var selectModelo5 = document.createElement('select');
     selectModelo5.id = 'tipoVehiculo';
     selectModelo5.required = true;
+    selectModelo5.disabled = true;
 
     // Añadir opciones al select
     var opciones = [
@@ -308,9 +309,14 @@ function validarTarjeta(input) {
     return true;
 }
 
+function habilitarSelect() {
+    selectModelo5.disabled = false;
+}
+
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
+    habilitarSelect();
 
     var spans = caja.querySelectorAll('span');
 
