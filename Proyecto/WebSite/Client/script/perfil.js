@@ -354,7 +354,7 @@ function GuardarCambios(event) {
     var datosValidos = true;
 
     var inputs = caja.querySelectorAll('input');
-    var datos = []
+    var datos = [];
 
     inputs.forEach(function (input) {
         if (!validarTarjeta(input)) {
@@ -363,18 +363,29 @@ function GuardarCambios(event) {
             if (input.dataset.error) {
                 window.alert(input.dataset.error);
             }
-        }
-        else {
+        } else {
             input.style.borderColor = '';
             datos.push(input.value);
         }
     });
+
+    // Validar y agregar el valor del select
+    var select = caja.querySelector('#tipoVehiculo');
+    if (select && select.value) {
+        datos.push(select.value);
+    } else {
+        datosValidos = false;
+        window.alert("Seleccione un tipo de vehículo.");
+        select.style.borderColor = 'red';
+    }
 
     datos.push(caja.querySelector("#codigo-telepass").textContent);
     console.log(datos);
 
     if (datosValidos) {
         ActualizarTarjeta(datos);
+
+        // Reemplazar inputs y select con spans
         inputs.forEach(function (input) {
             var span = document.createElement('span');
             span.id = input.id;
@@ -382,16 +393,22 @@ function GuardarCambios(event) {
             input.parentNode.replaceChild(span, input);
         });
 
+        if (select) {
+            var spanSelect = document.createElement('span');
+            spanSelect.id = select.id;
+            spanSelect.textContent = select.options[select.selectedIndex].text;
+            select.parentNode.replaceChild(spanSelect, select);
+        }
+
         event.target.textContent = 'Editar Tarjeta';
         event.target.removeEventListener("click", GuardarCambios);
         event.target.addEventListener("click", EditarTarjeta);
         deshabilitarSelect();
-
-    }
-    else {
-        window.alert("Corrije los campos en rojo");
+    } else {
+        window.alert("Corrija los campos en rojo.");
     }
 }
+
 
 
 async function ListarMovimientos(event) {
