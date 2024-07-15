@@ -75,30 +75,6 @@ body {
 
 }
 
-.contentNight {
-    width: 500px;
-    height: 600px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#ffffff72, #ffffff37) padding-box,
-        linear-gradient(145deg, transparent 35%, #510e6594, #011b8fea) border-box;
-    border: 2px solid transparent;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    border-radius: 16px;
-    transition: width 0.5s, height 0.5s, font-size 0.5s;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-
-}
-
 .form-group {
     width: 100%;
     display: flex;
@@ -134,12 +110,6 @@ body {
     height: 40px !important;
 }
 
-.btnNight {
-    background-image: linear-gradient(135deg, #510e65 0%, #011b8fd0 100%);
-    box-shadow: 0 20px 30px -6px rgba(23, 32, 133, 0.5);
-    text-shadow: none;
-}
-
 .btn:hover {
     transform: translateY(3px);
     box-shadow: none;
@@ -169,16 +139,6 @@ body {
 .contraseña:focus {
     animation: borderAnimationDay 2s infinite;
     border: solid 5px #d48d07;
-}
-
-.usernameNight:focus {
-    animation: borderAnimation 2s infinite;
-    border: solid 5px #691183;
-}
-
-.contraseñaNight:focus {
-    animation: borderAnimation 2s infinite;
-    border: solid 5px #691183;
 }
 
 /* =================================================================Rocha*/
@@ -274,7 +234,7 @@ body {
 }
 
 .logo:hover {
-    transform: rotate(360deg); 
+    transform: rotate(360deg);
 }
 
 .menuContainer .navbar ul li {
@@ -357,11 +317,11 @@ body {
 }
 
 .navbar ul li a:hover {
-    transform: scale(1.5); 
+    transform: scale(1.5);
 }
 
 .navbar ul li a:active {
-    color: rgb(75, 238, 250); 
+    color: rgb(75, 238, 250);
 }
 
 #menu-toggle {
@@ -417,20 +377,6 @@ body {
 
     .Desp {
         visibility: hidden;
-    }
-}
-
-@keyframes borderAnimation {
-    0% {
-        border-color: #691183;
-    }
-
-    50% {
-        border-color: #a379ff;
-    }
-
-    100% {
-        border-color: #4f0d63;
     }
 }
 
@@ -566,7 +512,7 @@ body {
 @media (max-height: 630px) {
     .content {
         width: 330px;
-        height: 380px;
+        height: 400px;
     }
 
     .form-group {
