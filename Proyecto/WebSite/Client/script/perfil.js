@@ -232,7 +232,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
 
     // Asegúrate de que el valor se mantiene después de recargar la página
     if (vehiculo && vehiculo.tipo) {
-        selectModelo5.value = vehiculo.tipo;
+        selectModelo5.value = vehiculo && vehiculo.tipo ? vehiculo.tipo :'Selecciona';
     }
     
     var elemento6 = document.createElement('li');
