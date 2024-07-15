@@ -198,12 +198,35 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var letra5 = document.createElement('strong');
     letra5.textContent = 'Tipo: ';
 
-    var spanModelo5 = document.createElement('span');
-    spanModelo5.id = 'tipoVehiculo';
-    spanModelo5.textContent = vehiculo && vehiculo.tipo ? vehiculo.tipo : 'Selecciona';
+    // Crear el elemento select
+    var selectModelo5 = document.createElement('select');
+    selectModelo5.id = 'tipoVehiculo';
+    selectModelo5.required = true;
+
+    // Añadir opciones al select
+    var opciones = [
+        { value: '', text: 'Seleccione' },
+        { value: 'Livianos', text: 'Livianos' },
+        { value: '2 Ejes', text: '2 Ejes' },
+        { value: '3 Ejes', text: '3 Ejes' },
+        { value: '4 Ejes', text: '4 Ejes' },
+        { value: '5 Ejes', text: '5 Ejes' },
+        { value: '6 o más Ejes', text: '6 o más Ejes' },
+        { value: 'Motos', text: 'Motos' }
+    ];
+
+    opciones.forEach(function(opcion) {
+        var option = document.createElement('option');
+        option.value = opcion.value;
+        option.text = opcion.text;
+        if (vehiculo && vehiculo.tipo === opcion.value) {
+            option.selected = true;
+        }
+        selectModelo5.appendChild(option);
+    });
 
     elemento5.appendChild(letra5);
-    elemento5.appendChild(spanModelo5);
+    elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
     
     var elemento6 = document.createElement('li');
