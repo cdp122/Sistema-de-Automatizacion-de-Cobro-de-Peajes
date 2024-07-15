@@ -327,22 +327,20 @@ function deshabilitarSelect() {
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
+    habilitarSelect();
 
     var spans = caja.querySelectorAll('span');
 
     spans.forEach(function (span) {
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.value = span.textContent;
-        input.id = span.id;
-        span.parentNode.replaceChild(input, span);
-    });
+        if (span.id !== 'saldo' && span.id !== 'codigo-telepass') {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.textContent;
+            input.id = span.id;
+            span.parentNode.replaceChild(input, span);
+        }
 
-    // Habilitar el select para edición
-    var select = caja.querySelector('#tipoVehiculo');
-    if (select) {
-        select.disabled = false;
-    }
+    });
 
     event.target.textContent = 'Guardar Cambios';
     event.target.removeEventListener("click", EditarTarjeta);
@@ -356,7 +354,7 @@ function GuardarCambios(event) {
     var datosValidos = true;
 
     var inputs = caja.querySelectorAll('input');
-    var datos = [];
+    var datos = []
 
     inputs.forEach(function (input) {
         if (!validarTarjeta(input)) {
@@ -365,29 +363,18 @@ function GuardarCambios(event) {
             if (input.dataset.error) {
                 window.alert(input.dataset.error);
             }
-        } else {
+        }
+        else {
             input.style.borderColor = '';
             datos.push(input.value);
         }
     });
-
-    // Validar y agregar el valor del select
-    var select = caja.querySelector('#tipoVehiculo');
-    if (select && select.value) {
-        datos.push(select.value);
-    } else {
-        datosValidos = false;
-        window.alert("Seleccione un tipo de vehículo.");
-        select.style.borderColor = 'red';
-    }
 
     datos.push(caja.querySelector("#codigo-telepass").textContent);
     console.log(datos);
 
     if (datosValidos) {
         ActualizarTarjeta(datos);
-
-        // Reemplazar inputs con spans
         inputs.forEach(function (input) {
             var span = document.createElement('span');
             span.id = input.id;
@@ -395,17 +382,16 @@ function GuardarCambios(event) {
             input.parentNode.replaceChild(span, input);
         });
 
-        // Mantener el select, pero asegurarse de que sea editable solo cuando se edite la tarjeta
-        select.disabled = true;
-
         event.target.textContent = 'Editar Tarjeta';
         event.target.removeEventListener("click", GuardarCambios);
         event.target.addEventListener("click", EditarTarjeta);
-    } else {
-        window.alert("Corrija los campos en rojo.");
+        deshabilitarSelect();
+
+    }
+    else {
+        window.alert("Corrije los campos en rojo");
     }
 }
-
 
 
 async function ListarMovimientos(event) {
