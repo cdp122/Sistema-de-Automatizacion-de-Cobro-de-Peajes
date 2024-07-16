@@ -44,6 +44,7 @@ class ContentDecorator extends ElementDecorator {
         }
     }
 }
+
 class NavDecorator extends ElementDecorator {
     applyStyle() {
         const hour = new Date().getHours();
@@ -55,13 +56,49 @@ class NavDecorator extends ElementDecorator {
     }
 }
 
+class FooterDecorator extends ElementDecorator {
+    applyStyle() {
+        const hour = new Date().getHours();
+        if (hour < 6 || hour >= 18) {
+            this.element.classList.add('footerNight');
+        }
+    }
+}
+class BodyDecorator extends ElementDecorator {
+    applyStyle() {
+        const hour = new Date().getHours();
+        if (hour < 6 || hour >= 18) {
+            this.element.classList.add('bodyNight');
+        }
+    }
+}
+class headerDecorator extends ElementDecorator {
+    applyStyle() {
+        const hour = new Date().getHours();
+        if (hour < 6 || hour >= 18) {
+            this.element.classList.add('headerNight');
+        }
+    }
+}
+
 function applyDecorators() {
     const fullSection = document.querySelector('.full');
     const contentSection = document.querySelector('.content');
     const buttons = document.querySelectorAll('.btn');
     const inputs = document.querySelectorAll('.username, .contraseña');
     const nav = document.querySelector('.menuContainer');
+    const footer = document.querySelector('.footer');
+    const body = document.querySelector('.body');
+    const header = document.querySelector('.header');
 
+    if (header) {
+        const decoratedHeader = new headerDecorator(header);
+        decoratedHeader.applyStyle();
+    }
+    if (body) {
+        const decoratedBody = new BodyDecorator(body);
+        decoratedBody.applyStyle();
+    }
     if (fullSection) {
         const decoratedFullSection = new DayNightDecorator(fullSection);
         decoratedFullSection.applyStyle();
@@ -84,6 +121,11 @@ function applyDecorators() {
     if (nav) {
         const decoratedNav = new NavDecorator(nav);
         decoratedNav.applyStyle();
+    }
+
+    if (footer) {
+        const decoratedFooter = new FooterDecorator(footer);
+        decoratedFooter.applyStyle();
     }
 }
 
