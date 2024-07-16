@@ -256,13 +256,24 @@ async function BuscarPlaca(placa) {
     if (response.ok) {
       const data = await response.json();
       if (!data.message)
-        RellenarInfoCliente(data);
+        RellenarInfoClientePorPlaca(data);
     } else {
       alert(result.message);
     }
   } catch (error) {
     console.error('Error:', error);
   }
+}
+
+async function RellenarInfoClientePorPlaca(infoCliente) {
+  document.getElementById("client-id").value = infoCliente.cedula;
+  document.getElementById("client-name").value = infoCliente.nombres;
+  document.getElementById("client-email").value = infoCliente.correo;
+  document.getElementById("client-phone").value = infoCliente.telefono;
+
+  busquedaCedulaHabilitada = false;
+
+  document.getElementById("type-select").disabled = true;
 }
 
 async function BuscarCliente(cedula) {
@@ -277,7 +288,7 @@ async function BuscarCliente(cedula) {
     if (response.ok) {
       const data = await response.json();
       if (!data.message)
-        RellenarInfoCliente(data);
+        RellenarInfoClientePorCedula(data);
     } else {
       alert(result.message);
     }
@@ -286,7 +297,7 @@ async function BuscarCliente(cedula) {
   }
 }
 
-async function RellenarInfoCliente(infoCliente) {
+async function RellenarInfoClientePorCedula(infoCliente) {
   document.getElementById("client-name").value = infoCliente.nombres;
   document.getElementById("client-email").value = infoCliente.correo;
   document.getElementById("client-phone").value = infoCliente.telefono;
