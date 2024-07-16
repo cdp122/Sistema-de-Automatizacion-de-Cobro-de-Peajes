@@ -159,6 +159,62 @@ function CambiarTipo(event) {
   else if (tipo == "6 o más Ejes") precio.value = 6;
   else precio.value = 0.5;
 }
+//#region Inicializar EmailJS
+(function () {
+  emailjs.init("-YbO7MjhVJ0lwF7TC"); // Reemplaza "-YbO7MjhVJ0lwF7TC" con tu Public Key
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Asignar fecha y hora actual a los campos correspondientes
+  const now = new Date();
+  const date = now.toISOString().split('T')[0];
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const time = `${hours}:${minutes}`;
+
+  document.getElementById('fechaFactura').value = date;
+  document.getElementById('horaFactura').value = time;
+
+});
+
+async function enviarFactura() {
+  try {
+    // Recopilar datos del formulario
+    const numeroFactura = document.getElementById('numeroFactura').textContent;
+    const fechaFactura = document.getElementById('fechaFactura').value;
+    const horaFactura = document.getElementById('horaFactura').value;
+    const clientId = document.getElementById('client-id').value;
+    const clientName = document.getElementById('client-name').value;
+    const clientEmail = document.getElementById('client-email').value;
+    const clientPhone = document.getElementById('client-phone').value;
+    const clientPlaca = document.getElementById('client-placa').value;
+    const movSelect = document.getElementById('mov-select').value;
+    const typeSelect = document.getElementById('type-select').value;
+    const price = document.getElementById('total-value').textContent;
+    const total = document.getElementById('total-value').textContent;
+
+    // Enviar la factura por correo electrónico usando EmailJS
+    await emailjs.send('service_9q1a4u4', 'template_rv8pgw3', {
+      numero_factura: numeroFactura,
+      fecha_factura: fechaFactura,
+      hora_factura: horaFactura,
+      client_id: clientId,
+      client_name: clientName,
+      client_email: clientEmail,
+      client_phone: clientPhone,
+      client_placa: clientPlaca,
+      mov_select: movSelect,
+      type_select: typeSelect,
+      price: price,
+      total: total
+    });
+
+    alert('Factura enviada exitosamente');
+  } catch (error) {
+    console.error('Error al enviar la factura:', error);
+    alert('Error al enviar la factura: ' + error.message);
+  }
+}
 //#endregion
 //#region Backend
 async function CargarNumFactura() {
@@ -196,14 +252,25 @@ async function BuscarPlaca(placa) {
     });
     if (response.ok) {
       const data = await response.json();
-      if (data.message) window.location.href = "../../Error/PagError404.html";
-      rellenarInfoPlaca(data);
+      if (!data.message)
+        RellenarInfoClientePorPlaca(data);
     } else {
       alert(result.message);
     }
   } catch (error) {
     console.error('Error:', error);
   }
+}
+
+async function RellenarInfoClientePorPlaca(infoCliente) {
+  document.getElementById("client-id").value = infoCliente.cedula;
+  document.getElementById("client-name").value = infoCliente.nombres;
+  document.getElementById("client-email").value = infoCliente.correo;
+  document.getElementById("client-phone").value = infoCliente.telefono;
+
+  busquedaCedulaHabilitada = false;
+
+  document.getElementById("type-select").disabled = true;
 }
 
 async function BuscarCliente(cedula) {
@@ -218,7 +285,7 @@ async function BuscarCliente(cedula) {
     if (response.ok) {
       const data = await response.json();
       if (!data.message)
-        RellenarInfoCliente(data);
+        RellenarInfoClientePorCedula(data);
     } else {
       alert(result.message);
     }
@@ -227,7 +294,7 @@ async function BuscarCliente(cedula) {
   }
 }
 
-async function RellenarInfoCliente(infoCliente) {
+async function RellenarInfoClientePorCedula(infoCliente) {
   document.getElementById("client-name").value = infoCliente.nombres;
   document.getElementById("client-email").value = infoCliente.correo;
   document.getElementById("client-phone").value = infoCliente.telefono;
@@ -300,9 +367,11 @@ async function RealizarTransacción(infoTransacción) {
     if (response.ok) {
       const resultado = await response.json();
       alert(resultado.message);
-      if (resultado.message == "Transacción Realizada Correctamente")
+      if (resultado.message == "Transacción Realizada Correctamente") {
+        await enviarFactura();
         window.location.reload();
-      return;
+        return;
+      }
     } else {
       alert(resultado.message);
       return;

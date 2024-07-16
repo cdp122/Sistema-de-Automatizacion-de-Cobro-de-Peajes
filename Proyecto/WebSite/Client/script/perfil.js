@@ -131,7 +131,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     var boton = document.createElement('button');
     boton.className = 'editar';
     boton.textContent = 'Editar Tarjeta';
-    boton.id ="editar-tarejta";
+    boton.id = "editar-tarejta";
     boton.addEventListener("click", EditarTarjeta);
 
     var boton2 = document.createElement('button');
@@ -151,7 +151,7 @@ async function manejarTarjetas(tarjeta, vehiculo) {
         if (saldo === 0) {
             Deshabilitar(caja);
         } else {
-        alert('La tarjeta no puede ser deshabilitada porque el saldo no es 0.');
+            alert('La tarjeta no puede ser deshabilitada porque el saldo no es 0.');
         }
     });
 
@@ -193,18 +193,15 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento4.appendChild(spanModelo4);
     lista.appendChild(elemento4);
 
-    // Crear el elemento select y agregar opciones
     var elemento5 = document.createElement('li');
     var letra5 = document.createElement('strong');
     letra5.textContent = 'Tipo: ';
 
-    // Crear el elemento select
     selectModelo5 = document.createElement('select');
     selectModelo5.id = 'tipoVehiculo';
     selectModelo5.required = true;
-    selectModelo5.disabled = true;
+    selectModelo5.disabled = true; // Inicialmente deshabilitado
 
-    // Añadir opciones al select
     var opciones = [
         { value: '', text: 'Seleccione' },
         { value: 'Livianos', text: 'Livianos' },
@@ -229,7 +226,13 @@ async function manejarTarjetas(tarjeta, vehiculo) {
     elemento5.appendChild(letra5);
     elemento5.appendChild(selectModelo5);
     lista.appendChild(elemento5);
-    
+
+    // Asegúrate de que el valor se mantiene después de recargar la página
+    if (vehiculo && vehiculo.tipo) {
+        selectModelo5.value = vehiculo.tipo;
+    }
+
+
     var elemento6 = document.createElement('li');
     var letra6 = document.createElement('strong');
     letra6.textContent = 'Color:';
@@ -296,9 +299,20 @@ function validarTarjeta(input) {
             }
             break;
         case 'placa':
-            if (!/^[a-zA-Z0-9]{6,7}$/.test(valor)) {
-                input.dataset.error = "La placa debe tener exactamente 6 0 7 digitos.";
-                return false;
+            var selectTipoVehiculo = document.querySelector('#tipoVehiculo');
+            if (selectTipoVehiculo) {
+                var tipoVehiculo = selectTipoVehiculo.value;
+                if (tipoVehiculo === 'Motos') {
+                    if (!/^[A-Z]{2}\d{3}[A-Z]$/.test(valor) || valor.length !== 6) {
+                        input.dataset.error = "La placa de la moto debe tener el formato ZZ###Z y tener exactamente 6 caracteres.";
+                        return false;
+                    }
+                } else {
+                    if (!/^[A-Z]{3}\d{4}$/.test(valor) || valor.length !== 7) {
+                        input.dataset.error = "La placa del vehículo debe tener el formato ZZZ#### y tener exactamente 7 caracteres.";
+                        return false;
+                    }
+                }
             }
             break;
         default:
@@ -309,25 +323,10 @@ function validarTarjeta(input) {
     return true;
 }
 
-function habilitarSelect() {
-    if (selectModelo5) {
-        selectModelo5.disabled = false;
-    } else {
-        console.error('El select no está definido');
-    }
-}
 
-function deshabilitarSelect() {
-    if (selectModelo5) {
-        selectModelo5.disabled = true;
-    } else {
-        console.error('El select no está definido');
-    }
-}
 
 function EditarTarjeta(event) {
     var caja = event.target.parentNode;
-    habilitarSelect();
 
     var spans = caja.querySelectorAll('span');
 
@@ -339,13 +338,19 @@ function EditarTarjeta(event) {
             input.id = span.id;
             span.parentNode.replaceChild(input, span);
         }
-
     });
+
+    // Habilitar el select para edición
+    var select = caja.querySelector('#tipoVehiculo');
+    if (select) {
+        select.disabled = false;
+    }
 
     event.target.textContent = 'Guardar Cambios';
     event.target.removeEventListener("click", EditarTarjeta);
     event.target.addEventListener("click", GuardarCambios);
 }
+
 
 
 function GuardarCambios(event) {
@@ -354,7 +359,7 @@ function GuardarCambios(event) {
     var datosValidos = true;
 
     var inputs = caja.querySelectorAll('input');
-    var datos = []
+    var datos = [];
 
     inputs.forEach(function (input) {
         if (!validarTarjeta(input)) {
@@ -363,18 +368,29 @@ function GuardarCambios(event) {
             if (input.dataset.error) {
                 window.alert(input.dataset.error);
             }
-        }
-        else {
+        } else {
             input.style.borderColor = '';
             datos.push(input.value);
         }
     });
+
+    // Validar y agregar el valor del select
+    var select = caja.querySelector('#tipoVehiculo');
+    if (select && select.value) {
+        datos.push(select.value);
+    } else {
+        datosValidos = false;
+        window.alert("Seleccione un tipo de vehículo.");
+        select.style.borderColor = 'red';
+    }
 
     datos.push(caja.querySelector("#codigo-telepass").textContent);
     console.log(datos);
 
     if (datosValidos) {
         ActualizarTarjeta(datos);
+
+        // Reemplazar inputs con spans
         inputs.forEach(function (input) {
             var span = document.createElement('span');
             span.id = input.id;
@@ -382,14 +398,14 @@ function GuardarCambios(event) {
             input.parentNode.replaceChild(span, input);
         });
 
+        // Mantener el select pero asegurarse de que sea editable solo cuando se edite la tarjeta
+        select.disabled = true;
+
         event.target.textContent = 'Editar Tarjeta';
         event.target.removeEventListener("click", GuardarCambios);
         event.target.addEventListener("click", EditarTarjeta);
-        deshabilitarSelect();
-
-    }
-    else {
-        window.alert("Corrije los campos en rojo");
+    } else {
+        window.alert("Corrija los campos en rojo.");
     }
 }
 
@@ -480,11 +496,11 @@ async function ActualizarTarjeta(datos) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                placa: datos[0],
-                modelo: datos[1],
-                tipo: datos[2],
-                color: datos[3],
-                tarjeta: datos[4]
+                placa: datos[2],
+                modelo: datos[3],
+                tipo: datos[5],
+                color: datos[4],
+                tarjeta: datos[0]
             })
         });
         if (response.ok) {

@@ -1,399 +1,347 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-* {
-    font-family: 'Bebas Neue', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-}
-
-body {
-    width: 100%;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow: hidden;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
-    background: url('../../Home/Images/Panorámica.webp') no-repeat center center fixed;
-    background-size: cover;
-}
-
-.menuContainerNight {
-    background: #050e3af1;
-}
-
-.navbarNight {
-    color: #ffffff !important;
-}
-
-.full {
-    width: 100%;
-    height: 100%;
-    display: table;
-    margin: 0;
-    top: 0;
-
-}
-
-.full-inner {
-    width: 100%;
-    height: 100%;
-    vertical-align: middle;
-    display: table-cell;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.content {
-    width: 500px;
-    height: 600px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#ffffff72, #ffffff37) padding-box,
-        linear-gradient(145deg, transparent 35%, #ef112789, #eb9046d0) border-box;
-    border: 2px solid transparent;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    border-radius: 16px;
-    transition: width 0.5s, height 0.5s, font-size 0.5s;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-
-}
-
-.contentNight {
-    width: 500px;
-    height: 600px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#ffffff72, #ffffff37) padding-box,
-        linear-gradient(145deg, transparent 35%, #510e6594, #011b8fea) border-box;
-    border: 2px solid transparent;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    border-radius: 16px;
-    transition: width 0.5s, height 0.5s, font-size 0.5s;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-
-}
-
-.form-group {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn {
-    width: 150px;
-    height: 60px;
-    border-radius: 50px;
-    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
-    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
-    outline: none;
-    cursor: pointer;
-    border: none;
-    font-size: 24px;
-    color: white;
-    margin-top: 10px;
-    transition: background-color 0.5s, font-size 0.5s;
-    transition: all 0.3s ease-in-out;
-    font-family: 'Bebas Neue', sans-serif;
-    text-decoration: none;
-    text-shadow: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.recuperar {
-    font-size: 17px !important;
-    height: 40px !important;
-}
-
-.btnNight {
-    background-image: linear-gradient(135deg, #510e65 0%, #011b8fd0 100%);
-    box-shadow: 0 20px 30px -6px rgba(23, 32, 133, 0.5);
-    text-shadow: none;
-}
-
-.btn:hover {
-    transform: translateY(3px);
-    box-shadow: none;
-}
-
-.btn:active {
-    opacity: 0.5;
-}
-
-.username,
-.contraseña {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    font-size: 20px;
-    transition: font-size 0.5s;
-}
-
-.username:focus {
-    animation: borderAnimationDay 2s infinite;
-    border: solid 5px #d48d07;
-}
-
-.contraseña:focus {
-    animation: borderAnimationDay 2s infinite;
-    border: solid 5px #d48d07;
-}
-
-.usernameNight:focus {
-    animation: borderAnimation 2s infinite;
-    border: solid 5px #691183;
-}
-
-.contraseñaNight:focus {
-    animation: borderAnimation 2s infinite;
-    border: solid 5px #691183;
-}
-
-/* =================================================================Rocha*/
-.header {
-    text-shadow: none;
-    background: #e4a451d8;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 90px;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-}
-
-/* Menú hamburguesa */
-.hamburger {
-    cursor: pointer;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-}
-
-.hamburger input {
-    display: none;
-}
-
-.hamburger svg {
-    height: 3em;
-    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line {
-    fill: none;
-    stroke: white;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 3;
-    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line-top-bottom {
-    stroke-dasharray: 12 63;
-}
-
-.hamburger input:checked+svg {
-    transform: rotate(-45deg);
-}
-
-.hamburger input:checked+svg .line-top-bottom {
-    stroke-dasharray: 20 300;
-    stroke-dashoffset: -32.42;
-}
-
-/* Menu de Navegacion */
-.menuContainer {
-    color: white;
-    background-color: transparent;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 70px;
-    size: 50px;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-}
-
-.menuContainer .navbar.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    position: absolute;
-    top: 60px;
-}
-
-.logo {
-    color: #fffdfc;
-    font-size: 25px;
-    width: 80px;
-    height: 80px;
-    align-items: center;
-    background: url('../../Home/Images/Logo.png') no-repeat 50% 50%;
-    background-size: cover;
-    margin-left: 20px;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    transition: transform 0.9s ease-in-out;
-}
-
-.logo:hover {
-    transform: rotate(360deg); 
-}
-
-.menuContainer .navbar ul li {
-    margin: 0 5px;
-}
-
-.menuContainer .navbar ul {
-    display: flex;
-    justify-content: center;
-}
-
-.menuContainer .navbar ul li a {
-    font-size: 20px;
-    padding: 20px;
-    color: #ffffff;
-    display: block;
-    opacity: 0;
-    animation: desvanecer 1s forwards;
-    /* Agregar animación */
-}
-
-.Desp {
-
-    text-align: center;
-    align-items: center;
-    width: 200px;
-    position: fixed;
-    top: 80px;
-    right: 10px;
-    z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    display: none;
-}
-
-#menu-toggle:checked~.Desp {
-    display: block;
-    /* Mostrar cuando el checkbox esté seleccionado */
-}
-
-.navDes ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navDes ul li {
-    margin: 5px 0;
-}
-
-.navDes ul li a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    text-shadow: none;
-}
-
-.navDes ul li a:hover {
-    color: #007BFF;
-    /* Color de enlace al pasar el mouse */
-}
-
-#menu-toggle:checked~.navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    position: absolute;
-    top: 90px;
-    /* Ajusta esta posición según sea necesario */
-    background: #000000d8;
-    /* Ajusta el fondo según sea necesario */
-}
-
-/* efecto al menu */
-.navbar ul li a {
-    transition: transform 0.3s, color 0.0s;
-}
-
-.navbar ul li a:hover {
-    transform: scale(1.5); 
-}
-
-.navbar ul li a:active {
-    color: rgb(75, 238, 250); 
-}
-
-#menu-toggle {
-    display: none;
-}
-
-.footer {
-    background-color: rgba(232, 159, 63, 0.8);
-    color: #ffffff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    opacity: 0;
-    animation: desvanecer 1s forwards, deslizar 1s forwards;
-}
-
-/* Mostrar el menú de hamburguesa en dispositivos móviles y tabletas */
-@media (min-width: 320px) and (max-width: 1024px) {
-    .hamburger {
-        display: block;
+    * {
+        font-family: 'Bebas Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
     }
 
-    .navbar {
+    body {
+        width: 100%;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow: hidden;
+        text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5);
+        background: url('../../Home/Images/Panorámica.webp') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .bodyNight {
+        background: url('../../Home/Images/PanorámicaNoche.webp') no-repeat center center fixed;
+    }
+
+    .full {
+        width: 100%;
+        height: 100%;
+        display: table;
+        margin: 0;
+        top: 0;
+
+    }
+
+    .full-inner {
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        display: table-cell;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        width: 500px;
+        height: 600px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(#ffffff72, #ffffff37) padding-box,
+            linear-gradient(145deg, transparent 35%, #ef112789, #eb9046d0) border-box;
+        border: 2px solid transparent;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        border-radius: 16px;
+        transition: width 0.5s, height 0.5s, font-size 0.5s;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        /* Agregar animación */
+
+    }
+
+    .contentNight {
+        width: 500px;
+        height: 600px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(#ffffff72, #ffffff37) padding-box,
+            linear-gradient(145deg, transparent 35%, #510e6594, #011b8fea) border-box;
+        border: 2px solid transparent;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        border-radius: 16px;
+        transition: width 0.5s, height 0.5s, font-size 0.5s;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        /* Agregar animación */
+
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn {
+        width: 150px;
+        height: 60px;
+        border-radius: 50px;
+        background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+        box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+        outline: none;
+        cursor: pointer;
+        border: none;
+        font-size: 24px;
+        color: white;
+        margin-top: 10px;
+        transition: background-color 0.5s, font-size 0.5s;
+        transition: all 0.3s ease-in-out;
+        font-family: 'Bebas Neue', sans-serif;
+        text-decoration: none;
+        text-shadow: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btnNight {
+        background-image: linear-gradient(135deg, #510e65 0%, #011b8fd0 100%);
+        box-shadow: 0 20px 30px -6px rgba(23, 32, 133, 0.5);
+        text-shadow: none;
+    }
+
+    .recuperar {
+        font-size: 17px !important;
+        height: 40px !important;
+    }
+
+    .btn:hover {
+        transform: translateY(3px);
+        box-shadow: none;
+    }
+
+    .btn:active {
+        opacity: 0.5;
+    }
+
+    .username,
+    .contraseña {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 20px;
+        transition: font-size 0.5s;
+    }
+
+    .username:focus {
+        animation: borderAnimationDay 2s infinite;
+        border: solid 5px #d48d07;
+    }
+
+    .contraseña:focus {
+        animation: borderAnimationDay 2s infinite;
+        border: solid 5px #d48d07;
+    }
+
+    .usernameNight:focus {
+        animation: borderAnimation 2s infinite;
+        border: solid 5px #691183;
+    }
+
+    .contraseñaNight:focus {
+        animation: borderAnimation 2s infinite;
+        border: solid 5px #691183;
+    }
+
+    /* =================================================================Rocha*/
+    .header {
+        text-shadow: none;
+        background: #e4a451d8;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 90px;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        /* Agregar animación */
+
+    }
+
+    .headerNight {
+        background-color: #050e3af1;
+    }
+
+    /* Menú hamburguesa */
+    .hamburger {
+        cursor: pointer;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        /* Agregar animación */
+    }
+
+    .hamburger input {
         display: none;
-        /* Oculta la barra de navegación por defecto */
+    }
+
+    .hamburger svg {
+        height: 3em;
+        transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .line {
+        fill: none;
+        stroke: white;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3;
+        transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .line-top-bottom {
+        stroke-dasharray: 12 63;
+    }
+
+    .hamburger input:checked+svg {
+        transform: rotate(-45deg);
+    }
+
+    .hamburger input:checked+svg .line-top-bottom {
+        stroke-dasharray: 20 300;
+        stroke-dashoffset: -32.42;
+    }
+
+    /* Menu de Navegacion */
+    .menuContainer {
+        color: white;
+        background-color: transparent;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 70px;
+        size: 50px;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        /* Agregar animación */
+    }
+
+    .menuContainer .navbar.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+    }
+
+    .logo {
+        color: #fffdfc;
+        font-size: 25px;
+        width: 80px;
+        height: 80px;
+        align-items: center;
+        background: url('../../Home/Images/Logo.png') no-repeat 50% 50%;
+        background-size: cover;
+        margin-left: 20px;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        transition: transform 0.9s ease-in-out;
+    }
+
+    .logo:hover {
+        transform: rotate(360deg);
+    }
+
+    .menuContainer .navbar ul li {
+        margin: 0 5px;
+    }
+
+    .menuContainer .navbar ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    .menuContainer .navbar ul li a {
+        font-size: 20px;
+        padding: 20px;
+        color: #ffffff;
+        display: block;
+        opacity: 0;
+        animation: desvanecer 1s forwards;
+        /* Agregar animación */
+    }
+
+    .Desp {
+
+        text-align: center;
+        align-items: center;
+        width: 200px;
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        z-index: 1000;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        display: none;
+    }
+
+    #menu-toggle:checked~.Desp {
+        display: block;
+        /* Mostrar cuando el checkbox esté seleccionado */
+    }
+
+    .navDes ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navDes ul li {
+        margin: 5px 0;
+    }
+
+    .navDes ul li a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        text-shadow: none;
+    }
+
+    .navDes ul li a:hover {
+        color: #007BFF;
+        /* Color de enlace al pasar el mouse */
     }
 
     #menu-toggle:checked~.navbar {
         display: flex;
-        /* Muestra la barra de navegación cuando el menú de hamburguesa está activado */
         flex-direction: column;
         align-items: center;
         width: 100%;
@@ -403,205 +351,278 @@ body {
         background: #000000d8;
         /* Ajusta el fondo según sea necesario */
     }
-}
 
-/* Ocultar el menú de hamburguesa en pantallas más grandes */
-@media (min-width: 1025px) {
-    .hamburger {
+    /* efecto al menu */
+    .navbar ul li a {
+        transition: transform 0.3s, color 0.0s;
+    }
+
+    .navbar ul li a:hover {
+        transform: scale(1.5);
+    }
+
+    .navbar ul li a:active {
+        color: rgb(75, 238, 250);
+    }
+
+    #menu-toggle {
         display: none;
     }
 
-    .navbar {
-        display: flex;
+    .footer {
+        background-color: rgba(232, 159, 63, 0.8);
+        color: #ffffff;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        opacity: 0;
+        animation: desvanecer 1s forwards, deslizar 1s forwards;
     }
 
-    .Desp {
-        visibility: hidden;
-    }
-}
-
-@keyframes borderAnimation {
-    0% {
-        border-color: #691183;
-    }
-
-    50% {
-        border-color: #a379ff;
+    .footerNight {
+        background-color: rgba(23, 89, 203, 0.8);
+        color: #ffffff;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        opacity: 0;
+        animation: desvanecer 1s forwards, deslizar 1s forwards;
     }
 
-    100% {
-        border-color: #4f0d63;
-    }
-}
-
-@keyframes borderAnimationDay {
-    0% {
-        border-color: #ef9608;
+    .menuContainerNight {
+        background: #050e3af1;
     }
 
-    50% {
-        border-color: #e0d35e;
+    .navbarNight {
+        color: #ffffff !important;
     }
 
-    100% {
-        border-color: #ff9d00;
-    }
-}
+    /* Mostrar el menú de hamburguesa en dispositivos móviles y tabletas */
+    @media (min-width: 320px) and (max-width: 1024px) {
+        .hamburger {
+            display: block;
+        }
 
-@keyframes desvanecer {
-    to {
-        opacity: 1;
-    }
-}
+        .navbar {
+            display: none;
+            /* Oculta la barra de navegación por defecto */
+        }
 
-/* Dispositivos móviles pequeños (teléfonos) */
-@media (min-width: 320px) {
-    .content {
-        width: 220px;
-        height: 320px;
-    }
-
-    .form-group {
-        font-size: 15px;
-    }
-
-    .btn {
-        font-size: 20px;
-        height: 40px;
+        #menu-toggle:checked~.navbar {
+            display: flex;
+            /* Muestra la barra de navegación cuando el menú de hamburguesa está activado */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: absolute;
+            top: 90px;
+            /* Ajusta esta posición según sea necesario */
+            background: #000000d8;
+            /* Ajusta el fondo según sea necesario */
+        }
     }
 
-    #password,
-    #username {
-        height: 20px;
-    }
-}
+    /* Ocultar el menú de hamburguesa en pantallas más grandes */
+    @media (min-width: 1025px) {
+        .hamburger {
+            display: none;
+        }
 
-/* Dispositivos móviles medianos (teléfonos más grandes) */
-@media (min-width: 375px) {
-    .content {
-        width: 270px;
-        height: 370px;
-    }
-}
+        .navbar {
+            display: flex;
+        }
 
-/* Dispositivos móviles grandes (teléfonos grandes y pequeños tabletas) */
-@media (min-width: 425px) {
-    .content {
-        width: 300px;
-        height: 390px;
+        .Desp {
+            visibility: hidden;
+        }
     }
 
-    .form-group {
-        font-size: 25px;
-    }
-}
+    @keyframes borderAnimationDay {
+        0% {
+            border-color: #ef9608;
+        }
 
-/* Dispositivos de tabletas */
-@media (min-width: 768px) {
-    .content {
-        width: 400px;
-        height: 460px;
-    }
+        50% {
+            border-color: #e0d35e;
+        }
 
-    .form-group {
-        font-size: 30px;
+        100% {
+            border-color: #ff9d00;
+        }
     }
 
-    .btn {
-        font-size: 24px;
-        height: 60px;
+    @keyframes borderAnimation {
+        0% {
+            border-color: #691183;
+        }
+
+        50% {
+            border-color: #a379ff;
+        }
+
+        100% {
+            border-color: #4f0d63;
+        }
     }
 
-    #password,
-    #username {
-        height: 20px;
-    }
-}
-
-/* Portátiles */
-@media (min-width: 1024px) {
-    .content {
-        width: 420px;
-        height: 460px;
+    @keyframes desvanecer {
+        to {
+            opacity: 1;
+        }
     }
 
-    .form-group {
-        font-size: 40px;
-    }
-}
+    /* Dispositivos móviles pequeños (teléfonos) */
+    @media (min-width: 320px) {
+        .content {
+            width: 220px;
+            height: 320px;
+        }
 
-/* Portátiles grandes y pantallas de escritorio */
-@media (min-width: 1440px) {
-    .content {
-        width: 700px;
-        height: 530px;
-    }
+        .form-group {
+            font-size: 15px;
+        }
 
-    .form-group {
-        font-size: 50px;
-    }
-}
+        .btn {
+            font-size: 20px;
+            height: 40px;
+        }
 
-@media (max-height: 700px) {
-    .content {
-        width: 400px;
-        height: 460px;
-    }
-
-    .form-group {
-        font-size: 30px;
+        #password,
+        #username {
+            height: 20px;
+        }
     }
 
-    .btn {
-        font-size: 24px;
-        height: 60px;
+    /* Dispositivos móviles medianos (teléfonos más grandes) */
+    @media (min-width: 375px) {
+        .content {
+            width: 270px;
+            height: 370px;
+        }
     }
 
-    #password,
-    #username {
-        height: 20px;
-    }
-}
+    /* Dispositivos móviles grandes (teléfonos grandes y pequeños tabletas) */
+    @media (min-width: 425px) {
+        .content {
+            width: 300px;
+            height: 390px;
+        }
 
-@media (max-height: 630px) {
-    .content {
-        width: 330px;
-        height: 380px;
-    }
-
-    .form-group {
-        font-size: 30px;
+        .form-group {
+            font-size: 25px;
+        }
     }
 
-    .btn {
-        font-size: 24px;
-        height: 60px;
+    /* Dispositivos de tabletas */
+    @media (min-width: 768px) {
+        .content {
+            width: 400px;
+            height: 460px;
+        }
+
+        .form-group {
+            font-size: 30px;
+        }
+
+        .btn {
+            font-size: 24px;
+            height: 60px;
+        }
+
+        #password,
+        #username {
+            height: 20px;
+        }
     }
 
-    #password,
-    #username {
-        height: 20px;
-    }
-}
+    /* Portátiles */
+    @media (min-width: 1024px) {
+        .content {
+            width: 420px;
+            height: 460px;
+        }
 
-@media (max-height: 550px) {
-    .content {
-        width: 370px;
-        height: 300px;
-        margin-top: 100px;
-    }
-
-    .form-group {
-        font-size: 20px;
+        .form-group {
+            font-size: 40px;
+        }
     }
 
-    .btn {
-        font-size: 18px;
-        height: 40px;
+    /* Portátiles grandes y pantallas de escritorio */
+    @media (min-width: 1440px) {
+        .content {
+            width: 700px;
+            height: 530px;
+        }
+
+        .form-group {
+            font-size: 50px;
+        }
     }
 
-    #password,
-    #username {
-        height: 20px;
+    @media (max-height: 700px) {
+        .content {
+            width: 400px;
+            height: 460px;
+        }
+
+        .form-group {
+            font-size: 30px;
+        }
+
+        .btn {
+            font-size: 24px;
+            height: 60px;
+        }
+
+        #password,
+        #username {
+            height: 20px;
+        }
     }
-}
+
+    @media (max-height: 630px) {
+        .content {
+            width: 330px;
+            height: 400px;
+        }
+
+        .form-group {
+            font-size: 30px;
+        }
+
+        .btn {
+            font-size: 24px;
+            height: 60px;
+        }
+
+        #password,
+        #username {
+            height: 20px;
+        }
+    }
+
+    @media (max-height: 550px) {
+        .content {
+            width: 370px;
+            height: 300px;
+            margin-top: 100px;
+        }
+
+        .form-group {
+            font-size: 20px;
+        }
+
+        .btn {
+            font-size: 18px;
+            height: 40px;
+        }
+
+        #password,
+        #username {
+            height: 20px;
+        }
+    }
