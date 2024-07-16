@@ -255,8 +255,8 @@ async function BuscarPlaca(placa) {
     });
     if (response.ok) {
       const data = await response.json();
-      if (data.message) window.location.href = "../../Error/PagError404.html";
-      rellenarInfoPlaca(data);
+      if (!data.message)
+        RellenarInfoCliente(data);
     } else {
       alert(result.message);
     }
