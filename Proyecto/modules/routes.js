@@ -443,10 +443,7 @@ employee.post('/payment', validar, async (req, res) => {
         }
         else {
             if (tarjeta[0].estado == 0) {
-                res.json({
-                    message:
-                        "La tarjeta no se encuentra activa"
-                })
+                res.json({ message: "La tarjeta no se encuentra activa" });
                 return;
             }
             else {
