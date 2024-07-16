@@ -72,6 +72,14 @@ class BodyDecorator extends ElementDecorator {
         }
     }
 }
+class headerDecorator extends ElementDecorator {
+    applyStyle() {
+        const hour = new Date().getHours();
+        if (hour < 6 || hour >= 18) {
+            this.element.classList.add('headerNight');
+        }
+    }
+}
 
 function applyDecorators() {
     const fullSection = document.querySelector('.full');
@@ -80,8 +88,13 @@ function applyDecorators() {
     const inputs = document.querySelectorAll('.username, .contraseña');
     const nav = document.querySelector('.menuContainer');
     const footer = document.querySelector('.footer');
-    const body = document.querySelector('body');
+    const body = document.querySelector('.body');
+    const header = document.querySelector('.header');
 
+    if (header) {
+        const decoratedHeader = new headerDecorator(header);
+        decoratedHeader.applyStyle();
+    }
     if (body) {
         const decoratedBody = new BodyDecorator(body);
         decoratedBody.applyStyle();

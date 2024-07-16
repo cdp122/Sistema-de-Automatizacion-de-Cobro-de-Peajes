@@ -189,6 +189,11 @@
         opacity: 0;
         animation: desvanecer 1s forwards;
         /* Agregar animación */
+
+    }
+
+    .headerNight {
+        background-color: #050e3af1;
     }
 
     /* Menú hamburguesa */
