@@ -11,10 +11,12 @@
 
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Oculta el scrollbar nativo */
+    overflow: hidden;
+    /* Oculta el scrollbar nativo */
 }
 
 body {
@@ -23,10 +25,13 @@ body {
     background: linear-gradient(60deg, #e17670, #fbd4ab);
     position: relative;
     animation: cambiar 1s ease-in-out infinite;
-    overflow: auto; /* Habilita el scroll en el body */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; 
+    overflow: auto;
+    /* Habilita el scroll en el body */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
 }
+
 body::-webkit-scrollbar {
     display: none;
 }
@@ -100,8 +105,9 @@ body::-webkit-scrollbar {
     right: 0;
     width: 12px;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(44, 248, 255, 0.9), rgba(255, 255, 255, 0.9)); /* Cambia la opacidad para mayor visibilidad */
-    pointer-events: none; 
+    background: linear-gradient(to bottom, rgba(44, 248, 255, 0.9), rgba(255, 255, 255, 0.9));
+    /* Cambia la opacidad para mayor visibilidad */
+    pointer-events: none;
     opacity: 1;
     transition: opacity 0.5s;
     border-left: 2px solid white;
@@ -144,8 +150,9 @@ body::-webkit-scrollbar {
 }
 
 .logo:hover {
-    transform: rotate(360deg); 
+    transform: rotate(360deg);
 }
+
 .menuContainer .navbar ul li {
     margin: 0 5px;
     /* Ajusta el margen según tus necesidades */
@@ -219,9 +226,10 @@ body::-webkit-scrollbar {
 .btn-1:hover {
     background-color: #a0845a;
 }
+
 .btn-1:hover {
-    transform: scale(1.05); 
-    transition: transform 0.3s ease-in-out; 
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
 }
 
 /* Dirección */
@@ -311,6 +319,7 @@ h2 {
     height: 500px;
     width: 100%;
     padding: 25px;
+    transition: transform 0.3s ease-in-out;
 }
 
 .house-1 {
@@ -331,9 +340,12 @@ h2 {
 
 /*Control de tamanio*/
 
-.house-1:hover, .house-2:hover, .house-3:hover, .house-4:hover {
-    transform: scale(1.05); 
-    transition: transform 0.3s ease-in-out; 
+.house-1:hover,
+.house-2:hover,
+.house-3:hover,
+.house-4:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
 }
 
 .txt {
@@ -430,10 +442,12 @@ form {
     border-radius: 25px;
     text-transform: uppercase;
 }
+
 .btn-2:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
 }
+
 .footer-txt h3 {
     color: #fefcfb;
     font-size: 35px;
@@ -619,6 +633,26 @@ form {
     }
 }
 
+.redessociales {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.redessociales a {
+    color: #ffffff;
+    font-size: 30px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.redessociales a:hover {
+    transform: scale(1.5);
+}
+
+.redessociales a:active {
+    color: rgb(44, 248, 255);
+}
+
 @media (max-width: 325px) {
     #menu-toggle:checked~.navbar {
         display: flex;
@@ -712,7 +746,11 @@ form {
 
 /* Animaciones */
 @keyframes desvanecer {
-    to {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
         opacity: 1;
     }
 }
@@ -743,9 +781,9 @@ form {
 }
 
 .navbar ul li a:hover {
-    transform: scale(1.5); 
+    transform: scale(1.5);
 }
 
 .navbar ul li a:active {
-    color: rgb(75, 238, 250); 
+    color: rgb(75, 238, 250);
 }

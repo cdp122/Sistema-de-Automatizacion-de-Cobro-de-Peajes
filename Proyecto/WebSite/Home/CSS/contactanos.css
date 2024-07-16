@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap');
 
 /* Estilos base */
 * {
@@ -7,26 +7,30 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Oculta el scrollbar nativo */
+    overflow: hidden;
+    /* Oculta el scrollbar nativo */
 }
 
 body {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
     width: 100%;
     height: 100%;
     color: #ffffff;
     background: url('../Images/ParqueCentral.webp') no-repeat center center fixed;
     position: relative;
     animation: desvanecer 1s forwards, cambiar 60s ease-in-out infinite;
-    overflow: auto; /* Habilita el scroll en el body */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; 
+    overflow: auto;
+    /* Habilita el scroll en el body */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
 }
 
 body::-webkit-scrollbar {
@@ -40,8 +44,9 @@ body::-webkit-scrollbar {
     right: 0;
     width: 12px;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(44, 248, 255, 0.9), rgba(255, 255, 255, 0.9)); /* Cambia la opacidad para mayor visibilidad */
-    pointer-events: none; 
+    background: linear-gradient(to bottom, rgba(44, 248, 255, 0.9), rgba(255, 255, 255, 0.9));
+    /* Cambia la opacidad para mayor visibilidad */
+    pointer-events: none;
     opacity: 1;
     transition: opacity 0.5s;
     border-left: 2px solid white;
@@ -66,7 +71,7 @@ body::-webkit-scrollbar {
 
 header h1 {
     margin: 0;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', 'Roboto', sans-serif;
     font-size: 32px;
     color: #ffffff;
 }
@@ -111,7 +116,7 @@ body {
 }
 
 .logo:hover {
-    transform: rotate(360deg); 
+    transform: rotate(360deg);
 }
 
 .menuContainer .navbar ul li {
@@ -149,11 +154,11 @@ body {
 }
 
 .navbar ul li a:hover {
-    transform: scale(1.5); 
+    transform: scale(1.5);
 }
 
 .navbar ul li a:active {
-    color: rgb(75, 238, 250); 
+    color: rgb(75, 238, 250);
 }
 
 /* Texto del encabezado */
@@ -241,6 +246,7 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
     opacity: 0;
     animation: desvanecer 1s forwards, deslizar 1s forwards;
+    animation-delay: 1s;
 }
 
 .card:hover,
@@ -262,16 +268,12 @@ body {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    text-decoration: none;
-    list-style: none;
     border-radius: 5px;
 }
 
 .card a:hover,
 .contact-card a:hover {
     text-decoration: underline;
-    text-decoration: none;
-    list-style: none;
 }
 
 .contact-card form {
@@ -284,6 +286,9 @@ body {
     font-size: 0.6cm;
     color: #333;
     text-shadow: none;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    animation-delay: 2s;
 }
 
 .contact-card input,
@@ -294,6 +299,9 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    animation-delay: 2s;
 }
 
 .contact-card button {
@@ -305,6 +313,9 @@ body {
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    animation-delay: 2.5s;
 }
 
 .contact-card button:hover {
@@ -326,14 +337,10 @@ body {
     text-decoration: none;
     text-shadow: none;
     transition: background-color 0.3s;
+    opacity: 0;
+    animation: desvanecer 1s forwards;
+    animation-delay: 2.5s;
 }
-
-#a {
-    text-decoration: none;
-    border-radius: 25px;
-
-}
-
 
 .redirect-button:hover,
 .back-button:hover {
